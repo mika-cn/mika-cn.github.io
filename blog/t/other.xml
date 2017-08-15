@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ <title>Your Title - other</title>
+ <link href="http://example.com/t/other.xml" rel="self"/>
+ <link href="http://example.com/tag/other.html"/>
+ <updated>2017-08-15T09:49:52+08:00</updated>
+ <id>http://example.com/tag/other.html</id>
+ <author>
+   <name>Author Here</name>
+ </author>
+ 
+ <entry>
+   <title>测试博客功能</title>
+   <link href="http://example.com/other/2016/01/01/test-blog-feature.html"/>
+   <updated>2016-01-01T13:34:35+08:00</updated>
+   <id>http://example.com/other/2016/01/01/test-blog-feature</id>
+   <content type="html">&lt;p&gt;test &lt;em&gt;Italic&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;test &lt;strong&gt;Bold&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;heading-1&quot;&gt;Heading 1&lt;/h1&gt;
+&lt;h2 id=&quot;heading-2&quot;&gt;Heading 2&lt;/h2&gt;
+&lt;h3 id=&quot;heading-3&quot;&gt;Heading 3&lt;/h3&gt;
+&lt;h4 id=&quot;heading-4&quot;&gt;Heading 4&lt;/h4&gt;
+&lt;h5 id=&quot;heading-5&quot;&gt;Heading 5&lt;/h5&gt;
+&lt;h6 id=&quot;heading-6&quot;&gt;Heading 6&lt;/h6&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://a.com&quot;&gt;Link&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/img/markdown.png&quot; alt=&quot;Image&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Blockquote&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;List&lt;/li&gt;
+  &lt;li&gt;List&lt;/li&gt;
+  &lt;li&gt;List&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;One&lt;/li&gt;
+  &lt;li&gt;Two&lt;/li&gt;
+  &lt;li&gt;Three&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Horizontal Rule&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Inline code&lt;/code&gt; with blackticks&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# code block
+print '3 backticks or'
+print 'indent 4 spaces'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+</content>
+ </entry>
+ 
+</feed>

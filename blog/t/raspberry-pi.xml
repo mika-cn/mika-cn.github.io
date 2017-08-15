@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+ <title>Your Title - raspberry-pi</title>
+ <link href="http://example.com/t/raspberry-pi.xml" rel="self"/>
+ <link href="http://example.com/tag/raspberry-pi.html"/>
+ <updated>2017-08-15T09:49:52+08:00</updated>
+ <id>http://example.com/tag/raspberry-pi.html</id>
+ <author>
+   <name>Author Here</name>
+ </author>
+ 
+ <entry>
+   <title>树莓派3代，ssh 与 无线连网</title>
+   <link href="http://example.com/raspberry-pi/2017/07/21/get-start-with-raspberry-pi-b3.html"/>
+   <updated>2017-07-21T14:24:35+08:00</updated>
+   <id>http://example.com/raspberry-pi/2017/07/21/get-start-with-raspberry-pi-b3</id>
+   <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;由于入手树莓派的时候，周边没有显示器，并且路由器在别的房间，而我进不去，刚好手上有两根网线（后来证实好像一根坏了),
+遂通过直接用网线连接笔记本和树莓派来连接ssh&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;本文讲述了没有显示器时候如何开始玩树莓派。&lt;/p&gt;
+
+&lt;h3 id=&quot;处境简介&quot;&gt;处境简介&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;一个笔记本电脑(linux系统)&lt;/li&gt;
+  &lt;li&gt;一块树莓派3代B电路板&lt;/li&gt;
+  &lt;li&gt;一个充电器(5v, 2A 官网讲最好2.5A输入，2A也可以，但是可能会有性能问题),&lt;/li&gt;
+  &lt;li&gt;一张 8G Micro SD Card&lt;/li&gt;
+  &lt;li&gt;一个读卡器&lt;/li&gt;
+  &lt;li&gt;一根网线&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;上篇-启动树莓派&quot;&gt;上篇: 启动树莓派&lt;/h3&gt;
+
+&lt;h4 id=&quot;烧录系统到sd卡&quot;&gt;烧录系统到sd卡&lt;/h4&gt;
+
+&lt;p&gt;下载系统&lt;/p&gt;
+
+&lt;p&gt;到官方下载页： https://www.raspberrypi.org/downloads/raspbian/ 即可下载&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;unzip raspbian.zip
+&lt;span class=&quot;c&quot;&gt;# 得到 raspbian.img (注: 这里简写了文件名, 实际得到的文件名为 2017-07-05-rasbian-jessie.img)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;插入sd卡到电脑&lt;/p&gt;
+
+&lt;p&gt;查看sd卡所在的设备文件(可看到sd卡所对应的为 /dev/sdb)&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ls /dev/sd&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# /dev/sda  /dev/sda1  /dev/sda2  /dev/sda3  /dev/sdb  /dev/sdb1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;如果sd卡已经mount到系统上了，就先使用 umount 挂载掉。(避免在烧录的过程中其他程序的读写)&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo umount /media/pi/sdcard
+&lt;span class=&quot;c&quot;&gt;# 我的系统是 ubuntu, 默认mount 到/media/$user 目录下&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;使用dd命令烧录系统&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo dd &lt;span class=&quot;nv&quot;&gt;bs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;4M &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/pi/Downloads/raspbian.img &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/sdb
+&lt;span class=&quot;c&quot;&gt;# 注意输出目录位置，别把你电脑的硬盘给覆盖了...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;开启ssh和设定系统使用的ip&quot;&gt;开启ssh和设定系统使用的ip&lt;/h4&gt;
+&lt;p&gt;raspbian 默认ssh没有开启，开启方法是在 /boot 目录下新建一个ssh文件即可&lt;/p&gt;
+
+&lt;p&gt;把sd卡拔出重新插上电脑&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;touch /media/pi/sdcard/boot/ssh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;指定系统启动后使用的ip(修改 /boot/cmdline.txt), 比如&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;192.168.100.101&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vim /media/pi/sdcard/boot/cmdline.txt
+&lt;span class=&quot;c&quot;&gt;# 在最前端加入 ip=192.168.100.101 (注： 通过空格和原有内容隔开)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;启动树莓派&quot;&gt;启动树莓派&lt;/h4&gt;
+&lt;p&gt;在启动树莓派之前，先把笔记本ip设置为 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;192.168.100.1&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo ifconfig eth0 192.168.100.1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;把sd卡插入树莓派，用网线把树莓派和笔记本连接起来，最后把充电器接入树莓派，树莓派启动（可看到pwr指示灯亮起来)
+过了一会之后，看网线两端的网口的指示灯是否亮起并不时的闪烁(ps: 我就是网线损坏，指示灯都不亮，换了一根后很顺利)&lt;/p&gt;
+
+&lt;p&gt;ping 树莓派, 能ping通说明两台机子可以通讯&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ping 192.168.100.101
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;成功ping之后，就可以ssh登录了。(用户名: pi, 默认密码: raspberry)&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh pi@192.168.100.101
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;下篇-连接无线&quot;&gt;下篇: 连接无线&lt;/h3&gt;
+
+&lt;p&gt;扫描周边wifi 热点信息&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo iwlist wlan0 scan
+&lt;span class=&quot;c&quot;&gt;# 会输出一堆信息，ESSID 后方名称即为 wifi名称&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;设置连接到某个信号&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo vim /etc/wpa_supplicant/wpa_supplicant.conf
+
+&lt;span class=&quot;c&quot;&gt;# 在文件后方加入连接信息，比如(wifi热点名称为tp001, 密码为cool1234):&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;network&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;={&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;ssid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;tp001&quot;&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;psk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;cool1234&quot;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;保存过后，几秒就会生效。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ifconfig wlan0
+&lt;span class=&quot;c&quot;&gt;# 查看是否成功, 看网卡是否启动并分配到ip (ps: 我没有成功:(  )&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;如果没有成功，使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo wpa_cli reconfigure&lt;/code&gt; 后，再查看&lt;/p&gt;
+
+&lt;p&gt;到这里，就可以把之前连接在两台电脑之间的网线断开了，直接使用无线进行 ssh :), 不过最好到路由器设置页面固定树莓派的ip。&lt;/p&gt;
+
+&lt;h3 id=&quot;参考资料&quot;&gt;参考资料&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://jingyan.baidu.com/article/4853e1e569d97c1908f72654.html&quot;&gt;https://jingyan.baidu.com/article/4853e1e569d97c1908f72654.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://shumeipai.nxez.com/2013/12/08/linux-command-line-burn-raspberry-pi-mirror-to-sd-card.html&quot;&gt;http://shumeipai.nxez.com/2013/12/08/linux-command-line-burn-raspberry-pi-mirror-to-sd-card.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.raspberrypi.org/documentation/remote-access/ssh/&quot;&gt;https://www.raspberrypi.org/documentation/remote-access/ssh/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md&quot;&gt;https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md&lt;/a&gt;&lt;/p&gt;
+</content>
+ </entry>
+ 
+</feed>

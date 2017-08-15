@@ -1,0 +1,2 @@
+/* base functions */
+var readyFns = [];

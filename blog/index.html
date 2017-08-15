@@ -1,0 +1,182 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>
+     ~  草木一秋 
+  </title>
+  <meta name="description" content="草木一秋 -- Less is more">
+
+  <link rel="stylesheet" href="/blog/assets/css/main.css">
+  <script src="/blog/assets/js/jquery-1.10.2.min.js"></script>
+  <link rel="canonical" href="https://mika-cn.github.io/blog/">
+  <link rel="alternate" type="application/rss+xml" title=" 草木一秋 " href="/blog/feed.xml">
+
+  
+</head>
+
+
+  <body>
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/blog/" title=" 草木一秋 -- Less is more"> 草木一秋 </a>
+
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="home">
+
+  <!--<h1 class="page-heading">Posts</h1>-->
+
+  
+
+  <ul class="post-list">
+    
+      <li>
+  <h4>
+    <a class="post-link" href="/blog/raspberry-pi/2017/07/21/get-start-with-raspberry-pi-b3.html">树莓派3代，ssh 与 无线连网</a>
+  </h4>
+
+  
+  <span class="post-meta">Jul 21, 2017 Tags: <a href="/blog/t/raspberry-pi.html" rel="tag">raspberry-pi</a></span>
+  <div></div>
+
+</li>
+
+
+    
+      <li>
+  <h4>
+    <a class="post-link" href="/blog/programing/2017/07/16/thinking-of-programming.html">编程感悟</a>
+  </h4>
+
+  
+  <span class="post-meta">Jul 16, 2017 Tags: <a href="/blog/t/programing.html" rel="tag">programing</a></span>
+  <div></div>
+
+</li>
+
+
+    
+      <li>
+  <h4>
+    <a class="post-link" href="/blog/other/2016/01/01/test-blog-feature.html">测试博客功能</a>
+  </h4>
+
+  
+  <span class="post-meta">Jan 1, 2016 Tags: <a href="/blog/t/other.html" rel="tag">other</a></span>
+  <div></div>
+
+</li>
+
+
+    
+      <li>
+  <h4>
+    <a class="post-link" href="/blog/zhuan/programing/2011/08/06/programming-and-perple.html">[转] 程序与人</a>
+  </h4>
+
+  
+  <span class="post-meta">Aug 6, 2011 Tags: <a href="/blog/t/zhuan.html" rel="tag">zhuan</a>, <a href="/blog/t/programing.html" rel="tag">programing</a></span>
+  <div></div>
+
+</li>
+
+
+    
+  </ul>
+
+  
+
+
+</div>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <!--<h2 class="footer-heading"> 草木一秋 </h2>-->
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-5">
+        <ul class="contact-list">
+          <li><a href="/blog/">Home</a></li>
+          <li><a href="/blog/tags">Tags</a> -- Blog Tags</li>
+            
+            <li><a href="mailto:laoquans@gmail.com">laoquans@gmail.com</a></li>
+            
+            <li><a target="_blank" href="/blog/feed.xml" id="rss-link">RSS</a></li>
+            
+            <li><a target="_blank" href="https://github.com/mika-cn">Github</a></li>
+            
+        </ul>
+        
+<!-- mottos begin -->
+<p id='luck-motto'></p>
+<script>
+  (function(){
+    var mottos = [
+ "好记性不如烂笔头",
+ "自由的保证是什么?是对自己不再感到羞耻 --尼采",
+ "渴求美德而非奖赏。",
+ "两年学说话，一生学闭嘴",
+ "计算机没什么用。他们只会告诉你答案。--毕加索",
+ "Your time is limited, so don't waste it living someone else's life.  ——史蒂夫.乔布斯" 
+]
+;
+
+    var getLuckIdx = function(){
+      var lastLuckIdx = localStorage.getItem('lastLuckIdx');
+      while(1){
+        var luckIdx = Math.floor(Math.random() * mottos.length);
+        if(luckIdx != lastLuckIdx){
+          localStorage.setItem('lastLuckIdx', luckIdx);
+          return luckIdx;
+        }
+      }
+    }
+
+    var luckIdx = getLuckIdx();
+    var luckMottoEle = $('#luck-motto')
+    var luckMotto = mottos[luckIdx];
+    luckMottoEle.html(luckMotto);
+  })();
+</script>
+<!-- mottos end -->
+
+      </div>
+    </div>
+
+
+  </div>
+
+<!-- tag feed -->
+<script>
+  (function(){
+    var url = location.href;
+    if(url.indexOf('/blog/t/') > -1 ){
+      $('#rss-link').attr('href', url.replace('.html', '.xml'));
+    }
+  })();
+</script>
+<!-- tag feed -->
+</footer>
+
+
+  </body>
+
+</html>

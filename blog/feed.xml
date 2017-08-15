@@ -1,0 +1,217 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="https://mika-cn.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mika-cn.github.io/blog/" rel="alternate" type="text/html" /><updated>2017-08-15T09:49:52+08:00</updated><id>https://mika-cn.github.io/blog/</id><title type="html"> 草木一秋 </title><subtitle> 草木一秋 -- Less is more</subtitle><entry><title type="html">树莓派3代，ssh 与 无线连网</title><link href="https://mika-cn.github.io/blog/raspberry-pi/2017/07/21/get-start-with-raspberry-pi-b3.html" rel="alternate" type="text/html" title="树莓派3代，ssh 与 无线连网" /><published>2017-07-21T14:24:35+08:00</published><updated>2017-07-21T14:24:35+08:00</updated><id>https://mika-cn.github.io/blog/raspberry-pi/2017/07/21/get-start-with-raspberry-pi-b3</id><content type="html" xml:base="https://mika-cn.github.io/blog/raspberry-pi/2017/07/21/get-start-with-raspberry-pi-b3.html">&lt;blockquote&gt;
+  &lt;p&gt;由于入手树莓派的时候，周边没有显示器，并且路由器在别的房间，而我进不去，刚好手上有两根网线（后来证实好像一根坏了),
+遂通过直接用网线连接笔记本和树莓派来连接ssh&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;本文讲述了没有显示器时候如何开始玩树莓派。&lt;/p&gt;
+
+&lt;h3 id=&quot;处境简介&quot;&gt;处境简介&lt;/h3&gt;
+&lt;ul&gt;
+  &lt;li&gt;一个笔记本电脑(linux系统)&lt;/li&gt;
+  &lt;li&gt;一块树莓派3代B电路板&lt;/li&gt;
+  &lt;li&gt;一个充电器(5v, 2A 官网讲最好2.5A输入，2A也可以，但是可能会有性能问题),&lt;/li&gt;
+  &lt;li&gt;一张 8G Micro SD Card&lt;/li&gt;
+  &lt;li&gt;一个读卡器&lt;/li&gt;
+  &lt;li&gt;一根网线&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;上篇-启动树莓派&quot;&gt;上篇: 启动树莓派&lt;/h3&gt;
+
+&lt;h4 id=&quot;烧录系统到sd卡&quot;&gt;烧录系统到sd卡&lt;/h4&gt;
+
+&lt;p&gt;下载系统&lt;/p&gt;
+
+&lt;p&gt;到官方下载页： https://www.raspberrypi.org/downloads/raspbian/ 即可下载&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;unzip raspbian.zip
+&lt;span class=&quot;c&quot;&gt;# 得到 raspbian.img (注: 这里简写了文件名, 实际得到的文件名为 2017-07-05-rasbian-jessie.img)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;插入sd卡到电脑&lt;/p&gt;
+
+&lt;p&gt;查看sd卡所在的设备文件(可看到sd卡所对应的为 /dev/sdb)&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ls /dev/sd&lt;span class=&quot;k&quot;&gt;*&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# /dev/sda  /dev/sda1  /dev/sda2  /dev/sda3  /dev/sdb  /dev/sdb1&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;如果sd卡已经mount到系统上了，就先使用 umount 挂载掉。(避免在烧录的过程中其他程序的读写)&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo umount /media/pi/sdcard
+&lt;span class=&quot;c&quot;&gt;# 我的系统是 ubuntu, 默认mount 到/media/$user 目录下&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;使用dd命令烧录系统&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo dd &lt;span class=&quot;nv&quot;&gt;bs&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;4M &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/home/pi/Downloads/raspbian.img &lt;span class=&quot;nv&quot;&gt;of&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;/dev/sdb
+&lt;span class=&quot;c&quot;&gt;# 注意输出目录位置，别把你电脑的硬盘给覆盖了...&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;开启ssh和设定系统使用的ip&quot;&gt;开启ssh和设定系统使用的ip&lt;/h4&gt;
+&lt;p&gt;raspbian 默认ssh没有开启，开启方法是在 /boot 目录下新建一个ssh文件即可&lt;/p&gt;
+
+&lt;p&gt;把sd卡拔出重新插上电脑&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;touch /media/pi/sdcard/boot/ssh
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;指定系统启动后使用的ip(修改 /boot/cmdline.txt), 比如&lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;192.168.100.101&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;vim /media/pi/sdcard/boot/cmdline.txt
+&lt;span class=&quot;c&quot;&gt;# 在最前端加入 ip=192.168.100.101 (注： 通过空格和原有内容隔开)&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h4 id=&quot;启动树莓派&quot;&gt;启动树莓派&lt;/h4&gt;
+&lt;p&gt;在启动树莓派之前，先把笔记本ip设置为 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;192.168.100.1&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo ifconfig eth0 192.168.100.1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;把sd卡插入树莓派，用网线把树莓派和笔记本连接起来，最后把充电器接入树莓派，树莓派启动（可看到pwr指示灯亮起来)
+过了一会之后，看网线两端的网口的指示灯是否亮起并不时的闪烁(ps: 我就是网线损坏，指示灯都不亮，换了一根后很顺利)&lt;/p&gt;
+
+&lt;p&gt;ping 树莓派, 能ping通说明两台机子可以通讯&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ping 192.168.100.101
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;成功ping之后，就可以ssh登录了。(用户名: pi, 默认密码: raspberry)&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ssh pi@192.168.100.101
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;下篇-连接无线&quot;&gt;下篇: 连接无线&lt;/h3&gt;
+
+&lt;p&gt;扫描周边wifi 热点信息&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo iwlist wlan0 scan
+&lt;span class=&quot;c&quot;&gt;# 会输出一堆信息，ESSID 后方名称即为 wifi名称&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;设置连接到某个信号&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo vim /etc/wpa_supplicant/wpa_supplicant.conf
+
+&lt;span class=&quot;c&quot;&gt;# 在文件后方加入连接信息，比如(wifi热点名称为tp001, 密码为cool1234):&lt;/span&gt;
+&lt;span class=&quot;nv&quot;&gt;network&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;={&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;ssid&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;tp001&quot;&lt;/span&gt;
+    &lt;span class=&quot;nv&quot;&gt;psk&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;=&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;cool1234&quot;&lt;/span&gt;
+&lt;span class=&quot;o&quot;&gt;}&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+&lt;p&gt;保存过后，几秒就会生效。&lt;/p&gt;
+
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;ifconfig wlan0
+&lt;span class=&quot;c&quot;&gt;# 查看是否成功, 看网卡是否启动并分配到ip (ps: 我没有成功:(  )&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;如果没有成功，使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;sudo wpa_cli reconfigure&lt;/code&gt; 后，再查看&lt;/p&gt;
+
+&lt;p&gt;到这里，就可以把之前连接在两台电脑之间的网线断开了，直接使用无线进行 ssh :), 不过最好到路由器设置页面固定树莓派的ip。&lt;/p&gt;
+
+&lt;h3 id=&quot;参考资料&quot;&gt;参考资料&lt;/h3&gt;
+&lt;p&gt;&lt;a href=&quot;https://jingyan.baidu.com/article/4853e1e569d97c1908f72654.html&quot;&gt;https://jingyan.baidu.com/article/4853e1e569d97c1908f72654.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://shumeipai.nxez.com/2013/12/08/linux-command-line-burn-raspberry-pi-mirror-to-sd-card.html&quot;&gt;http://shumeipai.nxez.com/2013/12/08/linux-command-line-burn-raspberry-pi-mirror-to-sd-card.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.raspberrypi.org/documentation/remote-access/ssh/&quot;&gt;https://www.raspberrypi.org/documentation/remote-access/ssh/&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md&quot;&gt;https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="raspberry-pi" /><summary type="html">由于入手树莓派的时候，周边没有显示器，并且路由器在别的房间，而我进不去，刚好手上有两根网线（后来证实好像一根坏了), 遂通过直接用网线连接笔记本和树莓派来连接ssh</summary></entry><entry><title type="html">编程感悟</title><link href="https://mika-cn.github.io/blog/programing/2017/07/16/thinking-of-programming.html" rel="alternate" type="text/html" title="编程感悟" /><published>2017-07-16T09:36:32+08:00</published><updated>2017-07-16T09:36:32+08:00</updated><id>https://mika-cn.github.io/blog/programing/2017/07/16/thinking-of-programming</id><content type="html" xml:base="https://mika-cn.github.io/blog/programing/2017/07/16/thinking-of-programming.html">&lt;p&gt;有些代码非常性感，读起来非常舒服，非常享受&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h4 id=&quot;keep-it-simple-and-stupied&quot;&gt;&lt;strong&gt;Keep It Simple and Stupied&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;&lt;strong&gt;化繁为简&lt;/strong&gt; 是一个很好的方向，我们却经常逆行而不自知&lt;/p&gt;
+
+&lt;h4 id=&quot;dont-repeat-yourself&quot;&gt;&lt;strong&gt;Don’t Repeat Yourself&lt;/strong&gt;&lt;/h4&gt;
+&lt;p&gt;重复是件可怕的事情，这经常意味着更多的修改，以及修改遗漏&lt;/p&gt;</content><author><name></name></author><category term="programing" /><summary type="html">有些代码非常性感，读起来非常舒服，非常享受</summary></entry><entry><title type="html">测试博客功能</title><link href="https://mika-cn.github.io/blog/other/2016/01/01/test-blog-feature.html" rel="alternate" type="text/html" title="测试博客功能" /><published>2016-01-01T13:34:35+08:00</published><updated>2016-01-01T13:34:35+08:00</updated><id>https://mika-cn.github.io/blog/other/2016/01/01/test-blog-feature</id><content type="html" xml:base="https://mika-cn.github.io/blog/other/2016/01/01/test-blog-feature.html">&lt;p&gt;test &lt;em&gt;Italic&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;test &lt;strong&gt;Bold&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h1 id=&quot;heading-1&quot;&gt;Heading 1&lt;/h1&gt;
+&lt;h2 id=&quot;heading-2&quot;&gt;Heading 2&lt;/h2&gt;
+&lt;h3 id=&quot;heading-3&quot;&gt;Heading 3&lt;/h3&gt;
+&lt;h4 id=&quot;heading-4&quot;&gt;Heading 4&lt;/h4&gt;
+&lt;h5 id=&quot;heading-5&quot;&gt;Heading 5&lt;/h5&gt;
+&lt;h6 id=&quot;heading-6&quot;&gt;Heading 6&lt;/h6&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://a.com&quot;&gt;Link&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/blog/assets/img/markdown.png&quot; alt=&quot;Image&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Blockquote&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;List&lt;/li&gt;
+  &lt;li&gt;List&lt;/li&gt;
+  &lt;li&gt;List&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;One&lt;/li&gt;
+  &lt;li&gt;Two&lt;/li&gt;
+  &lt;li&gt;Three&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Horizontal Rule&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;Inline code&lt;/code&gt; with blackticks&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;# code block
+print '3 backticks or'
+print 'indent 4 spaces'
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;</content><author><name></name></author><category term="other" /><summary type="html">test Italic</summary></entry><entry><title type="html">[转] 程序与人</title><link href="https://mika-cn.github.io/blog/zhuan/programing/2011/08/06/programming-and-perple.html" rel="alternate" type="text/html" title="[转] 程序与人" /><published>2011-08-06T00:08:00+08:00</published><updated>2011-08-06T00:08:00+08:00</updated><id>https://mika-cn.github.io/blog/zhuan/programing/2011/08/06/programming-and-perple</id><content type="html" xml:base="https://mika-cn.github.io/blog/zhuan/programing/2011/08/06/programming-and-perple.html">&lt;h5 id=&quot;备注-转自一位我敬佩的人小马哥&quot;&gt;&lt;strong&gt;备注: 转自一位我敬佩的人，小马哥&lt;/strong&gt;&lt;/h5&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;今天上培训课时乱想出来的东西。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;存在篇&quot;&gt;存在篇&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;在网上找不到一个完全符合你需求的程序，同样，世上也没一个为你量身订做的人。&lt;/li&gt;
+  &lt;li&gt;实用的程序总是有 bug 的，同样，真实的人总是有缺点。&lt;/li&gt;
+  &lt;li&gt;好用的程序不一定是通用的，同样，优秀的人不一定面面俱到。&lt;/li&gt;
+  &lt;li&gt;找得着的程序总有其存在的价值，同样，活着的人都有他生存的意义。&lt;/li&gt;
+  &lt;li&gt;老掉牙却还没消失的程序一定有它独特的作用，同样，永远不要忽视还没死掉的老人。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;频率篇&quot;&gt;频率篇&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;新的程序最吸引人，同样，新朋友最想去了解。&lt;/li&gt;
+  &lt;li&gt;常用的程序只有那么几个，同样，亲密的朋友就只有那么几人。&lt;/li&gt;
+  &lt;li&gt;用一个程序一辈子很难，同样，爱一个人一辈子也很难。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;制造篇&quot;&gt;制造篇&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;能用一辈子的程序都是自己不断修改的，同样，能爱一辈子的人的都是自己慢慢塑造的。&lt;/li&gt;
+  &lt;li&gt;合用的程序多是自己修改配置过的，同样，与自己相处得好的人都是被自己影响过的。&lt;/li&gt;
+  &lt;li&gt;自己写的程序是自己最珍惜的，同样，自己的孩子是自己痛爱的。&lt;/li&gt;
+  &lt;li&gt;头脑发热的时候不要编程，同样，醉酒冲动的时候不要造人。&lt;/li&gt;
+  &lt;li&gt;程序不会永远不更新，同样，人不会永远不变。&lt;/li&gt;
+  &lt;li&gt;将死未死的程序报警最多，同样，挣扎着的人最痛苦。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;自我篇&quot;&gt;自我篇&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;自己程序的 bug 自己难以看出，同样，自己的缺点自己难以发现。&lt;/li&gt;
+  &lt;li&gt;debug 要很耐心，同样，克服缺点也要很耐心。&lt;/li&gt;
+  &lt;li&gt;剪除辛苦构建的模块很难下手，同样，放弃曾经苦苦追求的很难抉择。&lt;/li&gt;
+  &lt;li&gt;为自己的系统添加一个功能总是很麻烦，同样，学习一件新东西总是很费劲，而且都是越老越难。&lt;/li&gt;
+  &lt;li&gt;重构系统代价极大，同样，完全改变自我几乎不可能，而且共同的是，越往后越难。&lt;/li&gt;
+  &lt;li&gt;看懂别人的程序要很长时间，了解别人也很漫长。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;似乎还可以写很多，不知道我是不是写程序写疯了。&lt;/p&gt;</content><author><name>小马哥</name></author><category term="zhuan" /><category term="programing" /><summary type="html">备注: 转自一位我敬佩的人，小马哥</summary></entry></feed>
