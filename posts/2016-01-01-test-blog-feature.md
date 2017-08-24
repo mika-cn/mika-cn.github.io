@@ -37,8 +37,6 @@ Horizontal Rule
 ---
 
 
-
-
 `Inline code` with blackticks
 
 ```

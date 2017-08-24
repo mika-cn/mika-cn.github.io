@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html>
+  <script>
+    (function(global){
+
+      if(!global.indexedDB) {
+        console.error("IndexedDB doesn't support")
+      }
+
+
+      /*** initialize database ***/
+      var db;
+      var dbName = "my_db";
+      var initDB = function(database){
+        console.info("initialize database");
+        db = database;
+        db.onerror = function(){
+          console.error("Database error: " + event.target.error);
+        }
+      }
+
+      /*** create object store ***/
+      var customers;
+      var createObjStore = function(){
+        console.info("create object store");
+        customers = db.createObjectStore("customers", {keyPath: "ssn"});
+        customers.createIndex("index.name", "name", {unique: false});
+        customers.createIndex("index.email", "email", {unique: true});
+      }
+
+      /*** open database ***/
+      var dbVersion = 2
+      var openDB = function(){
+        console.info("open database");
+        var request = global.indexedDB.open(dbName, dbVersion);
+
+        request.onsuccess = function(event) {
+          console.info("open database Success");
+          initDB(event.target.result);
+          test();
+        }
+
+        request.onupgradeneeded = function(event){
+          console.info("onupgradeneeded");
+          initDB(event.target.result);
+          createObjStore();
+        }
+      }
+
+
+      function test(){
+        console.info("run test");
+
+        const customerData = [
+          {ssn: "44-444", name: "Bill", age: 5, email: "bill@company.com"},
+          {ssn: "55-555", name: "Dona", age: 10,email: "dona@home.org"}
+        ];
+
+        var transaction = db.transaction(["customers"], "readwrite");
+        transaction.onerror = function(event){
+          console.error(event.target.error);
+        }
+        transaction.oncomplete = function(event){
+          console.info("add transaction Complete");
+        }
+        var objectStore = transaction.objectStore("customers");
+        for(var i in customerData){
+          var request = objectStore.add(customerData[i]);
+          request.onsuccess = function(event){
+            console.log("AddSuccess");
+          }
+        }
+      }
+
+      openDB();
+      
+
+    })(this)
+  </script>
+</html>

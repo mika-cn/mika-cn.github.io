@@ -1,0 +1,27 @@
+
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="网页上自定义事件">
+    <title>网页上自定义事件</title>
+  </head>
+  <body>
+    <p>打开console, 点击 PERFORM 按钮</p>
+    <input type="button" id="btn" value="PERFORM" />
+    <script>
+      function getMsg(a,b,c){
+        console.log(a);
+        console.log(b);
+        console.log(c);
+      }
+      var $ = function(id){ return document.getElementById(id)}
+      window.addEventListener("mika", getMsg, false)
+      $('btn').addEventListener("click", function(e){
+        var event = new CustomEvent("mika", {detail: {a: 1, b: 2}})
+        window.dispatchEvent(event)
+      });
+    </script>
+  </body>
+</html>
