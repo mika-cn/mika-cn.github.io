@@ -7,9 +7,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <title>
-     实验: ruby 标准输入(STDIN)  ~  草木一秋 
+     ruby 脚本编程，处理参数与输入流  ~  草木一秋 
   </title>
-  <meta name="description" content="本文探索了: ruby 脚本编程，获取输入的相关对象: ARGV, ARGF, $stdin">
+  <meta name="description" content="本文探索了: ruby 脚本编程时候对于参数和输入流的获取, 介绍了ARGV, ARGF 和 $stdin">
 
   <link rel="stylesheet" href="/blog/assets/css/main.css">
   <script src="/blog/assets/js/jquery-1.10.2.min.js"></script>
@@ -24,37 +24,31 @@
     <div class="blog-content">
 
     <header class="site-header" role="banner">
-
-  <div class="wrapper">
-    
-    
-    <a class="site-title" href="/blog/" title=" 草木一秋 -- Less is more"> 草木一秋 </a>
-
-  </div>
+  
+  
+  <a class="site-title" href="/blog/" title=" 草木一秋 -- Less is more"> 草木一秋 </a>
 </header>
 
 
     <main class="page-content" aria-label="Content">
-      <div class="wrapper">
-        <div class="wrapper">
-  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+      <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-    <header class="post-header">
-      <h4 class="post-title" itemprop="name headline">实验: ruby 标准输入(STDIN)</h4>
-      <p class="post-meta">
-      <time datetime="2018-03-28T07:33:35+08:00" itemprop="datePublished">
-        
-        Mar 28, 2018
-      </time>
-      </p>
-    </header>
+  <header class="post-header">
+    <h4 class="post-title" itemprop="name headline">ruby 脚本编程，处理参数与输入流</h4>
+    <p class="post-meta">
+    <time datetime="2018-03-28T07:33:35+08:00" itemprop="datePublished">
+      
+      Mar 28, 2018
+    </time>
+    </p>
+  </header>
 
-    <div class="post-content" itemprop="articleBody">
-      <blockquote>
-  <p>本文探索了: ruby 脚本编程，获取输入的相关对象: ARGV, ARGF, $stdin</p>
+  <div class="post-content" itemprop="articleBody">
+    <blockquote>
+  <p>本文探索了: ruby 脚本编程时候对于参数和输入流的获取, 介绍了ARGV, ARGF 和 $stdin</p>
 </blockquote>
 
-<h1 id="argv-对象">ARGV 对象<a name="head-argv"></a></h1>
+<h1 id="argv-对象">ARGV 对象</h1>
 
 <p>该对象存储的是调用脚本文件时传入的参数, 本质上是一个字符串数组</p>
 
@@ -73,7 +67,7 @@ Array
 
 <p>唠叨一句, 我们可以通过 <code class="highlighter-rouge">$0</code> 来获取当前运行的脚本参数 <code class="highlighter-rouge">"./argv_test.rb"</code></p>
 
-<h1 id="argf-对象">ARGF 对象<a name="head-argf"></a></h1>
+<h1 id="argf-对象">ARGF 对象</h1>
 
 <p><a href="http://ruby-doc.org/core-2.5.0/ARGF.html">官方文档对它的介绍</a></p>
 
@@ -120,6 +114,7 @@ argf_test.rb:2:in <span class="sb">`</span>each<span class="s1">': No such file 
 
 <span class="c"># ARGF 直接去读 "bar" 文件，结果就出错了</span>
 <span class="c"># 看来 ARGF 和 Kernel#gets 的功能差不多</span>
+<span class="c"># 注意： ARGF 和 gets 只有在 ARGV 里没有参数时候，才会读取标准输入</span>
 </code></pre>
 </div>
 
@@ -136,7 +131,7 @@ argf_test.rb:2:in <span class="sb">`</span>each<span class="s1">': No such file 
 </code></pre>
 </div>
 
-<h1 id="全局变量-stdin">全局变量 $stdin<a name="head-stdin"></a></h1>
+<h1 id="全局变量-stdin">全局变量 $stdin</h1>
 
 <p>表示当前环境的标准输入, 它的类是<code class="highlighter-rouge">IO</code></p>
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">irb</span><span class="o">&gt;</span> <span class="vg">$stdin</span>
@@ -163,46 +158,82 @@ puts <span class="nv">$stdin</span>.tty?
 </div>
 
 <p>所以 <code class="highlighter-rouge">#tty?</code> 可以作为判断有无标准输入的依据…</p>
-<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">if</span> <span class="o">!</span><span class="vg">$stdin</span><span class="p">.</span><span class="nf">tty?</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># stdin_test.rb</span>
+<span class="k">if</span> <span class="o">!</span><span class="vg">$stdin</span><span class="p">.</span><span class="nf">tty?</span>
   <span class="vg">$stdin</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">line</span><span class="o">|</span>
     <span class="nb">puts</span> <span class="n">line</span>
   <span class="k">end</span>
 <span class="k">end</span>
 </code></pre>
 </div>
+<p>标准输入，可以处理未结束的流。使用下面脚本创建一个未结束的流</p>
 
-    </div>
+<p>stream.rb</p>
+<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">#!/usr/bin/env ruby</span>
+<span class="vg">$stdout</span><span class="p">.</span><span class="nf">sync</span> <span class="o">=</span> <span class="kp">true</span> <span class="c1"># not buffer</span>
 
-    <div id="repo_name" data-repo-name="mika-cn/mika-cn.github.io"></div>
-
-
-
-  </article>
+<span class="k">while</span> <span class="kp">true</span>
+  <span class="nb">sleep</span> <span class="mi">0</span><span class="o">.</span><span class="mi">2</span>
+  <span class="vg">$stdout</span><span class="p">.</span><span class="nf">puts</span> <span class="no">Time</span><span class="p">.</span><span class="nf">now</span><span class="p">.</span><span class="nf">strftime</span><span class="p">(</span><span class="s2">"%T.%6N"</span><span class="p">)</span>
+<span class="k">end</span>
+</code></pre>
 </div>
 
-      </div>
+<p>测试:</p>
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>./stream | ruby stdin_test.rb
+11:45:54.884777
+11:45:55.084989
+11:45:55.285202
+11:45:55.485456
+11:45:55.685775
+11:45:55.885974
+11:45:56.086217
+11:45:56.286510
+11:45:56.486779
+11:45:56.687020
+11:45:56.887286
+.
+.
+.
+</code></pre>
+</div>
+
+<h1 id="总结">总结</h1>
+<ul>
+  <li>如果不涉及处理标准输入，则使用 <code class="highlighter-rouge">ARGV</code> 就足够了</li>
+  <li>如果只是单纯地文件处理，无需使用其他参数，可利用 <code class="highlighter-rouge">ARGF</code> 或 <code class="highlighter-rouge">gets</code>, 方便地处理输入</li>
+  <li>如果有参数且涉及标准输入，则通过<code class="highlighter-rouge">ARGV</code> 和 <code class="highlighter-rouge">$stdin</code> 来分别获取参数和标准输入流是比较妥当的选择。</li>
+</ul>
+
+
+  </div>
+
+  <div id="repo_name" data-repo-name="mika-cn/mika-cn.github.io"></div>
+
+
+
+</article>
+
     </main>
 
     <footer class="site-footer">
 
-  <div class="wrapper">
+  <!--<h2 class="footer-heading"> 草木一秋 </h2>-->
 
-    <!--<h2 class="footer-heading"> 草木一秋 </h2>-->
-
-    <div class="footer-col-wrapper">
-      <div class="footer-col footer-col-5">
-        <ul class="contact-list">
-          <li><a href="/blog/">Home</a></li>
-          <li><a href="/blog/tags">Tags</a> -- Blog Tags</li>
-            
-            <li><a href="mailto:laoquans@gmail.com">Email</a></li>
-            
-            <li><a target="_blank" href="/blog/feed.xml" id="rss-link">RSS</a></li>
-            
-            <li><a target="_blank" href="https://github.com/mika-cn">Github</a></li>
-            
-        </ul>
+  <div class="footer-col-wrapper">
+    <div class="footer-col footer-col-5">
+      <ul class="contact-list">
+        <li><a href="/blog/">Home</a></li>
+        <li><a href="/blog/tags">Tags</a> -- Blog Tags</li>
         
+        <li><a href="mailto:laoquans@gmail.com">Email</a></li>
+        
+        <li><a target="_blank" href="/blog/feed.xml" id="rss-link">RSS</a></li>
+        
+        <li><a target="_blank" href="https://github.com/mika-cn">Github</a></li>
+        
+      </ul>
+      
 <!-- mottos begin -->
 <p id='luck-motto'></p>
 <script>
@@ -236,9 +267,7 @@ puts <span class="nv">$stdin</span>.tty?
 </script>
 <!-- mottos end -->
 
-      </div>
     </div>
-
   </div>
 
 <!-- tag feed -->

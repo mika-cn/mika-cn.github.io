@@ -1,13 +1,13 @@
 ---
 layout: post
-title:  "实验: ruby 标准输入(STDIN)"
+title:  "ruby 脚本编程，处理参数与输入流"
 date:   2018-03-28 07:33:35 +0800
 tags: ruby
 categories: ruby
 ---
-> 本文探索了: ruby 脚本编程，获取输入的相关对象: ARGV, ARGF, $stdin
+> 本文探索了: ruby 脚本编程时候对于参数和输入流的获取, 介绍了ARGV, ARGF 和 $stdin
 
-# ARGV 对象<a name="head-argv" />
+# ARGV 对象
 
 该对象存储的是调用脚本文件时传入的参数, 本质上是一个字符串数组
 
@@ -28,7 +28,7 @@ Array
 
 
 
-# ARGF 对象<a name="head-argf" />
+# ARGF 对象
 
 [官方文档对它的介绍](http://ruby-doc.org/core-2.5.0/ARGF.html)
 
@@ -72,6 +72,7 @@ argf_test.rb:2:in `each': No such file or directory @ rb_sysopen - foo (Errno::E
 
 # ARGF 直接去读 "bar" 文件，结果就出错了
 # 看来 ARGF 和 Kernel#gets 的功能差不多
+# 注意： ARGF 和 gets 只有在 ARGV 里没有参数时候，才会读取标准输入
 ```
 
 当然，可以先把非文件名的参数从 `ARGV`里剔除
@@ -87,7 +88,7 @@ params = ARGV.dup.select do |arg|
 end
 ```
 
-# 全局变量 $stdin<a name="head-stdin" />
+# 全局变量 $stdin
 
 表示当前环境的标准输入, 它的类是`IO`
 ```ruby
@@ -115,9 +116,47 @@ false
 
 所以 `#tty?` 可以作为判断有无标准输入的依据...
 ```ruby
+# stdin_test.rb
 if !$stdin.tty?
   $stdin.each do |line|
     puts line
   end
 end
 ```
+标准输入，可以处理未结束的流。使用下面脚本创建一个未结束的流
+
+stream.rb
+```
+#!/usr/bin/env ruby
+$stdout.sync = true # not buffer
+
+while true
+  sleep 0.2
+  $stdout.puts Time.now.strftime("%T.%6N")
+end
+```
+
+测试:
+```shell
+$ ./stream | ruby stdin_test.rb
+11:45:54.884777
+11:45:55.084989
+11:45:55.285202
+11:45:55.485456
+11:45:55.685775
+11:45:55.885974
+11:45:56.086217
+11:45:56.286510
+11:45:56.486779
+11:45:56.687020
+11:45:56.887286
+.
+.
+.
+```
+
+# 总结
+* 如果不涉及处理标准输入，则使用 `ARGV` 就足够了
+* 如果只是单纯地文件处理，无需使用其他参数，可利用 `ARGF` 或 `gets`, 方便地处理输入
+* 如果有参数且涉及标准输入，则通过`ARGV` 和 `$stdin` 来分别获取参数和标准输入流是比较妥当的选择。
+

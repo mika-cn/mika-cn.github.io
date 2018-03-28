@@ -3,22 +3,22 @@
  <title>Your Title - ruby</title>
  <link href="http://example.com/t/ruby.xml" rel="self"/>
  <link href="http://example.com/tag/ruby.html"/>
- <updated>2018-03-28T10:28:58+08:00</updated>
+ <updated>2018-03-28T12:14:26+08:00</updated>
  <id>http://example.com/tag/ruby.html</id>
  <author>
    <name>Author Here</name>
  </author>
  
  <entry>
-   <title>实验: ruby 标准输入(STDIN)</title>
+   <title>ruby 脚本编程，处理参数与输入流</title>
    <link href="http://example.com/ruby/2018/03/28/ruby-stdin.html"/>
    <updated>2018-03-28T07:33:35+08:00</updated>
    <id>http://example.com/ruby/2018/03/28/ruby-stdin</id>
    <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;本文探索了: ruby 脚本编程，获取输入的相关对象: ARGV, ARGF, $stdin&lt;/p&gt;
+  &lt;p&gt;本文探索了: ruby 脚本编程时候对于参数和输入流的获取, 介绍了ARGV, ARGF 和 $stdin&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h1 id=&quot;argv-对象&quot;&gt;ARGV 对象&lt;a name=&quot;head-argv&quot;&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;h1 id=&quot;argv-对象&quot;&gt;ARGV 对象&lt;/h1&gt;
 
 &lt;p&gt;该对象存储的是调用脚本文件时传入的参数, 本质上是一个字符串数组&lt;/p&gt;
 
@@ -37,7 +37,7 @@ Array
 
 &lt;p&gt;唠叨一句, 我们可以通过 &lt;code class=&quot;highlighter-rouge&quot;&gt;$0&lt;/code&gt; 来获取当前运行的脚本参数 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;./argv_test.rb&quot;&lt;/code&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;argf-对象&quot;&gt;ARGF 对象&lt;a name=&quot;head-argf&quot;&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;h1 id=&quot;argf-对象&quot;&gt;ARGF 对象&lt;/h1&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://ruby-doc.org/core-2.5.0/ARGF.html&quot;&gt;官方文档对它的介绍&lt;/a&gt;&lt;/p&gt;
 
@@ -84,6 +84,7 @@ argf_test.rb:2:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;each&lt;span cl
 
 &lt;span class=&quot;c&quot;&gt;# ARGF 直接去读 &quot;bar&quot; 文件，结果就出错了&lt;/span&gt;
 &lt;span class=&quot;c&quot;&gt;# 看来 ARGF 和 Kernel#gets 的功能差不多&lt;/span&gt;
+&lt;span class=&quot;c&quot;&gt;# 注意： ARGF 和 gets 只有在 ARGV 里没有参数时候，才会读取标准输入&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
@@ -100,7 +101,7 @@ argf_test.rb:2:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;each&lt;span cl
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;h1 id=&quot;全局变量-stdin&quot;&gt;全局变量 $stdin&lt;a name=&quot;head-stdin&quot;&gt;&lt;/a&gt;&lt;/h1&gt;
+&lt;h1 id=&quot;全局变量-stdin&quot;&gt;全局变量 $stdin&lt;/h1&gt;
 
 &lt;p&gt;表示当前环境的标准输入, 它的类是&lt;code class=&quot;highlighter-rouge&quot;&gt;IO&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;irb&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;vg&quot;&gt;$stdin&lt;/span&gt;
@@ -127,13 +128,53 @@ puts &lt;span class=&quot;nv&quot;&gt;$stdin&lt;/span&gt;.tty?
 &lt;/div&gt;
 
 &lt;p&gt;所以 &lt;code class=&quot;highlighter-rouge&quot;&gt;#tty?&lt;/code&gt; 可以作为判断有无标准输入的依据…&lt;/p&gt;
-&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;vg&quot;&gt;$stdin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;tty?&lt;/span&gt;
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# stdin_test.rb&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;vg&quot;&gt;$stdin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;tty?&lt;/span&gt;
   &lt;span class=&quot;vg&quot;&gt;$stdin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;line&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
     &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;line&lt;/span&gt;
   &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
+&lt;p&gt;标准输入，可以处理未结束的流。使用下面脚本创建一个未结束的流&lt;/p&gt;
+
+&lt;p&gt;stream.rb&lt;/p&gt;
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#!/usr/bin/env ruby&lt;/span&gt;
+&lt;span class=&quot;vg&quot;&gt;$stdout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sync&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# not buffer&lt;/span&gt;
+
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
+  &lt;span class=&quot;nb&quot;&gt;sleep&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;2&lt;/span&gt;
+  &lt;span class=&quot;vg&quot;&gt;$stdout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;Time&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;now&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;strftime&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;%T.%6N&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;测试:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;./stream | ruby stdin_test.rb
+11:45:54.884777
+11:45:55.084989
+11:45:55.285202
+11:45:55.485456
+11:45:55.685775
+11:45:55.885974
+11:45:56.086217
+11:45:56.286510
+11:45:56.486779
+11:45:56.687020
+11:45:56.887286
+.
+.
+.
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;h1 id=&quot;总结&quot;&gt;总结&lt;/h1&gt;
+&lt;ul&gt;
+  &lt;li&gt;如果不涉及处理标准输入，则使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;ARGV&lt;/code&gt; 就足够了&lt;/li&gt;
+  &lt;li&gt;如果只是单纯地文件处理，无需使用其他参数，可利用 &lt;code class=&quot;highlighter-rouge&quot;&gt;ARGF&lt;/code&gt; 或 &lt;code class=&quot;highlighter-rouge&quot;&gt;gets&lt;/code&gt;, 方便地处理输入&lt;/li&gt;
+  &lt;li&gt;如果有参数且涉及标准输入，则通过&lt;code class=&quot;highlighter-rouge&quot;&gt;ARGV&lt;/code&gt; 和 &lt;code class=&quot;highlighter-rouge&quot;&gt;$stdin&lt;/code&gt; 来分别获取参数和标准输入流是比较妥当的选择。&lt;/li&gt;
+&lt;/ul&gt;
+
 </content>
  </entry>
  
