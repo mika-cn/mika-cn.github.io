@@ -11,7 +11,7 @@ dl, dd, ol, ul, figure {
  * Basic styling
  */
 body {
-  font: 300 14px/1.3 "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font: 400 14px/1.3 "Helvetica Neue", Helvetica, Arial, sans-serif;
   color: #343434;
   background-color: #fdfdfd;
   -webkit-text-size-adjust: 100%;
@@ -59,7 +59,7 @@ li > ol {
  * Headings
  */
 h1, h2, h3, h4, h5, h6 {
-  font-weight: 300; }
+  font-weight: 400; }
 
 /**
  * Links

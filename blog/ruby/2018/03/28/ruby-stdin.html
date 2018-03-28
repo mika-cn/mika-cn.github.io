@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <title>
+     实验: ruby 标准输入(STDIN)  ~  草木一秋 
+  </title>
+  <meta name="description" content="本文探索了: ruby 脚本编程，获取输入的相关对象: ARGV, ARGF, $stdin">
+
+  <link rel="stylesheet" href="/blog/assets/css/main.css">
+  <script src="/blog/assets/js/jquery-1.10.2.min.js"></script>
+  <link rel="canonical" href="https://mika-cn.github.io/blog/ruby/2018/03/28/ruby-stdin.html">
+  <link rel="alternate" type="application/rss+xml" title=" 草木一秋 " href="/blog/feed.xml">
+
+  
+</head>
+
+
+  <body>
+    <div class="blog-content">
+
+    <header class="site-header" role="banner">
+
+  <div class="wrapper">
+    
+    
+    <a class="site-title" href="/blog/" title=" 草木一秋 -- Less is more"> 草木一秋 </a>
+
+  </div>
+</header>
+
+
+    <main class="page-content" aria-label="Content">
+      <div class="wrapper">
+        <div class="wrapper">
+  <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+    <header class="post-header">
+      <h4 class="post-title" itemprop="name headline">实验: ruby 标准输入(STDIN)</h4>
+      <p class="post-meta">
+      <time datetime="2018-03-28T07:33:35+08:00" itemprop="datePublished">
+        
+        Mar 28, 2018
+      </time>
+      </p>
+    </header>
+
+    <div class="post-content" itemprop="articleBody">
+      <blockquote>
+  <p>本文探索了: ruby 脚本编程，获取输入的相关对象: ARGV, ARGF, $stdin</p>
+</blockquote>
+
+<h1 id="argv-对象">ARGV 对象<a name="head-argv"></a></h1>
+
+<p>该对象存储的是调用脚本文件时传入的参数, 本质上是一个字符串数组</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>cat ./argv_test.rb
+puts ARGV.class
+puts ARGV.to_s
+
+<span class="c"># 调用</span>
+<span class="gp">$ </span>ruby ./argv_test.rb a b 1 ./file.txt
+Array
+<span class="o">[</span><span class="s2">"a"</span>, <span class="s2">"b"</span>, <span class="s2">"1"</span>, <span class="s2">"./file.txt"</span><span class="o">]</span>
+</code></pre>
+</div>
+
+<p><code class="highlighter-rouge">ARGV</code> 就是这么单纯的数组, 所以可以像操作普通数组那样操作它 - 可别被它名字都是大写给迷惑住 :)</p>
+
+<p>唠叨一句, 我们可以通过 <code class="highlighter-rouge">$0</code> 来获取当前运行的脚本参数 <code class="highlighter-rouge">"./argv_test.rb"</code></p>
+
+<h1 id="argf-对象">ARGF 对象<a name="head-argf"></a></h1>
+
+<p><a href="http://ruby-doc.org/core-2.5.0/ARGF.html">官方文档对它的介绍</a></p>
+
+<blockquote>
+  <p>ARGF is a stream designed for use in scripts that process files given as command-line arguments or passed in via STDIN.</p>
+</blockquote>
+
+<blockquote>
+  <p>ARGF assumes that <strong>any arguments that aren’t filenames have been removed from ARGV</strong></p>
+</blockquote>
+
+<p><code class="highlighter-rouge">ARGF</code> 对象，会拿到 <code class="highlighter-rouge">ARGV</code> 数组里的参数，把每个参数当作文件名，然后很方便地访问这些文件.</p>
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="c"># 比如</span>
+<span class="gp">$ </span>cat ./argf_test.rb
+ARGF.each <span class="k">do</span> |line|
+  puts line
+end
+
+<span class="c"># 调用(通过传入文件名)</span>
+<span class="gp">$ </span>ruby ./argf_test.rb a.txt b.txt
+A: Line 1
+A: Line 2
+B: Line 1
+B: Line 2
+
+<span class="c"># 调用(通过标准输入)</span>
+<span class="gp">$ </span>cat b.txt a.txt | ruby argf_test.rb
+B: Line1
+B: Line2
+A: Line1
+A: Line2
+
+<span class="gp">$ </span>ruby argf_test.rb &lt; a.txt
+A: Line 1
+A: Line 2
+</code></pre>
+</div>
+
+<p>需要注意的是: 使用 <code class="highlighter-rouge">ARGF</code> 时候, 有个限制需确保<code class="highlighter-rouge">ARGV</code>的每个参数都能索引到文件</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>ruby argf_test.rb foo bar a.txt
+argf_test.rb:2:in <span class="sb">`</span>each<span class="s1">': No such file or directory @ rb_sysopen - foo (Errno::ENOENT)
+  from argf_test.rb:2:in `&lt;main&gt;'</span>
+
+<span class="c"># ARGF 直接去读 "bar" 文件，结果就出错了</span>
+<span class="c"># 看来 ARGF 和 Kernel#gets 的功能差不多</span>
+</code></pre>
+</div>
+
+<p>当然，可以先把非文件名的参数从 <code class="highlighter-rouge">ARGV</code>里剔除</p>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">params</span> <span class="o">=</span> <span class="no">ARGV</span><span class="p">.</span><span class="nf">dup</span><span class="p">.</span><span class="nf">select</span> <span class="k">do</span> <span class="o">|</span><span class="n">arg</span><span class="o">|</span>
+  <span class="n">path</span> <span class="o">=</span> <span class="n">arg</span><span class="p">.</span><span class="nf">start_with?</span><span class="p">(</span><span class="s1">'/'</span><span class="p">)</span> <span class="p">?</span> <span class="n">arg</span> <span class="p">:</span> <span class="no">File</span><span class="p">.</span><span class="nf">expand_path</span><span class="p">(</span><span class="s2">"../</span><span class="si">#{</span><span class="n">arg</span><span class="si">}</span><span class="s2">"</span><span class="p">,</span> <span class="kp">__FILE__</span><span class="p">)</span>
+  <span class="k">if</span> <span class="no">File</span><span class="p">.</span><span class="nf">exist?</span><span class="p">(</span><span class="n">path</span><span class="p">)</span>
+    <span class="kp">false</span>
+  <span class="k">else</span>
+    <span class="no">ARGV</span><span class="p">.</span><span class="nf">delete</span><span class="p">(</span><span class="n">arg</span><span class="p">)</span>
+    <span class="kp">true</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+<h1 id="全局变量-stdin">全局变量 $stdin<a name="head-stdin"></a></h1>
+
+<p>表示当前环境的标准输入, 它的类是<code class="highlighter-rouge">IO</code></p>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">irb</span><span class="o">&gt;</span> <span class="vg">$stdin</span>
+<span class="c1">#&lt;IO:&lt;STDIN&gt;&gt;</span>
+</code></pre>
+</div>
+<p><code class="highlighter-rouge">IO</code>类有个实例方法 <code class="highlighter-rouge">#tty?</code> 官方文档解释为:</p>
+
+<p>Returns true if ios is associated with a terminal device (tty), false otherwise.</p>
+
+<p>咋看之下，不知所云 :(</p>
+
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>cat stdin_tty_test.rb
+puts <span class="nv">$stdin</span>.tty?
+
+<span class="c"># 调用</span>
+<span class="gp">$ </span>ruby stdin_tty_test.rb a b
+<span class="nb">true</span>
+<span class="gp">$ </span>cat file.txt | ruby stdin_tty_test.rb a b
+<span class="nb">false</span>
+<span class="gp">$ </span>ruby stdin_tty_test.rb a b &lt; file.txt
+<span class="nb">false</span>
+</code></pre>
+</div>
+
+<p>所以 <code class="highlighter-rouge">#tty?</code> 可以作为判断有无标准输入的依据…</p>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="k">if</span> <span class="o">!</span><span class="vg">$stdin</span><span class="p">.</span><span class="nf">tty?</span>
+  <span class="vg">$stdin</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">line</span><span class="o">|</span>
+    <span class="nb">puts</span> <span class="n">line</span>
+  <span class="k">end</span>
+<span class="k">end</span>
+</code></pre>
+</div>
+
+    </div>
+
+    <div id="repo_name" data-repo-name="mika-cn/mika-cn.github.io"></div>
+
+
+
+  </article>
+</div>
+
+      </div>
+    </main>
+
+    <footer class="site-footer">
+
+  <div class="wrapper">
+
+    <!--<h2 class="footer-heading"> 草木一秋 </h2>-->
+
+    <div class="footer-col-wrapper">
+      <div class="footer-col footer-col-5">
+        <ul class="contact-list">
+          <li><a href="/blog/">Home</a></li>
+          <li><a href="/blog/tags">Tags</a> -- Blog Tags</li>
+            
+            <li><a href="mailto:laoquans@gmail.com">Email</a></li>
+            
+            <li><a target="_blank" href="/blog/feed.xml" id="rss-link">RSS</a></li>
+            
+            <li><a target="_blank" href="https://github.com/mika-cn">Github</a></li>
+            
+        </ul>
+        
+<!-- mottos begin -->
+<p id='luck-motto'></p>
+<script>
+  (function(){
+    var mottos = [
+ "好记性不如烂笔头",
+ "自由的保证是什么?是对自己不再感到羞耻 --尼采",
+ "渴求美德而非奖赏。",
+ "两年学说话，一生学闭嘴",
+ "计算机没什么用。他们只会告诉你答案。--毕加索",
+ "Your time is limited, so don't waste it living someone else's life.  ——史蒂夫.乔布斯" 
+]
+;
+
+    var getLuckIdx = function(){
+      var lastLuckIdx = localStorage.getItem('lastLuckIdx');
+      while(1){
+        var luckIdx = Math.floor(Math.random() * mottos.length);
+        if(luckIdx != lastLuckIdx){
+          localStorage.setItem('lastLuckIdx', luckIdx);
+          return luckIdx;
+        }
+      }
+    }
+
+    var luckIdx = getLuckIdx();
+    var luckMottoEle = $('#luck-motto')
+    var luckMotto = mottos[luckIdx];
+    luckMottoEle.html(luckMotto);
+  })();
+</script>
+<!-- mottos end -->
+
+      </div>
+    </div>
+
+  </div>
+
+<!-- tag feed -->
+<script>
+  (function(){
+    var url = location.href;
+    if(url.indexOf('/blog/t/') > -1 ){
+      $('#rss-link').attr('href', url.replace('.html', '.xml'));
+    }
+  })();
+</script>
+<!-- tag feed -->
+</footer>
+
+    </div>
+
+  </body>
+
+</html>
