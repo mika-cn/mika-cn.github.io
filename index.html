@@ -5,16 +5,36 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Home page of mika">
+    <title>Mika's Blog</title>
   </head>
+  <style>
+    body {background-color: #EEEEEE;}
+    .entry {display: none}
+    .hi {
+      color: #AAAAAA;
+      font-size: 4em;
+    }
+    .hi h2{text-align: right}
+  </style>
+
   <body>
-    <ul>
-      <li><a href="./blog/index.html">博客</a></li>
-      <li><a href="./page/test/index.html">测试网页</a></li>
-    </ul>
+    <!-- refactor Me -->
+    <div class="entry">
+      <ul>
+        <li><a href="./blog/index.html">博客</a></li>
+        <li><a href="./page/test/index.html">测试网页</a></li>
+      </ul>
+    </div>
+    <div class="hi">
+      <h1>Welcome you</h1>
+      <h2>Code running... </h2>
+    </div>
   </body>
   <script>
     (function(){
-      // document.location.pathname="/blog/";
+      setTimeout(function(){
+        document.location.pathname="/blog/";
+      }, 2000);
     })();
   </script>
 </html>

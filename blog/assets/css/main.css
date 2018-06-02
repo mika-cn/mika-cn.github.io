@@ -473,11 +473,17 @@ pre {
     color: #099; }
 
 body {
-  background-color: #EBEBEB; }
+  background-color: #F5F5F5; }
 
 blank {
   display: block;
   height: 45px; }
+
+.blog-content {
+  background-color: #EBEBEB;
+  max-width: 980px;
+  margin: 0 auto;
+  border: 1px solid #ccc; }
 
 .page-content {
   background-color: #FBFBFB; }
@@ -485,6 +491,10 @@ blank {
 /* padding */
 .site-header, .site-footer, .home, .post {
   padding: 10px; }
+
+/* border */
+.site-header {
+  border-top: 0px; }
 
 .home, .post {
   background-color: #FFFFFF;
