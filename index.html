@@ -5,36 +5,73 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Home page of mika">
-    <title>Mika's Blog</title>
+    <title>Mika's Home</title>
   </head>
   <style>
-    body {background-color: #EEEEEE;}
-    .entry {display: none}
-    .hi {
-      color: #AAAAAA;
-      font-size: 4em;
+    body {margin: 0px;}
+    .main{
+      padding: 60px 20px 200px 20px;
+      width: 100%;
+      min-height: 800px;
+      background: linear-gradient(to right, #A7D5EA, pink);
+      box-sizing: border-box;
     }
-    .hi h2{text-align: right}
+    .projects {}
+    .clearfix:after {
+      content: "";
+      display: table;
+      clear: both;
+    }
+    .project {
+      text-decoration: none;
+      display: inline-block;
+      background-color: white;
+      color: #586069;
+      width: 280px;
+      min-height: 126px;
+      padding: 18px;
+      text-align: center;
+      border: 1px solid #ccc;
+      border-radius: 3px;
+      cursor: pointer;
+      margin-right: 20px;
+      float: left;
+    }
+    .project:hover {
+      box-shadow: 0 0 6px gray;
+    }
+    .project > .name {
+      font-size: 15px;
+      color: #0366d6
+    }
+    .project > .fake-logo {
+      width: 30px;
+      height: 30px;
+    }
+
   </style>
 
   <body>
     <!-- refactor Me -->
-    <div class="entry">
-      <ul>
-        <li><a href="./blog/index.html">博客</a></li>
-        <li><a href="./page/test/index.html">测试网页</a></li>
-      </ul>
+    <div class="main">
+      <div class="projects">
+        <a class="project" href="/maoxian-web-clipper/index.html">
+          <img class="logo" src="/maoxian-web-clipper/imgs/logo.png" />
+          <h1 class="name">MaoXian Web Clipper</h1>
+          <div class="intro">
+             一个可以裁剪网页到本地的简洁浏览器扩展
+          </div>
+        </a>
+        <a class="project" href="/blog/index.html">
+          <div class="fake-logo"></div>
+          <h1 class="name">Mika's Blog</h1>
+          <div class="intro">
+             我的博客 :)
+          </div>
+        </a>
+      </div>
+      <div class="clearfix"></div>
     </div>
-    <div class="hi">
-      <h1>Welcome you</h1>
-      <h2>Code running... </h2>
-    </div>
+
   </body>
-  <script>
-    (function(){
-      setTimeout(function(){
-        document.location.pathname="/blog/";
-      }, 2000);
-    })();
-  </script>
 </html>
