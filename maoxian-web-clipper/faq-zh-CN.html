@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MaoXian Web Clipper</title>
+    <link rel="icon" type="image/png" href="imgs/logo.png" />
+    <style>
+      code { background-color: #d5d5d5; padding: 2px 3px 2px 3px; }
+      .main { padding-bottom: 200px }
+      .main img { max-width: 100%; }
+    </style>
+  </head>
+  <body>
+    <div class="main">
+    
+<h1 id="maoxian-web-clipper-">MaoXian Web Clipper 常见问题</h1>
+
+<ul>
+  <li><a href="#改变默认的下载路径">改变默认的下载路径</a></li>
+</ul>
+
+<hr />
+
+<h2 id="section">改变默认的下载路径</h2>
+
+<p>由于安全问题，浏览器扩展无法修改你的下载路径。但是你可以通过创建软链接(符号链接)，来达到你的目地。</p>
+
+<h3 id="linuxmac">Linux/Mac</h3>
+
+<p>假设:</p>
+
+<ul>
+  <li>/home/jack/Downloads     [是你的下载路径]</li>
+  <li>/home/jack/Dropbox/clips [是你的目标路径]</li>
+</ul>
+
+<p>运行命令: <code>ln -s /home/jack/Dropbox/clips /home/jack/Downloads/mx-wc</code></p>
+
+<h3 id="windows">Windows</h3>
+
+<p>假设:</p>
+
+<ul>
+  <li>C:\Users\jack\Downloads      [是你的下载路径]</li>
+  <li>C:\Users\jack\OneDrive\clips [是你的目标路径]</li>
+</ul>
+
+<p>把下面的命令保存成 mklink.bat 文件，再右击该文件，以管理员方式运行。</p>
+
+<p>命令: <code>mklink \D C:\Users\jack\Downloads\mx-wc C:\Users\jack\OneDrive\clips</code></p>
+
+<hr />
+<p><a href="index-zh-CN.html">首页</a></p>
+
+    </div>
+  </body>
+</html>
+
