@@ -1,12 +1,14 @@
 
 # MaoXian Web Clipper
 
+[简体中文](index-zh-CN.html)
+
 ## introduction
 
 It's a web extension to clip information from web page. save to your local machine to avoid information invalidation.
 
 ## Features
-* Local Storate - All file will save in local driver, you can control your data totally (eg: Use dropbox to sync file)
+* Local Storate - All file will save in local driver, you can control your data totally (e.g. Use dropbox to sync file)
 * Free Selection - You can select which area you want to clip.
 * Adjust Focus - After you focus a area, you can adjust your selection use hot keys.
 * Category And Tag - Before your clipping, you can change title, input category and some tags.
@@ -17,8 +19,8 @@ It's a web extension to clip information from web page. save to your local machi
 * [screenshots](screenshots.html)
 
 ## Install
-* Firefox - [https://addons.mozilla.org/zh-CN/firefox/addon/maoxian-web-clipper/](https://addons.mozilla.org/zh-CN/firefox/addon/maoxian-web-clipper/)
-* Chrome - [use in chrome](chrome.html)
+* Firefox - [https://addons.mozilla.org/en-US/firefox/addon/maoxian-web-clipper/](https://addons.mozilla.org/en-US/firefox/addon/maoxian-web-clipper/)
+* Chrome - [use in chrome](use-in-chrome.html)
 
 ## Notice
 If your browser enable "ask for filename every download", please disable this option. (because MaoXian Web Clipper will download lots of file one clipping, you will get lots of window if your enable this option)
