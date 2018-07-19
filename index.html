@@ -5,15 +5,19 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="description" content="Home page of mika">
-    <title>Mika's Home</title>
+    <title>Mika's Home page.</title>
   </head>
   <style>
-    body {margin: 0px;}
+    body {
+      margin: 0px;
+      font-family: "Helvetica Neue", "Luxi Sans", "DejaVu Sans", Tahoma, "Hiragino Sans GB", "Microsoft Yahei", sans-serif;
+    }
     .main{
       padding: 60px 20px 200px 20px;
       width: 100%;
       min-height: 800px;
       background: linear-gradient(to right, #A7D5EA, pink);
+      /*background: lightseagreen;*/
       box-sizing: border-box;
     }
     .projects {}
@@ -42,12 +46,15 @@
       box-shadow: 0 0 6px gray;
     }
     .project > .name {
-      font-size: 15px;
+      font-size: 16px;
       color: #0366d6
+    }
+    .project > .intro {
+      font-size: 14px;
     }
     .project > .fake-logo {
       width: 30px;
-      height: 30px;
+      height: 20px;
     }
 
   </style>
@@ -58,17 +65,18 @@
       <!-- main project -->
       <div class="projects">
         <a class="project" target="_blank" href="/maoxian-web-clipper/index.html">
-          <img class="logo" src="/maoxian-web-clipper/imgs/logo.png" />
+          <!--<img class="logo" src="/maoxian-web-clipper/imgs/logo.png" />-->
+          <div class="fake-logo"></div>
           <h1 class="name">MaoXian Web Clipper</h1>
           <div class="intro">
-             一个可以裁剪网页到本地的简洁浏览器扩展
+            It’s a web extension to clip information from web page. save to your local machine to avoid information invalidation.
           </div>
         </a>
         <a class="project" target="_blank" href="/blog/index.html">
           <div class="fake-logo"></div>
-          <h1 class="name">Mika's Blog</h1>
+          <h1 class="name">My Blog</h1>
           <div class="intro">
-             我的博客 :)
+            :)
           </div>
         </a>
       </div>
@@ -79,7 +87,7 @@
           <div class="fake-logo"></div>
           <h1 class="name">ColorDate</h1>
           <div class="intro">
-             一个根据网页上日期的新旧程度， 给日期进行着色的油猴脚本
+            A user script. It highlight date on webpage according to how long it since now. Use it, you can avoid wast your time on outdate information.
           </div>
         </a>
       </div>

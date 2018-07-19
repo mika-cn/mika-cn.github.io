@@ -8,7 +8,7 @@
 It's a web extension to clip information from web page. save to your local machine to avoid information invalidation.
 
 ## Features
-* Local Storate - All file will save in local driver, you can control your data totally (e.g. Use dropbox to sync file)
+* Local Storage - All file will save in local driver, you can control your data totally (e.g. Use dropbox to sync file)
 * Free Selection - You can select which area you want to clip.
 * Adjust Focus - After you focus a area, you can adjust your selection use hot keys.
 * Category And Tag - Before your clipping, you can change title, input category and some tags.
