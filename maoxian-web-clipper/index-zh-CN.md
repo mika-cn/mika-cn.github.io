@@ -19,7 +19,8 @@
 
 ## 安装
 * Firefox - [https://addons.mozilla.org/zh-CN/firefox/addon/maoxian-web-clipper/](https://addons.mozilla.org/zh-CN/firefox/addon/maoxian-web-clipper/)
-* Chrome - [https://chrome.google.com/webstore/detail/maoxian-web-clipper/kjahokgdcbohofgdidndeiaigkehdjdc](https://chrome.google.com/webstore/detail/maoxian-web-clipper/kjahokgdcbohofgdidndeiaigkehdjdc)
+* Chrome web store - [https://chrome.google.com/webstore/detail/maoxian-web-clipper/kjahokgdcbohofgdidndeiaigkehdjdc](https://chrome.google.com/webstore/detail/maoxian-web-clipper/kjahokgdcbohofgdidndeiaigkehdjdc)
+* Chrome - [墙内安装](chrome-install-by-crx.html)
 
 ## 使用注意
 如果你的浏览器开启了 “每次下载都询问文件名”， 请关了该选项（插件一次会下载许多文件，会弹出很多窗口）。

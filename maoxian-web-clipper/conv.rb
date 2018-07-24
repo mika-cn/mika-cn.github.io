@@ -17,5 +17,6 @@ render_markdown('./index.md', './index.html')
 render_markdown('./index-zh-CN.md', './index-zh-CN.html')
 render_markdown('./faq.md', './faq.html')
 render_markdown('./faq-zh-CN.md', './faq-zh-CN.html')
-render_markdown('./use-in-chrome.md', './use-in-chrome.html')
-render_markdown('./use-in-chrome-zh-CN.md', './use-in-chrome-zh-CN.html')
+render_markdown('./chrome-install-by-crx.md', './chrome-install-by-crx.html')
+render_markdown('./change-log.md', './change-log.html')
+
