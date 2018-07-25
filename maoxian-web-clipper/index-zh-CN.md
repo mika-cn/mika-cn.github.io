@@ -39,3 +39,4 @@
 
 ## 更多
 * [常见问题](faq-zh-CN.html)
+* [更新日志](change-log.html)

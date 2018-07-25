@@ -39,3 +39,4 @@ You could help MaoXian Web Clipper development in many ways.
 
 ## More
 * [FAQ](faq.html)
+* [Change log](change-log.html)

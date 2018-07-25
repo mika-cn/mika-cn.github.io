@@ -5,8 +5,9 @@
 
 ## 安装
 
-#### 1. 下载 crx 文件
-[maoxian-web-clipper-chrome-0.0.9.crx](crxs/maoxian-web-clipper-chrome-0.0.9.crx)
+#### 1. 下载 crx 文件，选择最新版以获得最好的体验。
+* [maoxian-web-clipper-chrome-0.1.0.crx](crxs/maoxian-web-clipper-chrome-0.1.0.crx)
+* [maoxian-web-clipper-chrome-0.0.9.crx](crxs/maoxian-web-clipper-chrome-0.0.9.crx)
 
 #### 2. 打开Chrome 扩展页面(在地址栏直接输入): `about:extensions`
 
