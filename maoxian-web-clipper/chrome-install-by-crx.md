@@ -6,6 +6,7 @@
 ## 安装
 
 #### 1. 下载 crx 文件，选择最新版以获得最好的体验。
+* [maoxian-web-clipper-chrome-0.1.1.crx](crxs/maoxian-web-clipper-chrome-0.1.1.crx)
 * [maoxian-web-clipper-chrome-0.1.0.crx](crxs/maoxian-web-clipper-chrome-0.1.0.crx)
 * [maoxian-web-clipper-chrome-0.0.9.crx](crxs/maoxian-web-clipper-chrome-0.0.9.crx)
 
