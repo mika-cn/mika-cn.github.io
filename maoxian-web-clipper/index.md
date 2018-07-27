@@ -35,7 +35,7 @@ You could help MaoXian Web Clipper development in many ways.
 
 * Sending feedback and suggestion.
 * Spread and promote this extension to your friend. Popularity is a strong power to drive developers.
-* If it's really helpful for you, consider [make a donation](/donate/maoxian-web-clipper.html)。
+* If it's really helpful for you, consider [make a donation](donate.html)。
 
 ## More
 * [FAQ](faq.html)
