@@ -33,7 +33,7 @@ Assume your default download path is `/home/foo/downloads`, then it will save fi
 ## Contribution
 You could help MaoXian Web Clipper development in many ways.
 
-* Sending feedback and suggestion.
+* [Sending feedback and suggestion](https://github.com/mika-cn/maoxian-web-clipper/issues).
 * Spread and promote this extension to your friend. Popularity is a strong power to drive developers.
 * If it's really helpful for you, consider [make a donation](donate.html)。
 
