@@ -8,10 +8,34 @@
     <style>
       body {
         font-size: 14px;
+        font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
       }
-      code { background-color: #d5d5d5; padding: 2px 3px 2px 3px; }
+      code {
+        border-radius: 3px;
+        padding: 2px 3px 2px 3px;
+        background-color: rgba(27,31,35,0.15);
+      }
+      hr {
+        color: #efefef;
+        margin-bottom: 50px;
+        margin-top: 25px;
+      }
       .main { padding-bottom: 200px }
       .main img { max-width: 100%; }
+
+      table {
+        padding: 5px;
+        border-radius: 3px;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      table > thead {
+        background-color: #e5e5e5;
+      }
+      table th, table td {
+        border: solid 1px #ccc;
+        padding: 5px;
+      }
     </style>
   </head>
   <body>
@@ -21,6 +45,7 @@
 
 <ul>
   <li><a href="#change-default-download-path">Change Default download path</a></li>
+  <li><a href="#allow-access-file-urls">Allow file URLs Access</a></li>
 </ul>
 
 <hr />
@@ -54,6 +79,69 @@
 <p>Save command below as mklink.bat, and run mklink.bat as administrator.</p>
 
 <p>Command: <code>mklink \D C:\Users\jack\Downloads\mx-wc C:\Users\jack\OneDrive\clips</code></p>
+
+<hr />
+
+<h2 id="allow-access-file-urls">Allow access file URLs</h2>
+
+<p>This section describe how to allow <code>MaoXian Web Clipper</code> to access file URLs(file://)</p>
+
+<p>First, we should get <code>extension identify</code>. You can get this information from <code>MaoXian Web Clipper</code>’s setting page.</p>
+
+<p>Looks like this:</p>
+
+<ul>
+  <li>Firefox =&gt; moz-extension://612ab18c-c29e-4211-bd50-3f208d227db7</li>
+  <li>Chrome =&gt; chrome-extension://612ab18c-c29e-4211-bd50-3f208d227db7</li>
+</ul>
+
+<h3 id="chrome">Chrome</h3>
+
+<p>Take <code>extension identify</code> above as an example, input <code>chrome://extension/?id=612ab18c-c29e-4211-bd50-3f208d227db7</code> to browser’s address bar, Enter.</p>
+
+<p>enable <code>Allow access to file URLs</code> option.</p>
+
+<h3 id="firefox">Firefox</h3>
+<p>Firefox haven’t provide a page to setting this option by default, but we can change firefox’s preference settings.</p>
+
+<p>I: input <code>about:config</code> to address bar and enter, you will get a config page.</p>
+
+<p>II: config these item below</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>Item Name</th>
+      <th>Item Value</th>
+      <th>Note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>capability.policy.policynames</td>
+      <td>localfilelinks</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>capability.policy.localfilelinks.sites</td>
+      <td>moz-extension://612ab18c-c29e-4211-bd50-3f208d227db7</td>
+      <td>change this to <code>extension identify</code> you got</td>
+    </tr>
+    <tr>
+      <td>capability.policy.localfilelinks.checkloaduri.enabled</td>
+      <td>allAccess</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>copy item name, paste to search.</p>
+
+<p>If found it, change it’s value by double click.</p>
+
+<p>If not found, right click &gt; new &gt; String &gt; paste item name &gt; paste item value</p>
+
+<p>III: Back to <code>MaoXian Web Clipper</code>’s setting page，check “I enabled ‘allow file scheme access’”.</p>
 
 <hr />
 <p><a href="index.html">Home</a></p>

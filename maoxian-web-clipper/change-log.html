@@ -8,16 +8,62 @@
     <style>
       body {
         font-size: 14px;
+        font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
       }
-      code { background-color: #d5d5d5; padding: 2px 3px 2px 3px; }
+      code {
+        border-radius: 3px;
+        padding: 2px 3px 2px 3px;
+        background-color: rgba(27,31,35,0.15);
+      }
+      hr {
+        color: #efefef;
+        margin-bottom: 50px;
+        margin-top: 25px;
+      }
       .main { padding-bottom: 200px }
       .main img { max-width: 100%; }
+
+      table {
+        padding: 5px;
+        border-radius: 3px;
+        border-collapse: collapse;
+        font-size: 13px;
+      }
+      table > thead {
+        background-color: #e5e5e5;
+      }
+      table th, table td {
+        border: solid 1px #ccc;
+        padding: 5px;
+      }
     </style>
   </head>
   <body>
     <div class="main">
     
 <h1 id="maoxian-web-clipper-change-log">MaoXian Web Clipper Change Log</h1>
+
+<hr />
+
+<h2 id="v014">v0.1.4</h2>
+
+<p><strong>Feature</strong></p>
+
+<ul>
+  <li>Support clip iframe element</li>
+  <li>Make clip URL clickable in history page</li>
+  <li>Allow save title as filename</li>
+  <li>Make clipping information optional.</li>
+</ul>
+
+<p><strong>功能</strong></p>
+
+<ul>
+  <li>支持裁剪 iframe 元素(裁剪内容)。</li>
+  <li>优化裁剪历史页面，使可直接点击查看(issue: #1)</li>
+  <li>允许设置保存的文件名为输入的标题(issue: #2)</li>
+  <li>可设置不保存「裁剪信息」</li>
+</ul>
 
 <hr />
 

@@ -3,6 +3,24 @@
 
 ------------------------------------------------------------
 
+## v0.1.4
+
+**Feature**
+
+* Support clip iframe element
+* Make clip URL clickable in history page
+* Allow save title as filename
+* Make clipping information optional.
+
+**功能**
+
+* 支持裁剪 iframe 元素(裁剪内容)。
+* 优化裁剪历史页面，使可直接点击查看(issue: #1)
+* 允许设置保存的文件名为输入的标题(issue: #2)
+* 可设置不保存「裁剪信息」
+
+------------------------------------------------------------
+
 ## v0.1.3
 
 **BugFixed**
