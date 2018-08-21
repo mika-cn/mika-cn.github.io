@@ -44,9 +44,32 @@
 <h1 id="maoxian-web-clipper-">MaoXian Web Clipper 常见问题</h1>
 
 <ul>
+  <li><a href="#clip-menu-not-work">点击了裁剪，没有反应</a></li>
+  <li><a href="#crash-on-clipping">裁剪流程停在下载中就没反应了</a></li>
   <li><a href="#change-default-download-path">改变默认的下载路径</a></li>
   <li><a href="#allow-access-file-urls">允许访问本地网址</a></li>
+  <li><a href="#feedback">反馈新问题</a></li>
 </ul>
+
+<hr />
+
+<h2 id="clip-menu-not-work">点击了裁剪，没有反应</h2>
+
+<p>请依次检查以下情况:</p>
+
+<ol>
+  <li><code>chrome.google.com</code> 和 <code>addons.mozilla.org</code> 域名下的网页都不能裁剪，这是正常的(浏览器内部的限制)</li>
+  <li>如果你刚安装完扩展，得刷新网页后才能裁剪</li>
+  <li>目前 <code>MaoXian Web Clipper</code> 只兼容 <code>Chrome</code> 和 <code>Firefox</code>, 其他浏览器不保证能正常工作</li>
+</ol>
+
+<hr />
+
+<h2 id="crash-on-clipping">裁剪流程停在下载中就没反应了</h2>
+
+<p>发生这种情况，可能是与其他的扩展冲突了，请尝试暂时停用其他有下载功能的扩展（比如  chrono)， 如果你无法确定哪些扩展是有下载功能的，那么可暂时只启用<code>MaoXian Web Clipper</code> 并停用其他扩展，再次尝试下，以判断是否是冲突的情况。</p>
+
+<p>发现有的朋友在其他浏览器上使用本扩展(比如: vivaldi), 有些浏览器会开发自己的下载管理功能，也会与 <code>MaoXian Web Clipper</code> 产生冲突</p>
 
 <hr />
 
@@ -143,6 +166,17 @@
 <p>III: 回到 <code>MaoXian Web Clipper</code> 的设置页面，把“本地网址” 一节中的复选框打上勾。</p>
 
 <hr />
+
+<h2 id="feedback">反馈新问题</h2>
+
+<p>如果上诉的解决方案都无法解决你的问题，把你遇到的问题反映到<a href="https://github.com/mika-cn/maoxian-web-clipper/issues">项目issue里</a>，开发人员会进行跟进。</p>
+
+<p>在描述你遇到的问题时候，请尽可能详细地提供信息。</p>
+
+<p>比如： 点击哪里用不了，操作系统信息(windows, Linux, Mac…), Chrome 版本，当前网址等有助于定位问题的信息。</p>
+
+<hr />
+
 <p><a href="index-zh-CN.html">首页</a></p>
 
     </div>
