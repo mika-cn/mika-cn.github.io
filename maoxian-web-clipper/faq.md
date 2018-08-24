@@ -50,7 +50,7 @@ Looks like this:
 
 ### Chrome
 
-Take `extension identify` above as an example, input `chrome://extension/?id=612ab18c-c29e-4211-bd50-3f208d227db7` to browser's address bar, Enter.
+Take `extension identify` above as an example, input `chrome://extensions/?id=612ab18c-c29e-4211-bd50-3f208d227db7` to browser's address bar, Enter.
 
 enable `Allow access to file URLs` option.
 
