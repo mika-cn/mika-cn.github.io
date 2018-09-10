@@ -86,7 +86,7 @@ II: 配置以下三项
 | 条目名称 | 值 | 提醒 |
 | -------- | -------- | -------- |
 | capability.policy.policynames | localfilelinks | - |
-| capability.policy.localfilelinks.sites | moz-extension://612ab18c-c29e-4211-bd50-3f208d227db7 | 这个值，你应该使用自己拿到的 `扩展标识` |
+| capability.policy.localfilelinks.sites | moz-extension://612ab18c-c29e-4211-bd50-3f208d227db7 | 这个值，你应该使用自己拿到的 `扩展标识`, 如果你允许多个扩展的话，这里用空格隔开 |
 | capability.policy.localfilelinks.checkloaduri.enabled | allAccess | - |
 
 这样操作:
