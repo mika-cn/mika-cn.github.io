@@ -6,7 +6,7 @@
 ## 安装
 
 #### 1. 下载 crx 文件，选择最新版以获得最好的体验。
-* [maoxian-web-clipper-chrome-0.1.6.crx](crxs/maoxian-web-clipper-chrome-0.1.6.crx)
+* [maoxian-web-clipper-chrome-0.1.7.crx](crxs/maoxian-web-clipper-chrome-0.1.7.crx)
 
 #### 2. 打开Chrome 扩展页面(在地址栏直接输入): `about:extensions`
 
@@ -30,7 +30,7 @@
 ### 3. 到本页面安装最新的扩展
 
 ## 最后
-如果上述方法失效了，请告知我。（也许谷歌越来越霸道了）
+如果上述方法失效了，[请建个Issue 给我](https://github.com/mika-cn/maoxian-web-clipper/issues)。（也许谷歌越来越霸道了）
 
 ------------------------------------------------
 
