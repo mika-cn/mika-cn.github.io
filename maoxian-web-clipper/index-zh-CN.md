@@ -40,4 +40,4 @@
 ## 更多
 * [常见问题](faq-zh-CN.html)
 * [更新日志](change-log.html)
-* [本地程序](native-app/index.html)
+* [本地程序](native-app/index-zh-CN.html)
