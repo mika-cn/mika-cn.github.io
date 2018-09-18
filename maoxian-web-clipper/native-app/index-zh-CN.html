@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Native application page of Maoxian Web Clipper" />
+    <title>Native application - MaoXian Web Clipper</title>
+    <link rel="icon" type="image/png" href="../imgs/logo.png" />
+    <link rel="stylesheet" type="text/css" href="../css/markdown.css" />
+    <style>
+    </style>
+  </head>
+  <body>
+    <div class="main">
+    
+<h1 id="maoxian-web-clipper-native-app">MaoXian web clipper Native App</h1>
+
+<h2 id="section">简介</h2>
+
+<p>这是一个配合 Maoxian Web clipper 的本地软件.</p>
+
+<p>用过安装这个软件，我们可以绕过使用浏览器的下载功能，从而避免和下载管理插件发生冲突 :)</p>
+
+<h2 id="section-1">安装</h2>
+<p>该软件依赖于 Ruby， 所以我们要先安装 Ruby</p>
+
+<p>Linux / Mac 用户， 很可能系统就自带了 ruby，请用以下命令查看</p>
+
+<pre><code>ruby -v
+</code></pre>
+<p>如果输出的是 ruby 的版本信息，则说明你的系统已经安装了 ruby, 否则请到 <a href="https://www.ruby-lang.org/en/downloads/">ruby 官网</a> 进行安装</p>
+
+<p>Windows  用户请到 <a href="https://rubyinstaller.org/downloads/">这里</a> 下载安装包，提醒一下，这里直接下载 <code>WITHOUT DEVKIT</code> 下面的版本即可。然后安装就可以了</p>
+
+<h3 id="section-2">下载软件包</h3>
+
+<p>请根据你的系统信息和浏览器类型， 下载对应的软件包</p>
+
+<ul>
+  <li><a href="files/maoxian-web-clipper-native-linux-chrome.zip">maoxian-web-clipper-native-app-linux-chrome.zip</a></li>
+  <li><a href="files/maoxian-web-clipper-native-linux-chromium.zip">maoxian-web-clipper-native-app-linux-chromium.zip</a></li>
+  <li><a href="files/maoxian-web-clipper-native-linux-firefox.zip">maoxian-web-clipper-native-app-linux-firefox.zip</a></li>
+  <li><a href="files/maoxian-web-clipper-native-osx-chrome.zip">maoxian-web-clipper-native-app-osx-chrome.zip</a></li>
+  <li><a href="files/maoxian-web-clipper-native-osx-chromium.zip">maoxian-web-clipper-native-app-osx-chromium.zip</a></li>
+  <li><a href="files/maoxian-web-clipper-native-osx-firefox.zip">maoxian-web-clipper-native-app-osx-firefox.zip</a></li>
+  <li><a href="files/maoxian-web-clipper-native-windows-chrome.zip">maoxian-web-clipper-native-app-windows-chrome.zip</a></li>
+  <li><a href="files/maoxian-web-clipper-native-windows-chromium.zip">maoxian-web-clipper-native-app-windows-chromium.zip</a></li>
+  <li><a href="files/maoxian-web-clipper-native-windows-firefox.zip">maoxian-web-clipper-native-app-windows-firefox.zip</a></li>
+</ul>
+
+<h3 id="section-3">解压软件包</h3>
+
+<p>Linux 或者 Mac</p>
+
+<pre><code>unzip maoxian-web-clipper-native-linux-chrome.zip -d maoxian-web-clipper-native
+</code></pre>
+
+<p>Windows</p>
+
+<pre><code>额，使用任何你喜欢的解压软件，把它解压到某个文件夹（由于是直接打包的文件，没有打包根文件夹）, :D
+</code></pre>
+
+<h3 id="section-4">配置下载路径</h3>
+
+<p>在安装之前，我们先配置一下，下载路径，也就是裁剪下来的文件存储的目录（等同于浏览器的下载目录）</p>
+
+<p>编辑 <code>config.yaml</code> ， （随便用一个文本编辑器就可编辑）
+如果你是在 Windows 上的话，别用记事本打开，找一个能正确处理换行符的编辑器，比如 <code>notepad++</code></p>
+
+<p>linux 例子</p>
+
+<pre><code># config.yaml
+environment: 'production'
+data_dir: '/home/jack/clippings'
+</code></pre>
+
+<p>windows 例子</p>
+
+<pre><code># config.yaml
+environment: 'production'
+data_dir: 'c:\jack\clippings'
+</code></pre>
+
+<h3 id="section-5">安装软件</h3>
+
+<p>Linux 或 Mac  直接运行 <code>install.sh</code> 脚本即可</p>
+
+<pre><code>./install.sh
+</code></pre>
+
+<p>在 Windows 上，直接双击 <code>install.bat</code></p>
+
+
+    </div>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122831827-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-122831827-1');
+    </script>
+  </body>
+</html>
+
