@@ -26,15 +26,27 @@
 <p>Download software according to your OS and browser type.</p>
 
 <ul>
-  <li><a href="files/maoxian-web-clipper-native-linux-chrome.zip">maoxian-web-clipper-native-app-linux-chrome.zip</a></li>
-  <li><a href="files/maoxian-web-clipper-native-linux-chromium.zip">maoxian-web-clipper-native-app-linux-chromium.zip</a></li>
-  <li><a href="files/maoxian-web-clipper-native-linux-firefox.zip">maoxian-web-clipper-native-app-linux-firefox.zip</a></li>
-  <li><a href="files/maoxian-web-clipper-native-osx-chrome.zip">maoxian-web-clipper-native-app-osx-chrome.zip</a></li>
-  <li><a href="files/maoxian-web-clipper-native-osx-chromium.zip">maoxian-web-clipper-native-app-osx-chromium.zip</a></li>
-  <li><a href="files/maoxian-web-clipper-native-osx-firefox.zip">maoxian-web-clipper-native-app-osx-firefox.zip</a></li>
-  <li><a href="files/maoxian-web-clipper-native-windows-chrome.zip">maoxian-web-clipper-native-app-windows-chrome.zip</a></li>
-  <li><a href="files/maoxian-web-clipper-native-windows-chromium.zip">maoxian-web-clipper-native-app-windows-chromium.zip</a></li>
-  <li><a href="files/maoxian-web-clipper-native-windows-firefox.zip">maoxian-web-clipper-native-app-windows-firefox.zip</a></li>
+  <li>Linux
+    <ul>
+      <li><a href="files/maoxian-web-clipper-native-linux-chrome.zip">native-app-chrome.zip</a></li>
+      <li><a href="files/maoxian-web-clipper-native-linux-chromium.zip">native-app-chromium.zip</a></li>
+      <li><a href="files/maoxian-web-clipper-native-linux-firefox.zip">native-app-firefox.zip</a></li>
+    </ul>
+  </li>
+  <li>Mac
+    <ul>
+      <li><a href="files/maoxian-web-clipper-native-osx-chrome.zip">native-app-chrome.zip</a></li>
+      <li><a href="files/maoxian-web-clipper-native-osx-chromium.zip">native-app-chromium.zip</a></li>
+      <li><a href="files/maoxian-web-clipper-native-osx-firefox.zip">native-app-firefox.zip</a></li>
+    </ul>
+  </li>
+  <li>windows
+    <ul>
+      <li><a href="files/maoxian-web-clipper-native-windows-chrome.zip">native-app-chrome.zip</a></li>
+      <li><a href="files/maoxian-web-clipper-native-windows-chromium.zip">native-app-chromium.zip</a></li>
+      <li><a href="files/maoxian-web-clipper-native-windows-firefox.zip">native-app-firefox.zip</a></li>
+    </ul>
+  </li>
 </ul>
 
 <h3 id="extract-zip-file">Extract zip file</h3>
@@ -49,12 +61,23 @@
 <pre><code>Use any extract software your like, extract it to a fold :D
 </code></pre>
 
+<h3 id="install-the-software">install the software</h3>
+
+<p>e.g in Linux or Mac</p>
+
+<pre><code>./install.sh
+</code></pre>
+
+<p>in windows double click <code>install.bat</code></p>
+
 <h3 id="configure-download-path">configure download path</h3>
 
 <p>You must configure your download path first,</p>
 
 <p>You will find a file named config.yaml, use any text editor to edit it.
 Notice: if you OS is windows, don’t edit it use xxx, use something like notepad++ which can handle line break correctly.</p>
+
+<p><strong>Notice: download path must exist</strong></p>
 
 <p>e.g in linux</p>
 
@@ -67,17 +90,24 @@ data_dir: '/home/jack/clippings'
 
 <pre><code># config.yaml
 environment: 'production'
-data_dir: 'c:\jack\clippings'
+data_dir: 'e:\\jack\clippings'
 </code></pre>
 
-<h3 id="install-the-software">install the software</h3>
+<h2 id="configure-maoxian-web-clipper">configure MaoXian Web Clipper</h2>
 
-<p>e.g in Linux or Mac</p>
+<ul>
+  <li>
+    <p>Allow extension to access File URLs. (See: extension setting page &gt; File URL)</p>
+  </li>
+  <li>
+    <p>choose <code>Download through native App</code> as clipping handler. (See: extension setting page &gt; Clipping Handler)</p>
+  </li>
+</ul>
 
-<pre><code>./install.sh
-</code></pre>
+<p>Finish. :D</p>
 
-<p>in windows double click <code>install.bat</code></p>
+<hr />
+<p><a href="../index.html">Home</a></p>
 
 
     </div>

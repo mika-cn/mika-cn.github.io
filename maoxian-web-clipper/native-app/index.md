@@ -12,15 +12,20 @@ ruby is required, install it first.
 
 Download software according to your OS and browser type.
 
-* [maoxian-web-clipper-native-app-linux-chrome.zip](files/maoxian-web-clipper-native-linux-chrome.zip)
-* [maoxian-web-clipper-native-app-linux-chromium.zip](files/maoxian-web-clipper-native-linux-chromium.zip)
-* [maoxian-web-clipper-native-app-linux-firefox.zip](files/maoxian-web-clipper-native-linux-firefox.zip)
-* [maoxian-web-clipper-native-app-osx-chrome.zip](files/maoxian-web-clipper-native-osx-chrome.zip)
-* [maoxian-web-clipper-native-app-osx-chromium.zip](files/maoxian-web-clipper-native-osx-chromium.zip)
-* [maoxian-web-clipper-native-app-osx-firefox.zip](files/maoxian-web-clipper-native-osx-firefox.zip)
-* [maoxian-web-clipper-native-app-windows-chrome.zip](files/maoxian-web-clipper-native-windows-chrome.zip)
-* [maoxian-web-clipper-native-app-windows-chromium.zip](files/maoxian-web-clipper-native-windows-chromium.zip)
-* [maoxian-web-clipper-native-app-windows-firefox.zip](files/maoxian-web-clipper-native-windows-firefox.zip)
+* Linux
+  - [native-app-chrome.zip](files/maoxian-web-clipper-native-linux-chrome.zip)
+  - [native-app-chromium.zip](files/maoxian-web-clipper-native-linux-chromium.zip)
+  - [native-app-firefox.zip](files/maoxian-web-clipper-native-linux-firefox.zip)
+
+* Mac
+  - [native-app-chrome.zip](files/maoxian-web-clipper-native-osx-chrome.zip)
+  - [native-app-chromium.zip](files/maoxian-web-clipper-native-osx-chromium.zip)
+  - [native-app-firefox.zip](files/maoxian-web-clipper-native-osx-firefox.zip)
+
+* windows
+  - [native-app-chrome.zip](files/maoxian-web-clipper-native-windows-chrome.zip)
+  - [native-app-chromium.zip](files/maoxian-web-clipper-native-windows-chromium.zip)
+  - [native-app-firefox.zip](files/maoxian-web-clipper-native-windows-firefox.zip)
 
 ### Extract zip file
 
@@ -37,12 +42,24 @@ Use any extract software your like, extract it to a fold :D
 ```
 
 
+### install the software
+
+e.g in Linux or Mac
+
+```
+./install.sh
+```
+
+in windows double click `install.bat`
+
 ### configure download path
 
 You must configure your download path first,
 
 You will find a file named config.yaml, use any text editor to edit it.
 Notice: if you OS is windows, don't edit it use xxx, use something like notepad++ which can handle line break correctly.
+
+**Notice: download path must exist**
 
 e.g in linux
 
@@ -57,17 +74,17 @@ e.g in windows
 ```
 # config.yaml
 environment: 'production'
-data_dir: 'c:\\jack\clippings'
+data_dir: 'e:\\\\jack\clippings'
 ```
 
-### install the software
+## configure MaoXian Web Clipper
 
-e.g in Linux or Mac
+* Allow extension to access File URLs. (See: extension setting page > File URL)
 
-```
-./install.sh
-```
+* choose `Download through native App` as clipping handler. (See: extension setting page > Clipping Handler)
 
-in windows double click `install.bat`
+Finish. :D
 
+-------------------------------------------
+[Home](../index.html)
 
