@@ -1,6 +1,10 @@
 
 # MaoXian web clipper Native App
 
+## Intro
+
+This is a little application. We develope it to provide download function for MaoXian Web Clipper. After Setting up this application, We can avoid conflict with your download manage extension. :)
+
 ## Installation
 
 ruby is required, install it first.

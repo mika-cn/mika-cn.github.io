@@ -13,6 +13,9 @@ def render_markdown(page)
   text = File.open(page.md_path).read
   text = text.gsub('```', '~~~')
   html = Kramdown::Document.new(text).to_html
+
+  # support w3m browser :)
+  html = html.gsub(/^\s*<table>\s*$/) {|match| match.gsub('table', 'table border=1')}
   indexHtml = render(page, html);
   File.open(page.html_path, 'w'){|f| f.write indexHtml}
 end

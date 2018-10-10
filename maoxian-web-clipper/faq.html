@@ -16,15 +16,37 @@
 <h1 id="maoxian-web-clipper-faq">MaoXian Web Clipper FAQ</h1>
 
 <ul>
+  <li><a href="#clip-menu-not-work">Not response after click clip</a></li>
+  <li><a href="#crash-on-clipping">Stop on clipping-hint every clipping</a></li>
   <li><a href="#change-default-download-path">Change Default download path</a></li>
   <li><a href="#allow-access-file-urls">Allow file URLs Access</a></li>
+  <li><a href="#feedback">Report new issue</a></li>
 </ul>
 
 <hr />
 
+<h2 id="clip-menu-not-work">Not response after click clip</h2>
+
+<p>Please check situation below:</p>
+
+<ul>
+  <li>Are you clip a page before your installation, try refresh your page.</li>
+  <li>Currently, It only support firefox and chrome/chromium, If you install it to other browser, we don’t guarantee it will work.</li>
+</ul>
+
+<h2 id="crash-on-clipping">Stop on clipping-hint every clipping</h2>
+
+<p>If you meet this situation. It’s probably you had installed some extension(e.g. chrone) to manage your downloads. Download manage extension will intercept download request, <code>MaoXian Web Clipper</code> use download API to save your clipping information. So <code>MaoXian Web Clipper</code> conflict with your download manage extension.</p>
+
+<p>We have found some user install this extension on other browser(like: vivaldi), vivaldi will intercept download request, so it conflict with <code>MaoXian Web Clipper</code> too.</p>
+
+<p>We had developed a native application to resolve this problem.</p>
+
+<p>See: <a href="native-app/index.html">Native App</a></p>
+
 <h2 id="change-default-download-path">Change default download path.</h2>
 
-<p>Web Extension can not modify your download path, due to secure reason.</p>
+<p>Web Extension can’t modify your download path, due to secure reason.</p>
 
 <p>But you can create a symbolic link to achieve this.</p>
 
@@ -56,31 +78,42 @@
 
 <h2 id="allow-access-file-urls">Allow access file URLs</h2>
 
-<p>This section describe how to allow <code>MaoXian Web Clipper</code> to access file URLs(file://)</p>
+<p>Web browser don’t allow extension to access file URLs(file://). <code>MaoXian Web Clipper</code> can’t open clipping file(opening file URL) directly because of it.</p>
 
-<p>First, we should get <code>extension identify</code>. You can get this information from <code>MaoXian Web Clipper</code>’s setting page.</p>
+<p>We suggest you to allow <code>MaoXian Web Clipper</code> access file URLs. So you can open clipping file more convenient.</p>
 
-<p>Looks like this:</p>
+<p>Section below describes how to allow <code>MaoXian Web Clipper</code> to access file URLs(file://).</p>
+
+<h3 id="getting-extension-identifier">1. Getting “extension identifier”</h3>
+
+<p>You can get it from <code>MaoXian Web Clipper</code>’s setting page.</p>
+
+<p>It looks like this:</p>
 
 <ul>
   <li>Firefox =&gt; moz-extension://612ab18c-c29e-4211-bd50-3f208d227db7</li>
   <li>Chrome =&gt; chrome-extension://612ab18c-c29e-4211-bd50-3f208d227db7</li>
 </ul>
 
-<h3 id="chrome">Chrome</h3>
+<h3 id="configure-browser-settings">2. configure browser settings</h3>
 
-<p>Take <code>extension identify</code> above as an example, input <code>chrome://extensions/?id=612ab18c-c29e-4211-bd50-3f208d227db7</code> to browser’s address bar, Enter.</p>
+<p>This step is different between each browser.</p>
 
-<p>enable <code>Allow access to file URLs</code> option.</p>
+<p><strong>Chrome/Chromium</strong></p>
 
-<h3 id="firefox">Firefox</h3>
-<p>Firefox haven’t provide a page to setting this option by default, but we can change firefox’s preference settings.</p>
+<p>Take <code>extension identifier</code> above as an example, input <code>chrome://extensions/?id=612ab18c-c29e-4211-bd50-3f208d227db7</code> to browser’s address bar, Enter.</p>
 
-<p>I: input <code>about:config</code> to address bar and enter, you will get a config page.</p>
+<p>Enable <code>Allow access to file URLs</code> option.</p>
 
-<p>II: config these item below</p>
+<p><strong>Firefox</strong></p>
 
-<table>
+<p>Firefox hasn’t provide a page to setting this option by default, but we can change firefox’s preference settings.</p>
+
+<p>I: input <code>about:config</code> to address bar and enter, you will get a configuration page.</p>
+
+<p>II: configure these item below</p>
+
+<table border=1>
   <thead>
     <tr>
       <th>Item Name</th>
@@ -97,7 +130,7 @@
     <tr>
       <td>capability.policy.localfilelinks.sites</td>
       <td>moz-extension://612ab18c-c29e-4211-bd50-3f208d227db7</td>
-      <td>change this to <code>extension identify</code> you got</td>
+      <td>change this to <code>extension identifier</code> you got</td>
     </tr>
     <tr>
       <td>capability.policy.localfilelinks.checkloaduri.enabled</td>
@@ -107,13 +140,19 @@
   </tbody>
 </table>
 
-<p>copy item name, paste to search.</p>
+<p>Copy item name, paste to search.</p>
 
-<p>If found it, change it’s value by double click.</p>
+<p>If you can find it. Change it’s value by double click.</p>
 
-<p>If not found, right click &gt; new &gt; String &gt; paste item name &gt; paste item value</p>
+<p>If you can’t find it. Do: right click &gt; new &gt; String &gt; paste item name &gt; paste item value</p>
 
-<p>III: Back to <code>MaoXian Web Clipper</code>’s setting page，check “I enabled ‘allow file scheme access’”.</p>
+<h3 id="configure-extension-settings">3. configure extension settings</h3>
+
+<p>Back to <code>MaoXian Web Clipper</code>’s setting page，check “I enabled ‘allow file scheme access’”.</p>
+
+<h2 id="feedback">Report new issue</h2>
+
+<p>If answers above can’t resolve your problem. Feedback your problem to <a href="https://github.com/mika-cn/maoxian-web-clipper/issues">Project Issue Page</a>.</p>
 
 <hr />
 <p><a href="index.html">Home</a></p>

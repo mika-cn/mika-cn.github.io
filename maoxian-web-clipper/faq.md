@@ -3,15 +3,35 @@
 
 # MaoXian Web Clipper FAQ
 
+* [Not response after click clip](#clip-menu-not-work)
+* [Stop on clipping-hint every clipping](#crash-on-clipping)
 * [Change Default download path](#change-default-download-path)
 * [Allow file URLs Access](#allow-access-file-urls)
+* [Report new issue](#feedback)
 
 
 -------------------------------------------
 
-## Change default download path.
+## Not response after click clip {#clip-menu-not-work}
 
-Web Extension can not modify your download path, due to secure reason.
+Please check situation below:
+
+* Are you clip a page before your installation, try refresh your page.
+* Currently, It only support firefox and chrome/chromium, If you install it to other browser, we don't guarantee it will work.
+
+## Stop on clipping-hint every clipping {#crash-on-clipping}
+
+If you meet this situation. It's probably you had installed some extension(e.g. chrone) to manage your downloads. Download manage extension will intercept download request, `MaoXian Web Clipper` use download API to save your clipping information. So `MaoXian Web Clipper` conflict with your download manage extension.
+
+We have found some user install this extension on other browser(like: vivaldi), vivaldi will intercept download request, so it conflict with `MaoXian Web Clipper` too.
+
+We had developed a native application to resolve this problem.
+
+See: [Native App](native-app/index.html)
+
+## Change default download path. {#change-default-download-path}
+
+Web Extension can't modify your download path, due to secure reason.
 
 But you can create a symbolic link to achieve this.
 
@@ -39,42 +59,58 @@ Command: `mklink \D C:\Users\jack\Downloads\mx-wc C:\Users\jack\OneDrive\clips`
 
 ## Allow access file URLs
 
-This section describe how to allow `MaoXian Web Clipper` to access file URLs(file://)
+Web browser don't allow extension to access file URLs(file://). `MaoXian Web Clipper` can't open clipping file(opening file URL) directly because of it.
 
-First, we should get `extension identify`. You can get this information from `MaoXian Web Clipper`'s setting page.
+We suggest you to allow `MaoXian Web Clipper` access file URLs. So you can open clipping file more convenient.
 
-Looks like this:
+Section below describes how to allow `MaoXian Web Clipper` to access file URLs(file://).
+
+### 1. Getting "extension identifier"
+
+You can get it from `MaoXian Web Clipper`'s setting page.
+
+It looks like this:
 
 * Firefox => moz-extension://612ab18c-c29e-4211-bd50-3f208d227db7
 * Chrome => chrome-extension://612ab18c-c29e-4211-bd50-3f208d227db7
 
-### Chrome
+### 2. configure browser settings
 
-Take `extension identify` above as an example, input `chrome://extensions/?id=612ab18c-c29e-4211-bd50-3f208d227db7` to browser's address bar, Enter.
+This step is different between each browser.
 
-enable `Allow access to file URLs` option.
+**Chrome/Chromium**
 
-### Firefox
-Firefox haven't provide a page to setting this option by default, but we can change firefox's preference settings.
+Take `extension identifier` above as an example, input `chrome://extensions/?id=612ab18c-c29e-4211-bd50-3f208d227db7` to browser's address bar, Enter.
 
-I: input `about:config` to address bar and enter, you will get a config page.
+Enable `Allow access to file URLs` option.
 
-II: config these item below
+**Firefox**
+
+Firefox hasn't provide a page to setting this option by default, but we can change firefox's preference settings.
+
+I: input `about:config` to address bar and enter, you will get a configuration page.
+
+II: configure these item below
 
 | Item Name | Item Value | Note |
 | -------- | -------- | -------- |
 | capability.policy.policynames | localfilelinks | - |
-| capability.policy.localfilelinks.sites | moz-extension://612ab18c-c29e-4211-bd50-3f208d227db7 | change this to `extension identify` you got |
+| capability.policy.localfilelinks.sites | moz-extension://612ab18c-c29e-4211-bd50-3f208d227db7 | change this to `extension identifier` you got |
 | capability.policy.localfilelinks.checkloaduri.enabled | allAccess | - |
 
-copy item name, paste to search.
+Copy item name, paste to search.
 
-If found it, change it's value by double click.
+If you can find it. Change it's value by double click.
 
-If not found, right click > new > String > paste item name > paste item value
+If you can't find it. Do: right click > new > String > paste item name > paste item value
 
+### 3. configure extension settings
 
-III: Back to `MaoXian Web Clipper`'s setting page，check "I enabled 'allow file scheme access'".
+Back to `MaoXian Web Clipper`'s setting page，check "I enabled 'allow file scheme access'".
+
+## Report new issue {#feedback}
+
+If answers above can't resolve your problem. Feedback your problem to [Project Issue Page](https://github.com/mika-cn/maoxian-web-clipper/issues).
 
 -------------------------------------------
 [Home](index.html)

@@ -30,7 +30,6 @@
 <p>请依次检查以下情况:</p>
 
 <ol>
-  <li><code>chrome.google.com</code> 和 <code>addons.mozilla.org</code> 域名下的网页都不能裁剪，这是正常的(浏览器内部的限制)</li>
   <li>如果你刚安装完扩展，得刷新网页后才能裁剪</li>
   <li>目前 <code>MaoXian Web Clipper</code> 只兼容 <code>Chrome</code> 和 <code>Firefox</code>, 其他浏览器不保证能正常工作</li>
 </ol>
@@ -43,7 +42,9 @@
 
 <p>发现有的朋友在其他浏览器上使用本扩展(比如: vivaldi), 有些浏览器会开发自己的下载管理功能，也会与 <code>MaoXian Web Clipper</code> 产生冲突</p>
 
-<p>安装 <a href="native-app/index-zh-CN.html">Native App</a> 可以解决这个问题</p>
+<p>我们开发了一个本地程序来解决这个问题。</p>
+
+<p>详情见: <a href="native-app/index-zh-CN.html">Native App</a></p>
 
 <hr />
 
@@ -79,9 +80,13 @@
 
 <h2 id="allow-access-file-urls">允许访问本地网址</h2>
 
-<p>当你允许本扩展访问本地网址后，你就可以在裁剪历史页面，点击后直接就可查看你的裁剪信息。(使用体验会更好一些)</p>
+<p>浏览器默认不允许扩展访问本地网址，这会导致本扩展无法直接打开裁剪下来的文件，不能让用户直接点击裁剪历史里面的链接就能查看。</p>
+
+<p>我们建议你允许本扩展访问本地网址，这样你在裁剪历史页面就能更方便地查看裁剪下来的内容，使用起来会方便许多。</p>
 
 <p>本节介绍了如何让浏览器允许 <code>MaoXian Web Clipper</code> 访问本地网址(file://打头的网址)</p>
+
+<h3 id="section">1. 获取 “扩展标识”</h3>
 
 <p>从 <code>MaoXian Web Clipper</code> 的设置页面，在“本地网址” 一节中找到<code>扩展标识</code> 信息。</p>
 
@@ -92,13 +97,18 @@
   <li>Chrome =&gt; chrome-extension://612ab18c-c29e-4211-bd50-3f208d227db7</li>
 </ul>
 
-<h3 id="chrome">Chrome</h3>
+<h3 id="section-1">2. 更改浏览器设置</h3>
+
+<p>这一步，不同的浏览器设置方式不一样。</p>
+
+<p><strong>Chrome/Chromium</strong></p>
 
 <p>以上面的扩展标识为例子，只要在地址栏输入<code>chrome://extensions/?id=612ab18c-c29e-4211-bd50-3f208d227db7</code>, 回车。</p>
 
 <p>找到 <code>允许访问本地文件/网址</code> 这一选项, 启用它就可以了。</p>
 
-<h3 id="firefox">Firefox</h3>
+<p><strong>Firefox</strong></p>
+
 <p>FireFox 默认没有提供一个页面可以设置这个选项，但可以通过修改浏览器的配置项，来达到目地。</p>
 
 <p>具体方法如下：</p>
@@ -107,7 +117,7 @@
 
 <p>II: 配置以下三项</p>
 
-<table>
+<table border=1>
   <thead>
     <tr>
       <th>条目名称</th>
@@ -140,7 +150,9 @@
 
 <p>如果没有搜索到，就鼠标右键 &gt; 新建 &gt; 字符串(String)， 把<code>条目名称</code>和<code>值</code>依次粘帖进去即可。</p>
 
-<p>III: 回到 <code>MaoXian Web Clipper</code> 的设置页面，把“本地网址” 一节中的复选框打上勾。</p>
+<h3 id="section-2">3. 更改本扩展中的设置</h3>
+
+<p>回到 <code>MaoXian Web Clipper</code> 的设置页面，把“本地网址” 一节中的复选框打上勾。</p>
 
 <hr />
 
