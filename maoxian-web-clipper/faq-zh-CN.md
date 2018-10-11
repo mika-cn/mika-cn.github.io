@@ -4,6 +4,7 @@
 * [点击了裁剪，没有反应](#clip-menu-not-work)
 * [裁剪流程停在下载中就没反应了](#crash-on-clipping)
 * [改变默认的下载路径](#change-default-download-path)
+* [无法打开以前裁剪的内容](#can-not-open-clipping-in-history)
 * [允许访问本地网址](#allow-access-file-urls)
 * [反馈新问题](#feedback)
 
@@ -55,6 +56,17 @@
 命令: `mklink \D C:\Users\jack\Downloads\mx-wc C:\Users\jack\OneDrive\clips`
 
 -------------------------------------------
+
+## 无法打开以前裁剪的内容 {#can-not-open-clipping-in-history}
+
+有的朋友可能发现，我刚裁剪下来的文件可以打开，可过几天就打不开了。
+
+这个是因为扩展在无法访问你本地网址的时候，会尝试通过下载历史打开文件，你可能在之后清除了下载历史，所以扩展找不到办法打开你的文件了。
+
+通过[允许扩展访问本地网址](#allow-access-file-urls), 可以避免这个问题。
+
+-------------------------------------------
+
 
 ## 允许访问本地网址 {#allow-access-file-urls}
 
