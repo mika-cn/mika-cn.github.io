@@ -6,6 +6,7 @@
 * [Not response after click clip](#clip-menu-not-work)
 * [Stop on clipping-hint every clipping](#crash-on-clipping)
 * [Change Default download path](#change-default-download-path)
+* [Can't open clipping on history page](#can-not-open-clipping-in-history)
 * [Allow file URLs Access](#allow-access-file-urls)
 * [Report new issue](#feedback)
 
@@ -54,6 +55,16 @@ Assume:
 Save command below as mklink.bat, and run mklink.bat as administrator.
 
 Command: `mklink \D C:\Users\jack\Downloads\mx-wc C:\Users\jack\OneDrive\clips`
+
+-------------------------------------------
+
+## Can't open clipping on history page {#can-not-open-clipping-in-history}
+
+Some user had found that the clipping on history page can open after clipping, But couldn't open it another day.
+
+If extension can't access file URLs, it will try to open clipping through download history. If you drase that history, then it cann't open it.
+
+[allow it access file URLs](#allow-access-file-urls), can avoid this situation.
 
 -------------------------------------------
 
