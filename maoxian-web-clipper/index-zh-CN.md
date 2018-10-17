@@ -37,7 +37,8 @@
 
 * [反馈您遇到的问题或建议](https://github.com/mika-cn/maoxian-web-clipper/issues)
 * 向你周围的人推荐本插件，软件的普及是开发者的力量源泉。
-* 如果本插件成为你喜爱的插件，并想回馈，可以[进行捐赠](donate.html)。
+* 如果你是开发者，欢迎PR.
+* 很喜欢本插件？ 可以考虑[请我喝杯咖啡](donate.html)。
 
 ## 更多
 * [常见问题](faq-zh-CN.html)
