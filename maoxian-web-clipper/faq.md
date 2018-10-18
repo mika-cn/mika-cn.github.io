@@ -32,7 +32,9 @@ See: [Native App](native-app/index.html)
 
 ## Change default download path. {#change-default-download-path}
 
-Web Extension can't modify your download path, due to secure reason.
+If you choose [**Native App**](native-app/index.html) as your clipping handler. You can edit the config.yaml to configure download path.
+
+If you choose **browser** as your clipping handler(default handler). Web Extension can't modify your download path, due to secure reason.
 
 But you can create a symbolic link to achieve this.
 
