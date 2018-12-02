@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Introduce how to interactive with MaoXian" />
+    <title>interactive with third party - MaoXian Web Clipper</title>
+    <link rel="icon" type="image/png" href="imgs/logo.png" />
+    <link rel="stylesheet" type="text/css" href="css/markdown.css" />
+    <style>
+    </style>
+  </head>
+  <body>
+    <div class="main">
+    
+<h1 id="maoxian-">MaoXian 与第三方的交互</h1>
+
+<p><strong>注意</strong> 只有在 <code>0.1.14</code> 以上版本才有效。</p>
+
+<p>为了更方便地进行裁剪，<code>MaoXian</code> 提供了一些与第三方脚本交互的方式。并且我们写了一个 js 库来来简化一些操作。</p>
+
+<p>下面以 <code>userScript</code> 为例子介绍一下：</p>
+
+<h2 id="section">隐藏不想要裁剪的元素</h2>
+
+<p><code>MaoXian</code> 会在你点击裁剪的时候，发送事件，告知 <code>userScript</code> 扩展已经进入裁剪模式了。此时 <code>userScript</code> 就可以对网页上的元素进行操作，比如隐藏掉不想要裁剪的元素（按钮、头像等等）</p>
+
+<p>例:</p>
+
+<div class="language-javascript highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#777">// ==UserScript==</span>
+<span style="color:#777">// @name         example</span>
+<span style="color:#777">// @namespace    example@mx-wc.oyd</span>
+<span style="color:#777">// @version      0.1</span>
+<span style="color:#777">// @description  your description</span>
+<span style="color:#777">// @author       you</span>
+<span style="color:#777">// @require      https://mika-cn.github.io/maoxian-web-clipper/mx-wc-tool.js</span>
+<span style="color:#777">// @include     *</span>
+<span style="color:#777">// @grant        none</span>
+<span style="color:#777">// ==/UserScript==</span>
+
+(<span style="color:#080;font-weight:bold">function</span>(){
+  const rules = [
+    <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">C||a.example.com||/blog/||.nav-btns</span><span style="color:#710">'</span></span>,
+    <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">C||a.example.com||/blog/||.site-header</span><span style="color:#710">'</span></span>,
+    <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">X||b.example.com||/blog/||//article//comments</span><span style="color:#710">'</span></span>
+  ];
+
+  const hideCmd = MxWc.newHideCmd();
+  hideCmd.init(rules);
+})();
+
+</pre></div>
+</div>
+</div>
+
+<p>目前 mx-wc-tool 这个脚本文件，支持的 rule 格式为: <code>$type||$domain||$path||$q</code></p>
+
+<p>各部分解释如下：</p>
+
+<div class="language-text highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>$type   : `C` 代表 `CSS`, `X` 代表 `xPath`.
+$domain : 规则应用的域名
+$path   : 规则应用的网址路径，给出可识别的部分就好
+$q      : 选择器(CSS selector 或者 xPath)
+</pre></div>
+</div>
+</div>
+
+<h2 id="section-1">预选中某个元素</h2>
+
+<p><code>userScript</code> 可以在 <code>MaoXian</code> 进入裁剪模式的时候，发送消息过去，告知预选中某个元素。</p>
+
+<p>例:</p>
+
+<div class="language-javascript highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#777">// 注意：这里省略了 UserScript 的声明部分</span>
+
+(<span style="color:#080;font-weight:bold">function</span>(){
+
+  <span style="color:#777">// 更方便的写法</span>
+  const rules = (<span style="color:#F00;background-color:#FAA">`</span>
+    C||a.example.com||<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">blog</span><span style="color:#404">/</span></span>||article
+    C||a.example.com||<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">news</span><span style="color:#404">/</span></span>||.news
+    X||b.example.com||<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">blog</span><span style="color:#404">/</span></span>||<span style="color:#777">//body//article</span>
+  <span style="color:#F00;background-color:#FAA">`</span>).split(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>)
+
+  const focusCmd = MxWc.newFocusCmd();
+  focusCmd.init(rules);
+
+<span style="color:#777">/*
+ * 或者使用 ConfirmCmd
+ */</span>
+<span style="color:#777">/*
+  const confirmCmd = MxWc.newConfirmCmd();
+  confirmCmd.init(rules);
+ */</span>
+})();
+</pre></div>
+</div>
+</div>
+
+<p>上面例子中 <code>FocusCmd</code> 和 <code>ConfirmCmd</code> 的区别是 <code>ConfirmCmd</code> 不仅选中元素，还做了确认（直接到达输入表单信息那一步）。</p>
+
+<h2 id="section-2">自动裁剪</h2>
+
+<p>当你要裁剪某个站点下的一批内容时（比如某些文章），可以用这个功能。这样你要做的就只是配置好 <code>userScript</code>, 然后依次点开你要裁剪的网页就可以了（<code>MaoXian</code> 会在网页加载完成时，就开始裁剪）</p>
+
+<p>这个功能一般是需要时才使用，所以建议, 使用 <code>userScript</code> 单独放一个脚本，必要时开启，用完关闭，会方便一些。</p>
+
+<p>例:</p>
+
+<div class="language-javascript highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#777">// 注意：这里省略了 UserScript 的声明部分</span>
+
+(<span style="color:#080;font-weight:bold">function</span>(){
+
+  <span style="color:#777">// 大部分情况下这里只需要一条规则</span>
+  const rules = [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">C||a.example.com||/blog/||article</span><span style="color:#710">&quot;</span></span>];
+
+  <span style="color:#777">// 这是裁剪时候填写到表单的三个信息</span>
+  const formInputs = {
+    <span style="color:#606">title</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">auto Clip test</span><span style="color:#710">&quot;</span></span>,       <span style="color:#777">//可选，默认使用网页的标题</span>
+    <span style="color:#606">category</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">test/user-script</span><span style="color:#710">&quot;</span></span>,  <span style="color:#777">//即保存的子目录</span>
+    <span style="color:#606">tagStr</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">test, auto-clip</span><span style="color:#710">&quot;</span></span>      <span style="color:#777">//使用空格或逗号分隔多个标签</span>
+  }
+
+  const clipCmd = MxWc.newClipCmd(formInputs);
+  focusCmd.init(rules);
+
+})();
+</pre></div>
+</div>
+</div>
+
+    </div>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122831827-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-122831827-1');
+    </script>
+  </body>
+</html>
+

@@ -44,3 +44,4 @@ You could help MaoXian Web Clipper development in many ways.
 * [FAQ](faq.html)
 * [Change log](change-log.html)
 * [Native App](native-app/index.html)
+* [与扩展交互-可编程](advanced-zh-CN.html)

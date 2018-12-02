@@ -44,3 +44,4 @@
 * [常见问题](faq-zh-CN.html)
 * [更新日志](change-log.html)
 * [本地程序](native-app/index-zh-CN.html)
+* [与扩展交互-可编程](advanced-zh-CN.html)

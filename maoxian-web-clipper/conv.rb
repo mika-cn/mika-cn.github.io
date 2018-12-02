@@ -1,6 +1,8 @@
 require 'kramdown'
 require 'ostruct'
 
+
+
 def render(page, html)
   template = File.open(page.template).read
   template = template.gsub('$title', page.title)
@@ -12,7 +14,10 @@ def render_markdown(page)
   page = OpenStruct.new(page)
   text = File.open(page.md_path).read
   text = text.gsub('```', '~~~')
-  html = Kramdown::Document.new(text).to_html
+  options = {
+    coderay_line_numbers: nil
+  }
+  html = Kramdown::Document.new(text, options).to_html
 
   # support w3m browser :)
   html = html.gsub(/^\s*<table>\s*$/) {|match| match.gsub('table', 'table border=1')}
@@ -86,6 +91,14 @@ pages.push({
   md_path: './native-app/index-zh-CN.md',
   html_path: './native-app/index-zh-CN.html',
   template: './native-app/markdown.template.html'
+})
+
+pages.push({
+  title: 'interactive with third party - MaoXian Web Clipper',
+  description: 'Introduce how to interactive with MaoXian',
+  md_path: './advanced-zh-CN.md',
+  html_path: './advanced-zh-CN.html',
+  template: './markdown.template.html'
 })
 
 pages.each {|page| render_markdown(page) }
