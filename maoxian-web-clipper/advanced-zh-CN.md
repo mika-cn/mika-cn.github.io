@@ -44,9 +44,9 @@
 各部分解释如下：
 
 ```text
-$type   : `C` 代表 `CSS`, `X` 代表 `xPath`.
-$domain : 规则应用的域名
-$path   : 规则应用的网址路径，给出可识别的部分就好
+$type   : C 代表 CSS, X 代表 xPath.
+$domain : 规则应用的域名( 支持通配符 *, *.example.org 或者直接 *)
+$path   : 规则应用的网址路径，(目前使用前缀匹配, 即 /post/ 匹配任何以 /post/ 打头的路径)
 $q      : 选择器(CSS selector 或者 xPath)
 ```
 

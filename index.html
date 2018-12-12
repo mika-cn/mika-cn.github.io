@@ -9,14 +9,16 @@
   </head>
   <style>
     body {
+      font-size: 14px;
+      line-height: 23px;
+      font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
       margin: 0px;
+      padding: 20px 20px;
     }
     .main{
-      padding: 60px 20px 200px 20px;
+      padding: 30px 20px 200px 20px;
       width: 100%;
       min-height: 800px;
-      background: linear-gradient(to right, #A7D5EA, pink);
-      /*background: lightseagreen;*/
       box-sizing: border-box;
     }
     .projects {}
@@ -26,92 +28,56 @@
       clear: both;
     }
     .project {
-      text-decoration: none;
-      display: inline-block;
-      background-color: white;
       color: #586069;
-      width: 280px;
-      min-height: 126px;
-      padding: 18px;
-      text-align: center;
-      border: 1px solid #ccc;
-      border-radius: 3px;
-      cursor: pointer;
-      margin-right: 20px;
       margin-bottom: 20px;
-      float: left;
-    }
-    .project:hover {
-      box-shadow: 0 0 6px gray;
-    }
-    .project > .name {
-      font-size: 16px;
-      color: #0366d6
     }
     .project > .intro {
       font-size: 14px;
-    }
-    .project > .fake-logo {
-      width: 30px;
-      height: 20px;
     }
 
   </style>
 
   <body>
+    <header>
+      <!--<h3>What web will become depends on what we programer doing now.</h3>-->
+    </header>
     <!-- refactor Me -->
     <div class="main">
       <!-- main project -->
       <div class="projects">
-        <a class="project" target="_blank" href="maoxian-web-clipper/index.html">
-          <!--<img class="logo" src="maoxian-web-clipper/imgs/logo.png" />-->
-          <div class="fake-logo"></div>
-          <h1 class="name">MaoXian Web Clipper</h1>
+        <div class="project">
+          <h3><a target="_blank" href="maoxian-web-clipper/index.html">MaoXian Web Clipper</a></h3>
           <div class="intro">
             It’s a web extension to clip information from web page. save to your local machine to avoid information invalidation.
           </div>
-        </a>
-        <a class="project" target="_blank" href="https://greasyfork.org/en/scripts/40188-colordate">
-          <div class="fake-logo"></div>
-          <h1 class="name">ColorDate</h1>
+        </div>
+
+        <div class="project">
+          <h3><a target="_blank" href="https://greasyfork.org/en/scripts/40188-colordate">ColorDate</a></h3>
           <div class="intro">
             A user script. It highlight date on webpage according to how long it since now. Using it, you can avoid wast your time on outdate information.
           </div>
-        </a>
-      </div>
-      <div class="clearfix"></div>
+        </div>
 
-      <!-- user scripts -->
-      <div class="projects">
-        <a class="project" target="_blank" href="https://github.com/mika-cn/web-ext-native-app-packer">
-          <div class="fake-logo"></div>
-          <h1 class="name">web-ext-native-app-packer</h1>
+        <div class="project">
+          <h3><a target="_blank" href="https://github.com/mika-cn/web-ext-native-app-packer">web-ext-native-app-packer</a></h3>
           <div class="intro">
             A tool(GEM) to pack web extension native application easily
           </div>
-        </a>
-        <a class="project" target="_blank" href="https://github.com/mika-cn/mathml2latex">
-          <div class="fake-logo"></div>
-          <h1 class="name">mathml2latex</h1>
+        </div>
+        <div class="project">
+          <h3><a target="_blank" href="https://github.com/mika-cn/mathml2latex">mathml2latex</a></h3>
           <div class="intro">
             A Javascript library to convert mathML to LaTeX
           </div>
-        </a>
-      </div>
-      <div class="clearfix"></div>
-
-      <div class="projects">
-        <a class="project" target="_blank" href="blog/index.html">
-          <div class="fake-logo"></div>
-          <h1 class="name">My Blog</h1>
+        </div>
+        <div class="project">
+          <h3><a target="_blank" href="blog/index.html">My Blog</a></h3>
           <div class="intro">
             :D
           </div>
-        </a>
+        </div>
       </div>
-      <div class="clearfix"></div>
-    </div>
-
 
 
   </body>

@@ -1,4 +1,4 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="https://mika-cn.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mika-cn.github.io/blog/" rel="alternate" type="text/html" /><updated>2018-05-31T10:21:49+08:00</updated><id>https://mika-cn.github.io/blog/</id><title type="html"> 草木一秋 </title><subtitle> 草木一秋 -- Less is more</subtitle><entry><title type="html">ruby 脚本编程，处理参数与输入流</title><link href="https://mika-cn.github.io/blog/ruby/2018/03/28/ruby-stdin.html" rel="alternate" type="text/html" title="ruby 脚本编程，处理参数与输入流" /><published>2018-03-28T07:33:35+08:00</published><updated>2018-03-28T07:33:35+08:00</updated><id>https://mika-cn.github.io/blog/ruby/2018/03/28/ruby-stdin</id><content type="html" xml:base="https://mika-cn.github.io/blog/ruby/2018/03/28/ruby-stdin.html">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="https://mika-cn.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mika-cn.github.io/blog/" rel="alternate" type="text/html" /><updated>2018-12-12T12:44:50+08:00</updated><id>https://mika-cn.github.io/blog/</id><title type="html"> 草木一秋 </title><subtitle> 草木一秋 -- Less is more</subtitle><entry><title type="html">ruby 脚本编程，处理参数与输入流</title><link href="https://mika-cn.github.io/blog/ruby/2018/03/28/ruby-stdin.html" rel="alternate" type="text/html" title="ruby 脚本编程，处理参数与输入流" /><published>2018-03-28T07:33:35+08:00</published><updated>2018-03-28T07:33:35+08:00</updated><id>https://mika-cn.github.io/blog/ruby/2018/03/28/ruby-stdin</id><content type="html" xml:base="https://mika-cn.github.io/blog/ruby/2018/03/28/ruby-stdin.html">&lt;blockquote&gt;
   &lt;p&gt;本文探索了: ruby 脚本编程时候对于参数和输入流的获取, 介绍了ARGV, ARGF 和 $stdin&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -278,15 +278,25 @@ puts &lt;span class=&quot;nv&quot;&gt;$stdin&lt;/span&gt;.tty?
 
 &lt;p&gt;&lt;a href=&quot;https://www.raspberrypi.org/documentation/remote-access/ssh/&quot;&gt;https://www.raspberrypi.org/documentation/remote-access/ssh/&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;a href=&quot;https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md&quot;&gt;https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="raspberry-pi" /><summary type="html">由于入手树莓派的时候，周边没有显示器，并且路由器在别的房间，而我进不去，刚好手上有两根网线（后来证实好像一根坏了), 遂通过直接用网线连接笔记本和树莓派来连接ssh</summary></entry><entry><title type="html">编程感悟</title><link href="https://mika-cn.github.io/blog/programing/2017/07/16/thinking-of-programming.html" rel="alternate" type="text/html" title="编程感悟" /><published>2017-07-16T09:36:32+08:00</published><updated>2017-07-16T09:36:32+08:00</updated><id>https://mika-cn.github.io/blog/programing/2017/07/16/thinking-of-programming</id><content type="html" xml:base="https://mika-cn.github.io/blog/programing/2017/07/16/thinking-of-programming.html">&lt;p&gt;有些代码非常性感，读起来非常舒服，非常享受&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md&quot;&gt;https://www.raspberrypi.org/documentation/configuration/wireless/wireless-cli.md&lt;/a&gt;&lt;/p&gt;</content><author><name></name></author><category term="raspberry-pi" /><summary type="html">由于入手树莓派的时候，周边没有显示器，并且路由器在别的房间，而我进不去，刚好手上有两根网线（后来证实好像一根坏了), 遂通过直接用网线连接笔记本和树莓派来连接ssh</summary></entry><entry><title type="html">编程杂记</title><link href="https://mika-cn.github.io/blog/programing/2017/07/16/thinking-of-programming.html" rel="alternate" type="text/html" title="编程杂记" /><published>2017-07-16T09:36:32+08:00</published><updated>2017-07-16T09:36:32+08:00</updated><id>https://mika-cn.github.io/blog/programing/2017/07/16/thinking-of-programming</id><content type="html" xml:base="https://mika-cn.github.io/blog/programing/2017/07/16/thinking-of-programming.html">&lt;p&gt;&lt;strong&gt;编程是堆放代码的艺术&lt;/strong&gt; —— 摘自网络&lt;/p&gt;
 
-&lt;hr /&gt;
+&lt;h2 id=&quot;引&quot;&gt;引&lt;/h2&gt;
 
-&lt;h4 id=&quot;keep-it-simple-and-stupied&quot;&gt;&lt;strong&gt;Keep It Simple and Stupied&lt;/strong&gt;&lt;/h4&gt;
-&lt;p&gt;&lt;strong&gt;化繁为简&lt;/strong&gt; 是一个很好的方向，我们却经常逆行而不自知&lt;/p&gt;
+&lt;p&gt;当你欣赏艺术品时往往会觉得很享受，有时候阅读代码亦是如此。思路清晰的代码，通常容易读懂，而且你会欣赏到作者绝妙的构思。有时甚至会感慨：”这代码写得真性感, 能有幸阅读这样的代码，真是一种享受！“。若能写出这样的代码，又何尝不是在用心雕刻一件艺术品。&lt;/p&gt;
 
-&lt;h4 id=&quot;dont-repeat-yourself&quot;&gt;&lt;strong&gt;Don’t Repeat Yourself&lt;/strong&gt;&lt;/h4&gt;
-&lt;p&gt;重复是件可怕的事情，这经常意味着更多的修改，以及修改遗漏&lt;/p&gt;</content><author><name></name></author><category term="programing" /><summary type="html">有些代码非常性感，读起来非常舒服，非常享受</summary></entry><entry><title type="html">测试博客功能</title><link href="https://mika-cn.github.io/blog/other/2016/01/01/test-blog-feature.html" rel="alternate" type="text/html" title="测试博客功能" /><published>2016-01-01T13:34:35+08:00</published><updated>2016-01-01T13:34:35+08:00</updated><id>https://mika-cn.github.io/blog/other/2016/01/01/test-blog-feature</id><content type="html" xml:base="https://mika-cn.github.io/blog/other/2016/01/01/test-blog-feature.html">&lt;p&gt;test &lt;em&gt;Italic&lt;/em&gt;&lt;/p&gt;
+&lt;h2 id=&quot;你为什么编程&quot;&gt;你为什么编程?&lt;/h2&gt;
+
+&lt;p&gt;你为什么编程？&lt;/p&gt;
+
+&lt;h2 id=&quot;创造&quot;&gt;创造&lt;/h2&gt;
+
+&lt;p&gt;每个程序的完成，都是一种创造，而创造会给人成就感。这应该是许多人被编程吸引的原因，编程似乎可以给你无穷的能力，只要电脑能做的事情，你就可以通过编程让电脑帮你做。&lt;/p&gt;
+
+&lt;h2 id=&quot;成本&quot;&gt;成本&lt;/h2&gt;
+
+&lt;p&gt;毫无疑问，最昂贵的是「时间」。&lt;/p&gt;
+
+&lt;h2 id=&quot;价值&quot;&gt;价值&lt;/h2&gt;</content><author><name></name></author><category term="programing" /><summary type="html">编程是堆放代码的艺术 —— 摘自网络</summary></entry><entry><title type="html">测试博客功能</title><link href="https://mika-cn.github.io/blog/other/2016/01/01/test-blog-feature.html" rel="alternate" type="text/html" title="测试博客功能" /><published>2016-01-01T13:34:35+08:00</published><updated>2016-01-01T13:34:35+08:00</updated><id>https://mika-cn.github.io/blog/other/2016/01/01/test-blog-feature</id><content type="html" xml:base="https://mika-cn.github.io/blog/other/2016/01/01/test-blog-feature.html">&lt;p&gt;test &lt;em&gt;Italic&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;test &lt;strong&gt;Bold&lt;/strong&gt;&lt;/p&gt;
 

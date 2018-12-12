@@ -14,19 +14,39 @@ MxWc.Rule.parse = function(ruleStr) {
   const SEPARATOR = '||';
   const r = ruleStr.trim().split(SEPARATOR);
   if(r.length === 4){
-    return { type: r[0], host: r[1], path: r[2], q: r[3]}
+    return { type: r[0].trim(), host: r[1].trim(), path: r[2].trim(), q: r[3].trim()}
   } else {
     return null;
   }
 }
 
 MxWc.Rule.isMatch = function(rule, win) {
-  if(rule && rule.host = win.location.host){
-    if(win.location.pathname.indexOf(it.path) > -1) {
-      return true;
+  if(rule){
+    let isHostMatch = false;
+    const index = rule.host.indexOf('*');
+    if( index > -1) {
+      if(rule.host.length === 1) {
+        isHostMatch = true;
+      } else {
+        switch(index){
+          case 0 :
+            isHostMatch = win.location.host.endsWith(rule.host.replace('*', ''));
+            break;
+          case rule.host.length - 1 :
+            isHostMatch = win.location.host.startsWith(rule.host.replace('*', ''));
+            break;
+          default:
+            console.error('Rule: host invalid:', rule.host);
+            isHostMatch = false;
+        }
+      }
+    } else {
+      isHostMatch = (rule.host === win.location.host);
     }
+    return isHostMatch && win.location.pathname.indexOf(rule.path) > -1;
+  } else {
+    return false;
   }
-  return false;
 }
 
 MxWc.Rule.getTypeName = function(rule) {
