@@ -3,7 +3,7 @@
  <title>Your Title - raspberry-pi</title>
  <link href="http://example.com/t/raspberry-pi.xml" rel="self"/>
  <link href="http://example.com/tag/raspberry-pi.html"/>
- <updated>2018-12-12T12:44:50+08:00</updated>
+ <updated>2018-12-21T16:38:00+08:00</updated>
  <id>http://example.com/tag/raspberry-pi.html</id>
  <author>
    <name>Author Here</name>
@@ -21,7 +21,7 @@
 
 &lt;p&gt;本文讲述了没有显示器时候如何开始玩树莓派。&lt;/p&gt;
 
-&lt;h3 id=&quot;处境简介&quot;&gt;处境简介&lt;/h3&gt;
+&lt;h2 id=&quot;处境简介&quot;&gt;处境简介&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;一个笔记本电脑(linux系统)&lt;/li&gt;
   &lt;li&gt;一块树莓派3代B电路板&lt;/li&gt;
@@ -31,9 +31,9 @@
   &lt;li&gt;一根网线&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;上篇-启动树莓派&quot;&gt;上篇: 启动树莓派&lt;/h3&gt;
+&lt;h2 id=&quot;上篇-启动树莓派&quot;&gt;上篇: 启动树莓派&lt;/h2&gt;
 
-&lt;h4 id=&quot;烧录系统到sd卡&quot;&gt;烧录系统到sd卡&lt;/h4&gt;
+&lt;h3 id=&quot;烧录系统到sd卡&quot;&gt;烧录系统到sd卡&lt;/h3&gt;
 
 &lt;p&gt;下载系统&lt;/p&gt;
 
@@ -63,7 +63,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;h4 id=&quot;开启ssh和设定系统使用的ip&quot;&gt;开启ssh和设定系统使用的ip&lt;/h4&gt;
+&lt;h3 id=&quot;开启ssh和设定系统使用的ip&quot;&gt;开启ssh和设定系统使用的ip&lt;/h3&gt;
 &lt;p&gt;raspbian 默认ssh没有开启，开启方法是在 /boot 目录下新建一个ssh文件即可&lt;/p&gt;
 
 &lt;p&gt;把sd卡拔出重新插上电脑&lt;/p&gt;
@@ -78,7 +78,7 @@
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;h4 id=&quot;启动树莓派&quot;&gt;启动树莓派&lt;/h4&gt;
+&lt;h3 id=&quot;启动树莓派&quot;&gt;启动树莓派&lt;/h3&gt;
 &lt;p&gt;在启动树莓派之前，先把笔记本ip设置为 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;192.168.100.1&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo ifconfig eth0 192.168.100.1
 &lt;/code&gt;&lt;/pre&gt;
@@ -99,7 +99,7 @@
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;下篇-连接无线&quot;&gt;下篇: 连接无线&lt;/h3&gt;
+&lt;h2 id=&quot;下篇-连接无线&quot;&gt;下篇: 连接无线&lt;/h2&gt;
 
 &lt;p&gt;扫描周边wifi 热点信息&lt;/p&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo iwlist wlan0 scan
@@ -128,7 +128,7 @@
 
 &lt;p&gt;到这里，就可以把之前连接在两台电脑之间的网线断开了，直接使用无线进行 ssh :), 不过最好到路由器设置页面固定树莓派的ip。&lt;/p&gt;
 
-&lt;h3 id=&quot;参考资料&quot;&gt;参考资料&lt;/h3&gt;
+&lt;h2 id=&quot;参考资料&quot;&gt;参考资料&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://jingyan.baidu.com/article/4853e1e569d97c1908f72654.html&quot;&gt;https://jingyan.baidu.com/article/4853e1e569d97c1908f72654.html&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://shumeipai.nxez.com/2013/12/08/linux-command-line-burn-raspberry-pi-mirror-to-sd-card.html&quot;&gt;http://shumeipai.nxez.com/2013/12/08/linux-command-line-burn-raspberry-pi-mirror-to-sd-card.html&lt;/a&gt;&lt;/p&gt;

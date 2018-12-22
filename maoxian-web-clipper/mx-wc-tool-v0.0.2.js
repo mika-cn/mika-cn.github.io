@@ -1,4 +1,9 @@
 ;
+/*
+ * $version: 0.0.2
+ *
+ */
+
 var MxWc = (MxWc || {});
 
 
@@ -122,11 +127,13 @@ MxWc.createCmd = function(type, action) {
     }
 
     function perform(){
+      console.log(Action.name, "PERFORM");
       Action.perform(state.rules);
     }
 
     function undo(){
-      if(action.undo){
+      console.log(Action.name, "UNDO");
+      if(Action.undo){
         Action.undo();
       }
     }
@@ -160,6 +167,7 @@ MxWc.Action = {}
  */
 MxWc.Action.Hide = function(){
   return {
+    name: 'hide',
     state: {},
     init: function(){
       this.state.elems = [];
@@ -189,6 +197,7 @@ MxWc.Action.Hide = function(){
 
 MxWc.Action.Focus = function(){
   return {
+    name: 'focus',
     perform: function(rules) {
       const rule = rules[0];
       if(rule) {
@@ -203,6 +212,7 @@ MxWc.Action.Focus = function(){
 
 MxWc.Action.Confirm = function(){
   return {
+    name: 'confirm',
     perform: function(rules) {
       const rule = rules[0];
       if(rule) {

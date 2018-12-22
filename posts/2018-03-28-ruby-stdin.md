@@ -7,7 +7,7 @@ categories: ruby
 ---
 > 本文探索了: ruby 脚本编程时候对于参数和输入流的获取, 介绍了ARGV, ARGF 和 $stdin
 
-# ARGV 对象
+## ARGV 对象
 
 该对象存储的是调用脚本文件时传入的参数, 本质上是一个字符串数组
 
@@ -28,7 +28,7 @@ Array
 
 
 
-# ARGF 对象
+## ARGF 对象
 
 [官方文档对它的介绍](http://ruby-doc.org/core-2.5.0/ARGF.html)
 
@@ -88,7 +88,7 @@ params = ARGV.dup.select do |arg|
 end
 ```
 
-# 全局变量 $stdin
+## 全局变量 $stdin
 
 表示当前环境的标准输入, 它的类是`IO`
 ```ruby
@@ -99,22 +99,99 @@ irb> $stdin
 
 Returns true if ios is associated with a terminal device (tty), false otherwise.
 
-咋看之下，不知所云 :(
+这里讲的 `IO` 和 `Terminal` 关联，有点模糊，到底怎样算关联？ 只能试试了……
 
-```shell
-$ cat stdin_tty_test.rb
-puts $stdin.tty?
+测试程序代码:
+```ruby
+# stdin_tty_test.rb
+puts ["tty?:", $stdin.tty?].join
+puts ["ARGV:", ARGV.to_s].join
 
-# 调用
-$ ruby stdin_tty_test.rb a b
-true
-$ cat file.txt | ruby stdin_tty_test.rb a b
-false
-$ ruby stdin_tty_test.rb a b < file.txt
-false
+
+# 为了更清晰，我们一次读一个字节
+one_byte = 1
+while true do
+  char = $stdin.read(one_byte)
+  if char.nil?
+    puts "EOF"
+    break;
+  else
+    puts char
+  end
+end
 ```
 
-所以 `#tty?` 可以作为判断有无标准输入的依据...
+测试1:
+```shell
+$ ruby stdin_tty_test.rb
+tty?:true
+ARGV:[]
+hello <-- 程序在这里等待输入，输入hello并回车
+h
+e
+l
+l
+o
+ <-- 这是换行符, 程序又在等待输入，我中断了它
+```
+
+测试2:
+```shell
+$ ruby stdin_tty_test.rb a b
+tty?:true
+ARGV:["a", "b"]
+ <-- 程序在这里等待输入，情况和上面一样，我中断了它
+```
+
+
+测试3:
+```shell
+$ echo hello | ruby stdin_tty_test.rb
+tty?:false
+ARGV:[]
+h
+e
+l
+l
+o
+ <-- 这是换行符
+EOF
+```
+
+测试4:
+```shell
+$ echo a b | xargs ruby stdin_tty_test.rb
+tty?:false
+ARGV:["a", "b"]
+EOF
+```
+
+测试5:
+```shell
+$ ruby stdin_tty_test.rb a b < file.txt
+tty?:false
+ARGV:["a", "b"]
+l
+i
+n
+e
+1
+ <-- 这是换行符
+l
+i
+n
+e
+2
+ <-- 这是换行符
+EOF
+```
+
+看来只要是调用时用了「管道」、「重定向操作符」或者 调用方为「其他程序(测试四)」时，就是和 Terminal 没关联，也就意味着 $stdin 「默认」有输入，即使是测试四那样也会输入一个 `EOF`。该方法可用来判断默认有无标准输入。
+
+一般情况下我们会用 IO 的 `#each` 方法，一行一行地读取输入，这个方法碰到 `EOF` 会停止读取。
+
+所以，一般会这么写：
+
 ```ruby
 # stdin_test.rb
 if !$stdin.tty?
@@ -123,10 +200,11 @@ if !$stdin.tty?
   end
 end
 ```
-标准输入，可以处理未结束的流。使用下面脚本创建一个未结束的流
+
+标准输入，可以用来接「未结束的流」。使用下面脚本创建一个未结束的流
 
 stream.rb
-```
+```ruby
 #!/usr/bin/env ruby
 $stdout.sync = true # not buffer
 
@@ -155,7 +233,8 @@ $ ./stream | ruby stdin_test.rb
 .
 ```
 
-# 总结
+## 总结
+
 * 如果不涉及处理标准输入，则使用 `ARGV` 就足够了
 * 如果只是单纯地文件处理，无需使用其他参数，可利用 `ARGF` 或 `gets`, 方便地处理输入
 * 如果有参数且涉及标准输入，则通过`ARGV` 和 `$stdin` 来分别获取参数和标准输入流是比较妥当的选择。

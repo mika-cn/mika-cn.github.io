@@ -48,7 +48,7 @@
   <p>本文探索了: ruby 脚本编程时候对于参数和输入流的获取, 介绍了ARGV, ARGF 和 $stdin</p>
 </blockquote>
 
-<h1 id="argv-对象">ARGV 对象</h1>
+<h2 id="argv-对象">ARGV 对象</h2>
 
 <p>该对象存储的是调用脚本文件时传入的参数, 本质上是一个字符串数组</p>
 
@@ -67,7 +67,7 @@ Array
 
 <p>唠叨一句, 我们可以通过 <code class="highlighter-rouge">$0</code> 来获取当前运行的脚本参数 <code class="highlighter-rouge">"./argv_test.rb"</code></p>
 
-<h1 id="argf-对象">ARGF 对象</h1>
+<h2 id="argf-对象">ARGF 对象</h2>
 
 <p><a href="http://ruby-doc.org/core-2.5.0/ARGF.html">官方文档对它的介绍</a></p>
 
@@ -131,7 +131,7 @@ argf_test.rb:2:in <span class="sb">`</span>each<span class="s1">': No such file 
 </code></pre>
 </div>
 
-<h1 id="全局变量-stdin">全局变量 $stdin</h1>
+<h2 id="全局变量-stdin">全局变量 $stdin</h2>
 
 <p>表示当前环境的标准输入, 它的类是<code class="highlighter-rouge">IO</code></p>
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="n">irb</span><span class="o">&gt;</span> <span class="vg">$stdin</span>
@@ -142,22 +142,98 @@ argf_test.rb:2:in <span class="sb">`</span>each<span class="s1">': No such file 
 
 <p>Returns true if ios is associated with a terminal device (tty), false otherwise.</p>
 
-<p>咋看之下，不知所云 :(</p>
+<p>这里讲的 <code class="highlighter-rouge">IO</code> 和 <code class="highlighter-rouge">Terminal</code> 关联，有点模糊，到底怎样算关联？ 只能试试了……</p>
 
-<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>cat stdin_tty_test.rb
-puts <span class="nv">$stdin</span>.tty?
+<p>测试程序代码:</p>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># stdin_tty_test.rb</span>
+<span class="nb">puts</span> <span class="p">[</span><span class="s2">"tty?:"</span><span class="p">,</span> <span class="vg">$stdin</span><span class="p">.</span><span class="nf">tty?</span><span class="p">].</span><span class="nf">join</span>
+<span class="nb">puts</span> <span class="p">[</span><span class="s2">"ARGV:"</span><span class="p">,</span> <span class="no">ARGV</span><span class="p">.</span><span class="nf">to_s</span><span class="p">].</span><span class="nf">join</span>
 
-<span class="c"># 调用</span>
-<span class="gp">$ </span>ruby stdin_tty_test.rb a b
-<span class="nb">true</span>
-<span class="gp">$ </span>cat file.txt | ruby stdin_tty_test.rb a b
-<span class="nb">false</span>
-<span class="gp">$ </span>ruby stdin_tty_test.rb a b &lt; file.txt
-<span class="nb">false</span>
+
+<span class="c1"># 为了更清晰，我们一次读一个字节</span>
+<span class="n">one_byte</span> <span class="o">=</span> <span class="mi">1</span>
+<span class="k">while</span> <span class="kp">true</span> <span class="k">do</span>
+  <span class="n">char</span> <span class="o">=</span> <span class="vg">$stdin</span><span class="p">.</span><span class="nf">read</span><span class="p">(</span><span class="n">one_byte</span><span class="p">)</span>
+  <span class="k">if</span> <span class="n">char</span><span class="p">.</span><span class="nf">nil?</span>
+    <span class="nb">puts</span> <span class="s2">"EOF"</span>
+    <span class="k">break</span><span class="p">;</span>
+  <span class="k">else</span>
+    <span class="nb">puts</span> <span class="n">char</span>
+  <span class="k">end</span>
+<span class="k">end</span>
 </code></pre>
 </div>
 
-<p>所以 <code class="highlighter-rouge">#tty?</code> 可以作为判断有无标准输入的依据…</p>
+<p>测试1:</p>
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>ruby stdin_tty_test.rb
+tty?:true
+ARGV:[]
+hello &lt;-- 程序在这里等待输入，输入hello并回车
+h
+e
+l
+l
+o
+ &lt;-- 这是换行符, 程序又在等待输入，我中断了它
+</code></pre>
+</div>
+
+<p>测试2:</p>
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>ruby stdin_tty_test.rb a b
+tty?:true
+ARGV:[<span class="s2">"a"</span>, <span class="s2">"b"</span><span class="o">]</span>
+ &lt;-- 程序在这里等待输入，情况和上面一样，我中断了它
+</code></pre>
+</div>
+
+<p>测试3:</p>
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">echo </span>hello | ruby stdin_tty_test.rb
+tty?:false
+ARGV:[]
+h
+e
+l
+l
+o
+ &lt;-- 这是换行符
+EOF
+</code></pre>
+</div>
+
+<p>测试4:</p>
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span><span class="nb">echo </span>a b | xargs ruby stdin_tty_test.rb
+tty?:false
+ARGV:[<span class="s2">"a"</span>, <span class="s2">"b"</span><span class="o">]</span>
+EOF
+</code></pre>
+</div>
+
+<p>测试5:</p>
+<div class="language-shell highlighter-rouge"><pre class="highlight"><code><span class="gp">$ </span>ruby stdin_tty_test.rb a b &lt; file.txt
+tty?:false
+ARGV:[<span class="s2">"a"</span>, <span class="s2">"b"</span><span class="o">]</span>
+l
+i
+n
+e
+1
+ &lt;-- 这是换行符
+l
+i
+n
+e
+2
+ &lt;-- 这是换行符
+EOF
+</code></pre>
+</div>
+
+<p>看来只要是调用时用了「管道」、「重定向操作符」或者 调用方为「其他程序(测试四)」时，就是和 Terminal 没关联，也就意味着 $stdin 「默认」有输入，即使是测试四那样也会输入一个 <code class="highlighter-rouge">EOF</code>。该方法可用来判断默认有无标准输入。</p>
+
+<p>一般情况下我们会用 IO 的 <code class="highlighter-rouge">#each</code> 方法，一行一行地读取输入，这个方法碰到 <code class="highlighter-rouge">EOF</code> 会停止读取。</p>
+
+<p>所以，一般会这么写：</p>
+
 <div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1"># stdin_test.rb</span>
 <span class="k">if</span> <span class="o">!</span><span class="vg">$stdin</span><span class="p">.</span><span class="nf">tty?</span>
   <span class="vg">$stdin</span><span class="p">.</span><span class="nf">each</span> <span class="k">do</span> <span class="o">|</span><span class="n">line</span><span class="o">|</span>
@@ -166,10 +242,11 @@ puts <span class="nv">$stdin</span>.tty?
 <span class="k">end</span>
 </code></pre>
 </div>
-<p>标准输入，可以处理未结束的流。使用下面脚本创建一个未结束的流</p>
+
+<p>标准输入，可以用来接「未结束的流」。使用下面脚本创建一个未结束的流</p>
 
 <p>stream.rb</p>
-<div class="highlighter-rouge"><pre class="highlight"><code><span class="c1">#!/usr/bin/env ruby</span>
+<div class="language-ruby highlighter-rouge"><pre class="highlight"><code><span class="c1">#!/usr/bin/env ruby</span>
 <span class="vg">$stdout</span><span class="p">.</span><span class="nf">sync</span> <span class="o">=</span> <span class="kp">true</span> <span class="c1"># not buffer</span>
 
 <span class="k">while</span> <span class="kp">true</span>
@@ -198,7 +275,8 @@ puts <span class="nv">$stdin</span>.tty?
 </code></pre>
 </div>
 
-<h1 id="总结">总结</h1>
+<h2 id="总结">总结</h2>
+
 <ul>
   <li>如果不涉及处理标准输入，则使用 <code class="highlighter-rouge">ARGV</code> 就足够了</li>
   <li>如果只是单纯地文件处理，无需使用其他参数，可利用 <code class="highlighter-rouge">ARGF</code> 或 <code class="highlighter-rouge">gets</code>, 方便地处理输入</li>

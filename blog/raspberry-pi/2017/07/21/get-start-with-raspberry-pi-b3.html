@@ -51,7 +51,7 @@
 
 <p>本文讲述了没有显示器时候如何开始玩树莓派。</p>
 
-<h3 id="处境简介">处境简介</h3>
+<h2 id="处境简介">处境简介</h2>
 <ul>
   <li>一个笔记本电脑(linux系统)</li>
   <li>一块树莓派3代B电路板</li>
@@ -61,9 +61,9 @@
   <li>一根网线</li>
 </ul>
 
-<h3 id="上篇-启动树莓派">上篇: 启动树莓派</h3>
+<h2 id="上篇-启动树莓派">上篇: 启动树莓派</h2>
 
-<h4 id="烧录系统到sd卡">烧录系统到sd卡</h4>
+<h3 id="烧录系统到sd卡">烧录系统到sd卡</h3>
 
 <p>下载系统</p>
 
@@ -93,7 +93,7 @@
 </code></pre>
 </div>
 
-<h4 id="开启ssh和设定系统使用的ip">开启ssh和设定系统使用的ip</h4>
+<h3 id="开启ssh和设定系统使用的ip">开启ssh和设定系统使用的ip</h3>
 <p>raspbian 默认ssh没有开启，开启方法是在 /boot 目录下新建一个ssh文件即可</p>
 
 <p>把sd卡拔出重新插上电脑</p>
@@ -108,7 +108,7 @@
 </code></pre>
 </div>
 
-<h4 id="启动树莓派">启动树莓派</h4>
+<h3 id="启动树莓派">启动树莓派</h3>
 <p>在启动树莓派之前，先把笔记本ip设置为 <strong><code class="highlighter-rouge">192.168.100.1</code></strong></p>
 <div class="language-shell highlighter-rouge"><pre class="highlight"><code>sudo ifconfig eth0 192.168.100.1
 </code></pre>
@@ -129,7 +129,7 @@
 
 <hr />
 
-<h3 id="下篇-连接无线">下篇: 连接无线</h3>
+<h2 id="下篇-连接无线">下篇: 连接无线</h2>
 
 <p>扫描周边wifi 热点信息</p>
 <div class="language-shell highlighter-rouge"><pre class="highlight"><code>sudo iwlist wlan0 scan
@@ -158,7 +158,7 @@
 
 <p>到这里，就可以把之前连接在两台电脑之间的网线断开了，直接使用无线进行 ssh :), 不过最好到路由器设置页面固定树莓派的ip。</p>
 
-<h3 id="参考资料">参考资料</h3>
+<h2 id="参考资料">参考资料</h2>
 <p><a href="https://jingyan.baidu.com/article/4853e1e569d97c1908f72654.html">https://jingyan.baidu.com/article/4853e1e569d97c1908f72654.html</a></p>
 
 <p><a href="http://shumeipai.nxez.com/2013/12/08/linux-command-line-burn-raspberry-pi-mirror-to-sd-card.html">http://shumeipai.nxez.com/2013/12/08/linux-command-line-burn-raspberry-pi-mirror-to-sd-card.html</a></p>

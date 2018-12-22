@@ -3,7 +3,7 @@
  <title>Your Title - programing</title>
  <link href="http://example.com/t/programing.xml" rel="self"/>
  <link href="http://example.com/tag/programing.html"/>
- <updated>2018-12-12T12:44:50+08:00</updated>
+ <updated>2018-12-21T16:38:00+08:00</updated>
  <id>http://example.com/tag/programing.html</id>
  <author>
    <name>Author Here</name>
@@ -47,7 +47,7 @@
   &lt;p&gt;今天上培训课时乱想出来的东西。&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;存在篇&quot;&gt;存在篇&lt;/h3&gt;
+&lt;h2 id=&quot;存在篇&quot;&gt;存在篇&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;在网上找不到一个完全符合你需求的程序，同样，世上也没一个为你量身订做的人。&lt;/li&gt;
@@ -57,7 +57,7 @@
   &lt;li&gt;老掉牙却还没消失的程序一定有它独特的作用，同样，永远不要忽视还没死掉的老人。&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&quot;频率篇&quot;&gt;频率篇&lt;/h3&gt;
+&lt;h2 id=&quot;频率篇&quot;&gt;频率篇&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;新的程序最吸引人，同样，新朋友最想去了解。&lt;/li&gt;
@@ -65,7 +65,7 @@
   &lt;li&gt;用一个程序一辈子很难，同样，爱一个人一辈子也很难。&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&quot;制造篇&quot;&gt;制造篇&lt;/h3&gt;
+&lt;h2 id=&quot;制造篇&quot;&gt;制造篇&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;能用一辈子的程序都是自己不断修改的，同样，能爱一辈子的人的都是自己慢慢塑造的。&lt;/li&gt;
@@ -76,7 +76,7 @@
   &lt;li&gt;将死未死的程序报警最多，同样，挣扎着的人最痛苦。&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&quot;自我篇&quot;&gt;自我篇&lt;/h3&gt;
+&lt;h2 id=&quot;自我篇&quot;&gt;自我篇&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;自己程序的 bug 自己难以看出，同样，自己的缺点自己难以发现。&lt;/li&gt;

@@ -21,7 +21,7 @@
 // @version      0.1
 // @description  your description
 // @author       you
-// @require      https://mika-cn.github.io/maoxian-web-clipper/mx-wc-tool.js
+// @require      https://mika-cn.github.io/maoxian-web-clipper/mx-wc-tool-v0.0.2.js
 // @include     *
 // @grant        none
 // ==/UserScript==
@@ -84,9 +84,26 @@ $q      : 选择器(CSS selector 或者 xPath)
 上面例子中 `FocusCmd` 和 `ConfirmCmd` 的区别是 `ConfirmCmd` 不仅选中元素，还做了确认（直接到达输入表单信息那一步）。
 
 
+下面这个例子，会在当前网页只有一个 article 标签的情况下，会选中这个 article 标签并且确认。
+
+```javascript
+// 注意：这里省略了 UserScript 的声明部分
+
+(function() {
+  var articles = document.querySelectorAll('article');
+  if(articles.length === 1){
+    const rules = ["C||*||/||article"];
+    const confirmCmd = MxWc.newConfirmCmd();
+    confirmCmd.init(rules);
+  } else {
+    // other rules
+  }
+})();
+```
+
 ## 自动裁剪
 
-当你要裁剪某个站点下的一批内容时（比如某些文章），可以用这个功能。这样你要做的就只是配置好 `userScript`, 然后依次点开你要裁剪的网页就可以了（`MaoXian` 会在网页加载完成时，就开始裁剪）
+这种情况应该比较少使用到，当你要裁剪某个站点下的一批内容时（比如某些文章），可以用这个功能。这样你要做的就只是配置好 `userScript`, 然后依次点开你要裁剪的网页就可以了（`MaoXian` 会在网页加载完成时，就开始裁剪）
 
 这个功能一般是需要时才使用，所以建议, 使用 `userScript` 单独放一个脚本，必要时开启，用完关闭，会方便一些。
 
@@ -112,3 +129,4 @@ $q      : 选择器(CSS selector 或者 xPath)
 
 })();
 ```
+

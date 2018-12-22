@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="https://mika-cn.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mika-cn.github.io/blog/" rel="alternate" type="text/html" /><updated>2018-12-12T12:44:50+08:00</updated><id>https://mika-cn.github.io/blog/</id><title type="html"> 草木一秋 </title><subtitle> 草木一秋 -- Less is more</subtitle><entry><title type="html">ruby 脚本编程，处理参数与输入流</title><link href="https://mika-cn.github.io/blog/ruby/2018/03/28/ruby-stdin.html" rel="alternate" type="text/html" title="ruby 脚本编程，处理参数与输入流" /><published>2018-03-28T07:33:35+08:00</published><updated>2018-03-28T07:33:35+08:00</updated><id>https://mika-cn.github.io/blog/ruby/2018/03/28/ruby-stdin</id><content type="html" xml:base="https://mika-cn.github.io/blog/ruby/2018/03/28/ruby-stdin.html">&lt;blockquote&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.5.0">Jekyll</generator><link href="https://mika-cn.github.io/blog/feed.xml" rel="self" type="application/atom+xml" /><link href="https://mika-cn.github.io/blog/" rel="alternate" type="text/html" /><updated>2018-12-21T16:38:00+08:00</updated><id>https://mika-cn.github.io/blog/</id><title type="html"> 草木一秋 </title><subtitle> 草木一秋 -- Less is more</subtitle><entry><title type="html">ruby 脚本编程，处理参数与输入流</title><link href="https://mika-cn.github.io/blog/ruby/2018/03/28/ruby-stdin.html" rel="alternate" type="text/html" title="ruby 脚本编程，处理参数与输入流" /><published>2018-03-28T07:33:35+08:00</published><updated>2018-03-28T07:33:35+08:00</updated><id>https://mika-cn.github.io/blog/ruby/2018/03/28/ruby-stdin</id><content type="html" xml:base="https://mika-cn.github.io/blog/ruby/2018/03/28/ruby-stdin.html">&lt;blockquote&gt;
   &lt;p&gt;本文探索了: ruby 脚本编程时候对于参数和输入流的获取, 介绍了ARGV, ARGF 和 $stdin&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h1 id=&quot;argv-对象&quot;&gt;ARGV 对象&lt;/h1&gt;
+&lt;h2 id=&quot;argv-对象&quot;&gt;ARGV 对象&lt;/h2&gt;
 
 &lt;p&gt;该对象存储的是调用脚本文件时传入的参数, 本质上是一个字符串数组&lt;/p&gt;
 
@@ -21,7 +21,7 @@ Array
 
 &lt;p&gt;唠叨一句, 我们可以通过 &lt;code class=&quot;highlighter-rouge&quot;&gt;$0&lt;/code&gt; 来获取当前运行的脚本参数 &lt;code class=&quot;highlighter-rouge&quot;&gt;&quot;./argv_test.rb&quot;&lt;/code&gt;&lt;/p&gt;
 
-&lt;h1 id=&quot;argf-对象&quot;&gt;ARGF 对象&lt;/h1&gt;
+&lt;h2 id=&quot;argf-对象&quot;&gt;ARGF 对象&lt;/h2&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://ruby-doc.org/core-2.5.0/ARGF.html&quot;&gt;官方文档对它的介绍&lt;/a&gt;&lt;/p&gt;
 
@@ -85,7 +85,7 @@ argf_test.rb:2:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;each&lt;span cl
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;h1 id=&quot;全局变量-stdin&quot;&gt;全局变量 $stdin&lt;/h1&gt;
+&lt;h2 id=&quot;全局变量-stdin&quot;&gt;全局变量 $stdin&lt;/h2&gt;
 
 &lt;p&gt;表示当前环境的标准输入, 它的类是&lt;code class=&quot;highlighter-rouge&quot;&gt;IO&lt;/code&gt;&lt;/p&gt;
 &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;n&quot;&gt;irb&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&quot;vg&quot;&gt;$stdin&lt;/span&gt;
@@ -96,22 +96,98 @@ argf_test.rb:2:in &lt;span class=&quot;sb&quot;&gt;`&lt;/span&gt;each&lt;span cl
 
 &lt;p&gt;Returns true if ios is associated with a terminal device (tty), false otherwise.&lt;/p&gt;
 
-&lt;p&gt;咋看之下，不知所云 :(&lt;/p&gt;
+&lt;p&gt;这里讲的 &lt;code class=&quot;highlighter-rouge&quot;&gt;IO&lt;/code&gt; 和 &lt;code class=&quot;highlighter-rouge&quot;&gt;Terminal&lt;/code&gt; 关联，有点模糊，到底怎样算关联？ 只能试试了……&lt;/p&gt;
 
-&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;cat stdin_tty_test.rb
-puts &lt;span class=&quot;nv&quot;&gt;$stdin&lt;/span&gt;.tty?
+&lt;p&gt;测试程序代码:&lt;/p&gt;
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# stdin_tty_test.rb&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;tty?:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;vg&quot;&gt;$stdin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;tty?&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;join&lt;/span&gt;
+&lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;p&quot;&gt;[&lt;/span&gt;&lt;span class=&quot;s2&quot;&gt;&quot;ARGV:&quot;&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;,&lt;/span&gt; &lt;span class=&quot;no&quot;&gt;ARGV&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;to_s&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;].&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;join&lt;/span&gt;
 
-&lt;span class=&quot;c&quot;&gt;# 调用&lt;/span&gt;
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;ruby stdin_tty_test.rb a b
-&lt;span class=&quot;nb&quot;&gt;true&lt;/span&gt;
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;cat file.txt | ruby stdin_tty_test.rb a b
-&lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;
-&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;ruby stdin_tty_test.rb a b &amp;lt; file.txt
-&lt;span class=&quot;nb&quot;&gt;false&lt;/span&gt;
+
+&lt;span class=&quot;c1&quot;&gt;# 为了更清晰，我们一次读一个字节&lt;/span&gt;
+&lt;span class=&quot;n&quot;&gt;one_byte&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt;
+  &lt;span class=&quot;n&quot;&gt;char&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;vg&quot;&gt;$stdin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;read&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;one_byte&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;char&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;nil?&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;s2&quot;&gt;&quot;EOF&quot;&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;break&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;;&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+    &lt;span class=&quot;nb&quot;&gt;puts&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;char&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;p&gt;所以 &lt;code class=&quot;highlighter-rouge&quot;&gt;#tty?&lt;/code&gt; 可以作为判断有无标准输入的依据…&lt;/p&gt;
+&lt;p&gt;测试1:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;ruby stdin_tty_test.rb
+tty?:true
+ARGV:[]
+hello &amp;lt;-- 程序在这里等待输入，输入hello并回车
+h
+e
+l
+l
+o
+ &amp;lt;-- 这是换行符, 程序又在等待输入，我中断了它
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;测试2:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;ruby stdin_tty_test.rb a b
+tty?:true
+ARGV:[&lt;span class=&quot;s2&quot;&gt;&quot;a&quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+ &amp;lt;-- 程序在这里等待输入，情况和上面一样，我中断了它
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;测试3:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;hello | ruby stdin_tty_test.rb
+tty?:false
+ARGV:[]
+h
+e
+l
+l
+o
+ &amp;lt;-- 这是换行符
+EOF
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;测试4:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;&lt;span class=&quot;nb&quot;&gt;echo &lt;/span&gt;a b | xargs ruby stdin_tty_test.rb
+tty?:false
+ARGV:[&lt;span class=&quot;s2&quot;&gt;&quot;a&quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+EOF
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;测试5:&lt;/p&gt;
+&lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;gp&quot;&gt;$ &lt;/span&gt;ruby stdin_tty_test.rb a b &amp;lt; file.txt
+tty?:false
+ARGV:[&lt;span class=&quot;s2&quot;&gt;&quot;a&quot;&lt;/span&gt;, &lt;span class=&quot;s2&quot;&gt;&quot;b&quot;&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;]&lt;/span&gt;
+l
+i
+n
+e
+1
+ &amp;lt;-- 这是换行符
+l
+i
+n
+e
+2
+ &amp;lt;-- 这是换行符
+EOF
+&lt;/code&gt;&lt;/pre&gt;
+&lt;/div&gt;
+
+&lt;p&gt;看来只要是调用时用了「管道」、「重定向操作符」或者 调用方为「其他程序(测试四)」时，就是和 Terminal 没关联，也就意味着 $stdin 「默认」有输入，即使是测试四那样也会输入一个 &lt;code class=&quot;highlighter-rouge&quot;&gt;EOF&lt;/code&gt;。该方法可用来判断默认有无标准输入。&lt;/p&gt;
+
+&lt;p&gt;一般情况下我们会用 IO 的 &lt;code class=&quot;highlighter-rouge&quot;&gt;#each&lt;/code&gt; 方法，一行一行地读取输入，这个方法碰到 &lt;code class=&quot;highlighter-rouge&quot;&gt;EOF&lt;/code&gt; 会停止读取。&lt;/p&gt;
+
+&lt;p&gt;所以，一般会这么写：&lt;/p&gt;
+
 &lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;# stdin_test.rb&lt;/span&gt;
 &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;!&lt;/span&gt;&lt;span class=&quot;vg&quot;&gt;$stdin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;tty?&lt;/span&gt;
   &lt;span class=&quot;vg&quot;&gt;$stdin&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;each&lt;/span&gt; &lt;span class=&quot;k&quot;&gt;do&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;line&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;|&lt;/span&gt;
@@ -120,10 +196,11 @@ puts &lt;span class=&quot;nv&quot;&gt;$stdin&lt;/span&gt;.tty?
 &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
-&lt;p&gt;标准输入，可以处理未结束的流。使用下面脚本创建一个未结束的流&lt;/p&gt;
+
+&lt;p&gt;标准输入，可以用来接「未结束的流」。使用下面脚本创建一个未结束的流&lt;/p&gt;
 
 &lt;p&gt;stream.rb&lt;/p&gt;
-&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#!/usr/bin/env ruby&lt;/span&gt;
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;&lt;span class=&quot;c1&quot;&gt;#!/usr/bin/env ruby&lt;/span&gt;
 &lt;span class=&quot;vg&quot;&gt;$stdout&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;.&lt;/span&gt;&lt;span class=&quot;nf&quot;&gt;sync&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;=&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt; &lt;span class=&quot;c1&quot;&gt;# not buffer&lt;/span&gt;
 
 &lt;span class=&quot;k&quot;&gt;while&lt;/span&gt; &lt;span class=&quot;kp&quot;&gt;true&lt;/span&gt;
@@ -152,7 +229,8 @@ puts &lt;span class=&quot;nv&quot;&gt;$stdin&lt;/span&gt;.tty?
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;h1 id=&quot;总结&quot;&gt;总结&lt;/h1&gt;
+&lt;h2 id=&quot;总结&quot;&gt;总结&lt;/h2&gt;
+
 &lt;ul&gt;
   &lt;li&gt;如果不涉及处理标准输入，则使用 &lt;code class=&quot;highlighter-rouge&quot;&gt;ARGV&lt;/code&gt; 就足够了&lt;/li&gt;
   &lt;li&gt;如果只是单纯地文件处理，无需使用其他参数，可利用 &lt;code class=&quot;highlighter-rouge&quot;&gt;ARGF&lt;/code&gt; 或 &lt;code class=&quot;highlighter-rouge&quot;&gt;gets&lt;/code&gt;, 方便地处理输入&lt;/li&gt;
@@ -164,7 +242,7 @@ puts &lt;span class=&quot;nv&quot;&gt;$stdin&lt;/span&gt;.tty?
 
 &lt;p&gt;本文讲述了没有显示器时候如何开始玩树莓派。&lt;/p&gt;
 
-&lt;h3 id=&quot;处境简介&quot;&gt;处境简介&lt;/h3&gt;
+&lt;h2 id=&quot;处境简介&quot;&gt;处境简介&lt;/h2&gt;
 &lt;ul&gt;
   &lt;li&gt;一个笔记本电脑(linux系统)&lt;/li&gt;
   &lt;li&gt;一块树莓派3代B电路板&lt;/li&gt;
@@ -174,9 +252,9 @@ puts &lt;span class=&quot;nv&quot;&gt;$stdin&lt;/span&gt;.tty?
   &lt;li&gt;一根网线&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;上篇-启动树莓派&quot;&gt;上篇: 启动树莓派&lt;/h3&gt;
+&lt;h2 id=&quot;上篇-启动树莓派&quot;&gt;上篇: 启动树莓派&lt;/h2&gt;
 
-&lt;h4 id=&quot;烧录系统到sd卡&quot;&gt;烧录系统到sd卡&lt;/h4&gt;
+&lt;h3 id=&quot;烧录系统到sd卡&quot;&gt;烧录系统到sd卡&lt;/h3&gt;
 
 &lt;p&gt;下载系统&lt;/p&gt;
 
@@ -206,7 +284,7 @@ puts &lt;span class=&quot;nv&quot;&gt;$stdin&lt;/span&gt;.tty?
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;h4 id=&quot;开启ssh和设定系统使用的ip&quot;&gt;开启ssh和设定系统使用的ip&lt;/h4&gt;
+&lt;h3 id=&quot;开启ssh和设定系统使用的ip&quot;&gt;开启ssh和设定系统使用的ip&lt;/h3&gt;
 &lt;p&gt;raspbian 默认ssh没有开启，开启方法是在 /boot 目录下新建一个ssh文件即可&lt;/p&gt;
 
 &lt;p&gt;把sd卡拔出重新插上电脑&lt;/p&gt;
@@ -221,7 +299,7 @@ puts &lt;span class=&quot;nv&quot;&gt;$stdin&lt;/span&gt;.tty?
 &lt;/code&gt;&lt;/pre&gt;
 &lt;/div&gt;
 
-&lt;h4 id=&quot;启动树莓派&quot;&gt;启动树莓派&lt;/h4&gt;
+&lt;h3 id=&quot;启动树莓派&quot;&gt;启动树莓派&lt;/h3&gt;
 &lt;p&gt;在启动树莓派之前，先把笔记本ip设置为 &lt;strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;192.168.100.1&lt;/code&gt;&lt;/strong&gt;&lt;/p&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo ifconfig eth0 192.168.100.1
 &lt;/code&gt;&lt;/pre&gt;
@@ -242,7 +320,7 @@ puts &lt;span class=&quot;nv&quot;&gt;$stdin&lt;/span&gt;.tty?
 
 &lt;hr /&gt;
 
-&lt;h3 id=&quot;下篇-连接无线&quot;&gt;下篇: 连接无线&lt;/h3&gt;
+&lt;h2 id=&quot;下篇-连接无线&quot;&gt;下篇: 连接无线&lt;/h2&gt;
 
 &lt;p&gt;扫描周边wifi 热点信息&lt;/p&gt;
 &lt;div class=&quot;language-shell highlighter-rouge&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;sudo iwlist wlan0 scan
@@ -271,7 +349,7 @@ puts &lt;span class=&quot;nv&quot;&gt;$stdin&lt;/span&gt;.tty?
 
 &lt;p&gt;到这里，就可以把之前连接在两台电脑之间的网线断开了，直接使用无线进行 ssh :), 不过最好到路由器设置页面固定树莓派的ip。&lt;/p&gt;
 
-&lt;h3 id=&quot;参考资料&quot;&gt;参考资料&lt;/h3&gt;
+&lt;h2 id=&quot;参考资料&quot;&gt;参考资料&lt;/h2&gt;
 &lt;p&gt;&lt;a href=&quot;https://jingyan.baidu.com/article/4853e1e569d97c1908f72654.html&quot;&gt;https://jingyan.baidu.com/article/4853e1e569d97c1908f72654.html&lt;/a&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;a href=&quot;http://shumeipai.nxez.com/2013/12/08/linux-command-line-burn-raspberry-pi-mirror-to-sd-card.html&quot;&gt;http://shumeipai.nxez.com/2013/12/08/linux-command-line-burn-raspberry-pi-mirror-to-sd-card.html&lt;/a&gt;&lt;/p&gt;
@@ -343,7 +421,7 @@ print 'indent 4 spaces'
   &lt;p&gt;今天上培训课时乱想出来的东西。&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h3 id=&quot;存在篇&quot;&gt;存在篇&lt;/h3&gt;
+&lt;h2 id=&quot;存在篇&quot;&gt;存在篇&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;在网上找不到一个完全符合你需求的程序，同样，世上也没一个为你量身订做的人。&lt;/li&gt;
@@ -353,7 +431,7 @@ print 'indent 4 spaces'
   &lt;li&gt;老掉牙却还没消失的程序一定有它独特的作用，同样，永远不要忽视还没死掉的老人。&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&quot;频率篇&quot;&gt;频率篇&lt;/h3&gt;
+&lt;h2 id=&quot;频率篇&quot;&gt;频率篇&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;新的程序最吸引人，同样，新朋友最想去了解。&lt;/li&gt;
@@ -361,7 +439,7 @@ print 'indent 4 spaces'
   &lt;li&gt;用一个程序一辈子很难，同样，爱一个人一辈子也很难。&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&quot;制造篇&quot;&gt;制造篇&lt;/h3&gt;
+&lt;h2 id=&quot;制造篇&quot;&gt;制造篇&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;能用一辈子的程序都是自己不断修改的，同样，能爱一辈子的人的都是自己慢慢塑造的。&lt;/li&gt;
@@ -372,7 +450,7 @@ print 'indent 4 spaces'
   &lt;li&gt;将死未死的程序报警最多，同样，挣扎着的人最痛苦。&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&quot;自我篇&quot;&gt;自我篇&lt;/h3&gt;
+&lt;h2 id=&quot;自我篇&quot;&gt;自我篇&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;自己程序的 bug 自己难以看出，同样，自己的缺点自己难以发现。&lt;/li&gt;

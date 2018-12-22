@@ -34,7 +34,7 @@
 <span style="color:#777">// @version      0.1</span>
 <span style="color:#777">// @description  your description</span>
 <span style="color:#777">// @author       you</span>
-<span style="color:#777">// @require      https://mika-cn.github.io/maoxian-web-clipper/mx-wc-tool.js</span>
+<span style="color:#777">// @require      https://mika-cn.github.io/maoxian-web-clipper/mx-wc-tool-v0.0.2.js</span>
 <span style="color:#777">// @include     *</span>
 <span style="color:#777">// @grant        none</span>
 <span style="color:#777">// ==/UserScript==</span>
@@ -102,9 +102,28 @@ $q      : 选择器(CSS selector 或者 xPath)
 
 <p>上面例子中 <code>FocusCmd</code> 和 <code>ConfirmCmd</code> 的区别是 <code>ConfirmCmd</code> 不仅选中元素，还做了确认（直接到达输入表单信息那一步）。</p>
 
+<p>下面这个例子，会在当前网页只有一个 article 标签的情况下，会选中这个 article 标签并且确认。</p>
+
+<div class="language-javascript highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#777">// 注意：这里省略了 UserScript 的声明部分</span>
+
+(<span style="color:#080;font-weight:bold">function</span>() {
+  <span style="color:#080;font-weight:bold">var</span> articles = document.querySelectorAll(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">article</span><span style="color:#710">'</span></span>);
+  <span style="color:#080;font-weight:bold">if</span>(articles.length === <span style="color:#00D">1</span>){
+    const rules = [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">C||*||/||article</span><span style="color:#710">&quot;</span></span>];
+    const confirmCmd = MxWc.newConfirmCmd();
+    confirmCmd.init(rules);
+  } <span style="color:#080;font-weight:bold">else</span> {
+    <span style="color:#777">// other rules</span>
+  }
+})();
+</pre></div>
+</div>
+</div>
+
 <h2 id="section-2">自动裁剪</h2>
 
-<p>当你要裁剪某个站点下的一批内容时（比如某些文章），可以用这个功能。这样你要做的就只是配置好 <code>userScript</code>, 然后依次点开你要裁剪的网页就可以了（<code>MaoXian</code> 会在网页加载完成时，就开始裁剪）</p>
+<p>这种情况应该比较少使用到，当你要裁剪某个站点下的一批内容时（比如某些文章），可以用这个功能。这样你要做的就只是配置好 <code>userScript</code>, 然后依次点开你要裁剪的网页就可以了（<code>MaoXian</code> 会在网页加载完成时，就开始裁剪）</p>
 
 <p>这个功能一般是需要时才使用，所以建议, 使用 <code>userScript</code> 单独放一个脚本，必要时开启，用完关闭，会方便一些。</p>
 
@@ -132,6 +151,7 @@ $q      : 选择器(CSS selector 或者 xPath)
 </pre></div>
 </div>
 </div>
+
 
     </div>
 

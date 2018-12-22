@@ -13,7 +13,7 @@ gh_issue_id: 2
 本文讲述了没有显示器时候如何开始玩树莓派。
 
 
-### 处境简介
+## 处境简介
 * 一个笔记本电脑(linux系统)
 * 一块树莓派3代B电路板
 * 一个充电器(5v, 2A 官网讲最好2.5A输入，2A也可以，但是可能会有性能问题),
@@ -22,9 +22,9 @@ gh_issue_id: 2
 * 一根网线
 
 
-### 上篇: 启动树莓派
+## 上篇: 启动树莓派
 
-#### 烧录系统到sd卡
+### 烧录系统到sd卡
 
 下载系统
 
@@ -55,7 +55,7 @@ sudo dd bs=4M if=/home/pi/Downloads/raspbian.img of=/dev/sdb
 # 注意输出目录位置，别把你电脑的硬盘给覆盖了...
 ```
 
-#### 开启ssh和设定系统使用的ip
+### 开启ssh和设定系统使用的ip
 raspbian 默认ssh没有开启，开启方法是在 /boot 目录下新建一个ssh文件即可
 
 把sd卡拔出重新插上电脑
@@ -70,7 +70,7 @@ vim /media/pi/sdcard/boot/cmdline.txt
 # 在最前端加入 ip=192.168.100.101 (注： 通过空格和原有内容隔开)
 ```
 
-#### 启动树莓派
+### 启动树莓派
 在启动树莓派之前，先把笔记本ip设置为 **`192.168.100.1`**
 ```shell
 sudo ifconfig eth0 192.168.100.1
@@ -92,7 +92,7 @@ ssh pi@192.168.100.101
 
 ******
 
-### 下篇: 连接无线
+## 下篇: 连接无线
 
 扫描周边wifi 热点信息
 ```shell
@@ -121,7 +121,7 @@ ifconfig wlan0
 
 到这里，就可以把之前连接在两台电脑之间的网线断开了，直接使用无线进行 ssh :), 不过最好到路由器设置页面固定树莓派的ip。
 
-### 参考资料
+## 参考资料
 [https://jingyan.baidu.com/article/4853e1e569d97c1908f72654.html](https://jingyan.baidu.com/article/4853e1e569d97c1908f72654.html)
 
 [http://shumeipai.nxez.com/2013/12/08/linux-command-line-burn-raspberry-pi-mirror-to-sd-card.html](http://shumeipai.nxez.com/2013/12/08/linux-command-line-burn-raspberry-pi-mirror-to-sd-card.html)
