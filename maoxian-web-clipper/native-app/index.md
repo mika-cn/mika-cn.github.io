@@ -16,7 +16,7 @@ ruby is required, install it first.
 
 Download software according to your OS and browser type.
 
-Current Version `0.1.1`
+Current Version `0.1.2`
 
 * Linux
   - [native-app-chrome.zip](files/maoxian-web-clipper-native-linux-chrome.zip)
@@ -63,7 +63,7 @@ in windows double click `install.bat`
 You must configure your download path first,
 
 You will find a file named config.yaml, use any text editor to edit it.
-Notice: if you OS is windows, don't edit it use xxx, use something like notepad++ which can handle line break correctly.
+Notice: if you OS is windows, don't edit it use notePad, use something like notepad++ which can handle line break correctly.
 
 **Notice: download path must exist**
 
