@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Offline index page of Maoxian Web Clipper" />
+    <title>Offline index page - MaoXian Web Clipper</title>
+    <link rel="icon" type="image/png" href="../imgs/logo.png" />
+    <link rel="stylesheet" type="text/css" href="../css/markdown.css" />
+    <style>
+    </style>
+  </head>
+  <body>
+    <div class="main">
+    <h1 id="offline-index-page">offline index page</h1>
+
+<h2 id="intro">intro</h2>
+
+<p>This is a static page, which supports list and search clipping history like the MaoXian’s history page does. use this page, you can browse your clippings offline, which means you can browser your clippings in a new device without install MaoXian.</p>
+
+<p>version: 0.0.1</p>
+
+<h2 id="usage">Usage</h2>
+
+<p><a href="files/history-0.0.1.zip">Download it</a> &amp;&amp; extract it.</p>
+
+<h3 id="step-1-move-directory">STEP 1: Move directory</h3>
+
+<p>Move extracted directory(named: history) to <code>$downloads/mx-wc</code>, after moving, it’s path look like <code>$downloads/mx-wc/history</code></p>
+
+<h3 id="step-2-open-it-with-browser">STEP 2: Open it with browser</h3>
+
+<p>Use your favourite browser open that <code>index.html</code>($download/mx-wc/history/index.html), This is the <strong>offline index page</strong> we talked before.</p>
+
+<h3 id="step-3-configure-maoxian-extension">STEP 3: Configure MaoXian extension</h3>
+
+<p>After step 2, you’ll see a page just like MaoXian’s history page and there are two sample clipping histories which is store in <code>clippings.js</code>. <code>clippings.js</code> is the file which <code>index.html</code> will load clipping histories from. At this step, You should configure your <code>MaoXian Web Clipper</code> to generate it automatically. Go to MaoXian extension’s <code>setting page</code> &gt; <code>offline index page</code>.</p>
+
+<p>Do this:</p>
+
+<ul>
+  <li>
+    <p>configure <strong>clipping javascript path</strong> (where clippings.js is), it’s value is <code>$MX-WC/history/clippings.js</code>, If you didn’t changed that extracted directory name (history), then you don’t need to change this item.</p>
+  </li>
+  <li>check the <strong>Autogenerate javascript file</strong> checkbox.</li>
+  <li>click the <strong>Generate Now</strong> button, refresh the <code>index.html</code> page which you open previously. If you can’t see that two sample clipping histories, then congratulation! you succeed.</li>
+</ul>
+
+    </div>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122831827-1"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'UA-122831827-1');
+    </script>
+  </body>
+</html>
+

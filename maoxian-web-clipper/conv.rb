@@ -82,7 +82,7 @@ pages.push({
   description: 'Native application page of Maoxian Web Clipper',
   md_path: './native-app/index.md',
   html_path: './native-app/index.html',
-  template: './native-app/markdown.template.html'
+  template: './markdown-subfolder.template.html'
 })
 
 pages.push({
@@ -90,7 +90,23 @@ pages.push({
   description: 'Native application page of Maoxian Web Clipper',
   md_path: './native-app/index-zh-CN.md',
   html_path: './native-app/index-zh-CN.html',
-  template: './native-app/markdown.template.html'
+  template: './markdown-subfolder.template.html'
+})
+
+pages.push({
+  title: 'Offline index page - MaoXian Web Clipper',
+  description: 'Offline index page of Maoxian Web Clipper',
+  md_path: './offline-page/index-zh-CN.md',
+  html_path: './offline-page/index-zh-CN.html',
+  template: './markdown-subfolder.template.html'
+})
+
+pages.push({
+  title: 'Offline index page - MaoXian Web Clipper',
+  description: 'Offline index page of Maoxian Web Clipper',
+  md_path: './offline-page/index.md',
+  html_path: './offline-page/index.html',
+  template: './markdown-subfolder.template.html'
 })
 
 pages.push({
