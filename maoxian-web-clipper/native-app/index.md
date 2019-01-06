@@ -3,7 +3,12 @@
 
 ## Intro
 
-This is a little application. We develope it to provide download function for MaoXian Web Clipper. After Setting up this application, We can avoid conflict with your download manage extension. :)
+This is a little application. We develope it to enhance MaoXian's abilities.
+
+## Features
+
+* Download file (to avoid conflic with download manage extention)
+* Delete clipping file (when you delete a clipping record in clipping history page, it delete files that relative to that record)
 
 ## Installation
 

@@ -28,3 +28,6 @@ Do this:
 
 * check the **Autogenerate javascript file** checkbox.
 * click the **Generate Now** button, refresh the `index.html` page which you open previously. If you can't see that two sample clipping histories, then congratulation! you succeed.
+
+-------------------------------------------
+[Home](../index.html)

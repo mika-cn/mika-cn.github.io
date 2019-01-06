@@ -17,9 +17,16 @@
 
 <h2 id="section">简介</h2>
 
-<p>这是一个很小的本地程序，我们开发这个程序来为 Maoxian Web Clipper 提供下载功能。在你设定好这款程序之后，我们就可以绕过浏览器的下载功能，从而避免与下载管理软件发生冲突。:)</p>
+<p>这是一个很小的本地程序，我们开发这个程序增强 Maoxian 的能力。</p>
 
-<h2 id="section-1">安装</h2>
+<h2 id="section-1">主要功能</h2>
+
+<ul>
+  <li>下载文件 （用于绕过浏览器的下载功能，从而避免与下载管理软件发生冲突）</li>
+  <li>删除裁剪信息 （让我们可以删除裁剪历史的同时，删除其对应的文件）</li>
+</ul>
+
+<h2 id="section-2">安装</h2>
 
 <p>该软件依赖于 Ruby， 所以我们要先安装 Ruby</p>
 
@@ -31,7 +38,7 @@
 
 <p>Windows  用户请到 <a href="https://rubyinstaller.org/downloads/">这里</a> 下载安装包，提醒一下，这里直接下载 <code>WITHOUT DEVKIT</code> 下面的版本即可。然后安装就可以了</p>
 
-<h3 id="section-2">下载软件包</h3>
+<h3 id="section-3">下载软件包</h3>
 
 <p>请根据你的系统信息和浏览器类型， 下载对应的软件包</p>
 
@@ -61,7 +68,7 @@
   </li>
 </ul>
 
-<h3 id="section-3">解压软件包</h3>
+<h3 id="section-4">解压软件包</h3>
 
 <p>Linux 或者 Mac</p>
 
@@ -73,7 +80,7 @@
 <pre><code>额，使用任何你喜欢的解压软件，把它解压到某个文件夹（由于是直接打包的文件，没有打包根文件夹）, :D
 </code></pre>
 
-<h3 id="section-4">安装软件</h3>
+<h3 id="section-5">安装软件</h3>
 
 <p>Linux 或 Mac  直接运行 <code>install.sh</code> 脚本即可</p>
 
@@ -82,7 +89,7 @@
 
 <p>在 Windows 上，直接双击 <code>install.bat</code></p>
 
-<h3 id="section-5">配置下载路径</h3>
+<h3 id="section-6">配置下载路径</h3>
 
 <p>在开始使用之前，我们需要先配置，下载路径，也就是裁剪下来的文件存储的目录（等同于浏览器的下载目录）</p>
 
@@ -105,7 +112,7 @@ environment: 'production'
 data_dir: 'e:\\jack\clippings'
 </code></pre>
 
-<h2 id="maoxian-web-clipper-">配合 MaoXian Web Clipper 使用</h2>
+<h2 id="maoxian-">配合 MaoXian 使用</h2>
 
 <ul>
   <li>
@@ -122,15 +129,6 @@ data_dir: 'e:\\jack\clippings'
 <p><a href="../index-zh-CN.html">首页</a></p>
 
     </div>
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122831827-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'UA-122831827-1');
-    </script>
   </body>
 </html>
 

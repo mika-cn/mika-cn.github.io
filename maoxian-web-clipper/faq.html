@@ -31,23 +31,23 @@
 <p>Please check situation below:</p>
 
 <ul>
-  <li>Are you clip a page before your installation, try refresh your page.</li>
+  <li>Are you clip a page before your installation? Try refresh your page if you are.</li>
   <li>Currently, It only support firefox and chrome/chromium, If you install it to other browser, we don’t guarantee it will work.</li>
 </ul>
 
 <h2 id="crash-on-clipping">Stop on clipping-hint every clipping</h2>
 
-<p>If you meet this situation. It’s probably you had installed some extension(e.g. chrone) to manage your downloads. Download manage extension will intercept download request, <code>MaoXian Web Clipper</code> use download API to save your clipping information. So <code>MaoXian Web Clipper</code> conflict with your download manage extension.</p>
+<p>If you meet this situation. It’s probably because you had installed some extension(e.g. chrone) to manage your downloads. Download manage extension will intercept your download request, MaoXian use download API to save your clipping information. MaoXian can’t finish its clipping because of that interception.</p>
 
-<p>We have found some user install this extension on other browser(like: vivaldi), vivaldi will intercept download request, so it conflict with <code>MaoXian Web Clipper</code> too.</p>
+<p>We have also found some user install MaoXian on other browser(like: vivaldi) which is base on chromium project, that means MaoXian may work fine on these browser. but these browser(e.g. vivaldi) have developed their own download manage function which will intercept download request too.</p>
 
-<p>We had developed a native application to resolve this problem.</p>
+<p>To solve this confliction, we had developed a native application which can receive download request that was sent by MaoXian.</p>
 
 <p>See: <a href="native-app/index.html">Native App</a></p>
 
 <h2 id="change-default-download-path">Change default download path.</h2>
 
-<p>If you choose <a href="native-app/index.html"><strong>Native App</strong></a> as your clipping handler. You can edit the config.yaml to configure download path.</p>
+<p>If you choose <a href="native-app/index.html"><strong>Native App</strong></a> as your clipping handler. You can edit the <code>config.yaml</code> to configure download path, don’t forget to restart your browser to apply new configuration.</p>
 
 <p>If you choose <strong>browser</strong> as your clipping handler(default handler). Web Extension can’t modify your download path, due to secure reason.</p>
 
@@ -73,7 +73,7 @@
   <li>C:\Users\jack\OneDrive\clips [destination directory]</li>
 </ul>
 
-<p>Save command below as mklink.bat, and run mklink.bat as administrator.</p>
+<p>Save command below as mklink.bat, and run mklink.bat as administrator(right click, run as administrator).</p>
 
 <p>Command: <code>mklink \D C:\Users\jack\Downloads\mx-wc C:\Users\jack\OneDrive\clips</code></p>
 
@@ -83,23 +83,23 @@
 
 <p>Some user had found that the clipping on history page can open after clipping, But couldn’t open it another day.</p>
 
-<p>If extension can’t access file URLs, it will try to open clipping through download history. If you clear that history, then it cann’t open it.</p>
+<p>This is because MaoXian will try to open clipping file through download history if it can’t access file URLs. If you clear that history, then it can’t open it.</p>
 
-<p><a href="#allow-access-file-urls">allow it access file URLs</a>, can avoid this situation.</p>
+<p><a href="#allow-access-file-urls">allow it to access file URLs</a>, can avoid this situation.</p>
 
 <hr />
 
 <h2 id="allow-access-file-urls">Allow access file URLs</h2>
 
-<p>Web browser don’t allow extension to access file URLs(file://). <code>MaoXian Web Clipper</code> can’t open clipping file(opening file URL) directly because of it.</p>
+<p>Web browser don’t allow extension to access file URLs(file://). MaoXian can’t open clipping file(opening file URL) directly because of it.</p>
 
-<p>We suggest you to allow <code>MaoXian Web Clipper</code> access file URLs. So you can open clipping file more convenient.</p>
+<p>We suggest you to allow MaoXian to access file URLs. So you can open clipping file more convenient.</p>
 
-<p>Section below describes how to allow <code>MaoXian Web Clipper</code> to access file URLs(file://).</p>
+<p>Section below describes how to allow MaoXian to access file URLs(file://).</p>
 
 <h3 id="getting-extension-identifier">1. Getting “extension identifier”</h3>
 
-<p>You can get it from <code>MaoXian Web Clipper</code>’s setting page.</p>
+<p>You can get it from MaoXian’s setting page.</p>
 
 <p>It looks like this:</p>
 
@@ -161,7 +161,7 @@
 
 <h3 id="configure-extension-settings">3. configure extension settings</h3>
 
-<p>Back to <code>MaoXian Web Clipper</code>’s setting page，check “I enabled ‘allow file scheme access’”.</p>
+<p>Back to MaoXian’s setting page，check “I enabled ‘allow file scheme access’”.</p>
 
 <h2 id="feedback">Report new issue</h2>
 
@@ -171,15 +171,6 @@
 <p><a href="index.html">Home</a></p>
 
     </div>
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122831827-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'UA-122831827-1');
-    </script>
   </body>
 </html>
 

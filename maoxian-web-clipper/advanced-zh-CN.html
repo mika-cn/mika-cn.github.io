@@ -15,13 +15,27 @@
     
 <h1 id="maoxian-">MaoXian 与第三方的交互</h1>
 
-<p><strong>注意</strong> 只有在 <code>0.1.14</code> 以上版本才有效。</p>
+<p>为了更方便地进行裁剪，MaoXian 提供了一些与第三方脚本交互的方式。</p>
 
-<p>为了更方便地进行裁剪，<code>MaoXian</code> 提供了一些与第三方脚本交互的方式。并且我们写了一个 js 库来来简化一些操作。</p>
+<p>目前利用这个交互功能，可以做到：</p>
 
-<p>下面以 <code>userScript</code> 为例子介绍一下：</p>
+<ul>
+  <li><a href="#hide-unwant-elems">隐藏不想要裁剪的元素</a></li>
+  <li><a href="#choose-the-elem-to-clip">预选中某个要裁剪的元素</a></li>
+  <li><a href="#auto-clip">自动裁剪</a></li>
+</ul>
 
-<h2 id="section">隐藏不想要裁剪的元素</h2>
+<h2 id="section">流程简介</h2>
+
+<ul>
+  <li>确保你安装的 MaoXian Web Clipper 版本大于 <strong>0.1.14</strong>。</li>
+  <li>安装 userScript 浏览器扩展，常见的有 Greasemonkey、 Tampermonkey， 选一个适用你浏览器的安装即可。</li>
+  <li>编写 userScript（需要你会 javascript 并且对 userScript有所了解）或 <a href="#shared-user-scripts">安装其他用户分享的脚本</a></li>
+</ul>
+
+<h2 id="section-1">编写脚本</h2>
+
+<h3 id="hide-unwant-elems">隐藏不想要裁剪的元素</h3>
 
 <p><code>MaoXian</code> 会在你点击裁剪的时候，发送事件，告知 <code>userScript</code> 扩展已经进入裁剪模式了。此时 <code>userScript</code> 就可以对网页上的元素进行操作，比如隐藏掉不想要裁剪的元素（按钮、头像等等）</p>
 
@@ -67,7 +81,9 @@ $q      : 选择器(CSS selector 或者 xPath)
 </div>
 </div>
 
-<h2 id="section-1">预选中某个元素</h2>
+<p>即 MaoXian 会拿当前页面的网址和规则里的 <code>$domain</code> 和 <code>$path</code>进行匹配，若当前页面符合规则，就根据 <code>$type</code> 和 <code>q</code> 找到要操作的元素, 再执行相关的操作。</p>
+
+<h3 id="choose-the-elem-to-clip">预选中某个要裁剪的元素</h3>
 
 <p><code>userScript</code> 可以在 <code>MaoXian</code> 进入裁剪模式的时候，发送消息过去，告知预选中某个元素。</p>
 
@@ -121,7 +137,7 @@ $q      : 选择器(CSS selector 或者 xPath)
 </div>
 </div>
 
-<h2 id="section-2">自动裁剪</h2>
+<h3 id="auto-clip">自动裁剪</h3>
 
 <p>这种情况应该比较少使用到，当你要裁剪某个站点下的一批内容时（比如某些文章），可以用这个功能。这样你要做的就只是配置好 <code>userScript</code>, 然后依次点开你要裁剪的网页就可以了（<code>MaoXian</code> 会在网页加载完成时，就开始裁剪）</p>
 
@@ -152,17 +168,19 @@ $q      : 选择器(CSS selector 或者 xPath)
 </div>
 </div>
 
+<h2 id="section-2">写给使用此功能的人</h2>
+
+<p>MaoXian 作者（也就是我），希望能汇集每个人编写的脚本，以让更多的人受益，所以希望你能分享你编写的脚本。</p>
+
+<h2 id="shared-user-scripts">用户分享的脚本</h2>
+
+<p>暂时: 「无」</p>
+
+<hr />
+
+<p><a href="index-zh-CN.html">首页</a></p>
 
     </div>
-
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-122831827-1"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'UA-122831827-1');
-    </script>
   </body>
 </html>
 

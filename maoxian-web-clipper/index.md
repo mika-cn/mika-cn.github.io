@@ -25,7 +25,7 @@ That's it, Not bored registration, Not charged.
 * Chrome - [https://chrome.google.com/webstore/detail/maoxian-web-clipper/kjahokgdcbohofgdidndeiaigkehdjdc](https://chrome.google.com/webstore/detail/maoxian-web-clipper/kjahokgdcbohofgdidndeiaigkehdjdc)
 
 ## Notice
-If your browser enable "ask for filename every download", please disable this option. (because MaoXian Web Clipper will download lots of file one clipping, you will get lots of window if your enable this option)
+If your browser enable "ask for filename every download", please disable this option. (because MaoXian Web Clipper will download lots of file one clipping, you will get lots of window if you enable this option)
 
 ## Storage Path
 All the file you clip will save in `$downloadFold/mx-wc` directory.
@@ -38,7 +38,6 @@ You could help MaoXian Web Clipper development in many ways.
 * [Sending feedback and suggestion](https://github.com/mika-cn/maoxian-web-clipper/issues).
 * Spread and promote this extension to your friend. Popularity is a strong power to drive developers.
 * If you're software developer, pull requests are welcome.
-* Love it? consider [make a donation](donate.html)。
 
 ## More
 * [FAQ](faq.html)
