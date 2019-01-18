@@ -24,19 +24,22 @@
 <ul>
   <li>Download file (to avoid conflic with download manage extention)</li>
   <li>Delete clipping file (when you delete a clipping record in clipping history page, it delete files that relative to that record)</li>
+  <li>Refresh history (This is useful when you have two clipping sources(e.g. two browsers on same computer or different computers) and want to keep clipping history latest)</li>
 </ul>
 
-<h2 id="installation">Installation</h2>
+<h2 id="install">Installation</h2>
+
+<h3 id="install-ruby">Install ruby</h3>
 
 <p>ruby is required, install it first.</p>
 
 <p><a href="https://www.ruby-lang.org/en/downloads/">Install Ruby</a></p>
 
-<h3 id="download">Download</h3>
+<h3 id="download-package">Download</h3>
 
 <p>Download software according to your OS and browser type.</p>
 
-<p>Current Version <code>0.1.2</code></p>
+<p>Current Version <code>0.1.5</code></p>
 
 <ul>
   <li>Linux
@@ -62,7 +65,7 @@
   </li>
 </ul>
 
-<h3 id="extract-zip-file">Extract zip file</h3>
+<h3 id="extract-package">Extract zip file</h3>
 
 <p>in linux or mac</p>
 
@@ -74,14 +77,12 @@
 <pre><code>Use any extract software your like, extract it to a fold :D
 </code></pre>
 
-<h3 id="install-the-software">install the software</h3>
+<h3 id="install-native-app">install the software</h3>
 
-<p>e.g in Linux or Mac</p>
-
-<pre><code>./install.sh
-</code></pre>
-
-<p>in windows double click <code>install.bat</code></p>
+<ul>
+  <li><strong>Mac or Linux</strong>: <code>./install.sh</code></li>
+  <li><strong>Windows</strong>:  double click <code>install.bat</code></li>
+</ul>
 
 <h3 id="configure-download-path">configure download path</h3>
 
@@ -106,7 +107,7 @@ environment: 'production'
 data_dir: 'e:\\jack\clippings'
 </code></pre>
 
-<h2 id="configure-maoxian-web-clipper">configure MaoXian Web Clipper</h2>
+<h3 id="configure-maoxian-web-clipper">configure MaoXian Web Clipper</h3>
 
 <ul>
   <li>
@@ -118,6 +119,23 @@ data_dir: 'e:\\jack\clippings'
 </ul>
 
 <p>Finish. :D</p>
+
+<h2 id="uninstall">uninstall</h2>
+
+<ul>
+  <li><strong>Mac or Linux</strong>: run <code>./uninstall.sh</code> and delete Native App directory.</li>
+  <li><strong>Windows</strong>: double click <code>uninstall.bat</code> and delete Native App directory.</li>
+</ul>
+
+<h2 id="upgrade">upgrade</h2>
+<ol>
+  <li>Backup <code>config.yaml</code></li>
+  <li><a href="#uninstall">Uninstall Native App</a></li>
+  <li><a href="#download-package">Download latest version</a> in current page and <a href="#extract-package">extract</a> it.</li>
+  <li>Replace <code>config.yaml</code> in extracted directory using the file we had backuped in first step.</li>
+  <li><a href="#install-native-app">Install this Native App</a></li>
+  <li>Reboot your browser.</li>
+</ol>
 
 <hr />
 <p><a href="../index.html">Home</a></p>

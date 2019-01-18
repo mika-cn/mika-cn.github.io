@@ -24,25 +24,26 @@
 <ul>
   <li>下载文件 （用于绕过浏览器的下载功能，从而避免与下载管理软件发生冲突）</li>
   <li>删除裁剪信息 （让我们可以删除裁剪历史的同时，删除其对应的文件）</li>
+  <li>刷新裁剪历史 （当你有两个裁剪源（比如：一台电脑上的两个浏览器或两台电脑上的浏览器）并且想让浏览器上的裁剪历史保持最新的时候，这一项非常有用。）</li>
 </ul>
 
-<h2 id="section-2">安装</h2>
+<h2 id="install">安装</h2>
+
+<h3 id="install-ruby">安装依赖</h3>
 
 <p>该软件依赖于 Ruby， 所以我们要先安装 Ruby</p>
 
-<p>Linux / Mac 用户， 很可能系统就自带了 ruby，请用以下命令查看</p>
+<p>Linux / Mac 用户， 很可能系统就自带了 ruby，请用命令 <code>ruby -v</code> 查看</p>
 
-<pre><code>ruby -v
-</code></pre>
 <p>如果输出的是 ruby 的版本信息，则说明你的系统已经安装了 ruby, 否则请到 <a href="https://www.ruby-lang.org/en/downloads/">ruby 官网</a> 进行安装</p>
 
 <p>Windows  用户请到 <a href="https://rubyinstaller.org/downloads/">这里</a> 下载安装包，提醒一下，这里直接下载 <code>WITHOUT DEVKIT</code> 下面的版本即可。然后安装就可以了</p>
 
-<h3 id="section-3">下载软件包</h3>
+<h3 id="download-package">下载软件包</h3>
 
 <p>请根据你的系统信息和浏览器类型， 下载对应的软件包</p>
 
-<p>当前版本 <code>0.1.2</code></p>
+<p>当前版本 <code>0.1.5</code></p>
 
 <ul>
   <li>Linux
@@ -68,7 +69,7 @@
   </li>
 </ul>
 
-<h3 id="section-4">解压软件包</h3>
+<h3 id="extract-package">解压软件包</h3>
 
 <p>Linux 或者 Mac</p>
 
@@ -80,16 +81,14 @@
 <pre><code>额，使用任何你喜欢的解压软件，把它解压到某个文件夹（由于是直接打包的文件，没有打包根文件夹）, :D
 </code></pre>
 
-<h3 id="section-5">安装软件</h3>
+<h3 id="install-native-app">安装软件</h3>
 
-<p>Linux 或 Mac  直接运行 <code>install.sh</code> 脚本即可</p>
+<ul>
+  <li>Linux 或 Mac  直接运行 <code>./install.sh</code> 进行安装</li>
+  <li>在 Windows 上，直接双击 <code>install.bat</code></li>
+</ul>
 
-<pre><code>./install.sh
-</code></pre>
-
-<p>在 Windows 上，直接双击 <code>install.bat</code></p>
-
-<h3 id="section-6">配置下载路径</h3>
+<h3 id="configure-download-path">配置下载路径</h3>
 
 <p>在开始使用之前，我们需要先配置，下载路径，也就是裁剪下来的文件存储的目录（等同于浏览器的下载目录）</p>
 
@@ -100,19 +99,25 @@
 
 <p>Linux 例子</p>
 
-<pre><code># config.yaml
+<div class="language-txt highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre># config.yaml
 environment: 'production'
 data_dir: '/home/jack/clippings'
-</code></pre>
+</pre></div>
+</div>
+</div>
 
 <p>windows 例子</p>
 
-<pre><code># config.yaml
+<div class="language-txt highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre># config.yaml
 environment: 'production'
 data_dir: 'e:\\jack\clippings'
-</code></pre>
+</pre></div>
+</div>
+</div>
 
-<h2 id="maoxian-">配合 MaoXian 使用</h2>
+<h3 id="maoxian-">配合 MaoXian 使用</h3>
 
 <ul>
   <li>
@@ -124,6 +129,23 @@ data_dir: 'e:\\jack\clippings'
 </ul>
 
 <p>完成上面两步后，就都完成了 :D</p>
+
+<h2 id="uninstall">卸载软件</h2>
+
+<p>Linux 或 Mac  直接运行 <code>./uninstall.sh</code> 脚本，再删除掉整个程序目录。</p>
+
+<p>在 Windows 上，直接双击 <code>uninstall.bat</code>，再删除掉整个程序目录。</p>
+
+<h2 id="upgrade">更新软件</h2>
+
+<ol>
+  <li>先备份 Native App 目录下的 <code>config.yaml</code> (复制到别的地方)</li>
+  <li><a href="#uninstall">卸载 Native App</a></li>
+  <li>在本页面<a href="#download-package">下载最新版本</a>，<a href="#extract-package">再解压软件包</a></li>
+  <li>用你备份的 <code>config.yaml</code> 覆盖解压出来的文件夹的 config.yaml.</li>
+  <li><a href="#install-native-app">安装新的程序</a></li>
+  <li>重启浏览器</li>
+</ol>
 
 <hr />
 <p><a href="../index-zh-CN.html">首页</a></p>

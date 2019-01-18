@@ -9,19 +9,22 @@ This is a little application. We develope it to enhance MaoXian's abilities.
 
 * Download file (to avoid conflic with download manage extention)
 * Delete clipping file (when you delete a clipping record in clipping history page, it delete files that relative to that record)
+* Refresh history (This is useful when you have two clipping sources(e.g. two browsers on same computer or different computers) and want to keep clipping history latest)
 
-## Installation
+## Installation {#install}
+
+### Install ruby {#install-ruby}
 
 ruby is required, install it first.
 
 [Install Ruby](https://www.ruby-lang.org/en/downloads/)
 
 
-### Download
+### Download {#download-package}
 
 Download software according to your OS and browser type.
 
-Current Version `0.1.2`
+Current Version `0.1.5`
 
 * Linux
   - [native-app-chrome.zip](files/maoxian-web-clipper-native-linux-chrome.zip)
@@ -38,7 +41,7 @@ Current Version `0.1.2`
   - [native-app-chromium.zip](files/maoxian-web-clipper-native-windows-chromium.zip)
   - [native-app-firefox.zip](files/maoxian-web-clipper-native-windows-firefox.zip)
 
-### Extract zip file
+### Extract zip file {#extract-package}
 
 in linux or mac
 
@@ -53,17 +56,12 @@ Use any extract software your like, extract it to a fold :D
 ```
 
 
-### install the software
+### install the software {#install-native-app}
 
-e.g in Linux or Mac
+* **Mac or Linux**: `./install.sh`
+* **Windows**:  double click `install.bat`
 
-```
-./install.sh
-```
-
-in windows double click `install.bat`
-
-### configure download path
+### configure download path {#configure-download-path}
 
 You must configure your download path first,
 
@@ -88,13 +86,27 @@ environment: 'production'
 data_dir: 'e:\\\\jack\clippings'
 ```
 
-## configure MaoXian Web Clipper
+### configure MaoXian Web Clipper
 
 * Allow extension to access File URLs. (See: extension setting page > File URL)
 
 * choose `Download through native App` as clipping handler. (See: extension setting page > Clipping Handler)
 
 Finish. :D
+
+## uninstall {#uninstall}
+
+* **Mac or Linux**: run `./uninstall.sh` and delete Native App directory.
+* **Windows**: double click `uninstall.bat` and delete Native App directory.
+
+## upgrade {#upgrade}
+1. Backup `config.yaml`
+2. [Uninstall Native App](#uninstall)
+3. [Download latest version](#download-package) in current page and [extract](#extract-package) it.
+4. Replace `config.yaml` in extracted directory using the file we had backuped in first step.
+5. [Install this Native App](#install-native-app)
+6. Reboot your browser.
+
 
 -------------------------------------------
 [Home](../index.html)
