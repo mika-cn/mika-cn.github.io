@@ -11,10 +11,13 @@
 
 ## 流程简介
 
-* 确保你安装的 MaoXian Web Clipper 版本大于 **0.1.14**。
+* 早期的扩展不支持该功能，Firefox 用户请确保 **MaoXian V0.1.25 以上**，Chrome 用户请确保 **MaoXian 0.1.14 以上**。
 * 安装 userScript 浏览器扩展，常见的有 Greasemonkey、 Tampermonkey， 选一个适用你浏览器的安装即可。
 * 编写 userScript（需要你会 javascript 并且对 userScript有所了解）或 [安装其他用户分享的脚本](#shared-user-scripts)
 
+## 版本信息
+
+当前 mx-wc-tool.js 版本为 `V0.0.3` ，你应该始终使用最新的版本。
 
 
 ## 编写脚本
@@ -32,7 +35,7 @@
 // @version      0.1
 // @description  your description
 // @author       you
-// @require      https://mika-cn.github.io/maoxian-web-clipper/mx-wc-tool-v0.0.2.js
+// @require      https://mika-cn.github.io/maoxian-web-clipper/mx-wc-tool-v0.0.3.js
 // @include     *
 // @grant        none
 // ==/UserScript==
@@ -149,7 +152,7 @@ MaoXian 作者（也就是我），希望能汇集每个人编写的脚本，以
 
 ## 用户分享的脚本 {#shared-user-scripts}
 
-暂时: 「无」
+「暂无」
 
 -------------------------------------------
 
