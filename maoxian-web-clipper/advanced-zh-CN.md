@@ -11,7 +11,7 @@
 
 ## 流程简介
 
-* 早期的扩展不支持该功能，Firefox 用户请确保 **MaoXian V0.1.25 以上**，Chrome 用户请确保 **MaoXian 0.1.14 以上**。
+* 早期的扩展不支持该功能，请确保 MaoXian 版本为 **V0.1.25 以上**
 * 安装 userScript 浏览器扩展，常见的有 Greasemonkey、 Tampermonkey， 选一个适用你浏览器的安装即可。
 * 编写 userScript（需要你会 javascript 并且对 userScript有所了解）或 [安装其他用户分享的脚本](#shared-user-scripts)
 
