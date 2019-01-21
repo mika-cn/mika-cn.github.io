@@ -13,11 +13,11 @@
 
 * 早期的扩展不支持该功能，请确保 MaoXian 版本为 **V0.1.25 以上**
 * 安装 userScript 浏览器扩展，常见的有 Greasemonkey、 Tampermonkey， 选一个适用你浏览器的安装即可。
-* 编写 userScript（需要你会 javascript 并且对 userScript有所了解）或 [安装其他用户分享的脚本](#shared-user-scripts)
+* 编写 userScript（需要你会 javascript 并且对 userScript有所了解）或 [安装其他用户分享的脚本](https://github.com/mika-cn/maoxian-web-clipper/tree/master/useful-res/README.md)
 
 ## 版本信息
 
-当前 mx-wc-tool.js 版本为 `V0.0.3` ，你应该始终使用最新的版本。
+当前 mx-wc-tool.js 版本为 `V0.0.4` ，你应该始终使用最新的版本。
 
 
 ## 编写脚本
@@ -60,7 +60,7 @@
 ```text
 $type   : C 代表 CSS, X 代表 xPath.
 $domain : 规则应用的域名( 支持通配符 *, *.example.org 或者直接 *)
-$path   : 规则应用的网址路径，(目前使用前缀匹配, 即 /post/ 匹配任何以 /post/ 打头的路径)
+$path   : 规则应用的网址路径，(目前使用包含匹配, 即 /post/ 匹配任何包含 /post/ 的路径)
 $q      : 选择器(CSS selector 或者 xPath)
 ```
 
@@ -98,6 +98,8 @@ $q      : 选择器(CSS selector 或者 xPath)
 ```
 
 上面例子中 `FocusCmd` 和 `ConfirmCmd` 的区别是 `ConfirmCmd` 不仅选中元素，还做了确认（直接到达输入表单信息那一步）。
+
+**注意**： `FocusCmd` 和 `ConfirmCmd` 会根据第一条匹配到的规则，操作找到的第一个元素，这和上面的 `HideCmd` 有所不同。`HideCmd` 会找匹配所有能匹配到的规则，操作所有找到的元素。
 
 
 下面这个例子，会在当前网页只有一个 article 标签的情况下，会选中这个 article 标签并且确认。
@@ -149,10 +151,6 @@ $q      : 选择器(CSS selector 或者 xPath)
 ## 写给使用此功能的人
 
 MaoXian 作者（也就是我），希望能汇集每个人编写的脚本，以让更多的人受益，所以希望你能分享你编写的脚本。
-
-## 用户分享的脚本 {#shared-user-scripts}
-
-「暂无」
 
 -------------------------------------------
 
