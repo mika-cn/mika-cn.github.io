@@ -35,7 +35,7 @@
 
 <h2 id="section-1">版本信息</h2>
 
-<p>当前 mx-wc-tool.js 版本为 <code>V0.0.4</code> ，你应该始终使用最新的版本。</p>
+<p>当前 mx-wc-tool.js 版本为 <code>V0.0.5</code> ，你应该始终使用最新的版本。</p>
 
 <h2 id="section-2">编写脚本</h2>
 
@@ -48,11 +48,11 @@
 <div class="language-javascript highlighter-coderay"><div class="CodeRay">
   <div class="code"><pre><span style="color:#777">// ==UserScript==</span>
 <span style="color:#777">// @name         example</span>
-<span style="color:#777">// @namespace    example@mx-wc.oyd</span>
+<span style="color:#777">// @namespace    example@MaoXian.OwnYourData</span>
 <span style="color:#777">// @version      0.1</span>
 <span style="color:#777">// @description  your description</span>
 <span style="color:#777">// @author       you</span>
-<span style="color:#777">// @require      https://mika-cn.github.io/maoxian-web-clipper/mx-wc-tool-v0.0.3.js</span>
+<span style="color:#777">// @require      https://mika-cn.github.io/maoxian-web-clipper/mx-wc-tool-v0.0.5.js</span>
 <span style="color:#777">// @include     *</span>
 <span style="color:#777">// @grant        none</span>
 <span style="color:#777">// ==/UserScript==</span>
@@ -84,8 +84,14 @@ $q      : 选择器(CSS selector 或者 xPath)
 </pre></div>
 </div>
 </div>
+<p>即 MaoXian 会拿当前页面的网址和规则里的 <code>$domain</code> 和 <code>$path</code>进行匹配，若当前页面符合规则，就根据 <code>$type</code> 和 <code>$q</code> 找到要操作的元素, 再执行相关的操作。</p>
 
-<p>即 MaoXian 会拿当前页面的网址和规则里的 <code>$domain</code> 和 <code>$path</code>进行匹配，若当前页面符合规则，就根据 <code>$type</code> 和 <code>q</code> 找到要操作的元素, 再执行相关的操作。</p>
+<p>rule 也可以是下面的格式（较简短）</p>
+
+<ul>
+  <li><code>$domain||$q</code> 等同于 <code>C||$domain||/||$q</code></li>
+  <li><code>$domain||$path||$q</code> 等同于 <code>C||$domain||$path||$q</code></li>
+</ul>
 
 <h3 id="choose-the-elem-to-clip">预选中某个要裁剪的元素</h3>
 
@@ -156,7 +162,7 @@ $q      : 选择器(CSS selector 或者 xPath)
 
 (<span style="color:#080;font-weight:bold">function</span>(){
 
-  <span style="color:#777">// 大部分情况下这里只需要一条规则</span>
+  <span style="color:#777">// 这里只需要一条规则</span>
   const rules = [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">C||a.example.com||/blog/||article</span><span style="color:#710">&quot;</span></span>];
 
   <span style="color:#777">// 这是裁剪时候填写到表单的三个信息</span>
@@ -173,11 +179,6 @@ $q      : 选择器(CSS selector 或者 xPath)
 </pre></div>
 </div>
 </div>
-
-<h2 id="section-3">写给使用此功能的人</h2>
-
-<p>MaoXian 作者（也就是我），希望能汇集每个人编写的脚本，以让更多的人受益，所以希望你能分享你编写的脚本。</p>
-
 <hr />
 
 <p><a href="index-zh-CN.html">首页</a></p>

@@ -17,7 +17,7 @@
 
 ## 版本信息
 
-当前 mx-wc-tool.js 版本为 `V0.0.4` ，你应该始终使用最新的版本。
+当前 mx-wc-tool.js 版本为 `V0.0.5` ，你应该始终使用最新的版本。
 
 
 ## 编写脚本
@@ -31,11 +31,11 @@
 ```javascript
 // ==UserScript==
 // @name         example
-// @namespace    example@mx-wc.oyd
+// @namespace    example@MaoXian.OwnYourData
 // @version      0.1
 // @description  your description
 // @author       you
-// @require      https://mika-cn.github.io/maoxian-web-clipper/mx-wc-tool-v0.0.3.js
+// @require      https://mika-cn.github.io/maoxian-web-clipper/mx-wc-tool-v0.0.5.js
 // @include     *
 // @grant        none
 // ==/UserScript==
@@ -63,8 +63,12 @@ $domain : 规则应用的域名( 支持通配符 *, *.example.org 或者直接 *
 $path   : 规则应用的网址路径，(目前使用包含匹配, 即 /post/ 匹配任何包含 /post/ 的路径)
 $q      : 选择器(CSS selector 或者 xPath)
 ```
+即 MaoXian 会拿当前页面的网址和规则里的 `$domain` 和 `$path`进行匹配，若当前页面符合规则，就根据 `$type` 和 `$q` 找到要操作的元素, 再执行相关的操作。
 
-即 MaoXian 会拿当前页面的网址和规则里的 `$domain` 和 `$path`进行匹配，若当前页面符合规则，就根据 `$type` 和 `q` 找到要操作的元素, 再执行相关的操作。
+rule 也可以是下面的格式（较简短）
+
+* `$domain||$q` 等同于 `C||$domain||/||$q`
+* `$domain||$path||$q` 等同于 `C||$domain||$path||$q`
 
 ### 预选中某个要裁剪的元素 {#choose-the-elem-to-clip}
 
@@ -132,7 +136,7 @@ $q      : 选择器(CSS selector 或者 xPath)
 
 (function(){
 
-  // 大部分情况下这里只需要一条规则
+  // 这里只需要一条规则
   const rules = ["C||a.example.com||/blog/||article"];
 
   // 这是裁剪时候填写到表单的三个信息
@@ -147,11 +151,6 @@ $q      : 选择器(CSS selector 或者 xPath)
 
 })();
 ```
-
-## 写给使用此功能的人
-
-MaoXian 作者（也就是我），希望能汇集每个人编写的脚本，以让更多的人受益，所以希望你能分享你编写的脚本。
-
 -------------------------------------------
 
 [首页](index-zh-CN.html)
