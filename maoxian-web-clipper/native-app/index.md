@@ -24,7 +24,7 @@ ruby is required, install it first.
 
 Download software according to your OS and browser type.
 
-Current Version `0.1.5`
+Current Version `0.1.6`
 
 * Linux
   - [native-app-chrome.zip](files/maoxian-web-clipper-native-linux-chrome.zip)
