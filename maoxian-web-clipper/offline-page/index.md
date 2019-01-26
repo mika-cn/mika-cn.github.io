@@ -4,11 +4,11 @@
 
 This is a static page, which supports list and search clipping history like the MaoXian's history page does. use this page, you can browse your clippings offline, which means you can browser your clippings in a new device without install MaoXian.
 
-version: 0.0.2
+version: 0.0.3
 
 ## Usage
 
-[Download it](files/history-0.0.2.zip) && extract it.
+[Download it](files/history-0.0.3.zip) && extract it.
 
 ### STEP 1: Move directory
 
