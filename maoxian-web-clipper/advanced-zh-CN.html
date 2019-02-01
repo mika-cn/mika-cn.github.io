@@ -20,6 +20,7 @@
 <p>目前利用这个交互功能，可以做到：</p>
 
 <ul>
+  <li><a href="#set-form-inputs">预设置表单的输入值</a></li>
   <li><a href="#hide-unwant-elems">隐藏不想要裁剪的元素</a></li>
   <li><a href="#choose-the-elem-to-clip">预选中某个要裁剪的元素</a></li>
   <li><a href="#auto-clip">自动裁剪</a></li>
@@ -28,22 +29,51 @@
 <h2 id="section">流程简介</h2>
 
 <ul>
-  <li>早期的扩展不支持该功能，请确保 MaoXian 版本为 <strong>V0.1.25 以上</strong></li>
+  <li>早期的扩展不支持该功能，请确保 MaoXian 版本为 <strong>V0.1.27 以上</strong></li>
   <li>安装 userScript 浏览器扩展，常见的有 Greasemonkey、 Tampermonkey， 选一个适用你浏览器的安装即可。</li>
   <li>编写 userScript（需要你会 javascript 并且对 userScript有所了解）或 <a href="https://github.com/mika-cn/maoxian-web-clipper/tree/master/useful-res/README.md">安装其他用户分享的脚本</a></li>
 </ul>
 
 <h2 id="section-1">版本信息</h2>
 
-<p>当前 mx-wc-tool.js 版本为 <code>V0.0.5</code> ，你应该始终使用最新的版本。</p>
+<p>当前 mx-wc-tool.js 版本为 <code>V0.0.6</code> ，你应该始终使用最新的版本。</p>
 
 <h2 id="section-2">编写脚本</h2>
 
-<h3 id="hide-unwant-elems">隐藏不想要裁剪的元素</h3>
+<h3 id="set-form-inputs">预设置表单的输入值</h3>
 
-<p><code>MaoXian</code> 会在你点击裁剪的时候，发送事件，告知 <code>userScript</code> 扩展已经进入裁剪模式了。此时 <code>userScript</code> 就可以对网页上的元素进行操作，比如隐藏掉不想要裁剪的元素（按钮、头像等等）</p>
+<p>MaoXian 会在显示表单的时候，自动帮你输入这些预设的值。</p>
 
-<p>例:</p>
+<p>表单的输入项名字和解释如下：</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>名字</th>
+      <th>说明</th>
+      <th>默认值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>title</td>
+      <td>对应表单的标题</td>
+      <td>当前网页的标题</td>
+    </tr>
+    <tr>
+      <td>category</td>
+      <td>对应表单的目录（多级目录用 <code>/</code> 隔开）</td>
+      <td>取决于你的设置（见扩展设置页面）</td>
+    </tr>
+    <tr>
+      <td>tagstr</td>
+      <td>对应表单的标签（多个标签用 <code>,</code> 或 <code>空格</code> 隔开)</td>
+      <td>无</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>用法参照下例：</p>
 
 <div class="language-javascript highlighter-coderay"><div class="CodeRay">
   <div class="code"><pre><span style="color:#777">// ==UserScript==</span>
@@ -52,10 +82,36 @@
 <span style="color:#777">// @version      0.1</span>
 <span style="color:#777">// @description  your description</span>
 <span style="color:#777">// @author       you</span>
-<span style="color:#777">// @require      https://mika-cn.github.io/maoxian-web-clipper/mx-wc-tool-v0.0.5.js</span>
+<span style="color:#777">// @require      https://mika-cn.github.io/maoxian-web-clipper/mx-wc-tool-v0.0.6.js</span>
 <span style="color:#777">// @include     *</span>
 <span style="color:#777">// @grant        none</span>
 <span style="color:#777">// ==/UserScript==</span>
+
+(<span style="color:#080;font-weight:bold">function</span>() {
+
+  const t = <span style="color:#080;font-weight:bold">new</span> Date();
+  const date = [t.getFullYear(), t.getMonth() + <span style="color:#00D">1</span>, t.getDate()].join(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">-</span><span style="color:#710">'</span></span>);
+  const tagstr = [window.location.host, date].join(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">,</span><span style="color:#710">'</span></span>);
+
+  <span style="color:#777">// 预设置当前域名和日期为tag，方便在裁剪历史页面进行搜索。</span>
+  MxWc.setFormInputs({ <span style="color:#606">tagstr</span>: tagstr });
+})();
+</pre></div>
+</div>
+</div>
+
+<p><code>mx-wc-tool.js</code> 脚本文件会帮助你监听 <strong>扩展进入裁剪模式</strong> 事件，并告知扩展，待会显示表单后，填入这些值。</p>
+
+<p><strong>注意：</strong> 如果你的脚本同时用到了下方的 <code>ConfirmCmd</code> ，则需要让 <code>MxWc.setFormInputs</code> 最先运行（这两个功能监听的是同一事件，有先后顺序的问题）。</p>
+
+<h3 id="hide-unwant-elems">隐藏不想要裁剪的元素</h3>
+
+<p><code>MaoXian</code> 会在你点击裁剪的时候，发送事件，告知 <code>userScript</code> 扩展已经进入裁剪模式了。此时 <code>userScript</code> 就可以对网页上的元素进行操作，比如隐藏掉不想要裁剪的元素（按钮、头像等等）</p>
+
+<p>例:</p>
+
+<div class="language-javascript highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#777">// 注意：这里省略了 UserScript 的声明部分</span>
 
 (<span style="color:#080;font-weight:bold">function</span>(){
   const rules = [
@@ -84,7 +140,8 @@ $q      : 选择器(CSS selector 或者 xPath)
 </pre></div>
 </div>
 </div>
-<p>即 MaoXian 会拿当前页面的网址和规则里的 <code>$domain</code> 和 <code>$path</code>进行匹配，若当前页面符合规则，就根据 <code>$type</code> 和 <code>$q</code> 找到要操作的元素, 再执行相关的操作。</p>
+
+<p>即 mx-wc-tool 会拿当前页面的网址和规则里的 <code>$domain</code> 和 <code>$path</code>进行匹配，若当前页面符合规则，就根据 <code>$type</code> 和 <code>$q</code> 找到要操作的元素, 再执行相关的操作。</p>
 
 <p>rule 也可以是下面的格式（较简短）</p>
 
@@ -149,6 +206,31 @@ $q      : 选择器(CSS selector 或者 xPath)
 </div>
 </div>
 
+<p>另 ConfirmCmd 还支持指定填写到表单的三个信息。</p>
+
+<p>用法请看下面例子</p>
+
+<div class="language-javascript highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#777">// 注意：这里省略了 UserScript 的声明部分</span>
+
+(<span style="color:#080;font-weight:bold">function</span>() {
+  const rules = (<span style="color:#F00;background-color:#FAA">`</span>
+    js.awesome.code||<span style="color:#F00;background-color:#FAA">#</span>article
+    py.awesome.code||<span style="color:#F00;background-color:#FAA">#</span>article
+    c.elegant.code||<span style="color:#F00;background-color:#FAA">#</span>post
+  <span style="color:#F00;background-color:#FAA">`</span>).split(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>);
+
+  <span style="color:#777">// 这是表单显示后，填写到里面的信息</span>
+  <span style="color:#777">// 注：`ConfirmCmd` 设置的 `formInputs` 会比 `MxWc.setFormInputs` 拥有更高的优先级。</span>
+  const formInputs = {<span style="color:#606">category</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">it/article</span><span style="color:#710">'</span></span>, <span style="color:#606">tagstr</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">technology</span><span style="color:#710">'</span></span>}
+  const cmd = MxWc.newConfirmCmd(formInputs);
+  cmd.init(rules);
+})();
+
+</pre></div>
+</div>
+</div>
+
 <h3 id="auto-clip">自动裁剪</h3>
 
 <p>这种情况应该比较少使用到，当你要裁剪某个站点下的一批内容时（比如某些文章），可以用这个功能。这样你要做的就只是配置好 <code>userScript</code>, 然后依次点开你要裁剪的网页就可以了（<code>MaoXian</code> 会在网页加载完成时，就开始裁剪）</p>
@@ -167,9 +249,9 @@ $q      : 选择器(CSS selector 或者 xPath)
 
   <span style="color:#777">// 这是裁剪时候填写到表单的三个信息</span>
   const formInputs = {
-    <span style="color:#606">title</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">auto Clip test</span><span style="color:#710">&quot;</span></span>,       <span style="color:#777">//可选，默认使用网页的标题</span>
-    <span style="color:#606">category</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">test/user-script</span><span style="color:#710">&quot;</span></span>,  <span style="color:#777">//即保存的子目录</span>
-    <span style="color:#606">tagStr</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">test, auto-clip</span><span style="color:#710">&quot;</span></span>      <span style="color:#777">//使用空格或逗号分隔多个标签</span>
+    <span style="color:#606">title</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">auto Clip test</span><span style="color:#710">&quot;</span></span>,
+    <span style="color:#606">category</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">test/user-script</span><span style="color:#710">&quot;</span></span>,
+    <span style="color:#606">tagstr</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">test, auto-clip</span><span style="color:#710">&quot;</span></span>
   }
 
   const clipCmd = MxWc.newClipCmd(formInputs);
