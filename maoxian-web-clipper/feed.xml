@@ -6,7 +6,14 @@
   </author>
   <id>https://mika-cn.github.io/maoxian-web-clipper/feed.xml</id>
   <title>MaoXian Web Clipper</title>
-  <updated>2018-12-03T18:27:10+08:00</updated>
+  <updated>2019-02-04T11:43:23+08:00</updated>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0127</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0127"/>
+    <title>MaoXian Web Clipper 0.1.27 is released</title>
+    <updated>2019-02-04T10:00:00+08:00</updated>
+    <dc:date>2019-02-04T10:00:00+08:00</dc:date>
+  </entry>
   <entry>
     <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0115</id>
     <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0115"/>
@@ -105,5 +112,5 @@
     <updated>2018-07-24T09:00:00+08:00</updated>
     <dc:date>2018-07-24T09:00:00+08:00</dc:date>
   </entry>
-  <dc:date>2018-12-03T18:27:10+08:00</dc:date>
+  <dc:date>2019-02-04T11:43:23+08:00</dc:date>
 </feed>
