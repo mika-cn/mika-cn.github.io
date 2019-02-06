@@ -4,6 +4,8 @@
 
 这是一个离线的 HTML 网页，它让你可以像扩展的历史页面那样，列出所有的裁剪信息 并且 支持搜索。下载这个页面并且配置好扩展后，扩展就能及时更新该页面的裁剪信息。这意味着你可以随时就把 `mx-wc` 文件夹同步或者拷贝到另一台设备，再用浏览器打开这个「离线索引页面」，就能浏览和搜索你所有的裁剪信息。
 
+顺带唠叨一句：如果你会 Web(HTML, CSS, javascript) 开发，你完全可以基于这个页面，修改其成你喜欢的样式，甚至添加功能。
+
 当前版本: 0.0.3
 
 ## 使用方法
@@ -13,6 +15,20 @@
 ### 步骤 1: 移动解压出来的文件夹
 
  把解压出来的文件夹(默认叫history)，移动到扩展裁剪的根目录（`$download/mx-wc`), 移动后的路径 `$download/mx-wc/history`.
+
+目录名 “history” 是默认的，你可以重命名它，甚至把目录里的文件移动到 `$download/mx-wc` 目录下面。更多细节，请看下面
+
+假设你的 `$download` 目录是 **/home/jack/Downloads**, 那么你的 `$download/mx-wc` 目录即是 **/home/jack/Downloads/mx-wc**.
+
+| 离线页面路径 | 是否支持 | 描述 |
+| -------- | -------- | -------- |
+| /home/jack/Downloads/mx-wc/offline-index/index.html | 是 | 我们把 `history` 重命名为 `offline-index` |
+| /home/jack/Downloads/mx-wc/offline-index.html | 是 | 我们把 `history` 目录下的所有文件移动到 `$download/mx-wc` 目录下并且把 `index.html` 重命名为 `offline-index.html` |
+| /home/jack/Downloads/mx-wc/offline-pages/history/index.html | 是 | 我们把这个页面放在了更深的目录下 |
+| /home/jack/history/index.html | 否 | 这个页面不能放到 `$download/mx-wc` 目录之外 |
+
+
+
 
 ### 步骤 2: 用浏览器打开它
 
