@@ -122,7 +122,7 @@
 
 <h4 id="start-clip-attr-badge">badge 属性</h4>
 
-<p><code>badge</code> 属性用于在扩展的图标（小剪刀）上方显示文字，可配置文字的颜色，和背景的颜色。</p>
+<p><code>badge</code> 属性用于在扩展的图标（小剪刀）边上显示文字，可配置文字的颜色，和背景的颜色。</p>
 
 <table border=1>
   <thead>
@@ -161,6 +161,8 @@
 
 <p>当指定了 <code>badge</code> 属性之后，裁剪过程中会显示文字，直到裁剪流程结束，才不显示。一般用 <code>badge</code> 来提示自己，当前执行的是哪些参数。</p>
 
+<p><strong>注:</strong> 基于 Chromium 开发的浏览器不支持修改文字的颜色。不管你提供的 <code>textColor</code> 的值是什么，都只会显示白色的文字。</p>
+
 <p>例子：</p>
 
 <pre><code class="language-json">{
@@ -168,7 +170,7 @@
     "exec": "startClip",
     "args": [
       {
-        "badge": {"text": "hi", "textColor": "white", "backgroundColor": "#ffffff"}
+        "badge": {"text": "hi", "textColor": "white", "backgroundColor": "#000000"}
       }
     ]
   }
