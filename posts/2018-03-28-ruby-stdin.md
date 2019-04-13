@@ -5,7 +5,8 @@ date:   2018-03-28 07:33:35 +0800
 tags: ruby
 categories: ruby
 ---
-> 本文探索了: ruby 脚本编程时候对于参数和输入流的获取, 介绍了ARGV, ARGF 和 $stdin
+
+本文探索了: ruby 脚本编程时候对于参数和输入流的获取, 介绍了ARGV, ARGF 和 $stdin
 
 ## ARGV 对象
 

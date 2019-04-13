@@ -3,7 +3,7 @@
  <title>Your Title - raspberry-pi</title>
  <link href="http://example.com/t/raspberry-pi.xml" rel="self"/>
  <link href="http://example.com/tag/raspberry-pi.html"/>
- <updated>2019-02-01T09:58:51+08:00</updated>
+ <updated>2019-02-07T11:30:37+08:00</updated>
  <id>http://example.com/tag/raspberry-pi.html</id>
  <author>
    <name>Author Here</name>
@@ -14,12 +14,10 @@
    <link href="http://example.com/raspberry-pi/2017/07/21/get-start-with-raspberry-pi-b3.html"/>
    <updated>2017-07-21T14:24:35+08:00</updated>
    <id>http://example.com/raspberry-pi/2017/07/21/get-start-with-raspberry-pi-b3</id>
-   <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;由于入手树莓派的时候，周边没有显示器，并且路由器在别的房间，而我进不去，刚好手上有两根网线（后来证实好像一根坏了),
-遂通过直接用网线连接笔记本和树莓派来连接ssh&lt;/p&gt;
-&lt;/blockquote&gt;
+   <content type="html">&lt;p&gt;本文讲述了没有显示器时候如何开始玩树莓派。&lt;/p&gt;
 
-&lt;p&gt;本文讲述了没有显示器时候如何开始玩树莓派。&lt;/p&gt;
+&lt;p&gt;由于入手树莓派的时候，周边没有显示器，并且路由器在别的房间，而我进不去，刚好手上有两根网线（后来证实好像一根坏了),
+遂通过直接用网线连接笔记本和树莓派来连接ssh&lt;/p&gt;
 
 &lt;h2 id=&quot;处境简介&quot;&gt;处境简介&lt;/h2&gt;
 &lt;ul&gt;

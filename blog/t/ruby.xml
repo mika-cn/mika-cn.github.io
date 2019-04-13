@@ -3,7 +3,7 @@
  <title>Your Title - ruby</title>
  <link href="http://example.com/t/ruby.xml" rel="self"/>
  <link href="http://example.com/tag/ruby.html"/>
- <updated>2019-02-01T09:58:51+08:00</updated>
+ <updated>2019-02-07T11:30:37+08:00</updated>
  <id>http://example.com/tag/ruby.html</id>
  <author>
    <name>Author Here</name>
@@ -14,9 +14,7 @@
    <link href="http://example.com/ruby/2018/03/28/ruby-stdin.html"/>
    <updated>2018-03-28T07:33:35+08:00</updated>
    <id>http://example.com/ruby/2018/03/28/ruby-stdin</id>
-   <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;本文探索了: ruby 脚本编程时候对于参数和输入流的获取, 介绍了ARGV, ARGF 和 $stdin&lt;/p&gt;
-&lt;/blockquote&gt;
+   <content type="html">&lt;p&gt;本文探索了: ruby 脚本编程时候对于参数和输入流的获取, 介绍了ARGV, ARGF 和 $stdin&lt;/p&gt;
 
 &lt;h2 id=&quot;argv-对象&quot;&gt;ARGV 对象&lt;/h2&gt;
 
