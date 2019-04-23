@@ -15,7 +15,7 @@ This is a little application. We develope it to enhance MaoXian's abilities.
 
 ### Install ruby {#install-ruby}
 
-ruby is required, install it first.
+ruby is required, install it first. Make sure version `>= 2.4.1`.
 
 [Install Ruby](https://www.ruby-lang.org/en/downloads/)
 
@@ -92,6 +92,8 @@ data_dir: 'e:\\\\jack\clippings'
 
 * choose `Download through native App` as clipping handler. (See: extension setting page > Clipping Handler)
 
+* reboot your browser
+
 Finish. :D
 
 ## uninstall {#uninstall}
@@ -105,7 +107,6 @@ Finish. :D
 3. [Download latest version](#download-package) in current page and [extract](#extract-package) it.
 4. Replace `config.yaml` in extracted directory using the file we had backuped in first step.
 5. [Install this Native App](#install-native-app)
-6. Reboot your browser.
 
 
 -------------------------------------------
