@@ -9,6 +9,12 @@ rss = RSS::Maker.make("atom") do |maker|
 
   news = [
     {
+      version: '0.1.31',
+      content: "MaoXian Web Clipper 0.1.31 is released",
+      link: "https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0131",
+      created_at: "2019-2-04 10:00:00 +0800"
+    },
+    {
       version: '0.1.27',
       content: "MaoXian Web Clipper 0.1.27 is released",
       link: "https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0127",
