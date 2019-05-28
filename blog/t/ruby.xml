@@ -3,7 +3,7 @@
  <title>Your Title - ruby</title>
  <link href="http://example.com/t/ruby.xml" rel="self"/>
  <link href="http://example.com/tag/ruby.html"/>
- <updated>2019-02-07T11:30:37+08:00</updated>
+ <updated>2019-05-28T22:49:43+08:00</updated>
  <id>http://example.com/tag/ruby.html</id>
  <author>
    <name>Author Here</name>
@@ -250,7 +250,6 @@ EOF
   &lt;li&gt;如果只是单纯地文件处理，无需使用其他参数，可利用 &lt;code class=&quot;highlighter-rouge&quot;&gt;ARGF&lt;/code&gt; 或 &lt;code class=&quot;highlighter-rouge&quot;&gt;gets&lt;/code&gt;, 方便地处理输入&lt;/li&gt;
   &lt;li&gt;如果有参数且涉及标准输入，则通过&lt;code class=&quot;highlighter-rouge&quot;&gt;ARGV&lt;/code&gt; 和 &lt;code class=&quot;highlighter-rouge&quot;&gt;$stdin&lt;/code&gt; 来分别获取参数和标准输入流是比较妥当的选择。&lt;/li&gt;
 &lt;/ul&gt;
-
 </content>
  </entry>
  

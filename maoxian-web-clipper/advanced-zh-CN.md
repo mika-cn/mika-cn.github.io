@@ -204,7 +204,9 @@ rule 也可以是下面的格式（较简短）
   }
 
   const clipCmd = MxWc.newClipCmd(formInputs);
-  focusCmd.init(rules);
+
+  // 这一步执行后，会很快进行裁剪
+  clipCmd.init(rules);
 
 })();
 ```

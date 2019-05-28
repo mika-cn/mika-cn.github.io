@@ -255,7 +255,9 @@ $q      : 选择器(CSS selector 或者 xPath)
   }
 
   const clipCmd = MxWc.newClipCmd(formInputs);
-  focusCmd.init(rules);
+
+  <span style="color:#777">// 这一步执行后，会很快进行裁剪</span>
+  clipCmd.init(rules);
 
 })();
 </pre></div>

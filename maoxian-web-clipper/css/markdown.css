@@ -50,5 +50,5 @@ pre > code {
   border: 1px solid #ccc;
   padding: 10px 5px;
   background-color: #D8D8D8;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
