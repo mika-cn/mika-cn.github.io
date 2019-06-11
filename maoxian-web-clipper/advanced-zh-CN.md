@@ -1,5 +1,9 @@
 
-# MaoXian 与第三方的交互
+# 警告： 该页面所描述的内容已过期（即不再推荐使用）, 通过下面新的链接获取新的内容
+
+[查看最新](https://github.com/mika-cn/maoxian-web-clipper/tree/master/useful-res/README.md)
+
+# MaoXian 与第三方的交互 (已过期）
 
 为了更方便地进行裁剪，MaoXian 提供了一些与第三方脚本交互的方式。
 

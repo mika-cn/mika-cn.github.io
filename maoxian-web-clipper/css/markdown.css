@@ -4,6 +4,8 @@ body {
   padding: 0px;
 }
 
+.red {color: red;}
+
 .main {
   font-size: 14px;
   line-height: 23px;

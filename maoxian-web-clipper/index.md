@@ -45,4 +45,3 @@ You could help MaoXian Web Clipper development in many ways.
 * [Native App](native-app/index.html)
 * [RSS](feed.xml)
 * [Offline Index Page](offline-page/index.html)
-* [与扩展交互-可编程](advanced-zh-CN.html)

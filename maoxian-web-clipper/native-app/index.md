@@ -45,13 +45,13 @@ Current Version `0.1.6`
 
 in linux or mac
 
-```
+```shell
 unzip maoxian-web-clipper-native-linux-chrome.zip -d maoxian-web-clipper-native
 ```
 
 in windows
 
-```
+```shell
 Use any extract software your like, extract it to a fold :D
 ```
 
@@ -72,7 +72,7 @@ Notice: if you OS is windows, don't edit it use notePad, use something like note
 
 e.g in linux
 
-```
+```yaml
 # config.yaml
 environment: 'production'
 data_dir: '/home/jack/clippings'
@@ -80,7 +80,7 @@ data_dir: '/home/jack/clippings'
 
 e.g in windows
 
-```
+```yaml
 # config.yaml
 environment: 'production'
 data_dir: 'e:\\\\jack\clippings'

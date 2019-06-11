@@ -46,4 +46,3 @@
 * [本地程序](native-app/index-zh-CN.html)
 * [RSS](feed.xml)
 * [离线索引页面](offline-page/index-zh-CN.html)
-* [与扩展交互-可编程](advanced-zh-CN.html)

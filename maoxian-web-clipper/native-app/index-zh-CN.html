@@ -33,7 +33,7 @@
 
 <p>该软件依赖于 Ruby， 所以我们要先安装 Ruby，请安装 <code>2.4.1</code> 以上版本。</p>
 
-<p>Linux / Mac 用户， 很可能系统就自带了 ruby，请用命令 <code>ruby -v</code> 查看</p>
+<p>Linux / Mac 用户， 很可能系统就自带了 ruby，请用命令 <code>ruby -v</code> 查看。罗嗦一句，如果你是命令行新手，不知道如何运行命令。没关系，每个人都是从新手过来的，不要看到命令行就害怕。请利用搜索引擎学习如何运行命令（比如：搜索 Mac 系统如何运行命令），再走下面的流程。</p>
 
 <p>如果输出的是 ruby 的版本信息，则说明你的系统已经安装了 ruby, 否则请到 <a href="https://www.ruby-lang.org/en/downloads/">ruby 官网</a> 进行安装</p>
 
@@ -73,19 +73,25 @@
 
 <p>Linux 或者 Mac</p>
 
-<pre><code>unzip maoxian-web-clipper-native-linux-chrome.zip -d maoxian-web-clipper-native
-</code></pre>
+<div class="language-shell highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>unzip maoxian-web-clipper-native-linux-chrome.zip -d maoxian-web-clipper-native
+</pre></div>
+</div>
+</div>
 
 <p>Windows</p>
 
-<pre><code>额，使用任何你喜欢的解压软件，把它解压到某个文件夹（由于是直接打包的文件，没有打包根文件夹）, :D
-</code></pre>
+<div class="language-shell highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre>额，使用任何你喜欢的解压软件，把它解压到某个文件夹（由于是直接打包的文件，没有打包根文件夹）, :D
+</pre></div>
+</div>
+</div>
 
 <h3 id="install-native-app">安装软件</h3>
 
 <ul>
   <li>Linux 或 Mac  直接运行 <code>./install.sh</code> 进行安装</li>
-  <li>在 Windows 上，直接双击 <code>install.bat</code></li>
+  <li>在 Windows 上，直接双击 <code>install.bat</code> （注意：你点击后，会发现有个命令窗口跳出来，闪了一下就关闭了，这是正常的，程序已经安装成功了。别怀疑你被安装了病毒哦 :D ）</li>
 </ul>
 
 <h3 id="configure-download-path">配置下载路径</h3>
@@ -97,22 +103,22 @@
 
 <p><strong>注意： 配置的下载路径必须真实存在，否则程序会运行启动失败</strong></p>
 
-<p>Linux 例子</p>
+<p>Linux / Mac 例子</p>
 
-<div class="language-txt highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre># config.yaml
-environment: 'production'
-data_dir: '/home/jack/clippings'
+<div class="language-yaml highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#777"># config.yaml</span>
+<span style="color:#606">environment</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">'production'</span></span>
+<span style="color:#606">data_dir</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">'/home/jack/clippings'</span></span>
 </pre></div>
 </div>
 </div>
 
 <p>windows 例子</p>
 
-<div class="language-txt highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre># config.yaml
-environment: 'production'
-data_dir: 'e:\\jack\clippings'
+<div class="language-yaml highlighter-coderay"><div class="CodeRay">
+  <div class="code"><pre><span style="color:#777"># config.yaml</span>
+<span style="color:#606">environment</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">'production'</span></span>
+<span style="color:#606">data_dir</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#D20">'e:\\jack\clippings'</span></span>
 </pre></div>
 </div>
 </div>
@@ -149,11 +155,15 @@ data_dir: 'e:\\jack\clippings'
   <li><a href="#install-native-app">安装新的程序</a></li>
 </ol>
 
+<h2 id="apply-config">运用最新的配置</h2>
+
+<p>有些用户更改了 <code>config.yaml</code> 里的配置，却发现扩展并没有使用最新的配置信息。这是属于正常现象，因为扩展只在浏览器启动的时候才去读 <code>config.yaml</code> 里的配置信息，所以要<strong>运用最新的配置，需要重启浏览器</strong> 。</p>
+
 <h2 id="log">查看运行日志</h2>
 
 <p>一般情况下，当你的 ruby 版本正确，并且配置文件 config.yaml 里面的存储路径是真实存在的路径，程序会正常工作。如果你仔细走完了上面的安装流程，还是无法进行裁剪的话。 请检查日志文件：<code>tmp/app.log</code> (在安装目录下)，使用任何文本编辑器打开即可。</p>
 
-<p>在进行下面检查之前，你得确保你至少用 <code>本地程序保存的方式</code> 进行了一次裁剪，并且发现，扩展卡在了 <code>下载中...</code> 不动了。</p>
+<p>在进行下面检查之前，你得确保你至少用 <code>本地程序保存的方式</code> 进行了一次裁剪，并且发现，扩展工作不正常，无法走完流程。</p>
 
 <ul>
   <li>如果你发现 <code>tmp</code> 目录下没有该文件，可能你 ruby 安装不正确，请确保当你运行 <code>ruby -v</code> 的时候，可以得到正确的 ruby 版本。</li>
