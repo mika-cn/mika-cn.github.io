@@ -45,3 +45,5 @@ You could help MaoXian Web Clipper development in many ways.
 * [Native App](native-app/index.html)
 * [RSS](feed.xml)
 * [Offline Index Page](offline-page/index.html)
+* [MaoXian assistant](https://github.com/mika-cn/maoxian-web-clipper/tree/master/useful-res/assistant/)
+* [useful-resource](https://github.com/mika-cn/maoxian-web-clipper/tree/master/useful-res/)

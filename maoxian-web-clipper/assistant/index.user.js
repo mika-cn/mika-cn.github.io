@@ -4,9 +4,9 @@
 // @version      0.0.1
 // @description  This script will interacte with MaoXian Web Clipper to ensure better experience
 // @author       MaoXian Fan
-// @require      https://mika-cn.github.io/maoxian-web-clipper/assistant/website-plans-v0.0.1.js?t=1560223086
-// @require      https://mika-cn.github.io/maoxian-web-clipper/assistant/fuzzy-matcher-v0.0.1.js?t=1560223086
-// @require      https://mika-cn.github.io/maoxian-web-clipper/assistant/mx-wc-tool-v0.2.0.js?t=1560223086
+// @require      https://mika-cn.github.io/maoxian-web-clipper/assistant/website-plans-v0.0.1.js?t=1560321977
+// @require      https://mika-cn.github.io/maoxian-web-clipper/assistant/fuzzy-matcher-v0.0.2.js?t=1560321977
+// @require      https://mika-cn.github.io/maoxian-web-clipper/assistant/mx-wc-tool-v0.2.0.js?t=1560321977
 // @include     *
 // @grant        none
 // ==/UserScript==
@@ -31,7 +31,7 @@
   // write your own custom plan
   const customPlans = [
     {
-      pattern: "http://*.mika/maoxian-web-clipper/*.html",
+      pattern: "http://*.mika/maoxian-web-clipper/",
       pick: [".main"],
       hide: ["ul"]
     },
