@@ -4,9 +4,9 @@
 // @version      0.0.2
 // @description  This script will interacte with MaoXian Web Clipper to ensure better experience
 // @author       MaoXian Fan
-// @require      https://mika-cn.github.io/maoxian-web-clipper/assistant/website-plans-v20190701.js?t=1564129295
-// @require      https://mika-cn.github.io/maoxian-web-clipper/assistant/fuzzy-matcher-v0.0.2.js?t=1564129295
-// @require      https://mika-cn.github.io/maoxian-web-clipper/assistant/mx-wc-tool-v0.2.2.js?t=1564129295
+// @require      https://mika-cn.github.io/maoxian-web-clipper/assistant/website-plans-v20190701.js?t=1564134545
+// @require      https://mika-cn.github.io/maoxian-web-clipper/assistant/fuzzy-matcher-v0.0.2.js?t=1564134545
+// @require      https://mika-cn.github.io/maoxian-web-clipper/assistant/mx-wc-tool-v0.2.3.js?t=1564134545
 // @include     *
 // @grant        none
 // ==/UserScript==
