@@ -6,11 +6,13 @@ This is a static page, which supports list and search clipping history like the 
 
 By the way, you can change this page as much as you like. Only HTML, CSS and javascript in it.
 
-version: 0.0.3
+version: 0.0.4
 
 ## Usage
 
-[Download it](files/history-0.0.3.zip) && extract it.
+[Download it](files/history-0.0.4.zip) && extract it.
+
+**Note**: MaoXian extension has supported changing name of root folder since version 0.1.34. This static page also has a new configure file (config.js) since version 0.0.4. If you've changed name of root folder in extention setting page, then you should change the "rootFolder" item in configure file.
 
 ### STEP 1: Move directory
 
