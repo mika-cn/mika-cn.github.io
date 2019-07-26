@@ -79,30 +79,27 @@
 
 <p>用法参照下例：</p>
 
-<div class="language-javascript highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#777">// ==UserScript==</span>
-<span style="color:#777">// @name         example</span>
-<span style="color:#777">// @namespace    example@MaoXian.OwnYourData</span>
-<span style="color:#777">// @version      0.1</span>
-<span style="color:#777">// @description  your description</span>
-<span style="color:#777">// @author       you</span>
-<span style="color:#777">// @require      https://mika-cn.github.io/maoxian-web-clipper/mx-wc-tool-v0.0.6.js</span>
-<span style="color:#777">// @include     *</span>
-<span style="color:#777">// @grant        none</span>
-<span style="color:#777">// ==/UserScript==</span>
+<pre><code class="language-javascript">// ==UserScript==
+// @name         example
+// @namespace    example@MaoXian.OwnYourData
+// @version      0.1
+// @description  your description
+// @author       you
+// @require      https://mika-cn.github.io/maoxian-web-clipper/mx-wc-tool-v0.0.6.js
+// @include     *
+// @grant        none
+// ==/UserScript==
 
-(<span style="color:#080;font-weight:bold">function</span>() {
+(function() {
 
-  const t = <span style="color:#080;font-weight:bold">new</span> Date();
-  const date = [t.getFullYear(), t.getMonth() + <span style="color:#00D">1</span>, t.getDate()].join(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">-</span><span style="color:#710">'</span></span>);
-  const tagstr = [window.location.host, date].join(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">,</span><span style="color:#710">'</span></span>);
+  const t = new Date();
+  const date = [t.getFullYear(), t.getMonth() + 1, t.getDate()].join('-');
+  const tagstr = [window.location.host, date].join(',');
 
-  <span style="color:#777">// 预设置当前域名和日期为tag，方便在裁剪历史页面进行搜索。</span>
-  MxWc.setFormInputs({ <span style="color:#606">tagstr</span>: tagstr });
+  // 预设置当前域名和日期为tag，方便在裁剪历史页面进行搜索。
+  MxWc.setFormInputs({ tagstr: tagstr });
 })();
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <p><code>mx-wc-tool.js</code> 脚本文件会帮助你监听 <strong>扩展进入裁剪模式</strong> 事件，并告知扩展，待会显示表单后，填入这些值。</p>
 
@@ -114,36 +111,30 @@
 
 <p>例:</p>
 
-<div class="language-javascript highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#777">// 注意：这里省略了 UserScript 的声明部分</span>
+<pre><code class="language-javascript">// 注意：这里省略了 UserScript 的声明部分
 
-(<span style="color:#080;font-weight:bold">function</span>(){
+(function(){
   const rules = [
-    <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">C||a.example.com||/blog/||.nav-btns</span><span style="color:#710">'</span></span>,
-    <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">C||a.example.com||/blog/||.site-header</span><span style="color:#710">'</span></span>,
-    <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">X||b.example.com||/blog/||//article//comments</span><span style="color:#710">'</span></span>
+    'C||a.example.com||/blog/||.nav-btns',
+    'C||a.example.com||/blog/||.site-header',
+    'X||b.example.com||/blog/||//article//comments'
   ];
 
   const hideCmd = MxWc.newHideCmd();
   hideCmd.init(rules);
 })();
 
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <p>目前 mx-wc-tool 这个脚本文件，支持的 rule 格式为: <code>$type||$domain||$path||$q</code></p>
 
 <p>各部分解释如下：</p>
 
-<div class="language-text highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre>$type   : C 代表 CSS, X 代表 xPath.
+<pre><code class="language-text">$type   : C 代表 CSS, X 代表 xPath.
 $domain : 规则应用的域名( 支持通配符 *, *.example.org 或者直接 *)
 $path   : 规则应用的网址路径，(目前使用包含匹配, 即 /post/ 匹配任何包含 /post/ 的路径)
 $q      : 选择器(CSS selector 或者 xPath)
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <p>即 mx-wc-tool 会拿当前页面的网址和规则里的 <code>$domain</code> 和 <code>$path</code>进行匹配，若当前页面符合规则，就根据 <code>$type</code> 和 <code>$q</code> 找到要操作的元素, 再执行相关的操作。</p>
 
@@ -160,32 +151,29 @@ $q      : 选择器(CSS selector 或者 xPath)
 
 <p>例:</p>
 
-<div class="language-javascript highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#777">// 注意：这里省略了 UserScript 的声明部分</span>
+<pre><code class="language-javascript">// 注意：这里省略了 UserScript 的声明部分
 
-(<span style="color:#080;font-weight:bold">function</span>(){
+(function(){
 
-  <span style="color:#777">// 更方便的写法</span>
-  const rules = (<span style="color:#F00;background-color:#FAA">`</span>
-    C||a.example.com||<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">blog</span><span style="color:#404">/</span></span>||article
-    C||a.example.com||<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">news</span><span style="color:#404">/</span></span>||.news
-    X||b.example.com||<span style="background-color:hsla(300,100%,50%,0.06)"><span style="color:#404">/</span><span style="color:#808">blog</span><span style="color:#404">/</span></span>||<span style="color:#777">//body//article</span>
-  <span style="color:#F00;background-color:#FAA">`</span>).split(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>)
+  // 更方便的写法
+  const rules = (`
+    C||a.example.com||/blog/||article
+    C||a.example.com||/news/||.news
+    X||b.example.com||/blog/||//body//article
+  `).split("\n")
 
   const focusCmd = MxWc.newFocusCmd();
   focusCmd.init(rules);
 
-<span style="color:#777">/*
+/*
  * 或者使用 ConfirmCmd
- */</span>
-<span style="color:#777">/*
+ */
+/*
   const confirmCmd = MxWc.newConfirmCmd();
   confirmCmd.init(rules);
- */</span>
+ */
 })();
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <p>上面例子中 <code>FocusCmd</code> 和 <code>ConfirmCmd</code> 的区别是 <code>ConfirmCmd</code> 不仅选中元素，还做了确认（直接到达输入表单信息那一步）。</p>
 
@@ -193,47 +181,41 @@ $q      : 选择器(CSS selector 或者 xPath)
 
 <p>下面这个例子，会在当前网页只有一个 article 标签的情况下，会选中这个 article 标签并且确认。</p>
 
-<div class="language-javascript highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#777">// 注意：这里省略了 UserScript 的声明部分</span>
+<pre><code class="language-javascript">// 注意：这里省略了 UserScript 的声明部分
 
-(<span style="color:#080;font-weight:bold">function</span>() {
-  <span style="color:#080;font-weight:bold">var</span> articles = document.querySelectorAll(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">article</span><span style="color:#710">'</span></span>);
-  <span style="color:#080;font-weight:bold">if</span>(articles.length === <span style="color:#00D">1</span>){
-    const rules = [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">C||*||/||article</span><span style="color:#710">&quot;</span></span>];
+(function() {
+  var articles = document.querySelectorAll('article');
+  if(articles.length === 1){
+    const rules = ["C||*||/||article"];
     const confirmCmd = MxWc.newConfirmCmd();
     confirmCmd.init(rules);
-  } <span style="color:#080;font-weight:bold">else</span> {
-    <span style="color:#777">// other rules</span>
+  } else {
+    // other rules
   }
 })();
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <p>另 ConfirmCmd 还支持指定填写到表单的三个信息。</p>
 
 <p>用法请看下面例子</p>
 
-<div class="language-javascript highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#777">// 注意：这里省略了 UserScript 的声明部分</span>
+<pre><code class="language-javascript">// 注意：这里省略了 UserScript 的声明部分
 
-(<span style="color:#080;font-weight:bold">function</span>() {
-  const rules = (<span style="color:#F00;background-color:#FAA">`</span>
-    js.awesome.code||<span style="color:#F00;background-color:#FAA">#</span>article
-    py.awesome.code||<span style="color:#F00;background-color:#FAA">#</span>article
-    c.elegant.code||<span style="color:#F00;background-color:#FAA">#</span>post
-  <span style="color:#F00;background-color:#FAA">`</span>).split(<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#b0b">\n</span><span style="color:#710">&quot;</span></span>);
+(function() {
+  const rules = (`
+    js.awesome.code||#article
+    py.awesome.code||#article
+    c.elegant.code||#post
+  `).split("\n");
 
-  <span style="color:#777">// 这是表单显示后，填写到里面的信息</span>
-  <span style="color:#777">// 注：`ConfirmCmd` 设置的 `formInputs` 会比 `MxWc.setFormInputs` 拥有更高的优先级。</span>
-  const formInputs = {<span style="color:#606">category</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">it/article</span><span style="color:#710">'</span></span>, <span style="color:#606">tagstr</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">'</span><span style="color:#D20">technology</span><span style="color:#710">'</span></span>}
+  // 这是表单显示后，填写到里面的信息
+  // 注：`ConfirmCmd` 设置的 `formInputs` 会比 `MxWc.setFormInputs` 拥有更高的优先级。
+  const formInputs = {category: 'it/article', tagstr: 'technology'}
   const cmd = MxWc.newConfirmCmd(formInputs);
   cmd.init(rules);
 })();
 
-</pre></div>
-</div>
-</div>
+</code></pre>
 
 <h3 id="auto-clip">自动裁剪</h3>
 
@@ -243,30 +225,27 @@ $q      : 选择器(CSS selector 或者 xPath)
 
 <p>例:</p>
 
-<div class="language-javascript highlighter-coderay"><div class="CodeRay">
-  <div class="code"><pre><span style="color:#777">// 注意：这里省略了 UserScript 的声明部分</span>
+<pre><code class="language-javascript">// 注意：这里省略了 UserScript 的声明部分
 
-(<span style="color:#080;font-weight:bold">function</span>(){
+(function(){
 
-  <span style="color:#777">// 这里只需要一条规则</span>
-  const rules = [<span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">C||a.example.com||/blog/||article</span><span style="color:#710">&quot;</span></span>];
+  // 这里只需要一条规则
+  const rules = ["C||a.example.com||/blog/||article"];
 
-  <span style="color:#777">// 这是裁剪时候填写到表单的三个信息</span>
+  // 这是裁剪时候填写到表单的三个信息
   const formInputs = {
-    <span style="color:#606">title</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">auto Clip test</span><span style="color:#710">&quot;</span></span>,
-    <span style="color:#606">category</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">test/user-script</span><span style="color:#710">&quot;</span></span>,
-    <span style="color:#606">tagstr</span>: <span style="background-color:hsla(0,100%,50%,0.05)"><span style="color:#710">&quot;</span><span style="color:#D20">test, auto-clip</span><span style="color:#710">&quot;</span></span>
+    title: "auto Clip test",
+    category: "test/user-script",
+    tagstr: "test, auto-clip"
   }
 
   const clipCmd = MxWc.newClipCmd(formInputs);
 
-  <span style="color:#777">// 这一步执行后，会很快进行裁剪</span>
+  // 这一步执行后，会很快进行裁剪
   clipCmd.init(rules);
 
 })();
-</pre></div>
-</div>
-</div>
+</code></pre>
 <hr />
 
 <p><a href="index-zh-CN.html">首页</a></p>
