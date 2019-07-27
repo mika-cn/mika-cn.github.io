@@ -70,6 +70,14 @@ pages.push({
 })
 
 pages.push({
+  title: 'Install by Extension file - MaoXian Web Clipper',
+  description: 'Install MaoXian Web Clipper by extension file',
+  md_path: './install-by-extension-file.md',
+  html_path: './install-by-extension-file.html',
+  template: './markdown.template.html'
+})
+
+pages.push({
   title: 'Change log - MaoXian Web Clipper',
   description: 'Change log of Maoxian Meb Clipper',
   md_path: './change-log.md',
