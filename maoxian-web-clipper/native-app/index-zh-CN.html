@@ -43,7 +43,7 @@
 
 <p>请根据你的系统信息和浏览器类型， 下载对应的软件包</p>
 
-<p>当前版本 <code>0.1.9</code></p>
+<p>当前版本 <code>0.2.0</code></p>
 
 <ul>
   <li>Linux
@@ -111,21 +111,13 @@ environment: 'production'
 data_dir: 'e:\\jack\clippings'
 </code></pre>
 
-<h3 id="maoxian-">配合 MaoXian 使用</h3>
+<h3 id="section-2">查看状态并启用</h3>
 
-<ul>
-  <li>
-    <p>需要允许浏览器允许访问本地路径。(具体查看： 扩展的设置页面 &gt; 本地网址一节)</p>
-  </li>
-  <li>
-    <p>需要先让扩展知道我们使用该种方式来保存内容。(具体查看：扩展设置页面 &gt; 保存方式一节)</p>
-  </li>
-  <li>
-    <p>最后重启浏览器</p>
-  </li>
-</ul>
+<p>请重启你的浏览器后，到 <strong>扩展设置页面 &gt; 本地程序</strong> 小节查看状态，若显示的是 「本地程序」的版本号，则 MaoXian 扩展已经和 「本地程序」对接上了。如果显示的是错误信息，请查看下方 <a href="#problems">常见错误</a> 小节。确保对接上后，请勾选下方的 <strong>启用该处理程序</strong> 。</p>
 
-<p>完成上面的步骤后，就都完成了 :D</p>
+<p>在两者对接上，并且「本地程序」已启用后。就可以使用「本地程序」了，比如到 <strong>扩展设置页面 &gt; 存储设置</strong> 选用「本地程序」来下载裁剪结果。</p>
+
+<p>为了更方便地预览裁剪下来的文件，我们强烈建议你 <strong>允许 MaoXian 访问本地网址</strong> (具体查看： <strong>扩展设置页面 &gt; 基础设置 &gt; 本地网址</strong> 一节)</p>
 
 <h2 id="uninstall">卸载软件</h2>
 
@@ -145,20 +137,41 @@ data_dir: 'e:\\jack\clippings'
 
 <h2 id="apply-config">运用最新的配置</h2>
 
-<p>有些用户更改了 <code>config.yaml</code> 里的配置，却发现扩展并没有使用最新的配置信息。这是属于正常现象，因为扩展只在浏览器启动的时候才去读 <code>config.yaml</code> 里的配置信息，所以要<strong>运用最新的配置，需要重启浏览器</strong> 。</p>
+<p>有些用户更改了 config.yaml 里的配置，却发现扩展并没有使用最新的配置信息。这是属于正常现象，因为扩展只在浏览器启动的时候才去读 config.yaml 里的配置信息，所以<strong>要运用最新的配置，需要重启浏览器</strong> 。</p>
 
-<h2 id="log">查看运行日志</h2>
+<h2 id="problems">常见问题</h2>
 
-<p>一般情况下，当你的 ruby 版本正确，并且配置文件 config.yaml 里面的存储路径是真实存在的路径，程序会正常工作。如果你仔细走完了上面的安装流程，还是无法进行裁剪的话。 请检查日志文件：<code>tmp/app.log</code> (在安装目录下)，使用任何文本编辑器打开即可。</p>
+<p>一般情况下，当你的 ruby 版本是正确的，并且配置文件 config.yaml 里面的存储路径是真实存在的路径，「本地程序」会和 MaoXian 对接成功。如果你仔细走完了上面的安装流程，还是无法对接上的话。 请检查日志文件：tmp/app.log (在安装目录下)，使用任何文本编辑器打开即可。</p>
 
-<p>在进行下面检查之前，你得确保你至少用 <code>本地程序保存的方式</code> 进行了一次裁剪，并且发现，扩展工作不正常，无法走完流程。</p>
+<p>在进行下面检查之前，你得确保你至少到过 <strong>扩展设置页面 &gt; 本地程序</strong> 页面查看过状态信息，并且其显示的是某个错误信息。</p>
 
-<ul>
-  <li>如果你发现 <code>tmp</code> 目录下没有该文件，可能你 ruby 安装不正确，请确保当你运行 <code>ruby -v</code> 的时候，可以得到正确的 ruby 版本。</li>
-  <li>打开日志文件后，发现错误： Config Invalid, data_dir not exist: xxxxx ，则表示你配置文件 config.yaml 里面的 data_dir 条目，配置的路径，在你的系统中是不存在的。则重新配置即可。</li>
-</ul>
+<h3 id="ruby">1. 浏览器找不到 ruby</h3>
 
-<p>如果日志文件不是上面这两种情况的话，可能发生 Bug 了。你可以用 <code>ruby -v</code> 检查下 ruby 版本， 若版本比 <code>2.4.1</code> 低，则重新安装更高的版本，重启浏览器，再试着裁剪一下，还是不行的话，请到 <a href="https://github.com/mika-cn/maoxian-web-clipper/issues">项目 issue 页</a>，给我提个issue, 并在 issue 里粘贴上 app.log 里面的内容。</p>
+<p>如果你发现 tmp 目录下没有该文件 (app.log)，则说明浏览器找不到 ruby 。可能原因如下：</p>
+
+<p>1) ruby 安装不正确。</p>
+
+<p>请确保当你运行 <code>ruby -v</code> 的时候，可以得到正确的 ruby 版本。如若不是，则重新安装即可。</p>
+
+<p>2) 虽然 ruby 安装成功，但是浏览器无法找到它。</p>
+
+<p>这种情况一般发生在 Mac 或 Linux 用户身上，如果你采用的是源码安装的方式，你可能会碰到此问题。</p>
+
+<p><strong>如何确认</strong></p>
+
+<p>可以通过从命令行启动浏览器的方式来确认，比如运行 <code>chromium-browser</code> 命令，然后再到 <strong>扩展设置页面 &gt; 本地程序</strong> 页面，再查看命令行的输出，可以看到类似 “/usr/bin/env: ‘ruby’: No such file or directory” 这样的错误信息。</p>
+
+<p><strong>如何解决</strong></p>
+
+<p>把 main.rb (安装目录下) 第一行的 “/usr/bin/env ruby” 改成 ruby 的绝对路径，比如 “/home/jack/ruby-2.5.0/bin/ruby”。 或者是创建一个软链接到 /usr/bin 目录下，比如： <code>ln -s /home/jack/ruby-2.5.0/bin/ruby /usr/bin/ruby</code>。</p>
+
+<h3 id="section-3">2. 配置不正确</h3>
+
+<p>如果你打开日志文件后，发现错误： “Config Invalid, data_dir not exist: xxxxx” ，则表示你配置文件 config.yaml 里面的 data_dir 配置的路径，在你的系统中是不存在的。则重新配置即可。</p>
+
+<h3 id="section-4">3. 还是不行？</h3>
+
+<p>可能发生 Bug 了。你可以用 <code>ruby -v</code> 检查下 ruby 版本， 若版本比 <code>2.4.1</code> 低，则重新安装更高的版本，重启浏览器，再试一下，还是不行的话，请到 <a href="https://github.com/mika-cn/maoxian-web-clipper/issues">项目 issue 页</a>，给开发者提个issue, 并在 issue 里粘贴上 app.log 里面的内容。</p>
 
 <hr />
 <p><a href="../index-zh-CN.html">首页</a></p>
