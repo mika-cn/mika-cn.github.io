@@ -4,13 +4,13 @@
 
 ## Firefox
 
-* [maoxian_web_clipper-0.1.38-an+fx.xpi](extension/maoxian_web_clipper-0.1.38-an+fx.xpi)
+* [maoxian_web_clipper-0.1.39-an+fx.xpi](extension/maoxian_web_clipper-0.1.39-an+fx.xpi)
 
 checksum
 
 ```
-08dcac0d291f84e44fc31b58c7b4fc22 [MD5]
-70560229318f395d14bfbe404c48e009965b8b048ad19d33613e2b50d545ce1d [SHA256]
+153c10a0f8b1bb0d4ccd487cabe11df3 [MD5]
+889152c437604b27f3854191fa34dd232689057e52864d071a5f21fdf1ee20cf [SHA256]
 ```
 
 ## Chrome / Chromium (谷歌浏览器)
@@ -22,15 +22,15 @@ checksum
 ### 通过 crx 文件安装。
 
 #### 1. 下载 crx 文件，选择最新版以获得最好的体验。
-* [maoxian-web-clipper-chrome-0.1.38.crx](extension/maoxian-web-clipper-chrome-0.1.38.crx)
+* [maoxian-web-clipper-chrome-0.1.39.crx](extension/maoxian-web-clipper-chrome-0.1.39.crx)
 
 下载完成后，你可通过下方的 checksum 检查，你下载的文件的完整性（避免下载未完全和被恶意修改）。
 
 checksum
 
 ```
-27ad80d65d8704bba41ece8e26155450 [MD5]
-d515789a416a3c8c9b1f54315ef4f434e95bd31d0b3222b91efdcea884b02809 [SHA256]
+47150ed80876a30df7caa5d2dc7290f3 [MD5]
+7474b9fb55552a50dac325645af22908fdc4a429b01193e981c1e167432b1cc0 [SHA256]
 ```
 
 
@@ -53,8 +53,8 @@ d515789a416a3c8c9b1f54315ef4f434e95bd31d0b3222b91efdcea884b02809 [SHA256]
 checksum
 
 ```
-d78bcdcbb4f029502807c44314146073 [MD5]
-bcb712432a71cc0a19c37bf18b723df36582ecd38505417c210a95a662e109f4 [SHA256]
+d5b52870f4813132572af037bbe57cce [MD5]
+0d40120c48f680c446cbdfc6edba3be658c69de6483114aa56fda997e319fb71 [SHA256]
 ```
 
 #### 2. 解压 zip 包
