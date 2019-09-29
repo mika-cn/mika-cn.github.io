@@ -118,6 +118,23 @@ pages.push({
 })
 
 pages.push({
+  title: 'MaoXian assistant - MaoXian Web Clipper',
+  description: 'MaoXian assistant',
+  md_path: './assistant/index.md',
+  html_path: './assistant/index.html',
+  template: './markdown-subfolder.template.html'
+})
+
+pages.push({
+  title: 'MaoXian assistant - MaoXian Web Clipper',
+  description: 'MaoXian assistant',
+  md_path: './assistant/index-zh-CN.md',
+  html_path: './assistant/index-zh-CN.html',
+  template: './markdown-subfolder.template.html'
+})
+
+
+pages.push({
   title: 'interactive with third party - MaoXian Web Clipper',
   description: 'Introduce how to interactive with MaoXian',
   md_path: './advanced-zh-CN.md',
