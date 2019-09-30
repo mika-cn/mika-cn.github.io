@@ -2,6 +2,7 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   margin: 0px;
   padding: 0px;
+  background-color: white;
 }
 
 .red {color: red;}
@@ -9,7 +10,7 @@ body {
 .main {
   font-size: 14px;
   line-height: 23px;
-  padding: 30px 10px 200px 10px;
+  padding: 30px;
   background-color: #EEE;
 }
 
@@ -45,7 +46,7 @@ pre > code {
   border: 1px solid #ccc;
   padding: 10px 5px;
   background-color: #D8D8D8;
-  overflow-x: scroll;
+  overflow-x: auto;
 }
 
 .highlighter-coderay {

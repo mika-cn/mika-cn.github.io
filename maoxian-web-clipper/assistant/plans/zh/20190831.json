@@ -1,0 +1,12 @@
+[
+  {
+    "name": "www.ituring.com.cn",
+    "pattern": "https://www.ituring.com.cn/article/*",
+    "pick": "div.article"
+  },
+  {
+    "name": "ruby-china.org",
+    "pattern": "https://ruby-china.org/topics/*",
+    "pick": ".topic-detail"
+  }
+]

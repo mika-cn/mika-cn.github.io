@@ -1,0 +1,16 @@
+[
+  {
+    "name": "wikipedia.org",
+    "pattern": "https://*.wikipedia.org/wiki/*",
+    "pick": "div.mw-parser-output",
+    "hide": [
+      "div#toc",
+      "table.infobox",
+      "span.mw-editsection",
+      "table.navbox",
+      "div.thumb",
+      "div.dablink",
+      "table.metadata"
+    ]
+  }
+]
