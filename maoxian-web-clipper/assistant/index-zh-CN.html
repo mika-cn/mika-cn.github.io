@@ -17,7 +17,18 @@
 
 <p>为了更方便 MaoXian Web Clipper 用户在对网页进行 “裁剪” 之前执行一些操作，我们把「MaoXian 助手」集成到扩展中。该项目用于收集和分享各个用户编写的 “Plan”。</p>
 
-<h2 id="section-1">背景</h2>
+<h2 id="section-1">订阅地址</h2>
+
+<pre><code class="language-shell">
+# 默认列表
+http://mika-cn.github.io/maoxian-web-clipper/assistant/plans/default/index.json
+
+# 华人网址
+http://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
+
+</code></pre>
+
+<h2 id="section-2">背景</h2>
 
 <p>由于 MaoXian Web Clipper 裁剪网页的时候，裁剪的是当前状态下的网页，并且不会保存任何脚本文件（即 javascript）。 这意味着在一些情况下，我们需要对网页进行一些操作后，才能获得一个较好的裁剪结果。比如： 一篇文章里的图片显示的都是缩略图，而你想保存的是原图；或者是你不想保存选区内的按钮、评论等无关内容；又或者是网页上的某些区域是可折叠的，需要在裁剪前把它们都展开。开发「MaoXian 助手」就是为了解决这些较常见的问题。</p>
 
@@ -28,7 +39,7 @@
 
 <p>如上的四个步骤中，「MaoXian 助手」主要用于「准备」阶段，也涉及到「选择」阶段（不过不多）。它的工作方式有点像「广告屏蔽扩展」，需要针对不同的网站，编写不同的操作（在「MaoXian 助手里」我们称其为 plan）。这也意味着它解决问题的多少取决于我们适配的网站的多少。</p>
 
-<h2 id="section-2">参与进来</h2>
+<h2 id="section-3">参与进来</h2>
 
 <p>如上一小节所述，「MaoXian 助手」的功能强大于否取决于我们适配的网站的多少。这需要的不仅仅是开发者，更是每一个使用者的无私分享精神，于此，我们欢迎各位 MaoXian 用户参与进来，只有这般，该助手才能发挥其真正的能力。</p>
 
@@ -38,7 +49,7 @@
 
 <h2 id="plan">如何编写 Plan</h2>
 
-<h3 id="section-3">流程</h3>
+<h3 id="section-4">流程</h3>
 
 <ol>
   <li>请到 MaoXian Web Clipper 的设置页面，启用「MaoXian 助手」</li>
@@ -93,7 +104,7 @@
 
 <p>目前支持的匹配符有 “*” 和 “**“。</p>
 
-<h5 id="section-4">星匹配符（*）</h5>
+<h5 id="section-5">星匹配符（*）</h5>
 
 <ul>
   <li>匹配开头</li>
@@ -113,7 +124,7 @@
 
 <p>比如：使用 <code>https://example.org/*/index.html</code>，可以匹配到 https://example.org/blog/index.html。但是无法匹配到 https://example.org/blog/jack/index.html，因为 “*” 号不匹配目录分隔符 “/”。</p>
 
-<h5 id="section-5">双星匹配符（**）</h5>
+<h5 id="section-6">双星匹配符（**）</h5>
 
 <p>一般使用双星匹配符，来匹配零个或零个以上的目录。</p>
 
@@ -121,7 +132,7 @@
 
 <p>上面这个例子也可以使用 <code>https://example.org/blog</code> 作为 Pattern ，来直接匹配以该模式打头的网址，不同的 Pattern，严格程度不同，根据需求给出 Pattern 即可。</p>
 
-<h4 id="section-6">选择器</h4>
+<h4 id="section-7">选择器</h4>
 
 <p>选择器有两种：CSS 选择器 和 xPath 选择器。是一个字符串，结构为 <code>$type||$q</code> 。</p>
 
