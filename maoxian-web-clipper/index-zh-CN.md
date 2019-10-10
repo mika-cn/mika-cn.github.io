@@ -46,5 +46,4 @@
 * [本地程序](native-app/index-zh-CN.html)
 * [RSS](feed.xml)
 * [离线索引页面](offline-page/index-zh-CN.html)
-* [毛线助手](https://github.com/mika-cn/maoxian-web-clipper/tree/master/useful-res/assistant/)
-* [辅助资源](https://github.com/mika-cn/maoxian-web-clipper/tree/master/useful-res/)
+* [毛线助手](assistant/index-zh-CN.html)

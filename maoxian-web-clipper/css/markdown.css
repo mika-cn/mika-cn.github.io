@@ -2,16 +2,33 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
   margin: 0px;
   padding: 0px;
-  background-color: white;
+  background-color: #464646;
 }
+
+@media (min-width: 768px) {
+  .main {
+    padding: 30px 25px 200px 25px;
+  }
+}
+
+@media (max-width: 767px) {
+  .main {
+    padding: 30px 10px 200px 10px;
+  }
+}
+
+/******** headers ********/
+h1 {padding-bottom: 20px; }
+h2 {padding-top: 20px; }
 
 .red {color: red;}
 
 .main {
+  max-width: 100%;
   font-size: 14px;
   line-height: 23px;
-  padding: 30px;
-  background-color: #EEE;
+  background-color: WhiteSmoke;
+  color: black;
 }
 
 .main img { max-width: 100%; }
@@ -21,6 +38,7 @@ code {
   padding: 2px 3px 2px 3px;
   background-color: rgba(27,31,35,0.15);
 }
+
 hr {
   color: #efefef;
   margin-bottom: 50px;
@@ -37,21 +55,22 @@ table > thead {
   background-color: #e5e5e5;
 }
 table th, table td {
-  border: solid 1px #ccc;
+  border: solid 1px #888888;
   padding: 5px;
 }
 
 pre > code {
   display: block;
   border: 1px solid #ccc;
-  padding: 10px 5px;
+  padding: 5px 10px;
   background-color: #D8D8D8;
   overflow-x: auto;
 }
 
+/* delete me*/
 .highlighter-coderay {
   border: 1px solid #ccc;
-  padding: 10px 5px;
+  padding: 5px 10px;
   background-color: #D8D8D8;
   overflow-x: auto;
 }

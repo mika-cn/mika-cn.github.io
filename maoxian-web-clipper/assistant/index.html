@@ -17,18 +17,7 @@
 
 <p>为了更方便 MaoXian Web Clipper 用户在对网页进行 “裁剪” 之前执行一些操作，我们把「MaoXian 助手」集成到扩展中。该项目用于收集和分享各个用户编写的 “Plan”。</p>
 
-<h2 id="section-1">订阅地址</h2>
-
-<pre><code class="language-shell">
-# 默认列表
-http://mika-cn.github.io/maoxian-web-clipper/assistant/plans/default/index.json
-
-# 华人网址
-http://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
-
-</code></pre>
-
-<h2 id="section-2">背景</h2>
+<h2 id="section-1">背景</h2>
 
 <p>由于 MaoXian Web Clipper 裁剪网页的时候，裁剪的是当前状态下的网页，并且不会保存任何脚本文件（即 javascript）。 这意味着在一些情况下，我们需要对网页进行一些操作后，才能获得一个较好的裁剪结果。比如： 一篇文章里的图片显示的都是缩略图，而你想保存的是原图；或者是你不想保存选区内的按钮、评论等无关内容；又或者是网页上的某些区域是可折叠的，需要在裁剪前把它们都展开。开发「MaoXian 助手」就是为了解决这些较常见的问题。</p>
 
@@ -37,15 +26,29 @@ http://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
 <pre><code>准备 --&gt; 选择 --&gt; 裁剪 --&gt; 存储
 </code></pre>
 
-<p>如上的四个步骤中，「MaoXian 助手」主要用于「准备」阶段，也涉及到「选择」阶段（不过不多）。它的工作方式有点像「广告屏蔽扩展」，需要针对不同的网站，编写不同的操作（在「MaoXian 助手里」我们称其为 plan）。这也意味着它解决问题的多少取决于我们适配的网站的多少。</p>
+<p>如上的四个步骤中，「MaoXian 助手」主要用于「准备」阶段，也涉及到「选择」阶段（不过不多）。它的工作方式有点像「广告屏蔽扩展」，需要针对不同的网站，编写不同的操作（在「MaoXian 助手里」我们称其为 Plan）。这也意味着它解决问题的多少取决于我们适配的网站的多少。</p>
+
+<h2 id="section-2">开始使用</h2>
+
+<p>你可以在 <strong>扩展设置页面 &gt; 毛线助手</strong> 页面启用该功能， 自己编写 Plan 或者订阅公开的 Plan。</p>
+
+<p><strong>订阅地址</strong></p>
+
+<pre><code class="language-shell"># 默认网站列表（全球性）
+http://mika-cn.github.io/maoxian-web-clipper/assistant/plans/default/index.json
+
+# 华人网站列表
+http://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
+
+</code></pre>
 
 <h2 id="section-3">参与进来</h2>
 
-<p>如上一小节所述，「MaoXian 助手」的功能强大于否取决于我们适配的网站的多少。这需要的不仅仅是开发者，更是每一个使用者的无私分享精神，于此，我们欢迎各位 MaoXian 用户参与进来，只有这般，该助手才能发挥其真正的能力。</p>
+<p>「MaoXian 助手」的功能强大于否取决于我们适配的网站的多少。这需要的不仅仅是开发者，更是每一个使用者的无私分享精神，于此，我们欢迎各位用户参与进来，只有这般，该助手才能发挥其真正的能力。</p>
 
 <p>如果你不会编程，你可以在项目 <a href="https://github.com/mika-cn/maoxian-assistant/issues">issue 页面</a> 提交适配请求(提供需要适配的网址)，或者回馈某个网站适配不正确的信息，以便其他人进行跟进。</p>
 
-<p>如果你会编程（只需要懂一点 CSS 就行），那么恭喜你，你完全有能力编写 Plan，并分享给其他人，具体查看下一节。</p>
+<p>如果你会编程（只需要懂一点 CSS，了解 JSON 格式就行），那么恭喜你，你完全有能力编写 Plan，并分享给其他人，具体查看下一节。</p>
 
 <h2 id="plan">如何编写 Plan</h2>
 
@@ -85,26 +88,36 @@ http://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
       <td>pick</td>
       <td>选择器</td>
       <td>必填</td>
-      <td>用于选择「要裁剪的元素」，可提供多个选择器，更详细请看下方</td>
+      <td>用于选择「要裁剪的元素」，可提供多个选择器，详情请看下文</td>
     </tr>
     <tr>
       <td>hide</td>
       <td>选择器</td>
-      <td>可选</td>
-      <td>用于选择「要剔除的元素」，可提供多个选择器，更详细请看下方</td>
+      <td>选填</td>
+      <td>用于选择「要剔除的元素」，可提供多个选择器，详情请看下文</td>
+    </tr>
+    <tr>
+      <td>show</td>
+      <td>选择器</td>
+      <td>选填</td>
+      <td>用于显示隐藏的「块状元素」，可提供多个选择器，详情请看下文</td>
+    </tr>
+    <tr>
+      <td>chAttr</td>
+      <td>元组</td>
+      <td>选填</td>
+      <td>用于修改元素的属性值，提供了多种修改属性的方式，详情请看下文</td>
     </tr>
   </tbody>
 </table>
 
-<p>上方表格给出的是常用的几个参数。更多参数说明会在后文给出。</p>
-
-<h4 id="pattern-">Pattern 参数的使用</h4>
+<h3 id="pattern-">Pattern 参数的使用</h3>
 
 <p>Pattern 参数描述了该 Plan 会应用到哪一类网址上。</p>
 
 <p>目前支持的匹配符有 “*” 和 “**“。</p>
 
-<h5 id="section-5">星匹配符（*）</h5>
+<p><strong>星匹配符</strong></p>
 
 <ul>
   <li>匹配开头</li>
@@ -124,15 +137,17 @@ http://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
 
 <p>比如：使用 <code>https://example.org/*/index.html</code>，可以匹配到 https://example.org/blog/index.html。但是无法匹配到 https://example.org/blog/jack/index.html，因为 “*” 号不匹配目录分隔符 “/”。</p>
 
-<h5 id="section-6">双星匹配符（**）</h5>
+<p><strong>双星匹配符</strong></p>
 
 <p>一般使用双星匹配符，来匹配零个或零个以上的目录。</p>
 
-<p>假如我们要匹配的网址为 https://example.org/blog/javascript/2017/01/05/awesome-article.html ，里面 /blog 为固定不变的部分，/javascript 为文章分类（不知道有没有子分类），后面是年月日，最后是文章名。可以用 <code>https://example.org/blog/**/*/*/*/*/*.html</code>这个 Pattern 来匹配。 中间用了四个 “*” 号来匹配分类和年月日，前面的 “**” 匹配可能存在的子分类。</p>
+<p>假如我们要匹配的网址为 https://example.org/blog/javascript/2017/01/05/awesome-article.html ，里面 /blog 为固定不变的部分，/javascript 为文章分类（不知道有没有子分类），后面是年月日，最后是文章名。</p>
+
+<p>可以用 <code>https://example.org/blog/**/*/*/*/*/*.html</code>这个 Pattern 来匹配。 中间用了四个 “*” 号来匹配分类和年月日，前面的 “**” 匹配可能存在的子分类。</p>
 
 <p>上面这个例子也可以使用 <code>https://example.org/blog</code> 作为 Pattern ，来直接匹配以该模式打头的网址，不同的 Pattern，严格程度不同，根据需求给出 Pattern 即可。</p>
 
-<h4 id="section-7">选择器</h4>
+<h3 id="section-5">选择器</h3>
 
 <p>选择器有两种：CSS 选择器 和 xPath 选择器。是一个字符串，结构为 <code>$type||$q</code> 。</p>
 
@@ -167,11 +182,11 @@ http://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
     <p><strong>pick 参数</strong> 选择器的查找范围为<strong>整个文档</strong>，找到第一个匹配元素就停止查找，如果你填写了多个选择器，则会按照选择器的顺序依次查找。</p>
   </li>
   <li>
-    <p><strong>hide 参数</strong> 选择器的查找范围为<strong>要裁剪元素的内部</strong>，所有选择器找到的元素都会被剔除掉。</p>
+    <p><strong>hide 参数</strong> 选择器的查找范围为<strong>要裁剪元素的内部</strong>，所有选择器找到的元素都会被隐藏掉（MaoXian 不会裁剪隐藏的元素）。</p>
   </li>
 </ul>
 
-<p>下面我们来看一个例子</p>
+<p>下面我们来看一个例子（注： 本页面给出的例子都是 JSON 格式）</p>
 
 <pre><code class="language-json">{
   "name": "example.org",
@@ -190,11 +205,11 @@ http://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
   <li>hide 填入的是多个选择器，即给出的是一个 选择器的元组（数组）。最后一个选择器是 xPath 选择器，<code>X||</code> 部分不能省略。</li>
 </ul>
 
-<h4 id="show-">show 参数的使用</h4>
+<h3 id="show-">show 参数的使用</h3>
 
-<p>show 参数是用于显示隐藏的块状元素的，属性的值也是选择器（可填写多个），show 比较特殊，它<strong>只可用于块状元素（即display 的值为 block）</strong>。它会将元素的 display 样式设置成 block 来让这个元素显示出来. 它相对于后文会提到的 chAttr 参数比较简单，如果要操作的元素都为块状元素，则使用 show 会比较方便，否则，请考虑使用 chAttr 参数（具体查看 chAttr 的例4）</p>
+<p>show 参数是用于显示「隐藏的块状元素」的，属性的值也是选择器（可填写多个），show 比较特殊，它<strong>只可用于块状元素（即display 的值为 block）</strong>。它会将元素的 display 样式设置成 block 来让这个元素显示出来. 它相对于后文会提到的 chAttr 参数比较简单，如果要操作的元素都为块状元素，则使用 show 会比较方便，否则，请考虑使用 chAttr 参数（具体查看 chAttr 的例4）</p>
 
-<h4 id="chattr-">chAttr 参数的使用</h4>
+<h3 id="chattr-">chAttr 参数的使用</h3>
 
 <p>chAttr 参数可以用来改变标签的某个属性的值。chAttr 是一个可选项，只有在需要的时候，才需要提供。 chAttr 的值为一个 $action 的数组，$action 是一个 Object。$action 的常用参数有三个 <code>type</code>, <code>pick</code> 和 <code>attr</code>。不同的 <code>type</code> 会跟不同的的参数。下面我们用例子来说明 chAttr 的用法。</p>
 
@@ -348,7 +363,7 @@ http://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
 }
 </code></pre>
 
-<p>一般可以使用这两种 $action ，对网页折叠部分进行控制，使其达到我们想要的状态。这种方式不像上文的 show 参数那样粗暴地对 display 进行操控，但是我们建议在能使用 show 的情况下，还是使用 show，简单一些。</p>
+<p>一般可以使用这两种 $action ，对网页折叠部分进行控制，使其达到我们想要的状态。这种方式不像上文的 show 参数那样粗暴地对 display 进行操控。</p>
 
 <h2 id="plan-1">贡献 Plan</h2>
 
@@ -358,7 +373,7 @@ http://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
 
 <p>使用方式如下(把你写的 json 文本复制到 tmp/myplans.json ):</p>
 
-<pre><code class="language-shell">./json2yaml.rb tmp/myplans.json &gt; tmp/myplans.yaml
+<pre><code class="language-shell">$ ./json2yaml.rb tmp/myplans.json &gt; tmp/myplans.yaml
 </code></pre>
 
 <p>再把 tmp/myplans.yaml 里面的 Plan 复制到对应的 plans.yaml （比如： plans/zh/plans.yaml ），提个 PR （pull request）就完成了。</p>
