@@ -6,17 +6,31 @@
   </author>
   <id>https://mika-cn.github.io/maoxian-web-clipper/feed.xml</id>
   <title>MaoXian Web Clipper</title>
-  <updated>2019-09-05T12:23:00+08:00</updated>
+  <updated>2019-10-19T13:14:52+08:00</updated>
   <entry>
-    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0137</id>
-    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0137"/>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0143</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0143"/>
+    <title>MaoXian Web Clipper 0.1.43 is released</title>
+    <updated>2019-10-19T11:40:00+08:00</updated>
+    <dc:date>2019-10-19T11:40:00+08:00</dc:date>
+  </entry>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0141</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0141"/>
+    <title>MaoXian Web Clipper 0.1.41 is released</title>
+    <updated>2019-09-14T11:40:00+08:00</updated>
+    <dc:date>2019-09-14T11:40:00+08:00</dc:date>
+  </entry>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0139</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0139"/>
     <title>MaoXian Web Clipper 0.1.39 is released</title>
     <updated>2019-09-05T12:10:00+08:00</updated>
     <dc:date>2019-09-05T12:10:00+08:00</dc:date>
   </entry>
   <entry>
-    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0137</id>
-    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0137"/>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0138</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0138"/>
     <title>MaoXian Web Clipper 0.1.38 is released</title>
     <updated>2019-09-03T15:10:00+08:00</updated>
     <dc:date>2019-09-03T15:10:00+08:00</dc:date>
@@ -161,5 +175,5 @@
     <updated>2018-07-24T09:00:00+08:00</updated>
     <dc:date>2018-07-24T09:00:00+08:00</dc:date>
   </entry>
-  <dc:date>2019-09-05T12:23:00+08:00</dc:date>
+  <dc:date>2019-10-19T13:14:52+08:00</dc:date>
 </feed>
