@@ -40,8 +40,8 @@ $ sha512sum maoxian-web-clipper-x.x.x.crx
 
 （1）下载 crx 文件
 
-* [maoxian-web-clipper-chrome-0.1.43.crx](extension/0.1.43/maoxian-web-clipper-chrome-0.1.43.crx)
-* [maoxian-web-clipper-chrome-0.1.43.crx.checksum.txt](extension/0.1.43/maoxian-web-clipper-chrome-0.1.43.crx.checksum.txt)
+* [maoxian-web-clipper-chrome-0.1.44.crx](extension/0.1.44/maoxian-web-clipper-chrome-0.1.43.crx)
+* [maoxian-web-clipper-chrome-0.1.44.crx.checksum.txt](extension/0.1.44/maoxian-web-clipper-chrome-0.1.43.crx.checksum.txt)
 
 （2）打开Chrome 扩展页面（在地址栏直接输入： `about:extensions`）
 
