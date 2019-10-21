@@ -28,21 +28,21 @@
 
 <p>如上的四个步骤中，「MaoXian 助手」主要用于「准备」阶段，也涉及到「选择」阶段（不过不多）。它的工作方式有点像「广告屏蔽扩展」，需要针对不同的网站，编写不同的操作（在「MaoXian 助手里」我们称其为 Plan）。这也意味着它解决问题的多少取决于我们适配的网站的多少。</p>
 
-<h2 id="section-2">开始使用</h2>
+<h2 id="public-subscriptions">开始使用</h2>
 
 <p>你可以在 <strong>扩展设置页面 &gt; 毛线助手</strong> 页面启用该功能， 自己编写 Plan 或者订阅公开的 Plan。</p>
 
 <p><strong>订阅地址</strong></p>
 
 <pre><code class="language-shell"># 默认网站列表（全球性）
-http://mika-cn.github.io/maoxian-web-clipper/assistant/plans/default/index.json
+https://mika-cn.github.io/maoxian-web-clipper/assistant/plans/default/index.json
 
 # 华人网站列表
-http://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
+https://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
 
 </code></pre>
 
-<h2 id="section-3">参与进来</h2>
+<h2 id="section-2">参与进来</h2>
 
 <p>「MaoXian 助手」的功能强大于否取决于我们适配的网站的多少。这需要的不仅仅是开发者，更是每一个使用者的无私分享精神，于此，我们欢迎各位用户参与进来，只有这般，该助手才能发挥其真正的能力。</p>
 
@@ -50,9 +50,9 @@ http://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
 
 <p>如果你会编程（只需要懂一点 CSS，了解 JSON 格式就行），那么恭喜你，你完全有能力编写 Plan，并分享给其他人，具体查看下一节。</p>
 
-<h2 id="plan">如何编写 Plan</h2>
+<h2 id="how-to-write-a-plan">如何编写 Plan</h2>
 
-<h3 id="section-4">流程</h3>
+<h3 id="section-3">流程</h3>
 
 <ol>
   <li>请到 MaoXian Web Clipper 的设置页面，启用「MaoXian 助手」</li>
@@ -147,7 +147,7 @@ http://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
 
 <p>上面这个例子也可以使用 <code>https://example.org/blog</code> 作为 Pattern ，来直接匹配以该模式打头的网址，不同的 Pattern，严格程度不同，根据需求给出 Pattern 即可。</p>
 
-<h3 id="section-5">选择器</h3>
+<h3 id="section-4">选择器</h3>
 
 <p>选择器有两种：CSS 选择器 和 xPath 选择器。是一个字符串，结构为 <code>$type||$q</code> 。</p>
 
@@ -365,7 +365,7 @@ http://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
 
 <p>一般可以使用这两种 $action ，对网页折叠部分进行控制，使其达到我们想要的状态。这种方式不像上文的 show 参数那样粗暴地对 display 进行操控。</p>
 
-<h2 id="plan-1">贡献 Plan</h2>
+<h2 id="plan">贡献 Plan</h2>
 
 <p>所有的 plan 都存储在 <code>plans</code> 目录下，比如 <code>plans/default/plans.yaml</code> 里面存储的是默认的 plan 信息，而 <code>plans/zh/plans.yaml</code> 存储的是中文网站相关的 plan 信息。最终所有的 <code>plans.yaml</code> 会在 <code>build.rb</code> 这个脚本的渲染下，变成 JSON 的格式。</p>
 

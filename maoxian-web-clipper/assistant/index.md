@@ -15,7 +15,7 @@
 
 如上的四个步骤中，「MaoXian 助手」主要用于「准备」阶段，也涉及到「选择」阶段（不过不多）。它的工作方式有点像「广告屏蔽扩展」，需要针对不同的网站，编写不同的操作（在「MaoXian 助手里」我们称其为 Plan）。这也意味着它解决问题的多少取决于我们适配的网站的多少。
 
-## 开始使用
+## 开始使用 {#public-subscriptions}
 
 你可以在 **扩展设置页面 > 毛线助手** 页面启用该功能， 自己编写 Plan 或者订阅公开的 Plan。
 
@@ -23,10 +23,10 @@
 
 ```shell
 # 默认网站列表（全球性）
-http://mika-cn.github.io/maoxian-web-clipper/assistant/plans/default/index.json
+https://mika-cn.github.io/maoxian-web-clipper/assistant/plans/default/index.json
 
 # 华人网站列表
-http://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
+https://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
 
 ```
 
@@ -38,7 +38,7 @@ http://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
 
 如果你会编程（只需要懂一点 CSS，了解 JSON 格式就行），那么恭喜你，你完全有能力编写 Plan，并分享给其他人，具体查看下一节。
 
-## 如何编写 Plan
+## 如何编写 Plan {#how-to-write-a-plan}
 
 ### 流程
 
