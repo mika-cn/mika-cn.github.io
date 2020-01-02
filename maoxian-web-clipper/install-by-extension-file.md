@@ -26,8 +26,8 @@ $ sha512sum maoxian-web-clipper-x.x.x.crx
 
 （1）下载 xpi 文件
 
-* [maoxian_web_clipper-0.1.44-an+fx.xpi](extension/0.1.44/maoxian_web_clipper-0.1.43-an+fx.xpi)
-* [maoxian_web_clipper-0.1.44-an+fx.xpi.checksum.txt](extension/0.1.44/maoxian_web_clipper-0.1.43-an+fx.xpi.checksum.txt)
+* [maoxian_web_clipper-0.1.44-an+fx.xpi](extension/0.1.44/maoxian_web_clipper-0.1.44-an+fx.xpi)
+* [maoxian_web_clipper-0.1.44-an+fx.xpi.checksum.txt](extension/0.1.44/maoxian_web_clipper-0.1.44-an+fx.xpi.checksum.txt)
 
 （2）打开 Firefox 扩展页面（在地址栏直接输入：`about:addons`）
 
@@ -40,8 +40,8 @@ $ sha512sum maoxian-web-clipper-x.x.x.crx
 
 （1）下载 crx 文件
 
-* [maoxian-web-clipper-chrome-0.1.44.crx](extension/0.1.44/maoxian-web-clipper-chrome-0.1.43.crx)
-* [maoxian-web-clipper-chrome-0.1.44.crx.checksum.txt](extension/0.1.44/maoxian-web-clipper-chrome-0.1.43.crx.checksum.txt)
+* [maoxian-web-clipper-chrome-0.1.44.crx](extension/0.1.44/maoxian-web-clipper-chrome-0.1.44.crx)
+* [maoxian-web-clipper-chrome-0.1.44.crx.checksum.txt](extension/0.1.44/maoxian-web-clipper-chrome-0.1.44.crx.checksum.txt)
 
 （2）打开Chrome 扩展页面（在地址栏直接输入： `about:extensions`）
 
@@ -58,8 +58,8 @@ $ sha512sum maoxian-web-clipper-x.x.x.crx
 
 （1）下载 zip 包
 
-* [maoxian-web-clipper-chrome-0.1.44.zip](extension/0.1.44/maoxian-web-clipper-chrome-0.1.43.zip)
-* [maoxian-web-clipper-chrome-0.1.44.zip.checksum.txt](extension/0.1.44/maoxian-web-clipper-chrome-0.1.43.zip.checksum.txt)
+* [maoxian-web-clipper-chrome-0.1.44.zip](extension/0.1.44/maoxian-web-clipper-chrome-0.1.44.zip)
+* [maoxian-web-clipper-chrome-0.1.44.zip.checksum.txt](extension/0.1.44/maoxian-web-clipper-chrome-0.1.44.zip.checksum.txt)
 
 （2）解压 zip 包
 
