@@ -24,7 +24,7 @@ Please check situation below:
 
 If you meet this situation. It's probably because you had installed some extension(e.g. chrone) to manage your downloads. Download manage extension will intercept your download request, MaoXian use download API to save your clipping information. MaoXian can't finish its clipping because of that interception.
 
-We have also found some user install MaoXian on other browser(like: vivaldi) which is base on chromium project, that means MaoXian may work fine on these browser. but these browser(e.g. vivaldi) have developed their own download manage function which will intercept download request too. 
+We have also found some user install MaoXian on other browser(like: vivaldi) which is base on chromium project, that means MaoXian may work fine on these browser. but these browser(e.g. vivaldi) have developed their own download manage function which will intercept download request too.
 
 To solve this confliction, we had developed a native application which can receive download request that was sent by MaoXian.
 
@@ -56,7 +56,7 @@ Assume:
 
 Save command below as mklink.bat, and run mklink.bat as administrator(right click, run as administrator).
 
-Command: `mklink \D C:\Users\jack\Downloads\mx-wc C:\Users\jack\OneDrive\clips`
+Command: `mklink /D C:\Users\jack\Downloads\mx-wc C:\Users\jack\OneDrive\clips`
 
 -------------------------------------------
 

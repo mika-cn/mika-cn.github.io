@@ -1,7 +1,7 @@
 
 # 警告： 该页面所描述的内容已过期（即不再推荐使用）, 通过下面新的链接获取新的内容
 
-[查看最新](https://github.com/mika-cn/maoxian-web-clipper/tree/master/useful-res/README.md)
+[查看最新](assistant/index-zh-CN.html)
 
 # MaoXian 与第三方的交互 (已过期）
 
