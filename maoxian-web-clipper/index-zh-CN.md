@@ -42,10 +42,6 @@ MaoXian 当前支持的浏览器如下：
 
 ## 安装
 
-**重要消息**
-
-当前，由于开发者的误操作，MaoXian Web Clipper 暂时没在 Google Web Store 上线，这导致 0.1.52 版本无法上线成功。请谷歌浏览器的用户，使用[zip 文件安装](install-by-extension-file.html#zip)的方式。
-
 * Firefox （火狐浏览器）- [https://addons.mozilla.org/zh-CN/firefox/addon/maoxian-web-clipper/](https://addons.mozilla.org/zh-CN/firefox/addon/maoxian-web-clipper/)
 * Chrome web store （谷歌浏览器） - [https://chrome.google.com/webstore/detail/maoxian-web-clipper/kjahokgdcbohofgdidndeiaigkehdjdc](https://chrome.google.com/webstore/detail/maoxian-web-clipper/kjahokgdcbohofgdidndeiaigkehdjdc)
 * Chrome （谷歌浏览器）- [墙内安装](install-by-extension-file.html)
