@@ -15,7 +15,10 @@
     
 <h1 id="maoxian-web-clipper-">MaoXian Web Clipper 常见问题</h1>
 
+<h2 id="section">目录</h2>
+
 <ul>
+  <li><a href="#what-content-will-be-saved">扩展会保存哪些内容？</a></li>
   <li><a href="#clip-menu-not-work">点击了裁剪，没有反应</a></li>
   <li><a href="#crash-on-clipping">裁剪流程停在下载中就没反应了</a></li>
   <li><a href="#change-default-download-path">改变默认的下载路径</a></li>
@@ -27,13 +30,54 @@
 
 <hr />
 
+<h2 id="what-content-will-be-saved">扩展会保存哪些内容？</h2>
+
+<p>MaoXian 的裁剪过程，裁剪的是<strong>当前状态</strong>下的网页。主要的裁剪内容为文本信息和图片，具体的存储内容会因存储格式的不同而不同，并且有些内容需要在设置页面勾选才会保存。如下：</p>
+
+<h3 id="html">若存储格式为 HTML</h3>
+
+<p><strong>会保存的内容</strong></p>
+
+<ul>
+  <li>选区的文本</li>
+  <li>选区的图片</li>
+  <li>网页的样式</li>
+  <li>内嵌的网页 （iframe）</li>
+  <li>背景图（默认未保存）</li>
+  <li>网页图标（默认未保存）</li>
+  <li>网页字体（默认未保存）</li>
+</ul>
+
+<p><strong>不会保存的内容</strong></p>
+
+<ul>
+  <li>网页脚本 （即：javascript）</li>
+  <li>音频</li>
+  <li>视频</li>
+  <li>其他一些媒体节点（如：embed、 object、 applet、 canvas）</li>
+  <li>不显示的元素</li>
+</ul>
+
+<h3 id="markdown">若存储格式为 Markdown</h3>
+
+<p><strong>会保存的内容</strong></p>
+
+<ul>
+  <li>选区的文本</li>
+  <li>选区的图片</li>
+</ul>
+
+<p>不会保存的内容和 HTML 一样，外加上不会保存网页样式。</p>
+
+<hr />
+
 <h2 id="clip-menu-not-work">点击了裁剪，没有反应</h2>
 
 <p>请依次检查以下情况:</p>
 
 <ol>
-  <li>如果你刚安装完扩展，得刷新网页后才能裁剪</li>
-  <li>目前 MaoXian 只兼容 <code>Chrome</code> 和 <code>Firefox</code>, 其他浏览器不保证能正常工作</li>
+  <li>如果你刚安装完扩展，那些在安装前就已经打开的网页得刷新后才能裁剪。</li>
+  <li>目前 MaoXian 只兼容 <code>Chrome</code> 和 <code>Firefox</code>, 其他浏览器不保证能正常工作。有的用户可能会使用基于 <code>Chromium</code> 开发的浏览器（如：vivaldi），该类浏览器很可能可以正常工作，但我们无法作出保证。</li>
 </ol>
 
 <hr />
@@ -88,7 +132,7 @@
 
 <p>这个是因为扩展在无法访问你本地网址的时候，会尝试通过下载历史打开文件，当浏览器的下载历史被清空（可能是你主动清空的，也可能是浏览器重启后清空的）时，扩展找不到办法打开你的文件了。</p>
 
-<p>可以通过<a href="#allow-access-file-urls">允许扩展访问本地网址</a>, 可以避免这个问题。</p>
+<p>可以通过<a href="#allow-access-file-urls">允许扩展访问本地网址</a>, 来避免这个问题。</p>
 
 <hr />
 
@@ -100,7 +144,7 @@
 
 <p>本节介绍了如何让浏览器允许 MaoXian 访问本地网址(file://打头的网址)</p>
 
-<h3 id="section">1. 获取 “扩展标识”</h3>
+<h3 id="section-1">1. 获取 “扩展标识”</h3>
 
 <p>从 MaoXian 的设置页面，在“本地网址” 一节中找到<code>扩展标识</code> 信息。</p>
 
@@ -111,7 +155,7 @@
   <li>Chrome =&gt; chrome-extension://612ab18c-c29e-4211-bd50-3f208d227db7</li>
 </ul>
 
-<h3 id="section-1">2. 更改浏览器设置</h3>
+<h3 id="section-2">2. 更改浏览器设置</h3>
 
 <p>这一步，不同的浏览器设置方式不一样。</p>
 
@@ -164,7 +208,7 @@
 
 <p>如果没有搜索到，就鼠标右键 &gt; 新建 &gt; 字符串(String)， 把<code>条目名称</code>和<code>值</code>依次粘帖进去即可。</p>
 
-<h3 id="section-2">3. 更改本扩展中的设置</h3>
+<h3 id="section-3">3. 更改本扩展中的设置</h3>
 
 <p>回到 MaoXian 的设置页面，把“本地网址” 一节中的复选框打上勾。</p>
 
@@ -182,13 +226,21 @@
 
 <h2 id="feedback">反馈新问题或建议</h2>
 
-<p>如果上诉的解决方案都无法解决你的问题，把你遇到的问题反映到<a href="https://github.com/mika-cn/maoxian-web-clipper/issues">项目issue里</a>，开发人员会进行跟进。</p>
+<p>如果上诉常见问题的解决方案都无法解决你的问题，把你遇到的问题反映到<a href="https://github.com/mika-cn/maoxian-web-clipper/issues">项目issue里</a>，开发人员会进行跟进。</p>
 
-<p>在描述你遇到的问题时候，请尽可能详细地提供信息。</p>
+<p><strong>反馈 Bug 注意事项</strong></p>
 
-<p>比如： 点击哪里用不了，操作系统信息(windows, Linux, Mac…), Chrome 版本，当前网址等有助于定位问题的信息。</p>
+<p>在描述你遇到的问题时候，请尽可能详细地提供信息。我们期望你能提供以下信息，以便开发者追踪问题。</p>
 
-<p>PS： 如果你没用过 <code>github</code>， 并且不想注册帐号的话，可以发邮件我 <a href="mailto:laoquans@gmail.com">laoquans@gmail.com</a>。我来帮你建 issue :)</p>
+<ul>
+  <li>当前网页的网址（如果你遇到的是裁剪过程中的 bug）。</li>
+  <li>支持页的信息 （扩展图标 &gt; 主页 &gt; 支持页），进入该页面后按 <code>Ctrl + A</code> 或者 <code>Cmd + A</code>（苹果电脑用户）选中所有信息，反馈时带上这些信息。</li>
+  <li>以及详细地描述你遇到的问题。</li>
+</ul>
+
+<p><strong>注： 在反馈这些信息时，我们建议你尽量避免使用截图，因为这样的话，页面会慢许多（我朝的网络环境，你懂的），而且我们有的开发者的浏览器是默认不显示图片的。</strong></p>
+
+<p>PS： 如果你没用过 <code>github</code>， 并且不想注册帐号的话，可以发邮件我 <a href="mailto:i.mika@tutanota.com">i.mika@tutanota.com</a>。我可以帮你建 issue ，但此种情况下我可能无法及时看到（或回复）你的邮件。</p>
 
 <hr />
 

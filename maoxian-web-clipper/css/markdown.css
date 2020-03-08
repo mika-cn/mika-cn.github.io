@@ -18,7 +18,7 @@ body {
 }
 
 /******** headers ********/
-h1 {padding-bottom: 20px; }
+h1 {padding-bottom: 20px; text-align: center;}
 h2 {padding-top: 20px; }
 
 .red {color: red;}

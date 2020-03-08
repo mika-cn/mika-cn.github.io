@@ -18,9 +18,11 @@ That's it, Not bored registration, Not charged.
 * Reset History - When you install this extension in new computer, you can reset your clipping history
 
 ## Software Preview
+
 * [screenshots](screenshots.html)
 
 ## Install
+
 * Firefox - [https://addons.mozilla.org/en-US/firefox/addon/maoxian-web-clipper/](https://addons.mozilla.org/en-US/firefox/addon/maoxian-web-clipper/)
 * Chrome - [https://chrome.google.com/webstore/detail/maoxian-web-clipper/kjahokgdcbohofgdidndeiaigkehdjdc](https://chrome.google.com/webstore/detail/maoxian-web-clipper/kjahokgdcbohofgdidndeiaigkehdjdc)
 
@@ -33,6 +35,9 @@ All the file you clip will save in `$downloadFold/mx-wc` directory.
 Assume your default download path is `/home/foo/downloads`, then it will save file in `/home/foo/downloads/mx-wc`
 
 ## Contribution
+
+We deeply believe that a software will become a really useful software, only when users keep reporting bugs and giving suggestions and developers keep enhancing the software according to the feedbacks. We've got lots of bug reportings from users
+
 You could help MaoXian Web Clipper development in many ways.
 
 * [Sending feedback and suggestion](https://github.com/mika-cn/maoxian-web-clipper/issues).

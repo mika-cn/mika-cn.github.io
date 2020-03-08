@@ -2,9 +2,10 @@
 
 # 通过扩展文件安装和更新 MaoXian Web Clipper
 
+
 ## 安装
 
-**说明**: 下方提供的以 `checksum.txt` 为对应文件的校验和，可用于检查文件的完整性 （避免下载未完全和被恶意修改）。
+**说明**: 下方提供的以 `checksum.txt` 结尾的文件为对应文件的校验和，可用于检查文件的完整性 （避免下载未完全和被恶意修改）。
 
 命令行用户可通过下方命令，计算出校验和，再和 `checksum.txt` 里面的内容进行比对。
 
@@ -26,8 +27,8 @@ $ sha512sum maoxian-web-clipper-x.x.x.crx
 
 （1）下载 xpi 文件
 
-* [maoxian_web_clipper-0.1.48-an+fx.xpi](extension/0.1.48/maoxian_web_clipper-0.1.48-an+fx.xpi)
-* [maoxian_web_clipper-0.1.48-an+fx.xpi.checksum.txt](extension/0.1.48/maoxian_web_clipper-0.1.48-an+fx.xpi.checksum.txt)
+* [maoxian-web-clipper-firefox-0.1.50.xpi](extension/0.1.50/maoxian-web-clipper-firefox-0.1.50.xpi)
+* [maoxian-web-clipper-firefox-0.1.50.xpi.checksum.txt](extension/0.1.50/maoxian-web-clipper-firefox-0.1.50.xpi.checksum.txt)
 
 （2）打开 Firefox 扩展页面（在地址栏直接输入：`about:addons`）
 
@@ -36,12 +37,20 @@ $ sha512sum maoxian-web-clipper-x.x.x.crx
 
 ### 通过 crx 文件安装 （Chrome / Chromium / 谷歌浏览器）
 
+
 由于这堵万恶的墙，无法翻墙（科学上网、正当上网）的朋友是无法访问谷歌商店进行安装。于此，提供下方 crx 文件。
+
 
 （1）下载 crx 文件
 
-* [maoxian-web-clipper-chrome-0.1.44.crx](extension/0.1.44/maoxian-web-clipper-chrome-0.1.44.crx)
-* [maoxian-web-clipper-chrome-0.1.44.crx.checksum.txt](extension/0.1.44/maoxian-web-clipper-chrome-0.1.44.crx.checksum.txt)
+> **声明**：Google Chrome 的上线流程需要人工进行审核。所以这里 crx 文件需要等待几个工作日后，才能得到。也就是说这里的文件可能不是最新的（可能由于太忙忘记去下载这个 crx 文件了），非常抱歉。你可以使用下方的 crx4chrome 网站获取最新的 crx 文件，或者是使用 zip 包安装 （具体看下一小节）。
+
+* [maoxian-web-clipper-chrome-0.1.50.crx](extension/0.1.50/maoxian-web-clipper-chrome-0.1.50.crx)
+* [maoxian-web-clipper-chrome-0.1.50.crx.checksum.txt](extension/0.1.50/maoxian-web-clipper-chrome-0.1.50.crx.checksum.txt)
+
+**另一处下载源**
+
+如果上方列出的版本不是最新的，请尝试在 crx4chrome 网站（还未被墙）下载最新的 crx 文件，该网站会自动同步最新的版本。经开发者验证，该网站的 crx 文件是靠谱的，请放心下载。（[传送门](https://www.crx4chrome.com/crx/104835/)）
 
 （2）打开Chrome 扩展页面（在地址栏直接输入： `about:extensions`）
 
@@ -52,14 +61,15 @@ $ sha512sum maoxian-web-clipper-x.x.x.crx
 注意: 如果这一步失败，保证开发者模式打开的情况下，重启浏览器，再重新拖拽。
 
 
-### 通过 zip 包安装
+### 通过 zip 包安装 {#zip}
 
-这一小节，是为了避免有一天邪恶的墙，全面封杀对外链接，导致开发者根本无法更新。所以提供 zip 包安装，zip 包和 crx 文件的功能完全一样，并没有什么不同，请放心使用。
+此种安装方式是最灵活的，也是开发者能保证及时更新的唯一一种安装方式（前提是：Github 不会被墙）。而且你可以更好地控制扩展的更新。我们推荐不会翻墙的朋友使用该种安装方式。
+
 
 （1）下载 zip 包
 
-* [maoxian-web-clipper-chrome-0.1.48.zip](extension/0.1.48/maoxian-web-clipper-chrome-0.1.48.zip)
-* [maoxian-web-clipper-chrome-0.1.48.zip.checksum.txt](extension/0.1.48/maoxian-web-clipper-chrome-0.1.48.zip.checksum.txt)
+* [maoxian-web-clipper-chrome-0.1.52.zip](extension/0.1.52/maoxian-web-clipper-chrome-0.1.52.zip)
+* [maoxian-web-clipper-chrome-0.1.52.zip.checksum.txt](extension/0.1.52/maoxian-web-clipper-chrome-0.1.52.zip.checksum.txt)
 
 （2）解压 zip 包
 
@@ -95,7 +105,7 @@ $ unzip maoxian-web-clipper-chrome-x.x.x.zip -d maoxian-web-clipper
 
 ## 写在最后
 
-如果上述方法失效了，[请建个Issue 给开发者](https://github.com/mika-cn/maoxian-web-clipper/issues)。（也许谷歌越来越霸道了）
+如果上述方法失效了，[请反馈（告知）给开发者](https://github.com/mika-cn/maoxian-web-clipper/issues)。（也许谷歌越来越霸道了）
 
 ------------------------------------------------
 
