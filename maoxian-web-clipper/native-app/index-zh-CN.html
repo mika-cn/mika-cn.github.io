@@ -19,7 +19,11 @@
 
 <p>这是一个很小的本地程序，我们开发这个程序增强 Maoxian 的能力。</p>
 
-<h2 id="section-1">主要功能</h2>
+<h2 id="section-1">公告</h2>
+
+<p>ruby 的最新版本（2.7.0）对之前的接口有一些不兼容，这会导致裁剪网页的时候，图片无法下载成功。如果你安装的 ruby 是 <code>2.7.0</code> 以上，则需要安装 <code>0.2.3</code> 以上的「本地程序」才能正常使用。</p>
+
+<h2 id="section-2">主要功能</h2>
 
 <ul>
   <li>下载文件 （用于绕过浏览器的下载功能，从而避免与下载管理软件发生冲突）</li>
@@ -43,9 +47,7 @@
 
 <p>请根据你的系统信息和浏览器类型， 下载对应的软件包</p>
 
-<p>当前版本 <code>0.2.2</code></p>
-
-<p><strong>致歉</strong>：本次 MaoXian 扩展的更新（0.1.46），无法兼容老版本的「本地程序」，所以当扩展更新后，使用「本地程序」的老用户，需要升级到新版本，才能继续使用。此实属无奈之举，造成诸多不便，非常抱歉。</p>
+<p>当前版本 <code>0.2.3</code></p>
 
 <ul>
   <li>Linux
@@ -113,7 +115,7 @@ environment: 'production'
 data_dir: 'e:\\jack\clippings'
 </code></pre>
 
-<h3 id="section-2">查看状态并启用</h3>
+<h3 id="section-3">查看状态并启用</h3>
 
 <p>请重启你的浏览器后，到 <strong>扩展设置页面 &gt; 本地程序</strong> 小节查看状态，若显示的是 「本地程序」的版本号，则 MaoXian 扩展已经和 「本地程序」对接上了。如果显示的是错误信息，请查看下方 <a href="#problems">常见错误</a> 小节。确保对接上后，请勾选下方的 <strong>启用该处理程序</strong> 。</p>
 
@@ -167,11 +169,11 @@ data_dir: 'e:\\jack\clippings'
 
 <p>把 main.rb (安装目录下) 第一行的 “/usr/bin/env ruby” 改成 ruby 的绝对路径，比如 “/home/jack/ruby-2.5.0/bin/ruby”。 或者是创建一个软链接到 /usr/bin 目录下，比如： <code>ln -s /home/jack/ruby-2.5.0/bin/ruby /usr/bin/ruby</code>。</p>
 
-<h3 id="section-3">2. 配置不正确</h3>
+<h3 id="section-4">2. 配置不正确</h3>
 
 <p>如果你打开日志文件后，发现错误： “Config Invalid, data_dir not exist: xxxxx” ，则表示你配置文件 config.yaml 里面的 data_dir 配置的路径，在你的系统中是不存在的。则重新配置即可。</p>
 
-<h3 id="section-4">3. 还是不行？</h3>
+<h3 id="section-5">3. 还是不行？</h3>
 
 <p>可能发生 Bug 了。你可以用 <code>ruby -v</code> 检查下 ruby 版本， 若版本比 <code>2.4.1</code> 低，则重新安装更高的版本，重启浏览器，再试一下，还是不行的话，请到 <a href="https://github.com/mika-cn/maoxian-web-clipper/issues">项目 issue 页</a>，给开发者提个issue, 并在 issue 里粘贴上 app.log 里面的内容。</p>
 

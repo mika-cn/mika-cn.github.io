@@ -15,6 +15,7 @@ def render_markdown(page)
   text = File.open(page.md_path).read
   text = text.gsub('```', '~~~')
   options = {
+    enable_coderay: false,
     coderay_line_numbers: nil
   }
   html = Kramdown::Document.new(text, options).to_html

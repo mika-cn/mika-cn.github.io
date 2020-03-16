@@ -1,9 +1,14 @@
 
 # MaoXian web clipper Native App
 
+
 ## Intro
 
 This is a little application. We develope it to enhance MaoXian's abilities.
+
+## Important News
+
+On the latest version of ruby which is 2.7.0, there's some interfaces are not compatible with old code. It'll cause this Native APP not able to download images. So if you have installed ruby 2.7.0 and your Native App's version is less than 0.2.3, you should upgrade it.
 
 ## Features
 
@@ -24,7 +29,7 @@ ruby is required, install it first. Make sure version `>= 2.4.1`.
 
 Download software according to your OS and browser type.
 
-Current Version `0.2.2`
+Current Version `0.2.3`
 
 * Linux
   - [native-app-chrome.zip](files/maoxian-web-clipper-native-linux-chrome.zip)
