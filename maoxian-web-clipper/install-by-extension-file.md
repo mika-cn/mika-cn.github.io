@@ -4,8 +4,7 @@
 
 ## 版本信息
 
-* **当前最新版本为：** 0.1.52
-* **Beta 版本：** 0.1.53-beta1
+* **当前最新版本为：** 0.1.53
 
 
 **注意**：如果你在本页面下载到的文件不是最新版本的，可能原因为该版本仍在上线中，还没有完成上线，对于 Firefox 来说，这个过程可能只是几个小时，对于 Chrome 来说这个过程可能几天（需要人工审核）。
@@ -34,8 +33,8 @@ $ sha512sum maoxian-web-clipper-x.x.x.crx
 
 （1）下载 xpi 文件
 
-* [maoxian-web-clipper-firefox-0.1.52.xpi](extension/0.1.52/maoxian-web-clipper-firefox-0.1.52.xpi)
-* [maoxian-web-clipper-firefox-0.1.52.xpi.checksum.txt](extension/0.1.52/maoxian-web-clipper-firefox-0.1.52.xpi.checksum.txt)
+* [maoxian-web-clipper-firefox-0.1.53.xpi](extension/0.1.53/maoxian-web-clipper-firefox-0.1.53.xpi)
+* [maoxian-web-clipper-firefox-0.1.53.xpi.checksum.txt](extension/0.1.53/maoxian-web-clipper-firefox-0.1.53.xpi.checksum.txt)
 
 （2）打开 Firefox 扩展页面（在地址栏直接输入：`about:addons`）
 
@@ -77,10 +76,8 @@ $ sha512sum maoxian-web-clipper-x.x.x.crx
 
 （1）下载 zip 包
 
-* [maoxian-web-clipper-chrome-0.1.52.zip](extension/0.1.52/maoxian-web-clipper-chrome-0.1.52.zip)
-* [maoxian-web-clipper-chrome-0.1.52.zip.checksum.txt](extension/0.1.52/maoxian-web-clipper-chrome-0.1.52.zip.checksum.txt)
-* [maoxian-web-clipper-chrome-0.1.53-beta1.zip](extension/0.1.53/maoxian-web-clipper-chrome-0.1.53-beta1.zip)
-* [maoxian-web-clipper-chrome-0.1.53-beta1.zip.checksum.txt](extension/0.1.53/maoxian-web-clipper-chrome-0.1.53-beta1.zip)
+* [maoxian-web-clipper-chrome-0.1.53.zip](extension/0.1.53/maoxian-web-clipper-chrome-0.1.53.zip)
+* [maoxian-web-clipper-chrome-0.1.53.zip.checksum.txt](extension/0.1.53/maoxian-web-clipper-chrome-0.1.53.zip.checksum.txt)
 
 （2）解压 zip 包
 
