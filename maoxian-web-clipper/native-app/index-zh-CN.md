@@ -102,6 +102,40 @@ environment: 'production'
 data_dir: 'e:\\\\jack\clippings'
 ```
 
+### 修改白名单
+
+**注意**：这一步，是通过[zip 安装](../install-by-extension-file.html)的用户，才需要做的，如果你是通过谷歌商店安装的，或者是通过 crx 文件安装的，则不需要执行这一步操作。
+
+因为 zip 包没有经过谷歌商店的签名。所以安装后，Chrome 浏览器会为其生成一个 id，这个 id 和经过谷歌商店签名过的 crx 文件是不一样的。所以我们需要修改 `manifest.json` 文件的 `allow_origins` 字段。
+
+**1）获取浏览器生成的 id**
+
+首先，在地址栏输入 `chrome://extensions`，回车。找到 MaoXian Web Clipper 扩展，复制上面显示的 id （注：如果你没有看到 id 字段，则打开开发者模式，即可看到）。
+
+**2）修改 `manifest.json`**
+
+注：假设我们上一步获取到的 id 为 `abcdefghijklmnopqrstuvwxyzzzzzzz`。
+
+**修改前**
+
+```json
+{
+  "name": "maoxian_web_clipper_native",
+  ...
+  "allowed_origins": [ "chrome-extension://kjahokgdcbohofgdidndeiaigkehdjdc/" ]
+}
+```
+
+**修改后**
+
+```json
+{
+  "name": "maoxian_web_clipper_native",
+  ...
+  "allowed_origins": [ "chrome-extension://abcdefghijklmnopqrstuvwxyzzzzzzz/" ]
+}
+```
+
 ### 查看状态并启用
 
 请重启你的浏览器后，到 **扩展设置页面 > 本地程序** 小节查看状态，若显示的是 「本地程序」的版本号，则 MaoXian 扩展已经和 「本地程序」对接上了。如果显示的是错误信息，请查看下方 [常见错误](#problems) 小节。确保对接上后，请勾选下方的 **启用该处理程序** 。

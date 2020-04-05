@@ -115,7 +115,39 @@ environment: 'production'
 data_dir: 'e:\\jack\clippings'
 </code></pre>
 
-<h3 id="section-3">查看状态并启用</h3>
+<h3 id="section-3">修改白名单</h3>
+
+<p><strong>注意</strong>：这一步，是通过<a href="../install-by-extension-file.html">zip 安装</a>的用户，才需要做的，如果你是通过谷歌商店安装的，或者是通过 crx 文件安装的，则不需要执行这一步操作。</p>
+
+<p>因为 zip 包没有经过谷歌商店的签名。所以安装后，Chrome 浏览器会为其生成一个 id，这个 id 和经过谷歌商店签名过的 crx 文件是不一样的。所以我们需要修改 <code>manifest.json</code> 文件的 <code>allow_origins</code> 字段。</p>
+
+<p><strong>1）获取浏览器生成的 id</strong></p>
+
+<p>首先，在地址栏输入 <code>chrome://extensions</code>，回车。找到 MaoXian Web Clipper 扩展，复制上面显示的 id （注：如果你没有看到 id 字段，则打开开发者模式，即可看到）。</p>
+
+<p><strong>2）修改 <code>manifest.json</code></strong></p>
+
+<p>注：假设我们上一步获取到的 id 为 <code>abcdefghijklmnopqrstuvwxyzzzzzzz</code>。</p>
+
+<p><strong>修改前</strong></p>
+
+<pre><code class="language-json">{
+  "name": "maoxian_web_clipper_native",
+  ...
+  "allowed_origins": [ "chrome-extension://kjahokgdcbohofgdidndeiaigkehdjdc/" ]
+}
+</code></pre>
+
+<p><strong>修改后</strong></p>
+
+<pre><code class="language-json">{
+  "name": "maoxian_web_clipper_native",
+  ...
+  "allowed_origins": [ "chrome-extension://abcdefghijklmnopqrstuvwxyzzzzzzz/" ]
+}
+</code></pre>
+
+<h3 id="section-4">查看状态并启用</h3>
 
 <p>请重启你的浏览器后，到 <strong>扩展设置页面 &gt; 本地程序</strong> 小节查看状态，若显示的是 「本地程序」的版本号，则 MaoXian 扩展已经和 「本地程序」对接上了。如果显示的是错误信息，请查看下方 <a href="#problems">常见错误</a> 小节。确保对接上后，请勾选下方的 <strong>启用该处理程序</strong> 。</p>
 
@@ -169,11 +201,11 @@ data_dir: 'e:\\jack\clippings'
 
 <p>把 main.rb (安装目录下) 第一行的 “/usr/bin/env ruby” 改成 ruby 的绝对路径，比如 “/home/jack/ruby-2.5.0/bin/ruby”。 或者是创建一个软链接到 /usr/bin 目录下，比如： <code>ln -s /home/jack/ruby-2.5.0/bin/ruby /usr/bin/ruby</code>。</p>
 
-<h3 id="section-4">2. 配置不正确</h3>
+<h3 id="section-5">2. 配置不正确</h3>
 
 <p>如果你打开日志文件后，发现错误： “Config Invalid, data_dir not exist: xxxxx” ，则表示你配置文件 config.yaml 里面的 data_dir 配置的路径，在你的系统中是不存在的。则重新配置即可。</p>
 
-<h3 id="section-5">3. 还是不行？</h3>
+<h3 id="section-6">3. 还是不行？</h3>
 
 <p>可能发生 Bug 了。你可以用 <code>ruby -v</code> 检查下 ruby 版本， 若版本比 <code>2.4.1</code> 低，则重新安装更高的版本，重启浏览器，再试一下，还是不行的话，请到 <a href="https://github.com/mika-cn/maoxian-web-clipper/issues">项目 issue 页</a>，给开发者提个issue, 并在 issue 里粘贴上 app.log 里面的内容。</p>
 
