@@ -5,26 +5,26 @@
     "pick": "body",
     "chAttr": [
       {
-        "pick": "div.t0",
         "type": "self.add",
+        "pick": "div.t0",
         "value": "actived"
       },
       {
-        "pick": "div.t1 img",
         "type": "self.attr",
+        "pick": "div.t1 img",
         "attr": "src",
         "tAttr": "hq-src"
       },
       {
-        "pick": "div.t2 img",
         "type": "self.replace",
+        "pick": "div.t2 img",
         "attr": "src",
         "subStr": "thumb",
         "newStr": "hq"
       },
       {
-        "pick": "div.t3 img",
         "type": "parent.attr",
+        "pick": "div.t3 img",
         "attr": "src",
         "tAttr": "href"
       }
@@ -35,12 +35,13 @@
     "pattern": "http://dev.*/maoxian-web-clipper/tmp/test-page/iframe*",
     "chAttr": [
       {
-        "pick": "img",
         "type": "self.attr",
+        "pick": "img",
         "attr": "src",
         "tAttr": "hq-src"
       }
-    ]
+    ],
+    "frame": "child"
   },
   {
     "name": "dev.pc",

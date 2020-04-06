@@ -11,6 +11,10 @@
       "div.thumb",
       "div.dablink",
       "table.metadata"
+    ],
+    "tags": [
+      "knowledge",
+      "wiki"
     ]
   }
 ]
