@@ -17,7 +17,17 @@
 
 <p>为了更方便 MaoXian Web Clipper 用户在对网页进行 “裁剪” 之前执行一些操作，我们把「MaoXian 助手」集成到扩展中。该项目用于收集和分享各个用户编写的 “Plan”。</p>
 
-<h2 id="section-1">背景</h2>
+<blockquote>
+  <p><strong>注：</strong> MaoXian Web Clipper 已经支持记住选区功能，如果你只是懒的每次都点选，则记住选区功能会很适合你，推荐你前往扩展的设置页面开启试试。如果你想更好地控制你要裁剪的内容，或者遇到一些难搞的网页，那么请往下看 :)</p>
+</blockquote>
+
+<h2 id="section-1">项目地址</h2>
+
+<ul>
+  <li><a href="https://github.com/mika-cn/maoxian-assistant">传送门</a></li>
+</ul>
+
+<h2 id="section-2">背景</h2>
 
 <p>由于 MaoXian Web Clipper 裁剪网页的时候，裁剪的是当前状态下的网页，并且不会保存任何脚本文件（即 javascript）。 这意味着在一些情况下，我们需要对网页进行一些操作后，才能获得一个较好的裁剪结果。比如： 一篇文章里的图片显示的都是缩略图，而你想保存的是原图；或者是你不想保存选区内的按钮、评论等无关内容；又或者是网页上的某些区域是可折叠的，需要在裁剪前把它们都展开。开发「MaoXian 助手」就是为了解决这些较常见的问题。</p>
 
@@ -42,7 +52,7 @@ https://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
 
 </code></pre>
 
-<h2 id="section-2">参与进来</h2>
+<h2 id="section-3">参与进来</h2>
 
 <p>「MaoXian 助手」的功能强大于否取决于我们适配的网站的多少。这需要的不仅仅是开发者，更是每一个使用者的无私分享精神，于此，我们欢迎各位用户参与进来，只有这般，该助手才能发挥其真正的能力。</p>
 
@@ -52,7 +62,7 @@ https://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
 
 <h2 id="how-to-write-a-plan">如何编写 Plan</h2>
 
-<h3 id="section-3">流程</h3>
+<h3 id="section-4">流程</h3>
 
 <ol>
   <li>请到 MaoXian Web Clipper 的设置页面，启用「MaoXian 助手」</li>
@@ -108,6 +118,12 @@ https://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
       <td>选填</td>
       <td>用于修改元素的属性值，提供了多种修改属性的方式，详情请看下文</td>
     </tr>
+    <tr>
+      <td>tags</td>
+      <td>元祖</td>
+      <td>选填</td>
+      <td>用于编注网站属性，使这些 plan 更好管理</td>
+    </tr>
   </tbody>
 </table>
 
@@ -147,7 +163,7 @@ https://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
 
 <p>上面这个例子也可以使用 <code>https://example.org/blog</code> 作为 Pattern ，来直接匹配以该模式打头的网址，不同的 Pattern，严格程度不同，根据需求给出 Pattern 即可。</p>
 
-<h3 id="section-4">选择器</h3>
+<h3 id="section-5">选择器</h3>
 
 <p>选择器有两种：CSS 选择器 和 xPath 选择器。是一个字符串，结构为 <code>$type||$q</code> 。</p>
 
@@ -228,7 +244,8 @@ https://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
       "subStr": "small",
       "newStr": "big"
     }
-  ]
+  ],
+  "tags": ["IT", "blog"]
 }
 </code></pre>
 
@@ -269,7 +286,8 @@ https://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
       "attr": "src",
       "tAttr": "hq-src"
     }
-  ]
+  ],
+  "tags": ["IT", "blog"]
 }
 </code></pre>
 <ul>
@@ -304,7 +322,8 @@ https://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
       "attr": "src",
       "tAttr": "href"
     }
-  ]
+  ],
+  "tags": ["IT", "blog"]
 }
 </code></pre>
 
@@ -332,7 +351,8 @@ https://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
       "value": "folded",
       "sep": " "
     }
-  ]
+  ],
+  "tags": ["IT", "blog"]
 }
 </code></pre>
 
@@ -359,45 +379,45 @@ https://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
       "pick": ".section",
       "value": "folded"
     }
-  ]
+  ],
+  "tags": ["IT", "blog"]
 }
 </code></pre>
 
 <p>一般可以使用这两种 $action ，对网页折叠部分进行控制，使其达到我们想要的状态。这种方式不像上文的 show 参数那样粗暴地对 display 进行操控。</p>
 
+<h3 id="tags-">tags 参数的使用</h3>
+
+<p>虽然 Plan 的 tags 属性是非必须的，但还是建议你为 Plan 打上标签，以便后期，我们能更好地管理他们。</p>
+
+<h3 id="frame-">frame 参数（极少用到）</h3>
+
+<p>frame 参数有两个可选值，<code>top</code> 和 <code>child</code>，默认为 <code>top</code>。<code>top</code> 表明该 Plan 会应用到最上方的 frame，也就是地址栏对应的网页本身，而 <code>child</code> 则表明该 Plan 会应用到某个 <code>&lt;iframe&gt;</code> 或 <code>&lt;frame&gt;</code> 中，并且 <code>pick</code> 属性会被忽略，也就是说 <code>hide</code>，<code>show</code>，<code>chAttr</code> 属性的作用范围是 document，而不是原来的 <code>pick</code> 选中的那个元素。</p>
+
 <h2 id="plan">贡献 Plan</h2>
 
-<p>所有的 plan 都存储在 <code>plans</code> 目录下，比如 <code>plans/default/plans.yaml</code> 里面存储的是默认的 plan 信息，而 <code>plans/zh/plans.yaml</code> 存储的是中文网站相关的 plan 信息。最终所有的 <code>plans.yaml</code> 会在 <code>build.rb</code> 这个脚本的渲染下，变成 JSON 的格式。</p>
+<p>所有的 plan 都存储在 <code>plans</code> 目录下，比如 <code>plans/default/plans.json</code> 里面存储的是默认的 plan 信息，而 <code>plans/zh/plans.json</code> 存储的是中文网站相关的 plan 信息。最终所有的 <code>plans.json</code> 会在 <code>build.rb</code> 这个脚本的渲染下，变成可订阅的形式。</p>
 
-<p>我们倾向于使用 YAML 来维护所有的 Plan，这样会整个文件看起来更清晰, 并且可以加上一些注释。如果你没用过 YAML 这种格式也没有关系。项目里有个 <code>json2yaml.rb</code> 脚本，专门可以用来把 JSON 格式转换为 YAML 格式。</p>
+<p>你可以通过下方几种方式把 plan 分享出来：</p>
 
-<p>使用方式如下(把你写的 json 文本复制到 tmp/myplans.json ):</p>
+<ul>
+  <li>通过 Github 建 Pull Request 的形式。（把你编写的 plan 复制到对应的 plans.json 文件即可）</li>
+  <li>通过 Github 建 issue。（把 plan 贴上即可）</li>
+  <li>通过发邮件给开发者（i.mika[AT]tutanota.com），直接发送内容或者发送 patch。</li>
+</ul>
 
-<pre><code class="language-shell">$ ./json2yaml.rb tmp/myplans.json &gt; tmp/myplans.yaml
-</code></pre>
+<h3 id="plansjson-">plans.json 的字段解释</h3>
 
-<p>再把 tmp/myplans.yaml 里面的 Plan 复制到对应的 plans.yaml （比如： plans/zh/plans.yaml ），提个 PR （pull request）就完成了。</p>
+<ul>
+  <li>name 为我们取的一个名字，只能使用字母和中划线 <code>-</code> 和 下划线 <code>_</code></li>
+  <li>version 为版本信息，我们使用年月日作为版本，在每次发布之前才需要修改它</li>
+  <li>description 为描述信息</li>
+  <li>plans 为我们维护的 plan 集合，是一个元祖（数组），上一节，提到的复制，即复制到 plans 下面即可。</li>
+</ul>
 
-<h3 id="plansyaml-">plans.yaml 的结构解释</h3>
+<h2 id="section-6">最后</h2>
 
-<pre><code class="language-yaml"># name 为我们为该 plan 列表取的一个名字，只能使用字母和中划线 "-" 和 下划线 "_"
-name: 'default'
-
-# version 为版本信息，我们使用年月日作为版本，在每次发布之前才需要修改它
-version: '20190101'
-
-# description 为描述信息
-description: 'default plans'
-
-# plans 为我们维护的 plan 集合，是一个元祖（数组）
-# 上一节，提到的复制，即复制到 plans 下面即可。
-plans:
-  - ...
-</code></pre>
-
-<hr />
-
-<p><a href="../index-zh-CN.html">首页</a></p>
+<p>如果你对「毛线助手」有什么看法或建议，请<a href="https://github.com/mika-cn/maoxian-assistant/issues">告诉我们</a>。</p>
 
     </div>
   </body>
