@@ -52,8 +52,8 @@ $ sha512sum maoxian-web-clipper-x.x.x.crx
 > **声明**：Google Chrome 的上线流程需要人工进行审核。所以这里 crx 文件需要等待几个工作日后，才能得到。也就是说这里的文件可能不是最新的（可能由于太忙忘记去下载这个 crx 文件了），非常抱歉。你可以使用下方的 crx4chrome 网站获取最新的 crx 文件，或者是使用 zip 包安装 （具体看下一小节）。
 
 
-* [maoxian-web-clipper-chrome-0.1.52.crx](extension/0.1.52/maoxian-web-clipper-chrome-0.1.52.crx)
-* [maoxian-web-clipper-chrome-0.1.52.crx.checksum.txt](extension/0.1.52/maoxian-web-clipper-chrome-0.1.52.crx.checksum.txt)
+* [maoxian-web-clipper-chrome-0.1.54.crx](extension/0.1.54/maoxian-web-clipper-chrome-0.1.54.crx)
+* [maoxian-web-clipper-chrome-0.1.54.crx.checksum.txt](extension/0.1.54/maoxian-web-clipper-chrome-0.1.54.crx.checksum.txt)
 
 **另一处下载源**
 
