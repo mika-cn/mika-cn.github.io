@@ -19,6 +19,7 @@
 
 <ul>
   <li><a href="#what-content-will-be-saved">扩展会保存哪些内容？</a></li>
+  <li><a href="#why-require-so-many-permissions">为什么需要那么多权限？</a></li>
   <li><a href="#clip-menu-not-work">点击了裁剪，没有反应</a></li>
   <li><a href="#crash-on-clipping">裁剪流程停在下载中就没反应了</a></li>
   <li><a href="#change-default-download-path">改变默认的下载路径</a></li>
@@ -71,6 +72,88 @@
 
 <hr />
 
+<h2 id="why-require-so-many-permissions">为什么需要那么多权限</h2>
+
+<p>在详细解释各权限在 MaoXian 这个扩展中的用途之前，有必要先解释一下： 这些权限的说明文字是站在用户的角度来表述的，当你在浏览器上看到这些说明文字时，其潜台词为：<strong>这个扩展拥有了这个权限之后，它最大限度可以做到这个 （而不是，这个扩展拥有了这个权限后，就一定会做这个）</strong>。</p>
+
+<p>下方是本扩展 <code>manifest.json</code> 文件里面的权限信息，由于这些权限很难用简练的文字表述出来，所以通过引用 <code>manifest.json</code> 文件里面的权限名来进行说明。</p>
+
+<pre><code class="language-json">{
+  "permissions": [
+    "&lt;all_urls&gt;",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "tabs",
+    "downloads",
+    "downloads.open",
+    "nativeMessaging"
+  ]
+}
+
+</code></pre>
+
+<p>下面我们详细说明这些权限在 MaoXian 中的用途：</p>
+
+<p><strong>权限：&lt;all_urls&gt;</strong></p>
+
+<ul>
+  <li>Chrome 描述文字：读取和更改你访问的所有网站的数据</li>
+  <li>Firefox 描述文字：访问所有网站的的数据</li>
+  <li>实际用途：MaoXian 使用该权限，去做一些初始化工作：初始化消息通道、如监听快捷键<kbd>C</kbd>、查找之前有没有对类似网页进行裁剪过，如果有，找出当时的裁剪信息（记住选取功能）等等。</li>
+</ul>
+
+<p><strong>权限：webNavigation</strong></p>
+
+<ul>
+  <li>Chrome 描述文字： 读取你的浏览历史</li>
+  <li>Firefox 描述文字：读取你的浏览活动</li>
+  <li>实际用途： MaoXian 使用该权限，去获取当前网页的所有内嵌网页的信息，为的是向其发送消息，以便能裁剪这些内嵌的网页。</li>
+</ul>
+
+<p><strong>权限：webRequest 和 webRequestBlocking</strong></p>
+
+<ul>
+  <li>Chrome 描述文字：无描述</li>
+  <li>Firefox 描述文字：无描述</li>
+  <li>实际用途： MaoXian 使用该权限，去记录图片请求的文件格式，以便在保存那些网址不包含扩展名的图片时，能修复其扩展名（注：有些浏览器在打开无扩展名的图片时，无法正常显示）。并且使用该权限去修改 MaoXian 扩展发出的请求的请求头（request header），对应于 <em>设置页面 &gt; 高级设置 &gt; 设置 Referrer</em>，这个是为了隐私保护的，默认的资源请求，包含的 Referrer 信息太大了。</li>
+</ul>
+
+<p><strong>权限：storage</strong></p>
+
+<ul>
+  <li>Chrome 描述文字：无描述</li>
+  <li>Firefox 描述文字：无描述</li>
+  <li>实际用途： 该权限赋予扩展保存信息的能力。MaoXian 使用该权限去保存：配置信息（包含设置页面和历史页面），裁剪记录（也就是历史页面显示的信息），目录记录，标签记录。所有这些信息都保存在你的本地，<strong>注：</strong> 该权限可以允许你保存的信息通过浏览器提供商的帐号体系（Firefox帐号或谷歌帐号），进行跨设备同步。在 MaoXian 中，我们没有启用该功能，将来也不会启用。</li>
+</ul>
+
+<p><strong>权限：tabs</strong></p>
+
+<ul>
+  <li>Chrome 描述文字： 无描述</li>
+  <li>Firefox 描述文字：访问浏览器的标签页</li>
+  <li>实际用途：MaoXian 使用该权限，主要是要获取「标签页」的 ID，扩展里各个组件间的通讯用到这个ID。并且还使用该权限去打开一个网页（通过创建「标签页」的方式打开），这些网页为：扩展本身的网页（如：设置页面，历史页面等）以及外部网页（如：项目文档）</li>
+</ul>
+
+<p><strong>权限：downloads 和 downloads.open</strong></p>
+
+<ul>
+  <li>Chrome 描述文字： 管理你的下载，并打开已下载的文件</li>
+  <li>Firefox 描述文字：下载文件，读取和更改你的下载历史，打开下载到你电脑的文件</li>
+  <li>实际用途：MaoXian 使用 <code>downloads</code> 权限去保存裁剪下来的文件，并且从你的下载记录里，删除掉除主文件外的下载历史（MaoXian 一次性会下载许多文件，如果都放到下载历史里，会把下载历史搞得很乱）。当文件下载完成后，MaoXian 使用 <code>downloads.open</code> 权限，去打开下载下来的主文件。</li>
+</ul>
+
+<p><strong>权限：nativeMessaging</strong></p>
+
+<ul>
+  <li>Chrome 描述文字： 与对应的本地程序通讯</li>
+  <li>Firefox 描述文字：与 Firefox 之外的程序，交换信息</li>
+  <li>实际用途： MaoXian 使用该权限，与 <a href="native-app/index-zh-CN.html">「本地程序」</a> 进行通讯。你需要安装 「本地程序」后，才会使用到该权限。</li>
+</ul>
+
+<hr />
+
 <h2 id="clip-menu-not-work">点击了裁剪，没有反应</h2>
 
 <p>请依次检查以下情况:</p>
@@ -98,7 +181,7 @@
 
 <p>如果你采用<a href="native-app/index-zh-CN.html">「本地程序」</a>的方式保存信息的话，直接修改配置文件，再重启一下浏览器就可以了。</p>
 
-<p>如果你采用的是 「浏览器下载功能」来保存信息的话，由于安全问题，浏览器扩展无法修改浏览器的下载路径。但是你可以通过创建软链接(符号链接)，来达到你的目地。方法如下：</p>
+<p>如果你采用的是 「浏览器下载功能」来保存信息的话，由于安全问题，浏览器扩展无法修改浏览器的下载路径。但是你可以通过创建软链接（符号链接），来达到你的目地。方法如下：</p>
 
 <h3 id="linuxmac">Linux/Mac</h3>
 
@@ -109,7 +192,10 @@
   <li>/home/jack/Dropbox/clips [是你的目标路径]</li>
 </ul>
 
-<p>运行命令: <code>ln -s /home/jack/Dropbox/clips /home/jack/Downloads/mx-wc</code></p>
+<p>运行命令:</p>
+
+<pre><code class="language-shell">ln -s /home/jack/Dropbox/clips /home/jack/Downloads/mx-wc
+</code></pre>
 
 <h3 id="windows">Windows</h3>
 
@@ -122,7 +208,10 @@
 
 <p>把下面的命令保存成 mklink.bat 文件，再右击该文件，以管理员方式运行。</p>
 
-<p>命令: <code>mklink /D C:\Users\jack\Downloads\mx-wc C:\Users\jack\OneDrive\clips</code></p>
+<p>命令:</p>
+
+<pre><code class="language-shell">mklink /D C:\Users\jack\Downloads\mx-wc C:\Users\jack\OneDrive\clips
+</code></pre>
 
 <hr />
 
@@ -234,7 +323,7 @@
 
 <ul>
   <li>当前网页的网址（如果你遇到的是裁剪过程中的 bug）。</li>
-  <li>支持页的信息 （扩展图标 &gt; 主页 &gt; 支持页），进入该页面后按 <code>Ctrl + A</code> 或者 <code>Cmd + A</code>（苹果电脑用户）选中所有信息，反馈时带上这些信息。</li>
+  <li>支持页的信息 （扩展图标 &gt; 主页 &gt; 支持页），进入该页面后按 <kbd>Ctrl</kbd> + <kbd>A</kbd> 或者 <kbd>Cmd</kbd> + <kbd>A</kbd>（苹果电脑用户）选中所有信息，反馈时带上这些信息。</li>
   <li>以及详细地描述你遇到的问题。</li>
 </ul>
 

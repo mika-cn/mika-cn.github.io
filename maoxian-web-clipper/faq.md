@@ -1,8 +1,7 @@
 
-[link-id]: https://mika-cn.github.io
-
 # MaoXian Web Clipper FAQ
 
+* [Why it requires so many permissions?](#why-require-so-many-permissions)
 * [Not response after click clip](#clip-menu-not-work)
 * [Stop on clipping-hint every clipping](#crash-on-clipping)
 * [Change Default download path](#change-default-download-path)
@@ -10,6 +9,74 @@
 * [Allow file URLs Access](#allow-access-file-urls)
 * [Report new issue](#feedback)
 
+
+-------------------------------------------
+
+## Why it requires so many permissions? {#why-require-so-many-permissions}
+
+Before we describe every permission's usage, it's necessary to clarify one thing: The description of permissions you saw on browser is said on user's position. when you saw these description. You should consider it as this extension will get the potential to do these things(whatever description of permission you saw) if it has got this permission rather than this extension will do these things if it has got this permission.
+
+Content below is the permissions that is declared in `manifest.json`. We'll use these permission names to introduce it's usage.
+
+```json
+{
+  "permissions": [
+    "<all_urls>",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "tabs",
+    "downloads",
+    "downloads.open",
+    "nativeMessaging"
+  ]
+}
+
+```
+
+**Permission: &lt;all_urls&gt;**
+
+* description on Chrome: Read and change all your data on websites you visit on all sites.
+* description on Firefox: Access your data for all websites
+* actual usage: MaoXian use this permission to do some initializations. Such as initialize message channel, listen to hotkey<kbd>C</kbd>, get current url and find out whether this kind of web page was clipped before(remember selection) etc.
+
+**Permission: webNavigation**
+
+* description on Chrome: Read your browser history.
+* description on Firefox: Access browser activity during navigation.
+* actual usage: MaoXian use this permission to get information of embed web pages. then using these information to communicate with it, so that they can be clipped.
+
+**Permission: webRequest and webRequestBlocking**
+
+* description on Chrome: Not description
+* description on Firefox: Not description
+* actual usage: MaoXian use these permissions to record MIME type of images. Some urls of images haven't file extension. we want to fix it(using MIME type) so that browsers can recognize the format of image and display it correctly. And these permissions are also used to modify the request headers that is sent by MaoXian. We modify some headers so that we leak less information to asset servers(see _Setting page > advanced > Referrer Policy_ for more details).
+
+
+**Permission: storage**
+
+* description on Chrome: Not description
+* description on Firefox: Not description
+* actual usage: This permission give browser extensions the ability to storage information. MaoXian use it to save configuration(includes setting page and history page), clipping records(which are showed on history page), category history and tag history. All these information will storage on your local hard disk. Note that this permission has potential to synchronize information across different devices if your account is online, MaoXian didn't enable this feature and won't enable it in the future.
+
+**Permission: tabs**
+
+* description on Chrome: Not description.
+* description on Firefox: Access browser tabs.
+* actual usage: MaoXian use this permission to get tab IDs that will be used to send message between components. And use this permission to load a web page in a new tab, these web pages include internal web pages of extension(setting page, history page etc.) and external web pages(e.g: documentation of this project).
+
+**Permission: downloads and downloads.open**
+
+* description on Chrome: Manage your downloads, Open downloaded files.
+* description on Firefox: Downlaod files and read and modify the browser's download history, Open files downloaded to your computer.
+* actual usage: MaoXian use `downloads` permission to save clipped files and delete these download records except the main file(MaoXian don't want to mess your download history). After clipping, MaoXian use `downloads.open` to open the clipped file.
+
+**Permission: nativeMessaging**
+
+* description on Chrome: Communicate with cooperating native applications
+* description on Firefox: Exchange messages with programs other than Firefox.
+* actual usage: MaoXian use this permission to communicate with [Native App](native-app/index.html)。
 
 -------------------------------------------
 
@@ -45,7 +112,11 @@ Assume:
 * /home/jack/Downloads     [your download path]
 * /home/jack/Dropbox/clips [destination directory]
 
-Command: `ln -s /home/jack/Dropbox/clips /home/jack/Downloads/mx-wc`
+Command:
+
+```shell
+ln -s /home/jack/Dropbox/clips /home/jack/Downloads/mx-wc
+```
 
 ### For Windows
 
@@ -56,7 +127,11 @@ Assume:
 
 Save command below as mklink.bat, and run mklink.bat as administrator(right click, run as administrator).
 
-Command: `mklink /D C:\Users\jack\Downloads\mx-wc C:\Users\jack\OneDrive\clips`
+Command:
+
+```shell
+mklink /D C:\Users\jack\Downloads\mx-wc C:\Users\jack\OneDrive\clips
+```
 
 -------------------------------------------
 
