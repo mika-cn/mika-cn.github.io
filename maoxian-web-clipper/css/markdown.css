@@ -18,6 +18,7 @@ body {
 }
 
 /******** headers ********/
+h1,h2,h3,h4,h5,h6 {color: black;}
 h1 {padding-bottom: 20px; text-align: center;}
 h2 {padding-top: 20px; }
 
@@ -25,10 +26,10 @@ h2 {padding-top: 20px; }
 
 .main {
   max-width: 100%;
-  font-size: 14px;
-  line-height: 23px;
+  font-size: 16px;
+  line-height: 26px;
   background-color: WhiteSmoke;
-  color: black;
+  color: #111111;
 }
 
 .main img { max-width: 100%; }
@@ -36,14 +37,33 @@ h2 {padding-top: 20px; }
 blockquote {
   margin-left: 0px;
   padding: 5px 15px 5px 15px;
-  border-left: 4px solid yellowgreen;
+  border: 1px dashed #666;
   background-color: #fff;
 }
 
 code {
   border-radius: 3px;
   padding: 2px 3px 2px 3px;
-  background-color: rgba(27,31,35,0.15);
+  /*background-color: rgba(27,31,35,0.15);*/
+  /*background-color: #F4EED7;*/
+  /*color: #FF5555;*/
+  color: #1E47B4;
+}
+
+kbd {
+  display: inline-block;
+  font-size: 13px;
+  min-width: 20px;
+  line-height: 15px;
+  width: auto;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 1px 2px;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #fafafa;
+  color: #333;
+  box-shadow: 1px 1px 2px gray;
 }
 
 hr {
@@ -54,24 +74,42 @@ hr {
 
 table {
   padding: 5px;
-  border-radius: 3px;
+  border: 0px;
   border-collapse: collapse;
   font-size: 13px;
 }
 table > thead {
-  background-color: #e5e5e5;
+  background-color: #777777;
+  color: white;
 }
+
 table th, table td {
-  border: solid 1px #888888;
+  border: solid 1px #AAAAAA;
   padding: 5px;
+}
+
+table td {
+  background-color: #FFFFFF;
 }
 
 pre > code {
   display: block;
-  border: 1px solid #ccc;
   padding: 5px 10px;
-  background-color: #D8D8D8;
+  border-radius: 3px;
+  /*background-color: black;*/
+  /*background-color: #0E2233;*/
+  background-color: #303030;
+  color: #F0F0F0;
   overflow-x: auto;
+}
+
+pre > code.language-shell {
+  background-color: black;
+  color: #00CC00;
+}
+
+pre > code.language-graph {
+  line-height: 22px;
 }
 
 /* delete me*/

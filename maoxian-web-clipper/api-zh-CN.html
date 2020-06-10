@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="编程接口" />
+    <title>MaoXian API</title>
+    <link rel="icon" type="image/png" href="imgs/logo.png" />
+    <link rel="stylesheet" type="text/css" href="css/markdown.css" />
+    <style>
+    </style>
+  </head>
+  <body>
+    <div class="main">
+<h1 id="section">编程接口</h1>
+
+<h2 id="section-1">准备工作</h2>
+
+<p><strong>1）开启第三方消息</strong></p>
+
+<p>请到 <code>设置页面 &gt; 高级</code> 进行开启</p>
+
+<p><strong>2）选择 js 代码的运行方式</strong></p>
+
+<ul>
+  <li>方式一：使用 「油猴脚本」（洋文叫：userScript）浏览器扩展。</li>
+  <li>方式二：自己编写浏览器扩展。</li>
+</ul>
+
+<p>方式一很方便，你需要安装一个可以运行油猴脚本的扩展，常见的有 Greasemonkey、 Tampermonkey， 选一个适用你浏览器的安装即可。然后编写「油猴脚本」，该方式需要你对「油猴脚本」有所了解。</p>
+
+<p>当然，你也可选择方式二，编写浏览器扩展可以给你最大的可控性。</p>
+
+<h2 id="maoxian-">与 MaoXian 交互</h2>
+
+<h3 id="maoxian--1">监听 MaoXian 发出的事件</h3>
+
+<p>MaoXian 会在特定的时间点，发送特定的事件，我们可以监听这些事件，并运行我们的代码。如下：</p>
+
+<pre><code class="language-javascript">document.addEventListener('mx-wc.selecting', function(e) {
+  // 注：有的事件会带有消息，消息为 JSON 字符串
+  // const msg = JSON.parse(e.detail);
+
+  // Do your work
+})
+</code></pre>
+
+<h3 id="maoxian">发送事件给 MaoXian</h3>
+
+<p>下方例子，预设置当前域名和日期为tag。</p>
+
+<pre><code class="language-javascript">document.addEventListener('mx-wc.selecting', function(e) {
+
+  // 1. 构造消息
+  const t = new Date();
+  const date = [t.getFullYear(), t.getMonth() + 1, t.getDate()].join('-');
+  const tagstr = [window.location.host, date].join(',');
+  const msg = {options: {tagStr: tagstr}};
+
+  // 2. 创建事件（注意：我们把消息转成 JSON 字符串）
+  const detail = JSON.stringify(msg);
+  const evName = 'mx-wc.set-form-input';
+  const ev = new CustomEvent(evName, {detail: detail});
+
+  // 3. 发送事件
+  document.dispatchEvent(ev);
+});
+</code></pre>
+
+<h2 id="section-2">事件详细说明</h2>
+
+<h3 id="section-3">流程图</h3>
+
+<pre><code class="language-graph">------&gt; ready
+          |
+      +-----&gt; actived* --&gt;  selecting --&gt; selected --&gt; confirmed --&gt; clipping --&gt; clipped* --&gt; saving --&gt; completed
+      |                         |             |            |                                                         |
+    idle &lt;----------------------+-------------+------------+---------------------------------------------------------+
+</code></pre>
+
+<h3 id="section-4">概览</h3>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>事件名</th>
+      <th>含消息？</th>
+      <th>简介</th>
+      <th>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>mx-wc.ready</td>
+      <td>否</td>
+      <td>初始化完成</td>
+      <td><strong>注意：</strong>该事件会发出多次，详情见下文</td>
+    </tr>
+    <tr>
+      <td>mx-wc.idle</td>
+      <td>否</td>
+      <td>切回空闲状态</td>
+      <td>由其他活跃状态，进行退出或取消操作后，发出该事件</td>
+    </tr>
+    <tr>
+      <td>mx-wc.selecting</td>
+      <td>否</td>
+      <td>进入自由选择模式</td>
+      <td>点击「裁剪」或者从选中模式按 ESC，会触发该事件</td>
+    </tr>
+    <tr>
+      <td>mx-wc.selected</td>
+      <td>否</td>
+      <td>选中某个选区</td>
+      <td>点击选中某个区域后，发出该事件</td>
+    </tr>
+    <tr>
+      <td>mx-wc.confirmed</td>
+      <td>否</td>
+      <td>确认某个选区</td>
+      <td>在选中区域后，按 Enter 建，发出该事件</td>
+    </tr>
+    <tr>
+      <td>mx-wc.submitted</td>
+      <td>是</td>
+      <td>表单提交</td>
+      <td>表单提交时，触发该事件</td>
+    </tr>
+    <tr>
+      <td>mx-wc.clipping</td>
+      <td>否</td>
+      <td>开始裁剪</td>
+      <td>填写完表单后，点击保存后，发出该事件</td>
+    </tr>
+    <tr>
+      <td>mx-wc.clipped</td>
+      <td>是</td>
+      <td>裁剪完成</td>
+      <td>裁剪完成时，发出该事件</td>
+    </tr>
+    <tr>
+      <td>mx-wc.saving</td>
+      <td>否</td>
+      <td>存储中</td>
+      <td>存储操作开始时，发出该事件</td>
+    </tr>
+    <tr>
+      <td>mx-wc.completed</td>
+      <td>是</td>
+      <td>裁剪和存储完成</td>
+      <td>裁剪和存储完成后，发出该事件</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="mx-wcready">mx-wc.ready</h3>
+
+<p>为了避免因为代码运行顺序不同，而导致事件丢失，该事件会发出多次，我们在监听该事件时，需要避免多次执行。如下：</p>
+
+<pre><code class="language-javascript">const evName = 'mx-wc.ready';
+const listener = function(e) {
+  // Do your work
+
+  // 确保该监听器，只执行一次
+  document.removeEventListener(evName, listener);
+}
+document.addEventListener(evName, listener);
+</code></pre>
+
+<p>当我们收到该事件，则表明 MaoXian 已经初始化完毕，可以与其正常通讯了。</p>
+
+<h3 id="mx-wcidle">mx-wc.idle</h3>
+
+<p>注意：在 <code>mx-wc.ready</code> 过后，并不会触发 <code>mx-wc.idle</code> 事件。该事件只在其他活跃状态下，进行退出或取消后，才会触发，如下：</p>
+
+<ul>
+  <li>用户进入自由选择模式，后进行退出</li>
+  <li>用户进入选中模式后，进行退出</li>
+  <li>用户确认选区后，点击表单的取消按钮</li>
+  <li>裁剪完成后，触发</li>
+</ul>
+
+<h3 id="mx-wcselecting">mx-wc.selecting</h3>
+
+<p>当进入「自由选择」模式时，就会触发该事件，如：</p>
+
+<ul>
+  <li>当用户点击「裁剪」</li>
+  <li>通过快捷键 <kbd>C</kbd> 进入裁剪时</li>
+  <li>从「选中模式」按 <kbd>ESC</kbd> 退回来</li>
+  <li>从填写表单，按 <kbd>ESC</kbd>，也会退回来</li>
+</ul>
+
+<h3 id="mx-wcselected">mx-wc.selected</h3>
+
+<p>当进入「选中模式」时，触发该事件，也就是你点击某个选区后，就会触发。</p>
+
+<h3 id="mx-wcconfirmed">mx-wc.confirmed</h3>
+
+<p>从「选中模式」按下 <kbd>Enter</kbd> 后，会触发该事件。</p>
+
+<h3 id="mx-wcclipping">mx-wc.clipping</h3>
+
+<p>点击表单的保存按钮后，开始裁剪的时候会触发该事件。</p>
+
+<h3 id="mx-wccompleted">mx-wc.completed</h3>
+
+<p>整个裁剪流程完成时，触发该事件。</p>
+
+<hr />
+
+<p>{
+  qType: ‘css’ or ‘xPath’
+  q:
+  options:
+}</p>
+
+<ul>
+  <li>mx-wc.focus-elem</li>
+  <li>mx-wc.confirm-elem</li>
+  <li>mx-wc.clip-elem</li>
+  <li>
+    <p>mx-wc.set-form-input</p>
+  </li>
+  <li>mx-wc.clipping-save-stgarted</li>
+  <li>mx-wc.clipping-save-progress</li>
+  <li>mx-wc.clipping-save-completed
+  {
+ clipID,
+ originalUrl,
+ filename,
+ url,
+ downloadItemId,
+ taskNum,
+ failedTaskNum,
+ pendingTaskNum,
+ completedTaskNum,
+ failedTasks,
+  }</li>
+</ul>
+
+<hr />
+<p><a href="index-zh-CN.html">首页</a></p>
+</div>
+  </body>
+</html>
+
