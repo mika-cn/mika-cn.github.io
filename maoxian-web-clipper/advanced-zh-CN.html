@@ -45,61 +45,6 @@
 
 <h3 id="set-form-inputs">预设置表单的输入值</h3>
 
-<p>MaoXian 会在显示表单的时候，自动帮你输入这些预设的值。</p>
-
-<p>表单的输入项名字和解释如下：</p>
-
-<table border=1>
-  <thead>
-    <tr>
-      <th>名字</th>
-      <th>说明</th>
-      <th>默认值</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>title</td>
-      <td>对应表单的标题</td>
-      <td>当前网页的标题</td>
-    </tr>
-    <tr>
-      <td>category</td>
-      <td>对应表单的目录（多级目录用 <code>/</code> 隔开）</td>
-      <td>取决于你的设置（见扩展设置页面）</td>
-    </tr>
-    <tr>
-      <td>tagstr</td>
-      <td>对应表单的标签（多个标签用 <code>,</code> 或 <code>空格</code> 隔开)</td>
-      <td>无</td>
-    </tr>
-  </tbody>
-</table>
-
-<p>用法参照下例：</p>
-
-<pre><code class="language-javascript">// ==UserScript==
-// @name         example
-// @namespace    example@MaoXian.OwnYourData
-// @version      0.1
-// @description  your description
-// @author       you
-// @require      https://mika-cn.github.io/maoxian-web-clipper/mx-wc-tool-v0.0.6.js
-// @include     *
-// @grant        none
-// ==/UserScript==
-
-(function() {
-
-  const t = new Date();
-  const date = [t.getFullYear(), t.getMonth() + 1, t.getDate()].join('-');
-  const tagstr = [window.location.host, date].join(',');
-
-  // 预设置当前域名和日期为tag，方便在裁剪历史页面进行搜索。
-  MxWc.setFormInputs({ tagstr: tagstr });
-})();
-</code></pre>
-
 <p><code>mx-wc-tool.js</code> 脚本文件会帮助你监听 <strong>扩展进入裁剪模式</strong> 事件，并告知扩展，待会显示表单后，填入这些值。</p>
 
 <p><strong>注意：</strong> 如果你的脚本同时用到了下方的 <code>ConfirmCmd</code> ，则需要让 <code>MxWc.setFormInputs</code> 最先运行（这两个功能监听的是同一事件，有先后顺序的问题）。</p>
