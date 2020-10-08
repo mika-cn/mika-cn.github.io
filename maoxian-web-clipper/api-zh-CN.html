@@ -4,53 +4,93 @@
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="description" content="编程接口" />
-    <title>MaoXian API</title>
+    <title>编程接口</title>
     <link rel="icon" type="image/png" href="imgs/logo.png" />
     <link rel="stylesheet" type="text/css" href="css/markdown.css" />
     <style>
 
+      .toc {
+        display: block;
+      }
+
+      .pin-toc-switcher {
+        z-index: 1;
+        display: block;
+        width: 25px;
+        height: 25px;
+        background-color: #aaa;
+        color: #f0f0f0;
+        position: absolute;
+        top: 15px;
+        right: 30px;
+        text-align: center;
+        cursor: pointer;
+      }
+      .pin-toc-switcher:before {
+        content: '=';
+      }
+
+      /* layout relative style */
+
       @media (min-width: 768px) {
-        .toc {
+        .pin-toc:checked ~ .toc {
           position: fixed;
-          display: block;
           z-index: 1;
-          top: 20px;
-          bottom: 20px;
+          top: 50px;
+          bottom: 50px;
           right: 8px;
           width: 26%;
+          font-size: 14px;
+          background-color: #eee;
+          overflow-x: auto;
+          overflow-y: auto;
+          box-shadow: 0px 2px 3px rgba(0,0,0,.1);
+          border: 1px dashed #ccc;
         }
-        .content {
+        .pin-toc:checked ~ .toc a {
+          color: #444;
+          text-decoration: none;
+        }
+        .pin-toc:checked ~ .toc a:visited {
+          color: #444;
+        }
+
+        .pin-toc:checked ~ .toc h2 {
+          margin: 15px;
+          border: 0px;
+          color: #333;
+        }
+
+        .pin-toc:checked ~ .toc ul { margin-left: 0px; }
+        .pin-toc:checked ~ .toc ol { margin-left: 0px; }
+        .pin-toc:checked ~ .content {
           width: 69%;
           margin-right: 30%;
+        }
+
+        .pin-toc:checked ~ .pin-toc-switcher:before {
+          content: '^';
         }
       }
 
       @media (max-width: 767px) {
-        .toc {display: none;}
+        .pin-toc-switcher {
+          display: none;
+        }
       }
 
-      .toc {
-        background-color: #eee;
-        overflow-x: auto;
-        overflow-y: auto;
-        font-size: 14px;
-        box-shadow: 0px 2px 3px rgba(0,0,0,.1);
-        border: 1px dashed #ccc;
-      }
-
-      .toc a {
-        color: #444;
-        text-decoration: none;
-      }
-      .toc a:visited {
-        color: #444;
-      }
 
     </style>
   </head>
   <body>
     <div class="main">
-      <div class="toc"><ul>
+      <div class="title"><h1>编程接口</h1></div>
+
+      <input type="checkbox" id="pin-toc" class="pin-toc" hidden>
+      <label for="pin-toc" class="pin-toc-switcher"></label>
+      <div class="toc">
+        <h2>目录</h2>
+        <ul>
   <li><a href="#get-ready">准备工作 </a></li>
   <li><a href="#introduction">了解 MaoXian 的裁剪过程 </a></li>
   <li><a href="#what-can-i-do-with-it">我能用这些 API 做些什么？ </a></li>
@@ -91,10 +131,10 @@
   </li>
   <li><a href="#last-note">写在最后 </a></li>
 </ul>
-</div>
-      <div class="content">
-<h1 id="section">编程接口</h1>
 
+      </div>
+
+      <div class="content">
 <h2 id="get-ready">准备工作</h2>
 
 <p><strong>1）启用 API</strong></p>

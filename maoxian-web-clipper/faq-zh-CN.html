@@ -12,8 +12,8 @@
   </head>
   <body>
     <div class="main">
-<h1 id="maoxian-web-clipper-">MaoXian Web Clipper 常见问题</h1>
-
+      <div class="title"><h1>常见问题</h1></div>
+      <div class="content">
 <h2 id="section">目录</h2>
 
 <ul>
@@ -24,11 +24,10 @@
   <li><a href="#change-default-download-path">改变默认的下载路径</a></li>
   <li><a href="#can-not-open-clipping-in-history">无法打开以前裁剪的内容</a></li>
   <li><a href="#allow-access-file-urls">允许访问本地网址</a></li>
+  <li><a href="#script-busy">浏览器弹出提示框提示：脚本无反应，询问是否中止</a></li>
   <li><a href="#save-as-single-file">能把网页裁剪成单个文件？比如：裁剪成 mhtml、zip 或者 存成图片</a></li>
   <li><a href="#feedback">反馈新问题</a></li>
 </ul>
-
-<hr />
 
 <h2 id="what-content-will-be-saved">扩展会保存哪些内容？</h2>
 
@@ -68,8 +67,6 @@
 </ul>
 
 <p>不会保存的内容和 HTML 一样，外加上不会保存网页样式。</p>
-
-<hr />
 
 <h2 id="why-require-so-many-permissions">为什么需要那么多权限</h2>
 
@@ -151,8 +148,6 @@
   <li>实际用途： MaoXian 使用该权限，与 <a href="native-app/index-zh-CN.html">「本地程序」</a> 进行通讯。你需要安装 「本地程序」后，才会使用到该权限。</li>
 </ul>
 
-<hr />
-
 <h2 id="clip-menu-not-work">点击了裁剪，没有反应</h2>
 
 <p>请依次检查以下情况:</p>
@@ -161,8 +156,6 @@
   <li>如果你刚安装完扩展，那些在安装前就已经打开的网页得刷新后才能裁剪。</li>
   <li>目前 MaoXian 只兼容 <code>Chrome</code> 和 <code>Firefox</code>, 其他浏览器不保证能正常工作。有的用户可能会使用基于 <code>Chromium</code> 开发的浏览器（如：vivaldi），该类浏览器很可能可以正常工作，但我们无法作出保证。</li>
 </ol>
-
-<hr />
 
 <h2 id="crash-on-clipping">裁剪流程停在下载中就没反应了</h2>
 
@@ -173,8 +166,6 @@
 <p>我们开发了一个本地程序来解决这个问题。</p>
 
 <p>详情见: <a href="native-app/index-zh-CN.html">Native App</a></p>
-
-<hr />
 
 <h2 id="change-default-download-path">改变默认的下载路径</h2>
 
@@ -212,8 +203,6 @@
 <pre><code class="language-shell">mklink /D C:\Users\jack\Downloads\mx-wc C:\Users\jack\OneDrive\clips
 </code></pre>
 
-<hr />
-
 <h2 id="can-not-open-clipping-in-history">无法打开以前裁剪的内容</h2>
 
 <p>有的朋友可能发现，我刚裁剪下来的文件可以打开，可过几天就打不开了。</p>
@@ -221,8 +210,6 @@
 <p>这个是因为扩展在无法访问你本地网址的时候，会尝试通过下载历史打开文件，当浏览器的下载历史被清空（可能是你主动清空的，也可能是浏览器重启后清空的）时，扩展找不到办法打开你的文件了。</p>
 
 <p>可以通过<a href="#allow-access-file-urls">允许扩展访问本地网址</a>, 来避免这个问题。</p>
-
-<hr />
 
 <h2 id="allow-access-file-urls">允许访问本地网址</h2>
 
@@ -300,7 +287,9 @@
 
 <p>回到 MaoXian 的设置页面，把“本地网址” 一节中的复选框打上勾。</p>
 
-<hr />
+<h2 id="script-busy">浏览器弹出提示框提示：脚本无反应，询问是否中止</h2>
+
+<p>目前在一些大的网页（网页上可能有成千上万个元素），会偶尔发生此种情况。若遇到此种情况，请选择「继续等待」就行了（可能需要多确认几次）。</p>
 
 <h2 id="save-as-single-file">能把网页裁剪成单个文件？比如：裁剪成 mhtml、zip 或者 存成图片</h2>
 
@@ -309,8 +298,6 @@
 <p>MaoXian 支持的两种格式 HTML 和 Markdown，都是简单的文本文件。文本文件格式简单，没有特殊的编码，这使其容易修改，且可搜索性强。这是那些特殊编码的单个文件所无法比拟的，比如图片，你要搜索其内容中的文字，几乎不可能。zip 也是如此，查看不方便，搜索也是极难。对于 mhtml 来说，并非所有浏览器都支持这种格式。再者，文本文件的简单性使你可以很容易地对其进行解析，转换。比如导入到其他软件中，或者把其转换成更复杂的格式，比如把你裁剪下来的所有网页转换成电子书（epub，pdf 等）。总总的灵活性，使其非常适合作为一种独立于软件的存储格式。</p>
 
 <p>当然，你很可能还是偏好于单文件格式，那么可以尝试下这些优秀的浏览器扩展，它们是： webscrapbook ，savepageWe， singleFile。</p>
-
-<hr />
 
 <h2 id="feedback">反馈新问题或建议</h2>
 
@@ -334,6 +321,7 @@
 
 <p><a href="index-zh-CN.html">首页</a></p>
 </div>
+    </div>
   </body>
 </html>
 
