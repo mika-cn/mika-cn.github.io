@@ -6,10 +6,17 @@
   </author>
   <id>https://mika-cn.github.io/maoxian-web-clipper/feed.xml</id>
   <title>MaoXian Web Clipper</title>
-  <updated>2020-10-13T15:01:30+08:00</updated>
+  <updated>2020-10-21T17:29:11+08:00</updated>
   <entry>
-    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0160</id>
-    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0160"/>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0162</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0162"/>
+    <title>MaoXian Web Clipper 0.1.62 is released</title>
+    <updated>2020-10-21T17:20:00+08:00</updated>
+    <dc:date>2020-10-21T17:20:00+08:00</dc:date>
+  </entry>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0161</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0161"/>
     <title>MaoXian Web Clipper 0.1.61 is released</title>
     <updated>2020-10-13T14:20:00+08:00</updated>
     <dc:date>2020-10-13T14:20:00+08:00</dc:date>
@@ -210,5 +217,5 @@
     <updated>2018-07-24T09:00:00+08:00</updated>
     <dc:date>2018-07-24T09:00:00+08:00</dc:date>
   </entry>
-  <dc:date>2020-10-13T15:01:30+08:00</dc:date>
+  <dc:date>2020-10-21T17:29:11+08:00</dc:date>
 </feed>

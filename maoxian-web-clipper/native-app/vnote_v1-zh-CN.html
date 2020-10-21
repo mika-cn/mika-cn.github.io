@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="enable vnote_v1 msg_handler" />
+    <title>使用本地程序对接 Vnote</title>
+    <link rel="icon" type="image/png" href="../imgs/logo.png" />
+    <link rel="stylesheet" type="text/css" href="../css/markdown.css" />
+    <style>
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="title"><h1>使用本地程序对接 Vnote</h1></div>
+      <div class="content">
+<h2 id="vnote-">什么是 Vnote ？</h2>
+
+<p>如果你不知道 Vnote 是什么，请猛击下方链接了解。</p>
+
+<p><a href="https://tamlok.gitee.io/vnote">Vnote 主页</a>
+<a href="https://github.com/vnotex/vnote/blob/master/README_zh.md">Vnote 项目</a></p>
+
+<h2 id="section">简介</h2>
+
+<p>本页面，我们将介绍如何使用「本地程序」来对接到 Vnote。也就是使用 MaoXian Web Clipper 裁剪网页，并把裁剪结果存到 Vnote 的笔记本中。</p>
+
+<p>请注意，当你使用这个方法时，你应该了解：</p>
+
+<ul>
+  <li>你裁剪下来的文件，必须以 Markdown 格式存储。</li>
+  <li>你会用 Vnote 来浏览和管理文件，而不是 MaoXian 自带的历史页面。</li>
+  <li>你必须在 Vnote 中新建一个「笔记本（notebook）」来做这个事情。</li>
+</ul>
+
+<h2 id="section-1">总体流程</h2>
+
+<ol>
+  <li>在 Vnote 上新建一个笔记本和一个根目录</li>
+  <li>下载 「本地程序」，并正确配置。</li>
+  <li>到 MaoXian 扩展上，做存储相关配置。</li>
+</ol>
+
+<h2 id="vnote--1">Vnote 这边的准备</h2>
+
+<ol>
+  <li>
+    <p>打开 Vnote，并新建一个笔记本（notebook），如：<code>clippings</code>。</p>
+  </li>
+  <li>
+    <p>再在这个笔记本下方，创建一个根目录，注意，这里为了方便，我们用 <code>mx-wc</code> 来命名它。</p>
+  </li>
+</ol>
+
+<p>通过上面这两步，我们会得到一个存储路径，比如： <code>/home/user/Documents/Vnote_notebooks/clippings</code>，这个路径下方有一个根目录 <code>mx-wc</code>。</p>
+
+<p>OK, Vnote 这边准备好了。</p>
+
+<h2 id="section-2">安装和配置「本地程序」</h2>
+
+<p>注意，这一步不涉及安装ruby，「本地程序」的下载，解压，安装，。这些都可以在<a href="index-zh-CN.html">这里</a> 找到相关介绍。我们这一步，主要介绍的是配置。</p>
+
+<p>首先，确保你已经成功安装了 ruby，并且把「本地程序」下载下来，并解压好了。</p>
+
+<p>接下来，用文本编辑器打开里面的 <code>config.yaml</code> 文件。以上一步，我们配置的情况，我们应该配置成下方这个样子</p>
+
+<pre><code class="language-yaml">environment: 'production'
+data_dir: '/home/user/Documents/Vnote_notebooks/clippings'
+msg_handler: 'vnote_v1'
+
+</code></pre>
+
+<ul>
+  <li>注意上方的 msg_handler 我们填写的是 <code>vnote_v1</code> 而不是默认的 <code>default</code>。</li>
+  <li>另外 data_dir 这一项，我们填写的这个路径，是我们在上一步创建的那个「笔记本」的路径。</li>
+</ul>
+
+<p>配置好了后，你就可以进行安装了。安装好后，确保和 MaoXian 扩展对接上后，这一步就完成了。</p>
+
+<h2 id="maoxian-">配置 MaoXian 扩展</h2>
+
+<ol>
+  <li>在 <em>设置 &gt; 本地程序</em> 一节，勾选 “启用本地程序“</li>
+  <li>在 <em>设置 &gt; 存储</em> 一节，配置如下项目：</li>
+</ol>
+
+<ul>
+  <li>裁剪方式选择「本地程序」</li>
+  <li>存储格式选择 Markdown</li>
+  <li>根目录配置成 <code>mx-wc</code> （这里和 Vnote 那边的根目录保持一致）</li>
+  <li>主文件的文件夹配置成 <code>$CATEGORY_PATH</code></li>
+  <li>主文件名配置成 <code>$TIME-INTSEC_$TITLE.md</code></li>
+  <li>资源文件夹配置成 <code>$CATEGORY_PATH/_v_images</code> （这是存图片的地方）</li>
+  <li>元信息文件的文件夹配置成 <code>$CATEGORY_PATH</code></li>
+  <li>「保存标题文件」一项，取消勾选。</li>
+</ul>
+
+<p>其他配置项，保持不变就好。</p>
+
+<h2 id="section-3">验证</h2>
+
+<p>经过上面的三小节，整个对接流程已经完成。现在打开一个有图片的网页，再进行裁剪，然后，打开 Vnote，在左边的目录树那里，点击右键，点击刷新。如果你看到刚才裁剪下来的网页，那么恭喜你，对接成功了。</p>
+
+<h2 id="section-4">最后</h2>
+
+<p>如你在此过程中遇到解决不了的问题，你可以把遇到的问题反映到<a href="https://github.com/mika-cn/maoxian-web-clipper/issues">项目 issue 里</a>。</p>
+
+<hr />
+<p><a href="../index-zh-CN.html">首页</a></p>
+</div>
+    </div>
+  </body>
+</html>
+

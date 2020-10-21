@@ -25,9 +25,18 @@
 <h2 id="section-2">主要功能</h2>
 
 <ul>
-  <li>下载文件 （用于绕过浏览器的下载功能，从而避免与下载管理软件发生冲突）</li>
-  <li>删除裁剪信息 （让我们可以删除裁剪历史的同时，删除其对应的文件）</li>
-  <li>刷新裁剪历史 （当你有两个裁剪源（比如：一台电脑上的两个浏览器或两台电脑上的浏览器）并且想让浏览器上的裁剪历史保持最新的时候，这一项非常有用。）</li>
+  <li>默认
+    <ul>
+      <li>下载文件 （用于绕过浏览器的下载功能，从而避免与下载管理软件发生冲突）</li>
+      <li>删除裁剪信息 （让我们可以删除裁剪历史的同时，删除其对应的文件）</li>
+      <li>刷新裁剪历史 （当你有两个裁剪源（比如：一台电脑上的两个浏览器或两台电脑上的浏览器）并且想让浏览器上的裁剪历史保持最新的时候，这一项非常有用。）</li>
+    </ul>
+  </li>
+  <li>Vnote
+    <ul>
+      <li>以 Vnote 的存储格式，存储裁剪下来的 Markdown 文件。当你对接上 Vnote 后，就可以在 Vnote 上管理你裁剪下来的文件。详情请看<a href="vnote_v1-zh-CN.html">这里</a></li>
+    </ul>
+  </li>
 </ul>
 
 <h2 id="install">安装</h2>
@@ -57,7 +66,7 @@
 
 <p>请根据你的系统信息和浏览器类型， 下载对应的软件包</p>
 
-<p>当前版本 <code>0.2.4</code></p>
+<p>当前版本 <code>0.2.5</code></p>
 
 <ul>
   <li>Linux
@@ -116,6 +125,8 @@
 <pre><code class="language-yaml"># config.yaml
 environment: 'production'
 data_dir: '/home/jack/clippings'
+# avariable handler: 'default', 'vnote_v1'
+msg_handler: 'default'
 </code></pre>
 
 <p>windows 例子</p>
@@ -123,7 +134,10 @@ data_dir: '/home/jack/clippings'
 <pre><code class="language-yaml"># config.yaml
 environment: 'production'
 data_dir: 'e:\jack\clippings'
+msg_handler: 'default'
 </code></pre>
+
+<p>注意上方的 <code>msg_handler</code> 目前支持兩個值 <code>default</code> 和 <code>vnote_v1</code> 。如果你要對接 Vnote ，那麼請點擊<a href="vnote_v1-zh-CN.html">這裏</a>，查看如何對接。</p>
 
 <h3 id="section-3">查看状态并启用</h3>
 
