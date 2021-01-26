@@ -21,6 +21,7 @@
   <li><a href="#clip-menu-not-work">Not response after click clip</a></li>
   <li><a href="#crash-on-clipping">Stop on clipping-hint every clipping</a></li>
   <li><a href="#change-default-download-path">Change Default download path</a></li>
+  <li><a href="#dont-save-index-file">I don’t want to save information files</a></li>
   <li><a href="#can-not-open-clipping-in-history">Can’t open clipping on history page</a></li>
   <li><a href="#allow-access-file-urls">Allow file URLs Access</a></li>
   <li><a href="#feedback">Report new issue</a></li>
@@ -78,6 +79,14 @@
   <li>description on Chrome: Not description</li>
   <li>description on Firefox: Not description</li>
   <li>actual usage: This permission give browser extensions the ability to storage information. MaoXian use it to save configuration(includes setting page and history page), clipping records(which are showed on history page), category history and tag history. All these information will storage on your local hard disk. Note that this permission has potential to synchronize information across different devices if your account is online, MaoXian didn’t enable this feature and won’t enable it in the future.</li>
+</ul>
+
+<p><strong>Permission：unlimitedStorage</strong></p>
+
+<ul>
+  <li>description on Chrome: Unknown</li>
+  <li>description on Firefox: Unknow</li>
+  <li>actual usage： This permission give browser extensions the ability to storage unlimited information. By default, browsers have a quota on storage which allow MaoXian to save about few thousands of clipping record. In order to save more information, MaoXian needs this permission.</li>
 </ul>
 
 <p><strong>Permission: tabs</strong></p>
@@ -160,6 +169,18 @@
 
 <pre><code class="language-shell">mklink /D C:\Users\jack\Downloads\mx-wc C:\Users\jack\OneDrive\clips
 </code></pre>
+
+<h2 id="dont-save-index-file">I don’t want to save information files</h2>
+
+<p>Information files (or meta files) are very important for MaoXian. MaoXian use it to identify each clipping result. Functions like Clipping History and Resetting History dependent on information files. So we hightly recommend you save these files.</p>
+
+<p><strong>WARNING: If you do not save these information files, MaoXian will not recognize them anymore, it usually means that you want to use another software to browser and manager the clipped files.</strong></p>
+
+<p>Here’s how to configure it:</p>
+
+<p>Go to <em>settings &gt; Reset / Backup</em>, ensure the “Setting page’s configuration” item is checked, after click “Backup to file” button you will get a JSON file. Use a text editor to open it and search <code>saveInfoFile</code>. change the value from <code>true</code> to <code>false</code>.</p>
+
+<p>Click “Restore from file” button, select the file you just editted. After the restoration, the change will be applied.</p>
 
 <h2 id="can-not-open-clipping-in-history">Can’t open clipping on history page</h2>
 

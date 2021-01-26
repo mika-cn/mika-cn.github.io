@@ -22,6 +22,7 @@
   <li><a href="#clip-menu-not-work">点击了裁剪，没有反应</a></li>
   <li><a href="#crash-on-clipping">裁剪流程停在下载中就没反应了</a></li>
   <li><a href="#change-default-download-path">改变默认的下载路径</a></li>
+  <li><a href="#dont-save-index-file">我不想保存元信息文件</a></li>
   <li><a href="#can-not-open-clipping-in-history">无法打开以前裁剪的内容</a></li>
   <li><a href="#allow-access-file-urls">允许访问本地网址</a></li>
   <li><a href="#script-busy">浏览器弹出提示框提示：脚本无反应，询问是否中止</a></li>
@@ -81,6 +82,7 @@
     "webRequest",
     "webRequestBlocking",
     "storage",
+    "unlimitedStorage",
     "tabs",
     "downloads",
     "downloads.open",
@@ -122,6 +124,14 @@
   <li>Chrome 描述文字：无描述</li>
   <li>Firefox 描述文字：无描述</li>
   <li>实际用途： 该权限赋予扩展保存信息的能力。MaoXian 使用该权限去保存：配置信息（包含设置页面和历史页面），裁剪记录（也就是历史页面显示的信息），目录记录，标签记录。所有这些信息都保存在你的本地，<strong>注：</strong> 该权限可以允许你保存的信息通过浏览器提供商的帐号体系（Firefox帐号或谷歌帐号），进行跨设备同步。在 MaoXian 中，我们没有启用该功能，将来也不会启用。</li>
+</ul>
+
+<p><strong>权限：unlimitedStorage</strong></p>
+
+<ul>
+  <li>Chrome 描述文字：未知</li>
+  <li>Firefox 描述文字：未知</li>
+  <li>实际用途： 该权限赋予扩展可以更多信息的能力。由于 MaoXian 会存储裁剪记录（也就是历史页面显示的信息），而浏览器默认有个存储限制，而且这个限制比较小，大概只能存储几千条记录。为了能保存更多的记录，MaoXian 使用到了该权限。</li>
 </ul>
 
 <p><strong>权限：tabs</strong></p>
@@ -202,6 +212,16 @@
 
 <pre><code class="language-shell">mklink /D C:\Users\jack\Downloads\mx-wc C:\Users\jack\OneDrive\clips
 </code></pre>
+
+<h2 id="dont-save-index-file">我不想保存元信息文件</h2>
+
+<p>元信息文件是 MaoXian 对裁剪下来的文件的一个识别入口，是许多功能的依赖文件（如：裁剪历史，重置历史等..），如非特别需要，还是建议保存此类文件。</p>
+
+<p><strong>警告：当你取消了元信息文件的保存后，表示你期望通过其他软件来查看和管理你裁剪下来的文件。那些依赖元信息文件的功能将无法识别你裁剪下来的文件（如：裁剪历史，重置历史等..）。</strong></p>
+
+<p>修改方式如下：</p>
+
+<p>进入扩展的 <em>设置页面 &gt; 重置与备份</em> ，确保 ”设置页面的配置信息“ 这一项有勾选后，点击 ”备份设置到文件“ 后得到一个 JSON 文件。使用文本编辑器打开它，使用 <code>saveInfoFile</code> 这个关键字查找，把查找到那一行冒号后面的值修改掉（<code>true</code> 为保存，<code>false</code> 为不保存）。修改完成后，再点击 ”从文件中恢复“ ，选择刚才导出的文件，导入成功后，修改即生效。</p>
 
 <h2 id="can-not-open-clipping-in-history">无法打开以前裁剪的内容</h2>
 
