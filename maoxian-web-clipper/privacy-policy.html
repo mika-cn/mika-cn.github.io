@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Privacy Policy" />
+    <title>Privacy Policy</title>
+    <link rel="icon" type="image/png" href="imgs/logo.png" />
+    <link rel="stylesheet" type="text/css" href="css/markdown.css" />
+    <style>
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="title"><h1>Privacy Policy</h1></div>
+      <div class="content">
+<h2 id="declaration">Declaration</h2>
+
+<p>We are not interest in any of your information, and we would like to protect you from leaking your information.</p>
+
+<p>That means:</p>
+
+<ul>
+  <li>We won’t collect any personal information from you.</li>
+  <li>We won’t put any usage analyze code(like: google analyze) into this browser extension.</li>
+  <li>We won’t embed advertising into this browser extension.</li>
+  <li>You don’t need to create an account, Forget about that annoying sign up form.</li>
+  <li>We are welcome you to send us any privacy relative suggestions.</li>
+</ul>
+
+<hr />
+
+<h2 id="what-requests-maoxian-will-make">What requests MaoXian will make</h2>
+
+<p>MaoXian will send requests to servers in following cases.</p>
+
+<p><strong>1) Clipping a web page.</strong></p>
+
+<p>When you clip a web page, MaoXian will ask browser to fetch web page relative files (images, styles, web fonts etc.). If the browser can not fetch these files from cache (your computer), It will download them by performing requests to static file servers (CDN servers). Cookies will not be sent.</p>
+
+<p><strong>2) Downloading public plans.</strong></p>
+
+<p>If you enable MaoXian Asistant and subscribe to some public plan lists. Then, MaoXian will download these lists (which contains public plans) from Github when you trigger it by click a button, or when you enable automatically update these lists.</p>
+
+<h2 id="permissions-and-why-its-need">Permissions and why it’s need</h2>
+
+<p>Before we describe every permission’s usage, it’s necessary to clarify one thing: The description of permissions you saw on browser is said on user’s position. when you saw these description. You should consider it as this extension will get the potential to do these things(whatever description of permission you saw) if it has got this permission rather than this extension will do these things if it has got this permission.</p>
+
+<p>Content below is the permissions that is declared in <code>manifest.json</code>. We’ll use these permission names to introduce it’s usage.</p>
+
+<pre><code class="language-json">{
+  "permissions": [
+    "&lt;all_urls&gt;",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "downloads",
+    "downloads.open"
+  ],
+  "optional_permissions": [
+    "nativeMessaging"
+  ],
+}
+
+</code></pre>
+
+<p><strong>Permission: &lt;all_urls&gt;</strong></p>
+
+<p>MaoXian use this permission to do some initializations. Such as initialize message channel, get current url and find out whether this kind of web page was clipped before(remember selection) etc.</p>
+
+<p><strong>Permission: webNavigation</strong></p>
+
+<p>MaoXian use this permission to get information of embed web pages. then using these information to communicate with it, so that they can be clipped.</p>
+
+<p><strong>Permission: webRequest and webRequestBlocking</strong></p>
+
+<p>MaoXian use these permissions to record MIME type of images. Some image urls don’t have file extension. we want to fix it(using MIME type) so that browsers can recognize the format of image and display it correctly. And these permissions are also used to modify the request headers that is sent by MaoXian. We modify some headers so that we leak less information to asset servers(see <em>Setting page &gt; advanced &gt; Referrer Policy</em> for more details).</p>
+
+<p><strong>Permission: storage</strong></p>
+
+<p>This permission give browser extensions the ability to storage information. MaoXian use it to save configuration(includes setting page and history page), clipping records(which are showed on history page), category history and tag history. All these information will storage on your local hard disk. Note that this permission has potential to synchronize information across different devices if your account is online, MaoXian didn’t enable this feature and won’t enable it in the future.</p>
+
+<p><strong>Permission：unlimitedStorage</strong></p>
+
+<p>This permission give browser extensions the ability to storage unlimited information. By default, browsers have a quota on storage which allow MaoXian to save about few thousands of clipping record. In order to save more information, MaoXian needs this permission.</p>
+
+<p><strong>Permission: tabs</strong></p>
+
+<p>MaoXian use this permission to get tab IDs that will be used to send message between components. And use this permission to load a web page in a new tab, these web pages include internal web pages of extension(setting page, history page etc.) and external web pages(e.g: documentation of this project).</p>
+
+<p><strong>Permission: downloads and downloads.open</strong></p>
+
+<p>MaoXian use <code>downloads</code> permission to save clipped files and delete these download records except the main file(MaoXian don’t want to mess your download history). After clipping, MaoXian use <code>downloads.open</code> to open the clipped file.</p>
+
+<p><strong>Permission: nativeMessaging</strong></p>
+
+<p>MaoXian use this permission to communicate with <a href="native-app/index.html">Native App</a>. This is an optional permission, you will only grant MaoXian this permission only when you need to using functions that provide by Native App.</p>
+
+<h2 id="how-could-i-believe-that-this-privacy-policy-is-true">How could I believe that this privacy policy is true?</h2>
+
+<p>Well, you don’t have to believe. MaoXian is an open source project, you can check it’s source code <a href="https://github.com/mika-cn/maoxian-web-clipper">here</a>.</p>
+
+<hr />
+
+<p><a href="index.html">Home page</a></p>
+</div>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,1213 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="MaoXian assistant" />
+    <title>毛线助手</title>
+    <link rel="icon" type="image/png" href="../imgs/logo.png" />
+    <link rel="stylesheet" type="text/css" href="../css/markdown.css" />
+    <link rel="stylesheet" type="text/css" href="../css/markdown-toc.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="title"><h1>毛线助手</h1></div>
+
+      <input type="checkbox" id="pin-toc" class="pin-toc" hidden>
+      <label for="pin-toc" class="pin-toc-switcher" title="pin(unpin) the table of content"></label>
+      <div class="toc">
+        <h2>目录</h2>
+        <ul>
+  <li><a href="#intro">简介 </a></li>
+  <li><a href="#project-home">项目地址 </a></li>
+  <li><a href="#background">背景 </a></li>
+  <li><a href="#three-type-of-plan">三种不同的 Plan </a></li>
+  <li><a href="#public-subscriptions">订阅「公开的 Plan」 </a></li>
+  <li><a href="#get-involved">参与进来 </a></li>
+  <li><a href="#how-to-write-a-plan">如何编写 Plan </a>
+    <ul>
+      <li><a href="#workflow">流程 </a></li>
+      <li><a href="#plan-structure">Plan 的结构解释 </a></li>
+      <li><a href="#arg-pattern">pattern 参数的使用 </a></li>
+      <li><a href="#arg-excludePattern">excludePattern 参数的使用 </a></li>
+      <li><a href="#arg-disabled">disabled 参数的使用 </a></li>
+      <li><a href="#selector">选择器 </a></li>
+      <li><a href="#arg-pick">pick 参数的使用 </a></li>
+      <li><a href="#arg-hide">hide 参数的使用 </a></li>
+      <li><a href="#arg-hideSibling">hideSibling 参数的使用 </a></li>
+      <li><a href="#arg-hideExcept">hideExcept 参数的使用 </a></li>
+      <li><a href="#arg-show">show 参数的使用 </a></li>
+      <li><a href="#arg-chAttr">chAttr 参数的使用 </a></li>
+      <li><a href="#arg-form">form 参数的使用 </a></li>
+      <li><a href="#arg-config">config 参数的使用 </a>
+        <ul>
+          <li><a href="#config-storage">存储相关 </a></li>
+          <li><a href="#config-markdown">Markdown 文档相关 </a></li>
+          <li><a href="#config-html">HTML 文档相关 </a></li>
+          <li><a href="#config-web-request">Web 请求相关 </a></li>
+        </ul>
+      </li>
+      <li><a href="#arg-tags">tags 参数的使用 </a></li>
+    </ul>
+  </li>
+  <li><a href="#contribution">贡献 Plan </a></li>
+  <li><a href="#last-word">最后 </a></li>
+</ul>
+
+      </div>
+
+      <div class="content">
+<h2 id="intro">简介</h2>
+
+<p>为了更方便 MaoXian Web Clipper 用户在对网页进行 “裁剪” 之前执行一些操作，我们把「MaoXian 助手」集成到扩展中。该项目用于收集和分享各个用户编写的 “Plan”。</p>
+
+<blockquote>
+  <p><strong>注：</strong> MaoXian Web Clipper 已经支持记住选区功能，如果你只是懒的每次都点选，则记住选区功能会很适合你，推荐你前往扩展的设置页面开启试试。如果你想更好地控制你要裁剪的内容，或者遇到一些难搞的网页，那么请往下看 :)</p>
+</blockquote>
+
+<h2 id="project-home">项目地址</h2>
+
+<ul>
+  <li><a href="https://github.com/mika-cn/maoxian-assistant">传送门</a></li>
+</ul>
+
+<h2 id="background">背景</h2>
+
+<p>由于 MaoXian Web Clipper 裁剪网页的时候，裁剪的是当前状态下的网页，并且不会保存任何脚本文件（即 javascript）。 这意味着在一些情况下，我们需要对网页进行一些操作后，才能获得一个较好的裁剪结果。比如： 一篇文章里的图片显示的都是缩略图，而你想保存的是原图；或者是你不想保存选区内的按钮、评论等无关内容；又或者是网页上的某些区域是可折叠的，需要在裁剪前把它们都展开。开发「MaoXian 助手」就是为了解决这些较常见的问题。</p>
+
+<p>在集成「MaoXian 助手」之后，MaoXian Web Clipper 的裁剪流程也完整了起来。</p>
+
+<pre><code>准备 --&gt; 选择 --&gt; 裁剪 --&gt; 存储
+</code></pre>
+
+<p>如上的四个步骤中，「MaoXian 助手」主要用于「准备」阶段，也涉及到「选择」阶段（不过不多）。它的工作方式有点像「广告屏蔽扩展」，需要针对不同的网站，编写不同的操作（在「MaoXian 助手里」我们称其为 Plan）。这也意味着它解决问题的多少取决于我们适配的网站的多少。</p>
+
+<h2 id="three-type-of-plan">三种不同的 Plan</h2>
+
+<p><strong>全局 Plan</strong></p>
+
+<p>「全局 Plan」 是由你自己编写的。它会应用到所有的网页上，如果某个操作具备普遍性，则可以加入到「全局 Plan」里。</p>
+
+<p><strong>自定义 Plan</strong></p>
+
+<p>「自定义 Plan」也是由你自己编写的，它会应用到某一类网页上。此种为最常见的，一般都会对某个网站的某类网页进行裁剪。比如对某个博客的文章进行裁剪，因为同类网页的结构一般都相同，需要对其的操作也相同，所以可以通过编写此种 Plan 对其进行统一处理。</p>
+
+<p><strong>公开的 Plan</strong></p>
+
+<p>为了减少用户重复编写「自定义 Plan」的工作。MaoXian 支持你将自己编写的 「自定义 Plan」分享出来，成为 「公开的 Plan」。这样所有用户都会受益。 此种 Plan，可以通过下方的订阅地址获取到。</p>
+
+<h2 id="public-subscriptions">订阅「公开的 Plan」</h2>
+
+<p>将下方的订阅地址复制到：<em>MaoXian 扩展 &gt; 设置页面 &gt; 助手</em> 页面的订阅框中。</p>
+
+<p><strong>订阅地址</strong></p>
+
+<pre><code class="language-shell"># 默认网站列表（全球性）
+https://mika-cn.github.io/maoxian-web-clipper/assistant/plans/default/index.json
+
+# 华人网站列表
+https://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
+
+</code></pre>
+
+<h2 id="get-involved">参与进来</h2>
+
+<p>「MaoXian 助手」的功能强大于否取决于我们适配的网站的多少。这需要的不仅仅是开发者，更是每一个使用者的无私分享精神，于此，我们欢迎各位用户参与进来，只有这般，该助手才能发挥其真正的能力。</p>
+
+<p>如果你不会编程，你可以在项目 <a href="https://github.com/mika-cn/maoxian-assistant/issues">issue 页面</a> 提交适配请求(提供需要适配的网址)，或者回馈某个网站适配不正确的信息，以便其他人进行跟进。</p>
+
+<p>如果你会编程（只需要懂一点 CSS，了解 JSON 格式就行），那么恭喜你，你完全有能力编写 Plan，并分享给其他人，具体查看下一节。</p>
+
+<h2 id="how-to-write-a-plan">如何编写 Plan</h2>
+
+<h3 id="workflow">流程</h3>
+
+<ol>
+  <li>请到 MaoXian Web Clipper 的设置页面，启用「MaoXian 助手」</li>
+  <li>使用任何编辑器编写 Plan， 再把其复制到 「MaoXian 助手」设置里的**自定义 Plan **里。</li>
+  <li>刷新目标网页，点击「裁剪」验证编写的动作有没有产生预期效果。</li>
+</ol>
+
+<h3 id="plan-structure">Plan 的结构解释</h3>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>参数名</th>
+      <th>类型</th>
+      <th>是否必填</th>
+      <th>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>name</td>
+      <td>字符串</td>
+      <td>必填</td>
+      <td>起标识作用，可随便填写，一般可以直接填写网站名</td>
+    </tr>
+    <tr>
+      <td>pattern</td>
+      <td>字符串、元组</td>
+      <td>必填</td>
+      <td>匹配的模式，只有网址和模式匹配，该 plan 才会被应用</td>
+    </tr>
+    <tr>
+      <td>excludePattern</td>
+      <td>字符串、元组</td>
+      <td>选填</td>
+      <td>用于充当 pattern 的黑名单</td>
+    </tr>
+    <tr>
+      <td>version</td>
+      <td>整型</td>
+      <td>必填</td>
+      <td>用于描述最后更新时间，格式为年月日，如：20190721</td>
+    </tr>
+    <tr>
+      <td>contributors</td>
+      <td>元组</td>
+      <td>选填</td>
+      <td>用于描述 plan 的作者和贡献者</td>
+    </tr>
+    <tr>
+      <td>disabled</td>
+      <td>波尔值</td>
+      <td>选填</td>
+      <td>用于表示 plan 的禁用状态</td>
+    </tr>
+    <tr>
+      <td>pick</td>
+      <td>选择器</td>
+      <td>选填</td>
+      <td>用于选择「要裁剪的节点」，可提供多个选择器，详情请看下文</td>
+    </tr>
+    <tr>
+      <td>hide</td>
+      <td>选择器</td>
+      <td>选填</td>
+      <td>用于选择「要剔除的节点」，可提供多个选择器，详情请看下文</td>
+    </tr>
+    <tr>
+      <td>hideSibling</td>
+      <td>选择器</td>
+      <td>选填</td>
+      <td>用于选择「要剔除的节点」，可提供多个选择器，详情请看下文</td>
+    </tr>
+    <tr>
+      <td>hideExcept</td>
+      <td>元组</td>
+      <td>选填</td>
+      <td>用于选择「要剔除的节点」，选择方式为反选，详情请看下文</td>
+    </tr>
+    <tr>
+      <td>show</td>
+      <td>选择器</td>
+      <td>选填</td>
+      <td>用于显示隐藏的「块状节点」，可提供多个选择器，详情请看下文</td>
+    </tr>
+    <tr>
+      <td>chAttr</td>
+      <td>元组</td>
+      <td>选填</td>
+      <td>用于修改节点的属性值，提供了多种修改属性的方式，详情请看下文</td>
+    </tr>
+    <tr>
+      <td>form</td>
+      <td>对象</td>
+      <td>选填</td>
+      <td>用于预设置表单的输入值，详情见下文</td>
+    </tr>
+    <tr>
+      <td>config</td>
+      <td>对象</td>
+      <td>选填</td>
+      <td>用于重写某些配置项，详情见下文</td>
+    </tr>
+    <tr>
+      <td>tags</td>
+      <td>元祖</td>
+      <td>选填</td>
+      <td>用于标注网站属性，使这些 plan 更好管理</td>
+    </tr>
+    <tr>
+      <td>comment</td>
+      <td>字符串</td>
+      <td>选填</td>
+      <td>备注</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="arg-pattern">pattern 参数的使用</h3>
+
+<p>pattern 参数描述了该 Plan 会应用到哪一类网址上，如果网站有多个域名且很难用匹配符进行匹配，则可以提供多个 Pattern，例如：<code>["https://a.com/article/*", "https://abcdefg.onion/article/*"]</code>。 如果 pattern 所匹配的网址中有几个特殊项，则可以用 excludePattern 参数剔除。</p>
+
+<p>目前支持的匹配符有数字匹配符 “<code>$d</code>” 和 星匹配符 “<code>*</code>” 和 “<code>**</code>“。</p>
+
+<p><strong>数字匹配符</strong></p>
+
+<p>数字匹配符专门用于匹配数字，常用于匹配网址路径中的数字部分。</p>
+
+<p>比如： 使用 <code>https://example.org/post/$d/$d/$d/$d</code> 可以匹配到 https://example.org/post/2019/07/21/003 。其中前三个 <code>$d</code> 分别匹配到 年，月，日。最后一个 <code>$d</code> 匹配到文章 ID，注意网址中的这四个部分全是数字。</p>
+
+<p>数字匹配符只能完整匹配，无法作为前缀或者后缀去使用。</p>
+
+<p>比如： 使用 <code>https://example.org/article-$d</code> 是无法匹配到 https://example.org/article-001 的。</p>
+
+<p>如果要匹配前缀和后缀，则需要使用星匹配符。</p>
+
+<p><strong>星匹配符</strong></p>
+
+<ul>
+  <li>匹配开头</li>
+</ul>
+
+<p>比如：匹配子域名，<code>*.example.org</code> 可匹配任何以 “example.org” 结尾的域名，例如： www.example.org，foo.bar.example.org。</p>
+
+<ul>
+  <li>匹配结尾</li>
+</ul>
+
+<p>比如：匹配网址协议，<code>http*</code> 即可以匹配到 http 也可以匹配到 https。</p>
+
+<ul>
+  <li>匹配整个部分，常用于匹配网址路径的一个目录。</li>
+</ul>
+
+<p>比如：使用 <code>https://example.org/*/index.html</code>，可以匹配到 https://example.org/blog/index.html 。但是无法匹配到 https://example.org/blog/jack/index.html ，因为 “*” 号不匹配目录分隔符 “/”。</p>
+
+<p><strong>双星匹配符</strong></p>
+
+<p>一般使用双星匹配符，来匹配零个或零个以上的目录。</p>
+
+<p>假如我们要匹配的网址为 https://example.org/blog/javascript/2017/01/05/awesome-article.html ，里面 /blog 为固定不变的部分，/javascript 为文章分类（不知道有没有子分类），后面是年月日，最后是文章名。</p>
+
+<p>可以用 <code>https://example.org/blog/**/*/*/*/*/*.html</code>这个 Pattern 来匹配。 中间用了四个 “*” 号来匹配分类和年月日，前面的 “**” 匹配可能存在的子分类。也可以用 <code>https://example.org/blog/**/*/$d/$d/$d/*.html</code> 来进行匹配。</p>
+
+<p>上面这个例子也可以使用 <code>https://example.org/blog/</code> （注意：最后面的 “/”） 作为 Pattern ，来直接匹配以该模式打头的网址，不同的 Pattern，严格程度不同，根据需求给出 Pattern 即可。</p>
+
+<p><strong>匹配网址的查询参数部分（较少使用）</strong></p>
+
+<ul>
+  <li>一般匹配</li>
+</ul>
+
+<p>一般匹配只是匹配网址的查询参数能满足 Pattern 的参数部分。网址的参数数量可以多，顺序也可以不一致。</p>
+
+<p>例如：使用 <code>https://a.org/page?id=*</code> 这个 Pattern，可以匹配到 https://a.org/page?id=123 ，也可以匹配到 https://a.org/page?type=news&amp;id=456 。当然了，你也可以进一步匹配参数值，如： <code>https://a.org/page?type=news</code> 这个 Pattern 。</p>
+
+<ul>
+  <li>严格匹配</li>
+</ul>
+
+<p>严格匹配表示网址的查询参数必须和 Pattern 的参数部分严格一致，数量不能多，不能少，但顺序可以不一致。 严格匹配需要在 Pattern 的参数部分的最前方加上 “!”。</p>
+
+<p>例如：使用 <code>https://a.org/page?!foo=111&amp;bar=222</code> 这个 Pattern，只能匹配到 https://a.org/page?foo=111&amp;bar=222 和 https://a.org/page?foo=222&amp;bar=111 。但不能匹配到 https://a.org/page?foo=111 或 https://a.org/page?foo=111&amp;bar=222&amp;baz=333。</p>
+
+<h3 id="arg-excludePattern">excludePattern 参数的使用</h3>
+
+<p>该参数用于作为 pattern 参数的黑名单，也可提供多个。用法参见 <a href="#arg-pattern">pattern 参数</a></p>
+
+<h3 id="arg-disabled">disabled 参数的使用</h3>
+
+<p>disabled 参数用于表明该 plan 是否已禁用了。常用于「全局 plan」，或者是禁用某个「公开 plan」。比如你订阅的公开的 plan 列表里，有一个 plan 你不想使用。则可以把那个 plan 复制进 「自定义 plan」列表里，然后把它设为 <code>"disabled": true</code> ，就会把它禁用掉。</p>
+
+<h3 id="selector">选择器</h3>
+
+<p><strong>选择器的格式</strong></p>
+
+<p>选择器有两种：CSS 选择器 和 xPath 选择器。是一个字符串，格式为 <code>$type||$q</code> 。</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>变量</th>
+      <th>说明</th>
+      <th>值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>$type</td>
+      <td>选择器的类型</td>
+      <td>C 代表 CSS, X 代表 xPath</td>
+    </tr>
+    <tr>
+      <td>$q</td>
+      <td>选择器</td>
+      <td>CSS 选择器 或 xPath 选择器</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>其中 <code>$type||</code> 部分可省略，省略后的部分表示的是 CSS 选择器，大部分情况下我们都会用 CSS 选择器，除非一些很难用 CSS 选择器表示的，才会使用到 xPath 选择器。</p>
+
+<p>下面我们来看一个例子（注： 本页面给出的例子都是 JSON 格式）</p>
+
+<pre><code class="language-json">{
+  "name": "example.org",
+  "version": 20190831,
+  "pattern": "https://www.example.org/article/*",
+  "pick": "article",
+  "hide": [
+    "div.status-bar",
+    "div.comment",
+    "X||//span[text()='更多请关注']"
+  ]
+}
+</code></pre>
+
+<ul>
+  <li>pick 填入的是一个选择器，此选择器是 CSS 选择器。其完整形式为 <code>C||article</code>，我们给出的是省略了 <code>C||</code> 后的部分。</li>
+  <li>hide 填入的是多个选择器，即给出的是一个 选择器的元组（数组）。最后一个选择器是 xPath 选择器，<code>X||</code> 部分不能省略。</li>
+</ul>
+
+<h3 id="arg-pick">pick 参数的使用</h3>
+
+<p>pick 参数用于选中要裁剪的节点。找到第一个匹配的节点就停止查找，如果你填写了多个选择器，则会按照选择器的顺序依次查找，也是找到第一个即停止。注意： 「全局 Plan」会忽略该参数。</p>
+
+<h3 id="arg-hide">hide 参数的使用</h3>
+
+<p>hide 参数是用来剔除你不想裁剪的节点的，所有选择器找到的节点都会被隐藏掉（MaoXian 不会裁剪隐藏的节点）。</p>
+
+<h3 id="arg-hideSibling">hideSibling 参数的使用</h3>
+
+<p>hideSibling 参数是用来剔除你不想裁剪的节点的，它比 hide 参数特殊的地方在于， 所有选择器找到的节点必须具有一个特征：找到的节点在父节点的子节点中有且只有一个。找到的节点的兄弟姊妹节点都会被隐藏掉。 （MaoXian 不会裁剪隐藏的节点）。</p>
+
+<h3 id="arg-hideExcept">hideExcept 参数的使用</h3>
+
+<p>hideExcept 参数是使用「反选」的方式来选择要剔除的节点。它的值是一个 $action 的元组，$action 是一个 Object。$action 有两个必须指定的属性：<code>inside</code> 和 <code>except</code></p>
+
+<ul>
+  <li>inside 属性的类型为选择器，用于指定该 $action 作用的范围。</li>
+  <li>except 属性的类型为选择器，可提供多个选择器，用于指定要保留的节点。</li>
+</ul>
+
+<p>假如有一个网页，它有如下结构：</p>
+
+<pre><code class="language-html">&lt;div class="post"&gt;
+  &lt;div class="xxxxx"&gt;广告内容&lt;/div&gt;
+  &lt;div class="post-header"&gt;&lt;h1&gt;文章标题&lt;/h1&gt;&lt;/div&gt;
+  &lt;div class="post-content"&gt;文章内容&lt;/div&gt;
+  &lt;div class="xxxxx"&gt;更多推荐&lt;/div&gt;
+&lt;/div&gt;
+</code></pre>
+<p>且其中的「广告内容」和「更多推荐」的 class 属性的值是随机生成的，其位置随机出现。这个时候可以通过 hideExcept 参数来反选它们，如：</p>
+
+<pre><code class="language-json">{
+  ...
+  "hideExcept": [
+    {"inside": ".post", "except": [".post-header", ".post-content"]}
+  ]
+}
+</code></pre>
+
+<p>该 Plan 会把 “.post” 选中到的节点内部的子节点进行隐藏，除了 “.post-header” 和 “.post-content” 指定的节点。（MaoXian 不会裁剪隐藏的节点）。</p>
+
+<h3 id="arg-show">show 参数的使用</h3>
+
+<p>show 参数是用于显示「隐藏的块状节点」的，属性的值也是选择器（可填写多个），show 比较特殊，它<strong>只可用于块状节点（即display 的值为 block）</strong>。它会将节点的 display 样式设置成 block 来让这个节点显示出来. 它相对于后文会提到的 chAttr 参数比较简单，如果要操作的节点都为块状节点，则使用 show 会比较方便，否则，请考虑使用 chAttr 参数（具体查看 chAttr 的例4）</p>
+
+<h3 id="arg-chAttr">chAttr 参数的使用</h3>
+
+<p>chAttr 参数可以用来改变标签的某个属性的值。chAttr 是一个可选项，只有在需要的时候，才需要提供。 chAttr 的值为一个 $action 的元组，$action 是一个 Object。$action 的常用参数有三个 <code>type</code>, <code>pick</code> 和 <code>attr</code>。不同的 <code>type</code> 会跟不同的的参数。下面我们用一些常见的例子来说明 chAttr 的用法。</p>
+
+<hr />
+
+<p><strong>例1.1</strong>： 假设有一个网页，显示的是低质量的图，这些图的 <code>src</code> 属性是一个有规律的地址，比如： https://www.example.org/images/awesome-pic-small.jpg  ，而某些操作后，可能就变为 https://www.example.org/images/awesome-pic-big.jpg 。我们希望裁剪的是后者，而非前者，可以用下面这个 Plan 来实现：</p>
+
+<pre><code class="language-json">{
+  ...
+  "chAttr": [
+    {
+      "type": "replace.last-match",
+      "pick": "img",
+      "attr": "src",
+      "subStr": "small",
+      "newStr": "big"
+    }
+  ]
+}
+</code></pre>
+
+<p>上面 Plan 中的 chAttr 参数的值是一个数组，里面包含了一个 $action，它的各个属性解读如下：</p>
+
+<ul>
+  <li>type 的值为 <strong>replace.last-match</strong> ，表示这个 $action 是将<strong>找到的节点的属性值的某个部分</strong>，进行替换操作，只会替换最后一个匹配。</li>
+  <li>pick 的类型为选择器，用来选中要操作的节点，我们选中了所有 img 标签。</li>
+  <li>attr 的值为要操作的属性名字，此例中，我们选择的是 src 属性。</li>
+  <li>subStr 的值为<strong>要替换掉的那部分</strong>，我们填入的是 small。</li>
+  <li>newStr 的值是替换项，也就是说我们用 newStr 的值 big，替换 subStr 的值 small。</li>
+</ul>
+
+<p>还有一种和这个类似的 $action，它的 type 为 <strong>replace.all</strong> ，作用是替换所有找到的匹配，较少使用。 <strong>replace.all</strong> 也支持有多个替换项（即：<code>subStr</code> 和 <code>newStr</code> 都可以是数组）。替换规则为：如果 <code>newStr</code> 有和 <code>subStr</code> 对应的项，则使用对应的项，否则使用 <code>newStr</code> 的第一项。</p>
+
+<p>例如： subStr 为 <code>["xm", "xxm"]</code>，newStr 为 <code>["xl", "xxl"]</code> 两个值一一对应，则会使用对应项。即 xm 会由 xl 替换， xxm 会由 xxl 替换。</p>
+
+<p>例如： subStr 为 <code>["xm", "xxm"]</code>，newStr 为 <code>["xxl"]</code> ，其中 xxm 没有对应的替换值，则会使用第一项。即 xxm 也会由 xxl 替换。</p>
+
+<p><strong>专门用于修改 URL 的 $action</strong></p>
+
+<p>比如上方的例1.1，也可以用下方的 Plan 来实现：</p>
+
+<pre><code class="language-json">{
+  ...
+  "chAttr": [
+    {
+      "type": "url.file.set-name-suffix",
+      "pick": "img",
+      "attr": "src",
+      "sep": "-",
+      "suffix": "big",
+      "whiteList": ["small", "big"]
+    }
+  ]
+}
+</code></pre>
+
+<p>这个 $action 会对 src 属性指定的 url 的文件名部分，设置后缀（在扩展名前面）。其中：</p>
+
+<ul>
+  <li>sep 必填，表示分隔符，包含分隔符的文件名，会进行替换，不包含时进行添加。</li>
+  <li>suffix 必填，要设置的后缀。</li>
+  <li>whiteList 选填（但强烈建议填写），为后缀的可选值，该项表示：当文件名有这些后缀时，替换为 suffix 参数提供的值。若不填，则不判断直接替换。</li>
+</ul>
+
+<p>如果要移除文件名后缀，则使用下方 Plan ：</p>
+
+<pre><code class="language-json">{
+  ...
+  "chAttr": [
+    {
+      "type": "url.file.rm-name-suffix",
+      "pick": "img",
+      "attr": "src",
+      "sep": "-",
+      "whiteList": ["small", "md"]
+    }
+  ]
+}
+</code></pre>
+
+<p>参数比前一个 Plan 少了 suffix。其中：</p>
+
+<ul>
+  <li>sep 必填，表示分隔符，包含分隔符的文件名，才删除后缀，不包含时，不删除后缀。</li>
+  <li>whiteList 选填（但强烈建议填写），为后缀的可选值，该项表示：当文件名有这些后缀时，删除这些后缀。若不填，则不判断直接删除后缀。</li>
+</ul>
+
+<p><strong>例1.2</strong>：有些网站会在文件的扩展名后面加上后缀来区分不同的文件质量。如：</p>
+
+<pre><code class="language-html">&lt;img src="assets/name.jpg!sm"&gt;
+</code></pre>
+
+<p>则可使用下方 Plan 进行设置：</p>
+
+<pre><code class="language-json">{
+  ...
+  "chAttr": [
+    {
+      "type": "url.file.set-ext-suffix",
+      "pick": "img",
+      "attr": "src",
+      "sep": "!",
+      "suffix": "lg"
+    }
+  ]
+}
+</code></pre>
+
+<p>若要移除，则使用：</p>
+
+<pre><code class="language-json">{
+  ...
+  "chAttr": [
+    {
+      "type": "url.file.rm-ext-suffix",
+      "pick": "img",
+      "attr": "src",
+      "sep": "!"
+    }
+  ]
+}
+</code></pre>
+
+<p>注意： MaoXian 助手对于扩展名后缀的操作很粗暴。须确保 url 文件名中含有的分隔符确实为扩展名和后缀的分隔符，不然会出问题。</p>
+
+<p><strong>例1.3</strong>：有些网站还会把版本信息放在 url 的查询参数中，如：</p>
+
+<pre><code class="language-html">&lt;img src="http://a.org/name.jpg?size=sm&amp;from=google"&gt;
+</code></pre>
+
+<p>遇到这种，可使用下方 Plan：</p>
+
+<pre><code class="language-json">{
+  ...
+  "chAttr": [
+    {
+      "type": "url.search.edit",
+      "pick": "img",
+      "attr": "src",
+      "change": {"size": "lg"},
+      "delete": ["from"]
+    }
+  ]
+}
+</code></pre>
+
+<p>其中：</p>
+
+<ul>
+  <li>change 为要设置的参数。</li>
+  <li>delete 为要移除的参数名。</li>
+</ul>
+
+<p>上面这个 plan 应用后， src 属性的值为： “http://a.org/name.jpg?size=lg”</p>
+
+<hr />
+
+<p><strong>例2</strong>： 假设有一个网页，显示的是低质量的图，它的高质量图片地址，放在了 img 标签的另一个属性上。图片的 html 如下：</p>
+
+<pre><code class="language-html">&lt;img src="/image/pic-abc.jpg" hq-src="/image/pic-bdf.jpg" /&gt;
+</code></pre>
+<p>我们要裁剪的是 hq-src 指定的那张图片，使用下面这个 Plan 实现：</p>
+
+<pre><code class="language-json">{
+  ...
+  "chAttr": [
+    {
+      "type": "assign.from.self-attr",
+      "pick": "img",
+      "attr": "src",
+      "tAttr": "hq-src"
+    }
+  ]
+}
+</code></pre>
+<ul>
+  <li>type 为 <strong>assign.from.self-attr</strong> ，它表明我们要用<strong>找到节点的另一个属性的值</strong>，来重写 attr 指定的属性。</li>
+  <li>pick 的类型为选择器，用来选中要操作的节点，我们选中了所有 img 标签。</li>
+  <li>attr 的值为要操作的属性名字，此例中，我们选择的是 src 属性。</li>
+  <li>tAttr 的值为目标属性（target attribute）的名字， 此例中，我们用 hq-src 属性重写 src 属性。</li>
+</ul>
+
+<hr />
+
+<p><strong>例3.1</strong>： 假设有一个网页，显示的是低质量的图，并且这些图片本身是一个链接，可以通过点击图片查看原图， 图片的 html 如下：</p>
+
+<pre><code class="language-html">&lt;a href="/image/awesome-pic-bdf.jpg" &gt;
+  &lt;img src="/image/pic-abc.jpg" /&gt;
+&lt;/a&gt;
+</code></pre>
+<p>我们要裁剪的是 a 标签 href 指定的那张图片，使用下面这个 Plan 实现：</p>
+
+<pre><code class="language-json">{
+  ...
+  "chAttr": [
+    {
+      "type": "assign.from.parent-attr",
+      "pick": "img",
+      "attr": "src",
+      "tAttr": "href"
+    }
+  ]
+}
+</code></pre>
+
+<ul>
+  <li>type 为 <strong>assign.from.parent-attr</strong> ，它表明我们要用找到节点的 <strong>父节点</strong> 的一个属性的值，来重写 attr 指定的属性。</li>
+  <li>pick 的类型为选择器，用来选中要操作的节点，我们选中了所有 img 标签。</li>
+  <li>attr 的值为要操作的属性名字，此例中，我们选择的是图片的 src 属性。</li>
+  <li>tAttr 的值为目标属性（target attribute）的名字， 此例中，我们用父节点的 href 属性重写图片的 src 属性。</li>
+</ul>
+
+<p><strong>例3.2</strong>: 假如和 例3.1 类似，但是原图的链接不在父节点，而是在祖先节点，HTML 如下：</p>
+
+<pre><code class="language-html">&lt;a href="/image/awesome-pic-bdf.jpg" &gt;
+  &lt;div class="wrapper"&gt;
+    &lt;img src="/image/pic-abc.jpg" /&gt;
+  &lt;div&gt;
+&lt;/a&gt;
+</code></pre>
+
+<p>我们要裁剪的是 a 标签 href 指定的那张图片，使用下面这个 Plan 实现：</p>
+
+<pre><code class="language-json">{
+  ...
+  "chAttr": [
+    {
+      "type": "assign.from.ancestor-attr",
+      "pick": "img",
+      "attr": "src",
+      "tElem": ["a"],
+      "tAttr": "href"
+    }
+  ]
+}
+</code></pre>
+
+<ul>
+  <li>type 为 <strong>assign.from.ancestor-attr</strong> ，它表明我们要用找到节点的 <strong>祖先节点</strong> 的一个属性的值，来重写 attr 指定的属性。</li>
+  <li>pick 的类型为选择器，用来选中要操作的节点，我们选中了所有 img 标签。</li>
+  <li>attr 的值为要操作的属性名字，此例中，我们选择的是图片的 src 属性。</li>
+  <li>tElem 的值为目标元素（target element）的选择器，此例子中，我们选中了 a 标签。</li>
+  <li>tAttr 的值为目标属性（target attribute）的名字， 此例中，我们用祖先节点的 href 属性重写图片的 src 属性。</li>
+</ul>
+
+<p><strong>注意</strong>  tElem 的值比较特殊，如下：</p>
+
+<ul>
+  <li>必须是一个选择器元祖（数组），而且选择器的个数为 1 ~ 2 个。</li>
+  <li>选择器只能是 CSS 选择器。</li>
+  <li>第一个选择器用于匹配祖先节点</li>
+  <li>第二个选择器用于选择祖先节点的内部节点，只有当第一个选择器无法确定目标节点时，才需要提供。（极少使用到）</li>
+</ul>
+
+<p>还有一种 和 <strong>assign.from.ancestor-attr</strong> 相似的类型为： <strong>assign.from.ancestor.child-attr</strong> ， 此种类型也需要提供 tElem ，且需要提供两个选择器。拿到的目标节点为祖先节点的后代节点。</p>
+
+<hr />
+
+<p><strong>例4</strong>： 除了上面这几种 $action, chAttr 还对 class 属性的修改做了支持。请看下方 Plan:</p>
+
+<pre><code class="language-json">{
+  ...
+  "chAttr": [
+    {
+      "type": "split2list.remove",
+      "pick": ".section",
+      "attr": "class",
+      "value": "folded",
+      "sep": " "
+    }
+  ]
+}
+</code></pre>
+
+<ul>
+  <li>type 为 <strong>split2list.remove</strong> ，它表明我们要用操作的属性具有的值比较特殊，可以通过某个分隔符分成多个部分，该类型表明要移除其中一部分。</li>
+  <li>pick 的类型为选择器，用来选中要操作的节点，我们选中了所有包含类名为 section 的标签。</li>
+  <li>attr 的值为要操作的属性名字，此例中，我们选择的是 class 属性。</li>
+  <li>value 为要移除的那部分，可移除多个值（如：<code>"value": ["a", "b", "c"]</code>）</li>
+  <li>sep 为分隔符</li>
+</ul>
+
+<p>还有一种 $action, 跟该例子类似，它的类型为 <strong>split2list.add</strong>，该类型表明要往属性里面添加一项。</p>
+
+<p>一般可以使用这两种 $action ，对网页折叠部分进行控制，使其达到我们想要的状态。这种方式不像上文的 show 参数那样粗暴地对 display 进行操控。</p>
+
+<hr />
+
+<p><strong>例5</strong>： 这种可能不常见，即直接修改属性的值</p>
+
+<pre><code class="language-json">{
+  ...
+  "chAttr": [
+    {
+      "type": "assign.from.value",
+      "pick": ".formula",
+      "attr": "type",
+      "value": "image/svg",
+    }
+  ]
+}
+</code></pre>
+
+<p>上面的例子会把 “type” 属性的值设置为 “image/svg”。</p>
+
+<h3 id="arg-form">form 参数的使用</h3>
+
+<p>用于预设置表单的输入值，MaoXian 会在显示表单的时候，自动帮你输入这些预设的值。四项都为选填，详情如下：</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>名字</th>
+      <th>类型</th>
+      <th>说明</th>
+      <th>默认值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>format</td>
+      <td>字符串</td>
+      <td>存储格式，只能为 <code>html</code> 或 <code>md</code></td>
+      <td>取决于你的设置（见扩展设置页面）</td>
+    </tr>
+    <tr>
+      <td>title</td>
+      <td>选择器</td>
+      <td>用于选中包含标题的元素</td>
+      <td>无</td>
+    </tr>
+    <tr>
+      <td>category</td>
+      <td>字符串</td>
+      <td>对应表单的目录（多级目录用 <code>/</code> 隔开）</td>
+      <td>取决于你的设置（见扩展设置页面）</td>
+    </tr>
+    <tr>
+      <td>tagstr</td>
+      <td>字符串</td>
+      <td>对应表单的标签（多个标签用 <code>,</code> 或 <code>空格</code> 隔开)</td>
+      <td>无</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>主要应用场景：</strong></p>
+
+<ul>
+  <li>通过设置 format 来实现：不同网站的网页使用不同的存储格式。</li>
+  <li>通过设置 title 来解决网页标题和内容标题不一致的问题（MaoXian 默认会使用网页的标题作为表单的标题输入值）。</li>
+  <li>通过设置 category 来为不同的网站的网页设置不同的默认分类。</li>
+  <li>通过设置 tagstr 来为不同的网站的网页，打上不同的默认标签。</li>
+</ul>
+
+<p>例子：</p>
+
+<p>请注意 <code>title</code> 的值是一个选择器，此例选中 <code>main h1</code> 对应的标题来作为『保存表单』的标题。</p>
+
+<pre><code class="language-json">{
+  ...
+  "form": {
+    "format": "md",
+    "title": "main h1",
+    "category": "news/read-later",
+    "tagstr": "international,freedom-news"
+  }
+}
+</code></pre>
+
+<h3 id="arg-config">config 参数的使用</h3>
+
+<p>重写某些配置项，并且重写的这个动作只在这个 Plan 的作用范围内有效。</p>
+
+<p>当前允许重写的配置项如下，所有可配置项均为选填。注： 其中的默认值指的是 MaoXian 扩展提供的默认值，该值只作为参考，实际上使用的是你自己配置页面上的值。</p>
+
+<h4 id="config-storage">存储相关</h4>
+
+<p>可在扩展的 <code>扩展 &gt; 设置页面 &gt; 存储设置</code> 一节找到可使用的变量及其说明。</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>名字</th>
+      <th>说明</th>
+      <th>类型</th>
+      <th>默认值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>clippingHandler</td>
+      <td>处理程序</td>
+      <td>String</td>
+      <td>Browser</td>
+    </tr>
+    <tr>
+      <td>saveFormat</td>
+      <td>保存格式</td>
+      <td>String</td>
+      <td>html</td>
+    </tr>
+    <tr>
+      <td>rootFolder</td>
+      <td>根目录</td>
+      <td>String</td>
+      <td>mx-wc</td>
+    </tr>
+    <tr>
+      <td>defaultCategory</td>
+      <td>默认分类</td>
+      <td>String</td>
+      <td>default</td>
+    </tr>
+    <tr>
+      <td>clippingFolderName</td>
+      <td>裁剪目录</td>
+      <td>String</td>
+      <td>$YYYY-$MM-$DD-$TIME-INTSEC</td>
+    </tr>
+    <tr>
+      <td>mainFileFolder</td>
+      <td>主文件的存储目录</td>
+      <td>String</td>
+      <td>$CLIPPING-PATH</td>
+    </tr>
+    <tr>
+      <td>mainFileName</td>
+      <td>主文件的文件名</td>
+      <td>String</td>
+      <td>index.$FORMAT</td>
+    </tr>
+    <tr>
+      <td>saveInfoFile</td>
+      <td>是否保存元信息文件</td>
+      <td>Boolean</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>infoFileFolder</td>
+      <td>元信息文件的存储目录</td>
+      <td>String</td>
+      <td>$CLIPPING-PATH</td>
+    </tr>
+    <tr>
+      <td>infoFileName</td>
+      <td>元信息文件的文件名</td>
+      <td>String</td>
+      <td>index.json</td>
+    </tr>
+    <tr>
+      <td>saveTitleFile</td>
+      <td>是否保存标题文件</td>
+      <td>Boolean</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>titleFileFolder</td>
+      <td>标题文件的存储目录</td>
+      <td>String</td>
+      <td>$CLIPPINT-PATH</td>
+    </tr>
+    <tr>
+      <td>titleFileName</td>
+      <td>标题文件的文件名</td>
+      <td>String</td>
+      <td>a-title_$TITLE</td>
+    </tr>
+    <tr>
+      <td>frameFileFolder</td>
+      <td>内嵌的网页文件的存储目录</td>
+      <td>String</td>
+      <td>$CLIPPING-PATH/frames</td>
+    </tr>
+    <tr>
+      <td>frameFileName</td>
+      <td>内嵌的网页文件的文件名</td>
+      <td>String</td>
+      <td>$TIME-INTSEC-$MD5URL.frame.html</td>
+    </tr>
+    <tr>
+      <td>assetFolder</td>
+      <td>资源文件的存储目录</td>
+      <td>String</td>
+      <td>$CLIPPING-PATH/assets</td>
+    </tr>
+    <tr>
+      <td>assetFileName</td>
+      <td>资源文件的文件名</td>
+      <td>String</td>
+      <td>$TIME-INTSEC-$MD5URL$EXT</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>备注</strong>：</p>
+
+<ul>
+  <li>clippingHandler （处理程序）的可选值为 <code>Browser</code>（浏览器下载功能） 和 <code>NativeApp</code> （本地程序）</li>
+  <li>saveFormat （保存格式）的可选值为 <code>html</code> 或 <code>md</code></li>
+  <li>saveInfoFile（是否保存元信息文件） 设置为 <code>false</code> 后，MaoXian 便不会保存裁剪历史。</li>
+</ul>
+
+<h4 id="config-markdown">Markdown 文档相关</h4>
+
+<p>请参考 <code>扩展 &gt; 设置 &gt; Markdown</code> 的说明文字进行配置。</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>名字</th>
+      <th>说明</th>
+      <th>类型</th>
+      <th>默认值</th>
+      <th>可选值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>markdownTemplate</td>
+      <td>Markdown 模板</td>
+      <td>String</td>
+      <td><code>\n{{content}}\n</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>markdownOptionHeadingStyle</td>
+      <td>标题格式</td>
+      <td>String</td>
+      <td><code>atx</code></td>
+      <td><code>setext</code> 或 <code>atx</code></td>
+    </tr>
+    <tr>
+      <td>markdownOptionHr</td>
+      <td>水平分割线</td>
+      <td>String</td>
+      <td><code>* * *</code></td>
+      <td><code>* * *</code> 或 <code>- - -</code> 等等</td>
+    </tr>
+    <tr>
+      <td>markdownOptionBulletListMarker</td>
+      <td>子弹列表的行头符</td>
+      <td>String</td>
+      <td><code>*</code></td>
+      <td><code>*</code>，<code>+</code> 或 <code>-</code></td>
+    </tr>
+    <tr>
+      <td>markdownOptionCodeBlockStyle</td>
+      <td>代码块格式</td>
+      <td>String</td>
+      <td><code>fenced</code></td>
+      <td><code>indented</code> 或 <code>fenced</code></td>
+    </tr>
+    <tr>
+      <td>markdownOptionFence</td>
+      <td>代码块分隔符</td>
+      <td>String</td>
+      <td><code>```</code></td>
+      <td><code>```</code> 或 <code>~~~</code></td>
+    </tr>
+    <tr>
+      <td>markdownOptionEmDelimiter</td>
+      <td>强调（斜体）分隔符</td>
+      <td>String</td>
+      <td><code>_</code></td>
+      <td><code>_</code> 或 <code>*</code></td>
+    </tr>
+    <tr>
+      <td>markdownOptionStrongDelimiter</td>
+      <td>加重（粗体）分隔符</td>
+      <td>String</td>
+      <td><code>**</code></td>
+      <td><code>**</code> 或 <code>__</code></td>
+    </tr>
+    <tr>
+      <td>markdownOptionLinkStyle</td>
+      <td>链接格式</td>
+      <td>String</td>
+      <td><code>inlined</code></td>
+      <td><code>inlined</code> 或 <code>referenced</code></td>
+    </tr>
+    <tr>
+      <td>markdownOptionFormulaBlockWrapper</td>
+      <td>块状公式的格式</td>
+      <td>String</td>
+      <td><code>padSameLine</code></td>
+      <td><code>sameLine</code>, <code>padSameLIne</code>, <code>multipleLine</code> 或 <code>mathCodeBlock</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>备注</strong>：</p>
+
+<ul>
+  <li>markdownOptionHr （水平分割线）可填写的值很灵活，具体查看这里 <a href="https://spec.commonmark.org/0.27/#thematic-breaks">Thematic break</a></li>
+</ul>
+
+<h4 id="config-html">HTML 文档相关</h4>
+
+<p>请参考 <code>扩展 &gt; 设置 &gt; HTML</code> 的说明文字进行配置。</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>名字</th>
+      <th>说明</th>
+      <th>类型</th>
+      <th>默认值</th>
+      <th>可选值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>htmlSaveClippingInformation</td>
+      <td>追加裁剪信息到内容尾部</td>
+      <td>Boolean</td>
+      <td><code>false</code></td>
+      <td><code>false</code>、 <code>true</code></td>
+    </tr>
+    <tr>
+      <td>htmlCustomBodyBgCssEnabled</td>
+      <td>允许自定义 body 标签的 CSS 背景颜色</td>
+      <td>Boolean</td>
+      <td><code>false</code></td>
+      <td><code>false</code>、 <code>true</code></td>
+    </tr>
+    <tr>
+      <td>htmlCustomBodyBgCssValue</td>
+      <td>body 标签的 CSS 背景颜色</td>
+      <td>String</td>
+      <td><code>#000000</code></td>
+      <td>查看 background-color (CSS)</td>
+    </tr>
+    <tr>
+      <td>htmlCompressCss</td>
+      <td>压缩样式（CSS）</td>
+      <td>Boolean</td>
+      <td><code>false</code></td>
+      <td><code>false</code>、<code>true</code></td>
+    </tr>
+    <tr>
+      <td>htmlCaptureImage</td>
+      <td>图片</td>
+      <td>String</td>
+      <td><code>saveAll</code></td>
+      <td><code>saveAll</code>、<code>saveCurrent</code></td>
+    </tr>
+    <tr>
+      <td>htmlCaptureAudio</td>
+      <td>声音</td>
+      <td>String</td>
+      <td><code>remove</code></td>
+      <td><code>saveAll</code> 、<code>saveCurrent</code>、 <code>remove</code></td>
+    </tr>
+    <tr>
+      <td>htmlCaptureVideo</td>
+      <td>影片</td>
+      <td>String</td>
+      <td><code>remove</code></td>
+      <td><code>saveAll</code>、 <code>saveCurrent</code>、 <code>remove</code></td>
+    </tr>
+    <tr>
+      <td>htmlCaptureApplet</td>
+      <td>Applets</td>
+      <td>String</td>
+      <td><code>remove</code></td>
+      <td><code>saveAll</code>、 <code>remove</code></td>
+    </tr>
+    <tr>
+      <td>htmlCaptureEmbed</td>
+      <td>Embeds</td>
+      <td>String</td>
+      <td><code>saveImage</code></td>
+      <td><code>saveAll</code>、 <code>saveImage</code>、 <code>remove</code>、 <code>filter</code></td>
+    </tr>
+    <tr>
+      <td>htmlCaptureObject</td>
+      <td>Objects</td>
+      <td>String</td>
+      <td><code>saveImage</code></td>
+      <td><code>saveAll</code>、 <code>saveImage</code>、 <code>remove</code>、 <code>filter</code></td>
+    </tr>
+    <tr>
+      <td>htmlCaptureIcon</td>
+      <td>网站图标</td>
+      <td>String</td>
+      <td><code>remove</code></td>
+      <td><code>saveAll</code>、 <code>saveFavicon</code>、 <code>remove</code></td>
+    </tr>
+    <tr>
+      <td>htmlCaptureCssRules</td>
+      <td>样式规则</td>
+      <td>String</td>
+      <td><code>saveUserd</code></td>
+      <td><code>saveAll</code>、 <code>saveUserd</code></td>
+    </tr>
+    <tr>
+      <td>htmlCaptureWebFont</td>
+      <td>Web 字体</td>
+      <td>String</td>
+      <td><code>remove</code></td>
+      <td><code>saveAll</code>、 <code>remove</code>、 <code>filterList</code></td>
+    </tr>
+    <tr>
+      <td>htmlCaptureCssImage</td>
+      <td>样式图片</td>
+      <td>String</td>
+      <td><code>remove</code></td>
+      <td><code>saveAll</code>、 <code>remove</code></td>
+    </tr>
+    <tr>
+      <td>htmlEmbedFilter</td>
+      <td>Embeds 过滤器</td>
+      <td>String</td>
+      <td><code>&lt;images&gt;</code></td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>htmlObjectFilter</td>
+      <td>Objects 过滤器</td>
+      <td>String</td>
+      <td><code>&lt;images&gt;</code></td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>htmlWebFontFilterList</td>
+      <td>Web 字体过滤器组</td>
+      <td>String</td>
+      <td><code>woff2|woff|otf|ttf</code></td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="config-web-request">Web 请求相关</h4>
+
+<p>请参考 <code>扩展 &gt; 设置 &gt; 高级设置</code> 的说明文字进行配置。</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>名字</th>
+      <th>说明</th>
+      <th>类型</th>
+      <th>默认值</th>
+      <th>可选值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>requestTimeout</td>
+      <td>超时（秒）</td>
+      <td>Integer</td>
+      <td>300</td>
+      <td>5 ~ 86400</td>
+    </tr>
+    <tr>
+      <td>requestMaxTries</td>
+      <td>最大尝试次数</td>
+      <td>Integer</td>
+      <td>3</td>
+      <td>大于1的整数</td>
+    </tr>
+    <tr>
+      <td>requestReferrerPolicy</td>
+      <td>Referrer 请求头</td>
+      <td>String</td>
+      <td><code>originWhenCrossOrigin</code></td>
+      <td><code>noReferrer</code>、 <code>origin</code>、 <code>originWhenCrossOrigin</code>、 <code>unsafeUrl</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="arg-tags">tags 参数的使用</h3>
+
+<p>虽然 Plan 的 tags 属性是非必须的，但还是建议你为 Plan 打上标签，以便后期，我们能更好地管理他们。</p>
+
+<h2 id="contribution">贡献 Plan</h2>
+
+<p>所有的 Plan 都存储在 <code>plans</code> 的子目录下，不同的子目录代表不同频道，每个频道最终都将生成一个订阅地址。请将你写的 Plan 以数组的形式单独存为一个文件，如： <code>plans/zh/zhihu.json</code>。每个网站建一个文件。</p>
+
+<p>最终所有的 Plan 会在 <code>build.rb</code> 这个脚本的渲染下，变成可订阅的形式。</p>
+
+<p>你可以通过下方几种方式把 plan 分享出来：</p>
+
+<ul>
+  <li>通过 Github 建 Pull Request 的形式。</li>
+  <li>通过 Github 建 issue。（把 plan 贴上即可）</li>
+  <li>通过发邮件给开发者（i.mika[AT]tutanota.com），直接发送内容或者发送 patch。</li>
+</ul>
+
+<h2 id="last-word">最后</h2>
+
+<p>如果你对「毛线助手」有什么看法或建议，请<a href="https://github.com/mika-cn/maoxian-assistant/issues">告诉我们</a>。</p>
+
+<p><a href="../index-zh-CN.html">首页</a></p>
+</div>
+    </div>
+  </body>
+</html>
+

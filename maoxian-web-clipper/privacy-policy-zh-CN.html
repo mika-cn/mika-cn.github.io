@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="『毛线』的隐私说明" />
+    <title>隐私说明</title>
+    <link rel="icon" type="image/png" href="imgs/logo.png" />
+    <link rel="stylesheet" type="text/css" href="css/markdown.css" />
+    <style>
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="title"><h1>隐私说明</h1></div>
+      <div class="content">
+<h2 id="section">声明</h2>
+
+<p>我们对你的信息没有任何兴趣，并且我们很乐意去帮助你避免个人信息的泄露。</p>
+
+<p>这意味着：</p>
+
+<ul>
+  <li>我们不会收集您的任何信息</li>
+  <li>我们不会嵌入任何分析代码（像谷歌分析或百度分析）到这个扩展中</li>
+  <li>我们不会嵌入任何广告到这个扩展中</li>
+  <li>本扩展无需任何帐号，所以你无需填写那讨人厌的注册表单</li>
+  <li>我们欢迎你向我们提任何保护隐私的建议</li>
+</ul>
+
+<h2 id="section-1">对外发送请求的说明</h2>
+
+<p>某些功能是需要连接其他电脑才能正常工作。在以下情况下，『毛线』会向其他电脑（服务器）发送请求：</p>
+
+<p><strong>裁剪网页</strong></p>
+
+<p>当你裁剪一个网页时，『毛线』会请求浏览器去获取这个网页相关的文件（图片、样式、字体等），如果此时浏览器无法从它的缓存里（即你的电脑）获取这些文件，它就会发送请求到这些文件所在的电脑（服务器）去下载。这些下载请求不会带 <code>Cookie</code>，而且 『毛线』 默认会把 <code>Referrer</code> 请求头的网址路径删除。</p>
+
+<p><strong>『毛线助手』公开 Plan 列表的下载</strong></p>
+
+<p>如果你启用了『毛线助手』并且订阅了某些公开的 Plan 列表，那么在你手动点击下载按钮或者你勾选了自动更新后，『毛线』会从 Github 下载这些列表。</p>
+
+<h2 id="section-2">使用到的权限，以及为啥需要这些权限。</h2>
+
+<p>在详细解释各权限在 『毛线』 这个扩展中的用途之前，有必要先解释一下： 这些权限的说明文字是站在用户的角度来表述的，当你在浏览器上看到这些说明文字时，其潜台词为：<strong>这个扩展拥有了这个权限之后，它最大限度可以做到这个 （而不是，这个扩展拥有了这个权限后，就一定会做这个）</strong>。</p>
+
+<p>下方是本扩展 <code>manifest.json</code> 文件里面的权限信息，由于这些权限很难用简练的文字表述出来，所以通过引用 <code>manifest.json</code> 文件里面的权限名来进行说明。</p>
+
+<pre><code class="language-json">{
+  "permissions": [
+    "&lt;all_urls&gt;",
+    "webNavigation",
+    "webRequest",
+    "webRequestBlocking",
+    "storage",
+    "unlimitedStorage",
+    "tabs",
+    "downloads",
+    "downloads.open"
+  ],
+  "optional_permissions": [
+    "nativeMessaging"
+  ],
+}
+
+</code></pre>
+
+<p>下面我们详细说明这些权限在『毛线』中的用途：</p>
+
+<p><strong>权限：&lt;all_urls&gt;</strong></p>
+
+<p>『毛线』使用该权限，去做一些初始化工作：初始化消息通道、查找之前有没有对类似网页进行裁剪过，如果有，找出当时的裁剪信息（记住选取功能）等等。</p>
+
+<p><strong>权限：webNavigation</strong></p>
+
+<p>『毛线』使用该权限，去获取当前网页的所有内嵌网页的信息，为的是向其发送消息，以便能裁剪这些内嵌的网页。</p>
+
+<p><strong>权限：webRequest 和 webRequestBlocking</strong></p>
+
+<p>『毛线』使用该权限，去记录图片请求的文件格式，以便在保存那些网址不包含扩展名的图片时，能修复其扩展名（注：有些浏览器在打开无扩展名的图片时，无法正常显示）。并且使用该权限去修改『毛线』扩展发出的请求的请求头（request header），对应于 <em>设置页面 &gt; 高级设置 &gt; 设置 Referrer</em>，这个是为了隐私保护的，默认的资源请求，包含的 Referrer 信息太大了。</p>
+
+<p><strong>权限：storage</strong></p>
+
+<p>该权限赋予扩展保存信息的能力。『毛线』 使用该权限去保存：配置信息（包含设置页面和历史页面），裁剪记录（也就是历史页面显示的信息），目录记录，标签记录。所有这些信息都保存在你的本地，<strong>注：</strong> 该权限可以允许你保存的信息通过浏览器提供商的帐号体系（Firefox帐号或谷歌帐号），进行跨设备同步。在 『毛线』 中，我们没有启用该功能，将来也不会启用。</p>
+
+<p><strong>权限：unlimitedStorage</strong></p>
+
+<p>该权限赋予扩展可以保存更多信息的能力。由于 『毛线』 会存储裁剪记录（也就是历史页面显示的信息），而浏览器默认有个存储限制，而且这个限制比较小，大概只能存储几千条记录。为了能保存更多的记录，『毛线』 使用到了该权限。</p>
+
+<p><strong>权限：tabs</strong></p>
+
+<p>『毛线』 使用该权限，主要是要获取「标签页」的 ID，扩展里各个组件间的通讯用到这个ID。并且还使用该权限去打开一个网页（通过创建「标签页」的方式打开），这些网页为：扩展本身的网页（如：设置页面，历史页面等）以及外部网页（如：项目文档）</p>
+
+<p><strong>权限：downloads 和 downloads.open</strong></p>
+
+<p>『毛线』 使用 <code>downloads</code> 权限去保存裁剪下来的文件，并且从你的下载记录里，删除掉除主文件外的下载历史（『毛线』 一次性会下载许多文件，如果都放到下载历史里，会把下载历史搞得很乱）。当文件下载完成后，『毛线』 使用 <code>downloads.open</code> 权限，去打开下载下来的主文件。</p>
+
+<p><strong>权限：nativeMessaging</strong></p>
+
+<p>『毛线』使用该权限与 <a href="native-app/index-zh-CN.html">「本地程序」</a> 进行通讯。该权限为非必要权限，除非你需要使用 「本地程序」，才需要授予该权限给本扩展。</p>
+
+<h2 id="section-3">怎么知道这个隐私声明是真实的？</h2>
+
+<p>我们很开心你有这个顾虑，很多情况下观其言是远远不够的。『毛线』是一个开源软件，你可以在<a href="https://github.com/mika-cn/maoxian-web-clipper">这里</a> 查看到软件源代码，你可以阅读这些代码来验证上方所述是否为实，以及编译它，然后和我们发布的版本做比较。</p>
+
+<hr />
+
+<p><a href="index-zh-CN.html">首页</a></p>
+</div>
+    </div>
+  </body>
+</html>
+

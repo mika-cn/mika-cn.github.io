@@ -1,0 +1,575 @@
+[
+  {
+    "name": "简书",
+    "pattern": "https://www.jianshu.com/p/*",
+    "version": 20220207,
+    "pick": "article",
+    "chAttr": [
+      {
+        "type": "assign.from.self-attr",
+        "pick": ".image-view img[data-original-src]",
+        "attr": "src",
+        "tAttr": "data-original-src"
+      }
+    ],
+    "tags": [
+      "writing"
+    ],
+    "contributors": [
+      "Mika"
+    ]
+  },
+  {
+    "name": "新浪微博",
+    "pattern": "https://weibo.com/$d/*",
+    "version": 20220207,
+    "hideSibling": [
+      "video.wbpv-tech"
+    ],
+    "chAttr": [
+      {
+        "type": "assign.from.value",
+        "pick": ".vue-recycle-scroller__item-wrapper",
+        "attr": "data-mx-sort-by-index",
+        "value": "1"
+      },
+      {
+        "type": "assign.from.value",
+        "pick": ".vue-recycle-scroller__item-view",
+        "attr": "data-mx-locked-style-position",
+        "value": "static !important"
+      },
+      {
+        "type": "assign.from.value",
+        "pick": ".vue-recycle-scroller__item-view",
+        "attr": "data-mx-locked-style-transform",
+        "value": "translateY(0px)"
+      },
+      {
+        "type": "assign.from.first-child-attr",
+        "pick": ".vue-recycle-scroller__item-view",
+        "attr": "data-mx-index",
+        "tAttr": "data-index"
+      }
+    ],
+    "contributors": [
+      "Mika"
+    ]
+  },
+  {
+    "name": "ruby-china.org",
+    "pattern": "https://ruby-china.org/topics/*",
+    "version": 20220207,
+    "pick": ".topic-detail",
+    "tags": [
+      "IT",
+      "community",
+      "ruby"
+    ],
+    "contributors": [
+      "Mika"
+    ]
+  },
+  {
+    "name": "IT之家",
+    "pattern": "https://www.ithome.com/**/*/*.htm",
+    "version": 20220207,
+    "pick": ".post_content",
+    "chAttr": [
+      {
+        "type": "assign.from.self-attr",
+        "pick": "img.lazy",
+        "attr": "src",
+        "tAttr": "data-original"
+      }
+    ],
+    "tags": [
+      "IT",
+      "news"
+    ],
+    "contributors": [
+      "yzqzss (author)",
+      "Mika"
+    ]
+  },
+  {
+    "name": "知乎专栏",
+    "pattern": "https://zhuanlan.zhihu.com/p/**",
+    "version": 20220207,
+    "hide": [
+      "figure > noscript",
+      ".GifPlayer-icon",
+      ".GifPlayer > .GifPlayer-gif2mp4",
+      ".PostIndex-Contributions",
+      ".Recommendations-Main",
+      ".CommentsV2-footer-wrapper",
+      ".CommentTopbar .Topbar-options",
+      ".ColumnPageHeader-Wrapper"
+    ],
+    "chAttr": [
+      {
+        "type": "split2list.remove",
+        "pick": ".RichContent-actions",
+        "attr": "class",
+        "value": [
+          "Sticky",
+          "is-fixed",
+          "is-bottom"
+        ]
+      },
+      {
+        "type": "assign.from.self-attr",
+        "pick": "figure > img",
+        "attr": "src",
+        "tAttr": "data-actualsrc"
+      },
+      {
+        "type": "replace.last-match",
+        "pick": ".GifPlayer > img",
+        "attr": "src",
+        "subStr": ".jpg",
+        "newStr": ".gif"
+      }
+    ],
+    "tags": [
+      "knowledge",
+      "share"
+    ],
+    "contributors": [
+      "Mika"
+    ]
+  },
+  {
+    "name": "知乎回答",
+    "pattern": "https://www.zhihu.com/question/*/answer/*",
+    "version": 20220207,
+    "hide": [
+      ".QuestionHeader-footer-main",
+      ".Card.ViewAll",
+      ".Question-mainColumnLogin",
+      ".Topbar-options",
+      ".List-header",
+      ".ContentItem-expandButton",
+      ".ContentItem-action.ContentItem-rightButton",
+      ".GifPlayer-icon",
+      ".GifPlayer > .GifPlayer-gif2mp4",
+      ".CommentsV2-footer-wrapper"
+    ],
+    "chAttr": [
+      {
+        "type": "split2list.remove",
+        "pick": ".ContentItem .RichContent",
+        "attr": "class",
+        "value": [
+          "is-collapsed"
+        ]
+      },
+      {
+        "type": "split2list.remove",
+        "pick": ".ContentItem-actions",
+        "attr": "class",
+        "value": [
+          "Sticky",
+          "is-fixed",
+          "is-bottom"
+        ]
+      },
+      {
+        "type": "assign.from.self-attr",
+        "pick": "figure > img",
+        "attr": "src",
+        "tAttr": "data-actualsrc"
+      },
+      {
+        "type": "replace.last-match",
+        "pick": ".GifPlayer > img",
+        "attr": "src",
+        "subStr": ".jpg",
+        "newStr": ".gif"
+      }
+    ],
+    "tags": [
+      "QA",
+      "answer",
+      "share",
+      "discuss"
+    ],
+    "contributors": [
+      "Mika"
+    ]
+  },
+  {
+    "name": "知乎问题",
+    "pattern": "https://www.zhihu.com/question/*",
+    "version": 20220207,
+    "hide": [
+      ".QuestionHeader-footer-main",
+      ".AnswersNavWrapper .List-header",
+      ".ContentItem-expandButton",
+      ".ContentItem-action.ContentItem-rightButton",
+      ".GifPlayer-icon",
+      ".GifPlayer > .GifPlayer-gif2mp4",
+      ".CommentsV2-footer-wrapper",
+      ".Question-sideColumn"
+    ],
+    "chAttr": [
+      {
+        "type": "split2list.remove",
+        "pick": ".ContentItem .RichContent",
+        "attr": "class",
+        "value": [
+          "is-collapsed"
+        ]
+      },
+      {
+        "type": "split2list.remove",
+        "pick": ".ContentItem-actions",
+        "attr": "class",
+        "value": [
+          "Sticky",
+          "is-fixed",
+          "is-bottom"
+        ],
+        "sep": " "
+      },
+      {
+        "type": "assign.from.self-attr",
+        "pick": "figure > img",
+        "attr": "src",
+        "tAttr": "data-actualsrc"
+      },
+      {
+        "type": "replace.last-match",
+        "pick": ".GifPlayer > img",
+        "attr": "src",
+        "subStr": ".jpg",
+        "newStr": ".gif"
+      }
+    ],
+    "tags": [
+      "QA",
+      "question",
+      "share",
+      "discuss"
+    ],
+    "contributors": [
+      "Mika"
+    ]
+  },
+  {
+    "name": "zhihu video",
+    "pattern": "https://video.zhihu.com/video/*",
+    "version": 20220207,
+    "hideSibling": "X||//video/.."
+  },
+  {
+    "name": "果壳",
+    "pattern": "http*://www.guokr.com/article/",
+    "version": 20220207,
+    "pick": "div[class*=ArticleContent]",
+    "tags": [
+      "science",
+      "nature"
+    ],
+    "contributors": [
+      "Mika"
+    ]
+  },
+  {
+    "name": "wangyi open courses",
+    "pattern": "https://open.163.com/newview/movie/free",
+    "version": 20220207,
+    "pick": ".video-module",
+    "hideSibling": [
+      ".video-js > video"
+    ]
+  },
+  {
+    "name": "Bilibili 专栏",
+    "pattern": "https://www.bilibili.com/read/*",
+    "version": 20220225,
+    "pick": "#read-article-holder",
+    "hide": [
+      ".img-box .n-img-mask"
+    ],
+    "chAttr": [
+      {
+        "type": "assign.from.self-attr",
+        "pick": ".img-box img",
+        "attr": "src",
+        "tAttr": "data-src"
+      }
+    ],
+    "contributors": [
+      "yzqzss",
+      "Mika"
+    ]
+  },
+  {
+    "name": "wixin-gh",
+    "pattern": "https://mp.weixin.qq.com/s",
+    "version": 20220207,
+    "pick": "#js_content",
+    "hide": [
+      ".qr_code_pc"
+    ],
+    "chAttr": [
+      {
+        "type": "assign.from.self-attr",
+        "pick": ".wxw-img[data-src], img.img_loading[data-src]",
+        "attr": "src",
+        "tAttr": "data-src"
+      }
+    ]
+  },
+  {
+    "name": "Solidot",
+    "pattern": "https://www.solidot.org/story",
+    "version": 20220207,
+    "pick": "div.p_mainnew",
+    "tags": [
+      "IT",
+      "news",
+      "geek"
+    ],
+    "contributors": [
+      "Mika"
+    ]
+  },
+  {
+    "name": "36kr",
+    "pattern": "https://36kr.com/p/$d",
+    "version": 20220503,
+    "pick": ".articleDetailContent",
+    "tags": [
+      "IT",
+      "news",
+      "tech"
+    ],
+    "contributors": [
+      "Mika"
+    ]
+  },
+  {
+    "name": "iPcfun",
+    "pattern": "https://www.ipcfun.com/*.html",
+    "version": 20220207,
+    "pick": ".post",
+    "hide": [
+      ".post_detail > .entry-relate-links",
+      "#sidebar"
+    ]
+  },
+  {
+    "name": "酷壳",
+    "pattern": "https://coolshell.cn/articles/*",
+    "version": 20220207,
+    "pick": ".post-content",
+    "tags": [
+      "IT",
+      "blog"
+    ],
+    "contributors": [
+      "Mika"
+    ]
+  },
+  {
+    "name": "异次元软件世界",
+    "pattern": "https://www.iplaysoft.com/*.html",
+    "version": 20220207,
+    "pick": "div.entry-content",
+    "hide": [
+      "ul#link1111",
+      "#socialshare",
+      ".post_wechat_qr",
+      ".donate",
+      ".entry-recommend-posts",
+      ".entry-relate-links",
+      ".same-cat-post-head",
+      ".same-cat-post",
+      "#respond",
+      "#sidebar"
+    ],
+    "chAttr": [
+      {
+        "type": "assign.from.self-attr",
+        "pick": "div.entry-content img.lazyload",
+        "attr": "src",
+        "tAttr": "data-src"
+      }
+    ],
+    "tags": [
+      "IT",
+      "software",
+      "share"
+    ],
+    "contributors": [
+      "Mika"
+    ]
+  },
+  {
+    "name": "iteye",
+    "pattern": "http*://*.iteye.com/blog/*",
+    "version": 20220207,
+    "pick": "#blog_content",
+    "hide": [
+      "#bottoms",
+      ".blog_bottom",
+      ".blog_nav",
+      ".blog_comment"
+    ],
+    "tags": [
+      "IT",
+      "blog"
+    ]
+  },
+  {
+    "name": "segmentfault.com",
+    "pattern": "https://segmentfault.com/a/",
+    "version": 20220207,
+    "pick": "article.article-content",
+    "tags": [
+      "IT",
+      "geek"
+    ],
+    "contributors": [
+      "Mika"
+    ]
+  },
+  {
+    "name": "掘金",
+    "pattern": [
+      "https://juejin.cn/post/*",
+      "https://juejin.im/post/*"
+    ],
+    "version": 20220207,
+    "pick": "div.article-content",
+    "hide": [
+      "span.copy-code-btn"
+    ],
+    "tags": [
+      "IT",
+      "community",
+      "frontend"
+    ],
+    "contributors": [
+      "CodingOX"
+    ]
+  },
+  {
+    "name": "少数派",
+    "pattern": "https://sspai.com/post/*",
+    "version": 20220207,
+    "pick": ".article-body > .articleWidth-content > .content",
+    "hide": [
+      ".bgGrey",
+      ".article-side"
+    ],
+    "chAttr": [
+      {
+        "type": "assign.from.self-attr",
+        "pick": ".content img",
+        "attr": "src",
+        "tAttr": "data-original"
+      }
+    ],
+    "tags": [
+      "news"
+    ],
+    "contributors": [
+      "Mika"
+    ]
+  },
+  {
+    "name": "阮一峰的博客",
+    "pattern": "http*://www.ruanyifeng.com/blog/**/*/*.html",
+    "version": 20220207,
+    "pick": "article",
+    "tags": [
+      "IT",
+      "blog",
+      "frontend"
+    ],
+    "contributors": [
+      "Mika"
+    ]
+  },
+  {
+    "name": "博客园",
+    "pattern": "https://www.cnblogs.com/**/*/*.html",
+    "version": 20220207,
+    "pick": "div#cnblogs_post_body",
+    "hide": [
+      "div.cnblogs_code_toolbar",
+      "div.cnblogs_code_copy"
+    ],
+    "tags": [
+      "IT",
+      "blog"
+    ],
+    "contributors": [
+      "CodingOX"
+    ]
+  },
+  {
+    "name": "v2ex",
+    "pattern": "https://www.v2ex.com/t/",
+    "version": 20220207,
+    "pick": "div.topic_content",
+    "tags": [
+      "IT",
+      "forum",
+      "share",
+      "creation"
+    ],
+    "contributors": [
+      "Mika"
+    ]
+  },
+  {
+    "name": "凤凰网/资讯",
+    "pattern": "https://news.ifeng.com/c/*",
+    "version": 20220503,
+    "pick": [
+      "[class|=main_content]",
+      "[class|=artical]",
+      "[class|=article]"
+    ],
+    "hide": [
+      "[class|=rightContent]",
+      "[class|=infoboxLink] [class|=face]",
+      "[class|=infoboxLink] [class|=follow]",
+      "[class|=artical] [class|=info] > [class|=share_box]",
+      "[class|=article] [class|=info] > [class|=share_box]",
+      "[class|=vote_box] [class|=qr_box]",
+      "[class|=vote_box] [class|=share_box]",
+      "[class|=comment_textarea_head]",
+      "[class|=comment_textarea_body]",
+      "[class|=comment_textarea_bottom]",
+      "[class|=showAllComment]"
+    ],
+    "hideSibling": [
+      "[class|=artical]",
+      "[class|=article]"
+    ],
+    "tags": [
+      "news"
+    ],
+    "contributors": [
+      "Mika"
+    ]
+  },
+  {
+    "name": "linux.cn",
+    "pattern": "https://linux.cn/article-*.html",
+    "version": 20220207,
+    "pick": "div#article_content",
+    "tags": [
+      "IT",
+      "Linux"
+    ],
+    "contributors": [
+      "Mika"
+    ]
+  }
+]

@@ -1,0 +1,53 @@
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta name="author" value="nobody">
+<title>colorful live</title>
+<style type="text/css">
+  div{ position: absolute; overflow: hidden; border-radius: 100000px; }
+</style>
+</head>
+<body>
+</body>
+<script type="text/javascript">
+
+  Screen_X = screen.width + 50;
+  Screen_Y = screen.height - 50;
+  IMGS = ['./imgs/flower/1.jpg',
+          './imgs/flower/2.jpg',
+          './imgs/flower/3.jpg',
+          './imgs/flower/4.jpg',
+          './imgs/flower/5.jpg',
+          './imgs/flower/6.jpg',
+          './imgs/flower/7.jpg',
+          './imgs/flower/8.jpg'
+];
+  times = 1000;
+  min_width = 10;
+  max_width = 50;
+  function int_random(max_value){ return Math.ceil(Math.random() * max_value); }
+  function paint(){
+    if( times-- == 0){ return; }
+      x = int_random(Screen_X);
+      y = int_random(Screen_Y);
+    img_url = IMGS[int_random(IMGS.length)-1];
+    width = Math.ceil(min_width + Math.random()*max_width);
+    div = document.createElement("div");
+    div.style.left = x+"px";
+    div.style.top = y+"px";
+    div.style.width = "" + width + "px";
+    div.style.height = div.style.width;
+    img = document.createElement("img");
+    img.src = img_url;
+    img.style.width = "100%";
+    img.style.height = "100%";
+    div.appendChild(img);
+    document.body.appendChild(div);
+    setTimeout("paint();",2);
+  }
+  paint();
+</script>
+</html>
+&nbsp

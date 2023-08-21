@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Introduce how to interactive with MaoXian" />
+    <title>MaoXian 与第三方的交互 (已过期）</title>
+    <link rel="icon" type="image/png" href="imgs/logo.png" />
+    <link rel="stylesheet" type="text/css" href="css/markdown.css" />
+    <style>
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="title"><h1>MaoXian 与第三方的交互 (已过期）</h1></div>
+      <div class="content">
+<h2 id="section">警告： 该页面所描述的内容已过期（即不再推荐使用）, 通过下面新的链接获取新的内容</h2>
+
+<p><a href="assistant/index-zh-CN.html">毛线助手</a>
+<a href="api-zh-CN.html">编程接口</a></p>
+
+<hr />
+
+<p>为了更方便地进行裁剪，MaoXian 提供了一些与第三方脚本交互的方式。</p>
+
+<p>目前利用这个交互功能，可以做到：</p>
+
+<ul>
+  <li><a href="#set-form-inputs">预设置表单的输入值</a></li>
+  <li><a href="#hide-unwant-elems">隐藏不想要裁剪的元素</a></li>
+  <li><a href="#choose-the-elem-to-clip">预选中某个要裁剪的元素</a></li>
+  <li><a href="#auto-clip">自动裁剪</a></li>
+</ul>
+
+<h2 id="section-1">流程简介</h2>
+
+<ul>
+  <li>早期的扩展不支持该功能，请确保 MaoXian 版本为 <strong>V0.1.27 以上</strong></li>
+  <li>安装 userScript 浏览器扩展，常见的有 Greasemonkey、 Tampermonkey， 选一个适用你浏览器的安装即可。</li>
+  <li>编写 userScript（需要你会 javascript 并且对 userScript有所了解）或 <a href="https://github.com/mika-cn/maoxian-web-clipper/tree/master/useful-res/README.md">安装其他用户分享的脚本</a></li>
+</ul>
+
+<h2 id="section-2">版本信息</h2>
+
+<p>当前 mx-wc-tool.js 版本为 <code>V0.0.6</code> ，你应该始终使用最新的版本。</p>
+
+<h2 id="section-3">编写脚本</h2>
+
+<h3 id="set-form-inputs">预设置表单的输入值</h3>
+
+<p><code>mx-wc-tool.js</code> 脚本文件会帮助你监听 <strong>扩展进入裁剪模式</strong> 事件，并告知扩展，待会显示表单后，填入这些值。</p>
+
+<p><strong>注意：</strong> 如果你的脚本同时用到了下方的 <code>ConfirmCmd</code> ，则需要让 <code>MxWc.setFormInputs</code> 最先运行（这两个功能监听的是同一事件，有先后顺序的问题）。</p>
+
+<h3 id="hide-unwant-elems">隐藏不想要裁剪的元素</h3>
+
+<p><code>MaoXian</code> 会在你点击裁剪的时候，发送事件，告知 <code>userScript</code> 扩展已经进入裁剪模式了。此时 <code>userScript</code> 就可以对网页上的元素进行操作，比如隐藏掉不想要裁剪的元素（按钮、头像等等）</p>
+
+<p>例:</p>
+
+<pre><code class="language-javascript">// 注意：这里省略了 UserScript 的声明部分
+
+(function(){
+  const rules = [
+    'C||a.example.com||/blog/||.nav-btns',
+    'C||a.example.com||/blog/||.site-header',
+    'X||b.example.com||/blog/||//article//comments'
+  ];
+
+  const hideCmd = MxWc.newHideCmd();
+  hideCmd.init(rules);
+})();
+
+</code></pre>
+
+<p>目前 mx-wc-tool 这个脚本文件，支持的 rule 格式为: <code>$type||$domain||$path||$q</code></p>
+
+<p>各部分解释如下：</p>
+
+<pre><code class="language-text">$type   : C 代表 CSS, X 代表 xPath.
+$domain : 规则应用的域名( 支持通配符 *, *.example.org 或者直接 *)
+$path   : 规则应用的网址路径，(目前使用包含匹配, 即 /post/ 匹配任何包含 /post/ 的路径)
+$q      : 选择器(CSS selector 或者 xPath)
+</code></pre>
+
+<p>即 mx-wc-tool 会拿当前页面的网址和规则里的 <code>$domain</code> 和 <code>$path</code>进行匹配，若当前页面符合规则，就根据 <code>$type</code> 和 <code>$q</code> 找到要操作的元素, 再执行相关的操作。</p>
+
+<p>rule 也可以是下面的格式（较简短）</p>
+
+<ul>
+  <li><code>$domain||$q</code> 等同于 <code>C||$domain||/||$q</code></li>
+  <li><code>$domain||$path||$q</code> 等同于 <code>C||$domain||$path||$q</code></li>
+</ul>
+
+<h3 id="choose-the-elem-to-clip">预选中某个要裁剪的元素</h3>
+
+<p><code>userScript</code> 可以在 <code>MaoXian</code> 进入裁剪模式的时候，发送消息过去，告知预选中某个元素。</p>
+
+<p>例:</p>
+
+<pre><code class="language-javascript">// 注意：这里省略了 UserScript 的声明部分
+
+(function(){
+
+  // 更方便的写法
+  const rules = (`
+    C||a.example.com||/blog/||article
+    C||a.example.com||/news/||.news
+    X||b.example.com||/blog/||//body//article
+  `).split("\n")
+
+  const focusCmd = MxWc.newFocusCmd();
+  focusCmd.init(rules);
+
+/*
+ * 或者使用 ConfirmCmd
+ */
+/*
+  const confirmCmd = MxWc.newConfirmCmd();
+  confirmCmd.init(rules);
+ */
+})();
+</code></pre>
+
+<p>上面例子中 <code>FocusCmd</code> 和 <code>ConfirmCmd</code> 的区别是 <code>ConfirmCmd</code> 不仅选中元素，还做了确认（直接到达输入表单信息那一步）。</p>
+
+<p><strong>注意</strong>： <code>FocusCmd</code> 和 <code>ConfirmCmd</code> 会根据第一条匹配到的规则，操作找到的第一个元素，这和上面的 <code>HideCmd</code> 有所不同。<code>HideCmd</code> 会找匹配所有能匹配到的规则，操作所有找到的元素。</p>
+
+<p>下面这个例子，会在当前网页只有一个 article 标签的情况下，会选中这个 article 标签并且确认。</p>
+
+<pre><code class="language-javascript">// 注意：这里省略了 UserScript 的声明部分
+
+(function() {
+  var articles = document.querySelectorAll('article');
+  if(articles.length === 1){
+    const rules = ["C||*||/||article"];
+    const confirmCmd = MxWc.newConfirmCmd();
+    confirmCmd.init(rules);
+  } else {
+    // other rules
+  }
+})();
+</code></pre>
+
+<p>另 ConfirmCmd 还支持指定填写到表单的三个信息。</p>
+
+<p>用法请看下面例子</p>
+
+<pre><code class="language-javascript">// 注意：这里省略了 UserScript 的声明部分
+
+(function() {
+  const rules = (`
+    js.awesome.code||#article
+    py.awesome.code||#article
+    c.elegant.code||#post
+  `).split("\n");
+
+  // 这是表单显示后，填写到里面的信息
+  // 注：`ConfirmCmd` 设置的 `formInputs` 会比 `MxWc.setFormInputs` 拥有更高的优先级。
+  const formInputs = {category: 'it/article', tagstr: 'technology'}
+  const cmd = MxWc.newConfirmCmd(formInputs);
+  cmd.init(rules);
+})();
+
+</code></pre>
+
+<h3 id="auto-clip">自动裁剪</h3>
+
+<p>这种情况应该比较少使用到，当你要裁剪某个站点下的一批内容时（比如某些文章），可以用这个功能。这样你要做的就只是配置好 <code>userScript</code>, 然后依次点开你要裁剪的网页就可以了（<code>MaoXian</code> 会在网页加载完成时，就开始裁剪）</p>
+
+<p>这个功能一般是需要时才使用，所以建议, 使用 <code>userScript</code> 单独放一个脚本，必要时开启，用完关闭，会方便一些。</p>
+
+<p>例:</p>
+
+<pre><code class="language-javascript">// 注意：这里省略了 UserScript 的声明部分
+
+(function(){
+
+  // 这里只需要一条规则
+  const rules = ["C||a.example.com||/blog/||article"];
+
+  // 这是裁剪时候填写到表单的三个信息
+  const formInputs = {
+    title: "auto Clip test",
+    category: "test/user-script",
+    tagstr: "test, auto-clip"
+  }
+
+  const clipCmd = MxWc.newClipCmd(formInputs);
+
+  // 这一步执行后，会很快进行裁剪
+  clipCmd.init(rules);
+
+})();
+</code></pre>
+<hr />
+
+<p><a href="index-zh-CN.html">首页</a></p>
+</div>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Offline index page of Maoxian Web Clipper" />
+    <title>离线索引页面</title>
+    <link rel="icon" type="image/png" href="../imgs/logo.png" />
+    <link rel="stylesheet" type="text/css" href="../css/markdown.css" />
+    <link rel="stylesheet" type="text/css" href="../css/markdown-toc.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="title"><h1>离线索引页面</h1></div>
+
+      <input type="checkbox" id="pin-toc" class="pin-toc" hidden>
+      <label for="pin-toc" class="pin-toc-switcher" title="pin(unpin) the table of content"></label>
+      <div class="toc">
+        <h2>目录</h2>
+        <ul>
+  <li><a href="#intro">简介 </a></li>
+  <li><a href="#usage">使用方法 </a>
+    <ul>
+      <li><a href="#step1">步骤 1: 移动解压出来的文件夹 </a></li>
+      <li><a href="#step2">步骤 2: 用浏览器打开它 </a></li>
+      <li><a href="#step3">步骤 3: 配置 MaoXian 扩展 </a></li>
+    </ul>
+  </li>
+</ul>
+
+      </div>
+
+      <div class="content">
+<h2 id="intro">简介</h2>
+
+<p>这是一个离线的 HTML 网页，它让你可以像扩展的历史页面那样，列出所有的裁剪信息 并且 支持搜索。下载这个页面并且配置好扩展后，扩展就能及时更新该页面的裁剪信息。这意味着你可以随时就把 <code>mx-wc</code> 文件夹同步或者拷贝到另一台设备，再用浏览器打开这个「离线索引页面」，就能浏览和搜索你所有的裁剪信息。另，你也可以把这个页面部署到你自己的服务器上，或者是 Github pages，以及任何支持发布网页的服务。</p>
+
+<p>顺带唠叨一句：如果你会 Web(HTML, CSS, javascript) 开发，你完全可以基于这个页面，修改其成你喜欢的样式，甚至添加功能。</p>
+
+<p>当前版本: 0.0.5</p>
+
+<h2 id="usage">使用方法</h2>
+
+<p><a href="files/history-0.0.5.zip">先下载该页面</a> &amp;&amp; 解压它</p>
+
+<p><strong>温馨提示</strong>: MaoXian 扩展从 0.1.34 版本开始，支持你配置根目录的名称，该索引页面也从 0.0.4 版本开始，多了一个配置文件 (config.js) ，如果你修改了扩展设置页面里的根目录，你也要修改这个配置文件里面的根目录项（rootFolder）。下文中提到的 <code>mx-wc</code> 即是默认的根目录，你的可能由于改了配置，而不同。</p>
+
+<p><strong>致歉</strong>：本次 MaoXian 扩展的更新（0.1.46），无法兼容老版本的「离线索引页」，所以当扩展更新后，使用「离线索引页」的老用户，需要升级到新版本，才能正常使用。此实属无奈之举，造成诸多不便，非常抱歉。</p>
+
+<h3 id="step1">步骤 1: 移动解压出来的文件夹</h3>
+
+<p>把解压出来的文件夹(默认叫history)，移动到扩展裁剪的根目录（<code>$download/mx-wc</code>), 移动后的路径 <code>$download/mx-wc/history</code>.</p>
+
+<p>目录名 “history” 是默认的，你可以重命名它，甚至把目录里的文件移动到 <code>$download/mx-wc</code> 目录下面。更多细节，请看下面</p>
+
+<p>假设你的 <code>$download</code> 目录是 <strong>/home/jack/Downloads</strong>, 那么你的 <code>$download/mx-wc</code> 目录即是 <strong>/home/jack/Downloads/mx-wc</strong>.</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>离线页面路径</th>
+      <th>是否支持</th>
+      <th>描述</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>/home/jack/Downloads/mx-wc/offline-index/index.html</td>
+      <td>是</td>
+      <td>我们把 <code>history</code> 重命名为 <code>offline-index</code></td>
+    </tr>
+    <tr>
+      <td>/home/jack/Downloads/mx-wc/offline-index.html</td>
+      <td>是</td>
+      <td>我们把 <code>history</code> 目录下的所有文件移动到 <code>$download/mx-wc</code> 目录下并且把 <code>index.html</code> 重命名为 <code>offline-index.html</code></td>
+    </tr>
+    <tr>
+      <td>/home/jack/Downloads/mx-wc/offline-pages/history/index.html</td>
+      <td>是</td>
+      <td>我们把这个页面放在了更深的目录下</td>
+    </tr>
+    <tr>
+      <td>/home/jack/history/index.html</td>
+      <td>否</td>
+      <td>这个页面不能放到 <code>$download/mx-wc</code> 目录之外</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="step2">步骤 2: 用浏览器打开它</h3>
+
+<p>使用你喜欢的浏览器，打开 <code>index.html</code> (即$download/mx-wc/history/index.html), 该页面即是我们所说的「离线索引页面」</p>
+
+<h3 id="step3">步骤 3: 配置 MaoXian 扩展</h3>
+
+<p>当你做完步骤2,你应该能看到一个和扩展的历史页面很像的网页。该网页上会有两条裁剪信息，是样本。这两条信息存储在一个叫 <code>clippings.js</code> (即 $download/mx-wc/history/clippings.js) 里面。第三步是到扩展的设置页面，配置「离线索引页面」的相关配置。</p>
+
+<p>具体是这样配置:</p>
+
+<ul>
+  <li>配置脚本文件的路径，即clippings.js 的路径。默认是 <code>$MX-WC/history/clippings.js</code>, 如果你没有改过解压出来的文件夹的名字。这个配置则无需修改</li>
+  <li>勾选自动生成脚本文件 (让扩展及时地更新这个脚本文件，时时保持最新)</li>
+  <li>页面上有个「马上生成」按钮，你现在就可以点一下看看，然后再刷新刚才你打开的 index.html , 如果页面上的记录不再是那两条样本信息，恭喜你，配置成功了。</li>
+</ul>
+
+<hr />
+
+<p><a href="../index-zh-CN.html">首页</a></p>
+</div>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="A web extension to clip information from web page. save to your local machine to avoid information invalidation. Not bored registration Not charged." />
+    <title>MaoXian Web Clipper</title>
+    <link rel="icon" type="image/png" href="imgs/logo.png" />
+    <link rel="stylesheet" type="text/css" href="css/markdown.css" />
+    <style>
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="title"><h1>MaoXian Web Clipper</h1></div>
+      <div class="content">
+<p><a href="index.html">English</a></p>
+
+<h2 id="section">简介</h2>
+
+<p>MaoXian 是一个可以将网页的内容裁剪并保存到<strong>本地电脑</strong>的浏览器扩展。使用它，你可以避免网站挂了，网址失效，图片失效等问题。 它可以将网页保存为 HTML 格式或 Markdown 格式，图片样式等也会一同保存下来。</p>
+
+<p>这是一个简洁好用的绿色软件，耐下心来尝试一下，你会喜欢上它的 :)</p>
+
+<h2 id="section-1">项目愿景</h2>
+
+<p>尊重隐私，珍惜自由。 创建一个由社区驱动的，以用户真实需求为导向的，尊重用户隐私的网页裁剪工具。界面简洁易用，可配置性强，同时保持开放性。</p>
+
+<h2 id="section-2">项目信息</h2>
+
+<p>该项目为开源项目（自由软件），软件许可为 MIT。你可以在 <a href="https://github.com/mika-cn/maoxian-web-clipper">Github</a> 上查看（或参与）该项目。</p>
+
+<h2 id="section-3">特点与功能</h2>
+
+<ul>
+  <li>本地存储 - 所有文件都保存在本地硬盘上，用户可以完全掌控自己的数据，比如可以自由选择第三方同步服务（目前支持两种存储格式：HTML 和 Markdown）。并且所有类型的文件都可以灵活配置其存储路径，以组成最适合你的存储结构。</li>
+  <li>毛线助手 - 帮你修改当前网页的状态，使其更适合裁剪（如：删除掉多余的按钮和推荐，保存高清图等等）。</li>
+  <li>自由选择 - 可自由选择要裁剪的区域。(不会自作聪明地帮你瞎选中某个区域)</li>
+  <li>调整选中 - 当用户选中一个区域后，可通过快捷键灵活地调整选中区域，亦可剔除某些不想保存的元素。</li>
+  <li>记住选中 - 记住选中的区域，并在下次尝试运用它（默认未启用）。</li>
+  <li>分类归档 - 裁剪前可修改标题，录入保存目录，打上几个标签</li>
+  <li>裁剪历史 - 记录裁剪历史，并支持搜索(通过标题/目录/标签)</li>
+  <li>重置历史 - 当你在新电脑上安装插件后，可以通过重置历史功能，载入裁剪历史，目录历史，标签历史</li>
+</ul>
+
+<p>当存储格式为 Markdown 时：</p>
+
+<ul>
+  <li>模板 - 你可以通过修改模板，使用各种变量，来改变生成的 Markdown 文件（如：在顶部添加 YAML Front Matter）。</li>
+  <li>强大的代码块识别 - 对于网络上各种各样的代码块，具有很好的保存效果。</li>
+  <li>公式的识别 - 可识别数学公式，并将其保存为 Latex 格式。</li>
+</ul>
+
+<h2 id="section-4">软件预览</h2>
+
+<ul>
+  <li><a href="screenshots.html">点我查看软件截图</a></li>
+</ul>
+
+<h2 id="section-5">运行环境</h2>
+
+<p>MaoXian 当前支持的浏览器如下：</p>
+
+<ul>
+  <li>Firefox（火狐浏览器），版本 &gt;= 57.0，推荐使用最新的版本。</li>
+  <li>Chrome/Chromium（谷歌浏览器或社区版谷歌浏览器），版本 &gt;= 66.0，推荐使用最新版本。</li>
+</ul>
+
+<h2 id="section-6">安装</h2>
+
+<ul>
+  <li>Firefox （火狐浏览器）- <a href="https://addons.mozilla.org/zh-CN/firefox/addon/maoxian-web-clipper/">https://addons.mozilla.org/zh-CN/firefox/addon/maoxian-web-clipper/</a></li>
+  <li>Chromium （谷歌浏览器社区版）- <a href="install-by-extension-file-zh-CN.html">安装</a></li>
+</ul>
+
+<h2 id="section-7">使用注意</h2>
+
+<p>（1） 如果你的浏览器开启了 “每次下载都询问文件名”， 请关了该选项（插件一次会下载许多文件，会弹出很多窗口，<strong>窗口打击很疼的 :D</strong>）。</p>
+
+<p>（2） 我们建议你<a href="faq-zh-CN.html#allow-access-file-urls">允许本扩展访问本地网址</a>，这样你才能更方便地查看裁剪下来的文件。</p>
+
+<h2 id="section-8">存储路径</h2>
+
+<p>所有裁剪下来的文件都存放在 <code>$downloadFolder/mx-wc</code> 目录下。</p>
+
+<p>比如你的下载路径为 <code>/home/foo/downloads</code>，那么文件就会保存在 <code>/home/foo/downloads/mx-wc</code>。如果你不想保存在下载目录下，请<a href="faq-zh-CN.html#change-default-download-path">点击这里</a>查看如何操作。</p>
+
+<h2 id="section-9">开发状态</h2>
+
+<p>目前一些核心功能已初步完成，并在逐步完善中。在大部分情况下，软件可正常使用，但目前还没有达到一个很健壮，成熟的一个状态。在一些环境（如：恶劣的网络环境、静态资源服务器对请求有鉴权）下仍表现不理想。</p>
+
+<h2 id="section-10">贡献</h2>
+
+<p>我们深信一个软件只有在用户的不断反馈，开发者的不断跟进下才能成长为一个真正好用的软件。我们已经从用户那里得到许多有用的 Bug（软件缺陷）回馈，以及一些极好的建议（这些建议大部分被采纳和实现）。若该软件有幸得到你的喜爱，你也可以考虑参与进来，共同推动该软件的发展。</p>
+
+<p><strong>参与方式如下</strong>：</p>
+
+<ul>
+  <li>向周围的人推荐本软件，软件的流行对软件的成长至关重要（这也是开发者的动力源泉:D，并能带来更多的参与者）。</li>
+  <li>使用最新的版本，并反馈在使用过程中遇到的问题，不管是使用问题还是 Bug（软件缺陷）。（<a href="https://github.com/mika-cn/maoxian-web-clipper/issues">回馈入口</a>）</li>
+  <li>对软件的功能与发展有一些建议和看法？反馈给我们，我们乐于听到用户对软件的看法。（<a href="https://github.com/mika-cn/maoxian-web-clipper/issues">回馈入口</a>）</li>
+  <li>如果你是开发者，加入我们，一起开发（维护）该软件。（项目地址：<a href="https://github.com/mika-cn/maoxian-web-clipper">GitHub</a>）</li>
+  <li>你还可以<a href="donate.html">做这个</a>。</li>
+</ul>
+
+<h2 id="section-11">更多</h2>
+
+<ul>
+  <li><a href="faq-zh-CN.html">常见问题</a></li>
+  <li><a href="change-log.html">更新日志</a></li>
+  <li><a href="native-app/index-zh-CN.html">本地程序</a></li>
+  <li><a href="feed.xml">RSS</a></li>
+  <li><a href="offline-page/index-zh-CN.html">离线索引页面</a></li>
+  <li><a href="assistant/index-zh-CN.html">毛线助手</a></li>
+  <li><a href="api-zh-CN.html">编程接口「试行版」</a></li>
+  <li><a href="obsidian-zh-CN.html">用 MaoXian 网摘保存网络文章到 Obsidian</a></li>
+  <li><a href="privacy-policy-zh-CN.html">隐私说明</a></li>
+</ul>
+
+</div>
+    </div>
+  </body>
+</html>
+

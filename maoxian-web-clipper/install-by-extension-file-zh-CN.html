@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Install MaoXian Web Clipper by extension file" />
+    <title>通过下载扩展文件的方式来安装『毛线』</title>
+    <link rel="icon" type="image/png" href="imgs/logo.png" />
+    <link rel="stylesheet" type="text/css" href="css/markdown.css" />
+    <style>
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="title"><h1>通过下载扩展文件的方式来安装『毛线』</h1></div>
+      <div class="content">
+<p><a href="install-by-extension-file.html">English</a></p>
+
+<h2 id="section">版本信息</h2>
+
+<ul>
+  <li><strong>当前最新版本为：</strong> 0.4.39</li>
+</ul>
+
+<h2 id="maoxian-">下载 MaoXian 软件包</h2>
+
+<p><strong>说明</strong>: 下方提供的以 <code>checksum.txt</code> 结尾的文件为对应文件的校验和，可用于检查文件的完整性 （避免下载未完全和被恶意修改）。</p>
+
+<h3 id="chromium-">安装目标为 Chromium 类浏览器</h3>
+
+<h4 id="crx-">CRX 文件安装包</h4>
+
+<p>此安装包，安装后可以自动更新。但不适用于 <code>Windows + Chrome</code> 或 <code>MacOS + Chrome</code>，此类用户请查看下方的安装说明。</p>
+
+<p><strong>注意</strong>：如果当前使用的是 Chromium / Edge 等等基于 <code>Chromium</code> 的浏览器，请使用下方链接下载，并且下载成功后，把文件名最后的 <code>.zip</code> 删除。这样做的原因是： 此类浏览器会尝试去安装下载下来的 crx 文件，而 MaoXian 没有发布在『谷歌商店』上，所以这个自动安装会失败，并且会以不安全为由删除掉已下载的 crx 文件。为下载成功，采用此方式绕过。</p>
+
+<ul>
+  <li>
+    <a href="extension/0.4.39/maoxian-web-clipper-chromium-0.4.39.crx" download="maoxian-web-clipper-chromium-0.4.39.crx.zip">maoxian-web-clipper-chromium-0.4.39.crx.zip</a>
+  </li>
+  <li>
+    <a href="extension/0.4.39/maoxian-web-clipper-chromium-0.4.39.crx.checksum.txt" download="maoxian-web-clipper-chromium-0.4.39.crx.zip.checksum.txt">maoxian-web-clipper-chromium-0.4.39.crx.zip.checksum.txt</a>
+  </li>
+</ul>
+
+<p><strong>注意</strong>：如果你当前使用的是非基于 <code>Chromium</code> 的浏览器，请使用下方链接下载：</p>
+
+<ul>
+  <li><a href="extension/0.4.39/maoxian-web-clipper-chromium-0.4.39.crx">maoxian-web-clipper-chromium-0.4.39.crx</a></li>
+  <li><a href="extension/0.4.39/maoxian-web-clipper-chromium-0.4.39.crx.checksum.txt">maoxian-web-clipper-chromium-0.4.39.crx.checksum.txt</a></li>
+</ul>
+
+<h4 id="zip-">ZIP 文件安装包</h4>
+
+<p>此安装包，安装后<strong>不可自动更新</strong>。</p>
+
+<ul>
+  <li><a href="extension/0.4.39/maoxian-web-clipper-chromium-0.4.39.zip">maoxian-web-clipper-chromium-0.4.39.zip</a></li>
+  <li><a href="extension/0.4.39/maoxian-web-clipper-chromium-0.4.39.zip.checksum.txt">maoxian-web-clipper-chromium-0.4.39.zip.checksum.txt</a></li>
+</ul>
+
+<h3 id="firefox-">安装目标为 Firefox 浏览器</h3>
+
+<p>此处提供的 ZIP 安装包，安装过后<strong>不可自动更新</strong>。我们推荐普通用户还是去<a href="https://addons.mozilla.org/zh-CN/firefox/addon/maoxian-web-clipper/">火狐商店</a>安装。</p>
+
+<ul>
+  <li><a href="extension/0.4.39/maoxian-web-clipper-firefox-0.4.39.zip">maoxian-web-clipper-firefox-0.4.39.zip</a></li>
+  <li><a href="extension/0.4.39/maoxian-web-clipper-firefox-0.4.39.zip.checksum.txt">maoxian-web-clipper-firefox-0.4.39.zip.checksum.txt</a></li>
+</ul>
+
+<h2 id="section-1">验证校验和</h2>
+
+<p>命令行用户可通过下方命令，计算出校验和，再和 <code>checksum.txt</code> 里面的内容进行比对，若一致则表明下载的文件未经修改且是完整的。</p>
+
+<pre><code class="language-shell"># 通过 md5 算法计算校验和
+$ md5sum maoxian-web-clipper-x.x.x.zip
+
+# 通过 sha256 算法计算校验和
+$ sha256sum maoxian-web-clipper-x.x.x.zip
+
+# 通过 sha512 算法计算校验和
+$ sha512sum maoxian-web-clipper-x.x.x.zip
+
+</code></pre>
+
+<h2 id="section-2">安装</h2>
+
+<h3 id="chromium--1">在 Chromium 类浏览器上安装</h3>
+
+<h4 id="section-3">安装说明</h4>
+
+<p>当你的安装环境是 <code>Windows + Chrome</code> 或者 <code>MacOS + Chrome</code> 时，在安装扩展（crx文件）的过程中，如果这个扩展不是从「谷歌商店」下载的，就会遭到禁用且无法手动启用。Chrome 此举，以“为了你的安全“为由，直接剥夺了你安装其他扩展（不是通过「谷歌商店」上线的扩展）的能力。而这个理由显然是不成立的，通过其他渠道分发的扩展就一定是恶意扩展吗？不一定吧！而通过「谷歌商店」分发的扩展就一定是可信赖的扩展吗？也不一定吧！ 说到底，对于一个软件来说，其本身对用户是否是恶意的，根本就和分发渠道无关。从「谷歌商店」上线的扩展会经过他们的审查，即使如此，最多也只能说明<strong>从「谷歌商店」</strong>的角度（而非用户的角度）来说，这些经过审查的扩展相对较安全，并不足以作为一刀切行为的理由。基于以上，我们强烈建议你弃用 Chrome，因为它既不尊重用户，也不尊重开发者。</p>
+
+<p>我们推荐你选择 Chromium 浏览器或者更进一步，选择去 Google 化的 Ungoogled-Chromium 浏览器。或者其他以 Chromium 为基础开发的尊重用户权益与隐私的浏览器。如果你现在使用的是某国内大公司开发的浏览器，我们也建议你赶紧替换掉。 虽然国内大公司开发的浏览器也大多以 Chromium 为基础，但是它们会以“根据相关法律法规“ 为由（还美其名曰：“为了你的安全”），阻止你访问某些网站，996.ICU 事件就是很好的一个例子。换句话说：它们阉割了你接收信息的渠道。哪怕这些浏览器的功能做出花来，也不要选用它们。</p>
+
+<p>如果你看了上面两段话后，还是决定使用 Chrome ，那么请使用下方的『zip 包解压安装法』进行安装。</p>
+
+<p>本节介绍的安装方式以 Chromium 浏览器为例，原则上适用于除了 Chrome 之外的任何以 Chromium 为基础开发的浏览器。</p>
+
+<h4 id="crx--1">crx 文件拖放安装法</h4>
+
+<p>这是目前最推荐的安装方式，安装过后是可以自动更新的（目前已经在 Linux 和 Windows 上用 Chromium 验证过，如果你发现无法自动更新请反馈）</p>
+
+<p>（0）假设你已经把 crx 文件下载下来。（如果你下载的是以 <code>.crx.zip</code> 结尾的文件，需先重命名，把<code>.zip</code> 先去除）</p>
+
+<p>（1）打开 Chromium 的扩展管理页面（在地址栏直接输入： <code>about:extensions</code> 并回车）。</p>
+
+<p>（2）打开「开发者模式」的开关。</p>
+
+<p>（3）用你系统的文件浏览器，打开 crx 文件所在的文件夹。</p>
+
+<p>（4）用鼠标将 crx 文件拖到 Chromium 的扩展管理页面，放开后，Chromium 会询问是否安装，点击确认，安装成功。</p>
+
+<p><strong>注</strong>： 如果第 4 步的拖放，没有触发安装，则保持「开发者模式」是开启的情况下，重启浏览器，再重新试试。</p>
+
+<h4 id="zip--1">zip 包解压安装法</h4>
+
+<p>这是黑客喜欢的安装方式，他们不怕麻烦，喜欢研究代码，讨厌自动更新带来的不确定性。</p>
+
+<p>（0）假设你已经把 zip 包下载下来。（请确认你的安装包是以 <code>.zip</code> 结尾，而不是以 <code>.crx</code> 或 <code>.crx.zip</code> 结尾）</p>
+
+<p>（1）解压 zip 包</p>
+
+<p>注意： 由于打包的时候，是直接打包的程序文件，没有打包根目录，所以先建好一个目录，再把 zip 包扔里面，再进行解压。Windows 用户如果解压不了，请换一个解压软件（如：7zip）。</p>
+
+<p>命令行用户请直接用 unzip 解压：</p>
+
+<pre><code class="language-shell">$ unzip maoxian-web-clipper-chromium-x.x.x.zip -d maoxian-web-clipper
+</code></pre>
+
+<p>（2）打开 Chromium 的扩展管理页面（在地址栏直接输入： <code>about:extensions</code> 并回车）</p>
+
+<p>（3）打开「开发者模式」的开关。</p>
+
+<p>（4）点击「加载已解压文件夹」按钮，选中你第一步解压出来的文件夹</p>
+
+<p><strong>注： 此种安装方式，安装的扩展，是不会自动更新的。</strong></p>
+
+<h3 id="firefox---zip-">在 Firefox 上安装 （使用 zip 包）</h3>
+
+<p><strong>注意</strong>：当前在 Firefox 上最方便的安装方式是通过火狐的扩展中心进行安装，我们也推荐你使用该种安装方式。<a href="https://addons.mozilla.org/zh-CN/firefox/addon/maoxian-web-clipper/">传送门</a> ，</p>
+
+<p>目前 zip 包无法在普通版本上进行安装，我们推荐你使用 ESR 版本的 Firefox。ESR 版本的 Firefox 更稳定，bug 也更少，并且支持 zip 包直接安装。</p>
+
+<p>（1）开启 zip 包安装的开关。在地址栏输入 <code>about:config</code> 并回车， 点击继续， 搜索 <code>xpinstall.signatures.required</code> ，并把它的值改为 <code>false</code>。</p>
+
+<p>（2）安装。在地址栏输入 <code>about:addons</code> 并回车，点击左边的「扩展」选项卡，再点击右上角的小齿轮，点击从文件安装，再选择你下载下来的 zip 文件。</p>
+
+<h2 id="section-4">更新</h2>
+
+<h3 id="section-5">获取更新通知</h3>
+
+<ul>
+  <li>订阅<a href="feed.xml">RSS源</a></li>
+</ul>
+
+<p>开发者会在完成更新后，更新 RSS 源，这样你就可以知道插件更新啦。</p>
+
+<h3 id="section-6">下载新版本的软件包</h3>
+
+<p>到本页面下载新版本。</p>
+
+<h3 id="chromium--zip-">在 Chromium 上的更新（仅适用于 zip 包安装的用户）</h3>
+
+<p>（1）把 zip 包解压</p>
+
+<p>（2）用解压出来的文件夹，替换原来的文件夹。你可以先把旧版本的文件夹重命名，再把新版本的文件夹移动到旧版本那里。</p>
+
+<p>（3）重新加载扩展，可以通过重启浏览器，或者到扩展管理页面（<code>about:extensions</code>），点击对应的刷新图标。</p>
+
+<p><strong>注意：</strong> 请不要在扩展管理页面（<code>about:extensions</code>）上， 使用先卸载再安装的方式进行更新，因为那样会丢失扩展的配置信息。</p>
+
+<h3 id="firefox---zip--1">在 Firefox 上的更新 （仅适用于 zip 包安装的用户）</h3>
+
+<p>Firefox 请参照本页面的安装教程，直接安装新的 zip 包，就相当于更新了。</p>
+
+<h2 id="section-7">写在最后</h2>
+
+<p>如你遇到困难，请到<a href="https://github.com/mika-cn/maoxian-web-clipper/issues">此处</a>寻求帮助。</p>
+
+<hr />
+
+<p><a href="index-zh-CN.html">首页</a></p>
+</div>
+    </div>
+  </body>
+</html>
+

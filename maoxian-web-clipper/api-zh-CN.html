@@ -1,0 +1,1378 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="编程接口" />
+    <title>编程接口</title>
+    <link rel="icon" type="image/png" href="imgs/logo.png" />
+    <link rel="stylesheet" type="text/css" href="css/markdown.css" />
+    <link rel="stylesheet" type="text/css" href="css/markdown-toc.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="title"><h1>编程接口</h1></div>
+
+      <input type="checkbox" id="pin-toc" class="pin-toc" hidden>
+      <label for="pin-toc" class="pin-toc-switcher" title="pin(unpin) the table of content"></label>
+      <div class="toc">
+        <h2>目录</h2>
+        <ul>
+  <li><a href="#get-ready">准备工作 </a></li>
+  <li><a href="#introduction">了解 MaoXian 的裁剪过程 </a></li>
+  <li><a href="#what-can-i-do-with-it">我能用这些 API 做些什么？ </a></li>
+  <li><a href="#state-flow-graph">MaoXian 的状态流程图 </a></li>
+  <li><a href="#communicate-with-mx">与 MaoXian 交互 </a>
+    <ul>
+      <li><a href="#listen-mx-event">监听 MaoXian 发出的事件 </a></li>
+      <li><a href="#send-event-to-mx">发送事件给 MaoXian </a></li>
+      <li><a href="#using-api-tool">使用工具库调用 API </a></li>
+    </ul>
+  </li>
+  <li><a href="#publish-events">MaoXian 发出的事件 </a>
+    <ul>
+      <li><a href="#ready">事件：mx-wc.ready </a></li>
+      <li><a href="#selecting">事件： mx-wc.selecting </a></li>
+      <li><a href="#selected">事件： mx-wc.selected </a></li>
+      <li><a href="#confirmed">事件： mx-wc.confirmed </a></li>
+      <li><a href="#clipping">事件： mx-wc.clipping </a></li>
+      <li><a href="#clipped">事件： mx-wc.clipped </a></li>
+      <li><a href="#completed">事件： mx-wc.completed </a></li>
+      <li><a href="#idle">事件： mx-wc.idle </a></li>
+    </ul>
+  </li>
+  <li><a href="#listen-events">MaoXian 监听的事件 </a>
+    <ul>
+      <li><a href="#set-form-inputs">事件： mx-wc.set-form-inputs </a></li>
+      <li><a href="#set-form-options">事件： mx-wc.set-form-options </a></li>
+      <li><a href="#select-elem">事件： mx-wc.select-elem </a></li>
+      <li><a href="#confirm-elem">事件： mx-wc.confirm-elem </a></li>
+      <li><a href="#clip-elem">事件： mx-wc.clip-elem </a></li>
+      <li><a href="#overwrite-config">事件： mx-wc.overwrite-config </a>
+        <ul>
+          <li><a href="#config-storage">存储相关 </a></li>
+          <li><a href="#config-markdown">Markdown 文档相关 </a></li>
+          <li><a href="#config-html">HTML 文档相关 </a></li>
+          <li><a href="#config-web-request">Web 请求相关 </a></li>
+        </ul>
+      </li>
+      <li><a href="#set-yielding">事件： mx-wc.set-yielding </a></li>
+      <li><a href="#unset-yielding">事件： mx-wc.unset-yielding </a></li>
+      <li><a href="#yield-back">事件： mx-wc.yield-back </a>
+        <ul>
+          <li><a href="#yield-back-from-actived">当让出状态为 actived 时，让回时，允许的动作 </a></li>
+          <li><a href="#yield-back-from-confirmed">当让出状态为 confirmed 时，让回时，允许的动作 </a></li>
+          <li><a href="#yield-back-from-clipped">当让出状态为 clipped 时，让回时，允许的动作 </a></li>
+        </ul>
+      </li>
+      <li><a href="#resume-actived">事件： mx-wc.resume-actived </a></li>
+      <li><a href="#set-saving-hint">事件： mx-wc.set-saving-hint </a></li>
+    </ul>
+  </li>
+  <li><a href="#last-note">写在最后 </a></li>
+</ul>
+
+      </div>
+
+      <div class="content">
+<h2 id="get-ready">准备工作</h2>
+
+<p><strong>0）版本检查</strong></p>
+
+<p>请检查 MaoXian 的版本，必须大于 0.4.7 才行。</p>
+
+<p><strong>1）启用 API</strong></p>
+
+<p>请到 <code>设置页面 &gt; 高级</code> 进行启用</p>
+
+<p><strong>注</strong>：MaoXian 在网页加载完成后，默认是不会加载 MaoXian 扩展的脚本的，而是需要等到用户主动触发裁剪动作，才开始加载脚本并运行。所以当你需要主动触发 MaoXian 时（如：在网页加载完成后，立即调用 MaoXian 进行裁剪），则需要启用「网页加载完成时即运行脚本」选项，否则 MaoXian 不能收到你的请求。</p>
+
+<p><strong>2）选择 js 代码的运行方式</strong></p>
+
+<ul>
+  <li>方式一：使用 「油猴脚本」（洋文叫：userScript）浏览器扩展。</li>
+  <li>方式二：自己编写浏览器扩展。</li>
+</ul>
+
+<p>方式一很方便，你需要安装一个可以运行油猴脚本的扩展，常见的有 Greasemonkey、 Tampermonkey， 选一个适用你浏览器的安装即可。然后编写「油猴脚本」，该方式需要你对「油猴脚本」有所了解。</p>
+
+<p>当然，你也可选择方式二，编写浏览器扩展可以给你更大的可控性。</p>
+
+<h2 id="introduction">了解 MaoXian 的裁剪过程</h2>
+
+<p>MaoXian 的整个流程可大致分为三个阶段，如下：</p>
+
+<ol>
+  <li><strong>准备阶段</strong>，此阶段，我们对网页内容进行调整（如：删除无关元素，选用高清图片……），确定要裁剪的元素（选择裁区），确定归类和标签（表单录入）。</li>
+  <li><strong>裁剪阶段</strong>，此阶段，MaoXian 根据输入并结合配置信息，对选中的元素进行裁剪，并生成裁剪结果。</li>
+  <li><strong>存储阶段</strong>，此阶段，MaoXian 对上一阶段生成的裁剪结果，进行保存（包含外部资源文件的下载，如：图片）。</li>
+</ol>
+
+<p>本页面提供的接口，主要是用于「准备阶段」和「存储阶段」的。</p>
+
+<h2 id="what-can-i-do-with-it">我能用这些 API 做些什么？</h2>
+
+<p><strong>准备阶段的应用举例</strong></p>
+
+<ol>
+  <li>虽然 MaoXian 扩展已内置了 「MaoXian 助手」，但「MaoXian 助手」只能针对较普遍的一些操作。对于那些难搞的网页，可以通过这里的接口，对网页内容进行处理。</li>
+  <li>做标注，你可以在此阶段，对目标文本进行高亮，划下划线，注解等。</li>
+  <li>实现某种程度的自动裁剪。</li>
+  <li>可以使用你自定义的表单，而非默认的表单。</li>
+</ol>
+
+<p>当然除了上方提到的例子，肯定还有许多其他的需求，发挥你的想象力 :)</p>
+
+<p><strong>存储阶段的应用举例</strong></p>
+
+<ol>
+  <li>对「裁剪结果」做进一步的处理，通常是一些小的调整。</li>
+  <li>转存「裁剪结果」。把「裁剪结果」转存到其他笔记软件，或是知识管理软件。</li>
+  <li>把「裁剪结果」存到自己开发的知识管理软件。</li>
+  <li>甚至把「裁剪结果」处理成单文件格式，如：zip，pdf。</li>
+</ol>
+
+<p>到了存储阶段，其实 MaoXian 的工作已经做完了，你拿到了「裁剪结果」，你想怎么处理就怎么处理 :P</p>
+
+<h2 id="state-flow-graph">MaoXian 的状态流程图</h2>
+
+<pre><code class="language-graph">---&gt; ready
+       |
+   +-----&gt; actived* --&gt;  selecting --&gt; selected --&gt; confirmed* --&gt; clipping --&gt; clipped* --&gt; saving --&gt; completed
+   |          |              |             |            |                                                  |
+ idle &lt;----------------------+-------------+------------+--------------------------------------------------+
+</code></pre>
+
+<p>上方的图，箭头为状态的转变方向，带星号（<code>*</code>）的状态，为“可让出“状态。当一个状态被设置为“让出“时，MaoXian 会在这些状态事件发生后，停下来，等待对方的回应。</p>
+
+<p>各事件概述如下：</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>事件名</th>
+      <th>带消息？</th>
+      <th>简介</th>
+      <th>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>mx-wc.ready</td>
+      <td>否</td>
+      <td>初始化完成</td>
+      <td><strong>注意：</strong>该事件会发出多次，详情见下文</td>
+    </tr>
+    <tr>
+      <td>mx-wc.actived</td>
+      <td>否</td>
+      <td>活跃（激活）状态</td>
+      <td>点击裁剪按钮后，在加载「用户界面（UI）」之前触发</td>
+    </tr>
+    <tr>
+      <td>mx-wc.selecting</td>
+      <td>否</td>
+      <td>进入自由选择模式</td>
+      <td>扩展激活后，便会进入自由选择模式，触发该事件</td>
+    </tr>
+    <tr>
+      <td>mx-wc.selected</td>
+      <td>否</td>
+      <td>选中某个选区</td>
+      <td>点击选中某个区域后，发出该事件</td>
+    </tr>
+    <tr>
+      <td>mx-wc.confirmed</td>
+      <td>否</td>
+      <td>确认某个选区</td>
+      <td>在选中区域后，按 Enter 键，发出该事件</td>
+    </tr>
+    <tr>
+      <td>mx-wc.clipping</td>
+      <td>否</td>
+      <td>开始裁剪</td>
+      <td>填写完表单后，点击保存后，发出该事件</td>
+    </tr>
+    <tr>
+      <td>mx-wc.clipped</td>
+      <td>是</td>
+      <td>裁剪完成</td>
+      <td>裁剪完成时，发出该事件</td>
+    </tr>
+    <tr>
+      <td>mx-wc.saving</td>
+      <td>否</td>
+      <td>存储中</td>
+      <td>存储操作开始时，发出该事件</td>
+    </tr>
+    <tr>
+      <td>mx-wc.completed</td>
+      <td>是</td>
+      <td>存储完成</td>
+      <td>存储完成后，发出该事件，至此，整个流程结束</td>
+    </tr>
+    <tr>
+      <td>mx-wc.idle</td>
+      <td>否</td>
+      <td>切回空闲状态</td>
+      <td>由其他活跃状态，进行退出或取消操作后，发出该事件</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="communicate-with-mx">与 MaoXian 交互</h2>
+
+<p>我们是通过事件与 MaoXian 进行交互的。 MaoXian 会在到达某个状态时，发出对应的事件。另外 MaoXian 也会监听某些事件（你发送出的事件）。</p>
+
+<h3 id="listen-mx-event">监听 MaoXian 发出的事件</h3>
+
+<p>监听事件的工具函数：</p>
+
+<pre><code class="language-javascript">function listenMxEvent(evName, listener) {
+  document.addEventListener(evName, function(e) {
+    // Note that some events may contain data(message)
+    const msg = JSON.parse(e.detail || '{}');
+    listener(msg);
+  })
+}
+</code></pre>
+
+<p>使用样例：</p>
+
+<pre><code class="language-javascript">listenMxEvent('mx-wc.actived', function(msg) {
+  // MaoXian is actived
+  // Do your work
+});
+</code></pre>
+
+<h3 id="send-event-to-mx">发送事件给 MaoXian</h3>
+
+<p>发送事件的工具函数：</p>
+
+<pre><code class="language-javascript">function sendMxEvent(evName, msg) {
+  // 1. create the event (We turn message to JSON string)
+  const detail = JSON.stringify(msg || {});
+  const ev = new CustomEvent(evName, {detail: detail});
+
+  // 2. send the event
+  document.dispatchEvent(ev);
+}
+</code></pre>
+
+<p><strong>注意：</strong> 发送事件与监听事件不同，发送事件必须等到 MaoXian 初始化完成之后，MaoXian 才能收到你发出的事件。即：须等到 MaoXian 的状态变为 ready 之后。</p>
+
+<p>大部分情况下，你都不需要和 <code>mx-wc.ready</code> 事件打交道。都是先监听其他事件的发生后，再发送出事件，比如我们要预先设置保存表单里面的值：</p>
+
+<pre><code class="language-javascript">listenMxEvent('mx-wc.actived', function(msg) {
+  const msg = {formInputs: {category: 'box/news', tags: 'news'}};
+  sendMxEvent('mx-wc.set-form-inputs', msg);
+});
+
+</code></pre>
+
+<p>如果你需要在 MaoXian 处于 ready 状态时就发出某个事件，则需要注意点。MaoXian 提供了 <code>mx-wc.ready</code> 事件，以及一个挂在 window 对象下的属性 <code>___mxwc_is_ready___</code> (它的值为 <code>true</code> 或者 <code>undefined</code>） 来处理双方代码运行时机不可知这个问题。请看下方例子：</p>
+
+<pre><code class="language-javascript">function sendEventWhenMaoXianIsReady() {
+  if (window.___mxwc_is_ready___) {
+    // send your maoxian event here
+  } else {
+    const readyEventListener = function() {
+      document.removeEventListener('mx-wc.ready', readyEventListener);
+      // send your maoxian event here
+    }
+    document.addEventListener('mx-wc.ready', readyEventListener);
+  }
+}
+</code></pre>
+
+<h3 id="using-api-tool">使用工具库调用 API</h3>
+
+<p>为了方便，我们把上方提到的工具函数合成一个工具库。使用这个工具库可以更方便地与 MaoXian 交互。如下：</p>
+
+<p>该库支持你省略掉事件名的前缀，如监听事件：</p>
+
+<pre><code class="language-javascript">MxAPI.listenEvent('actived', function(msg) {
+  // MaoXian is actived
+  // Do your work
+});
+</code></pre>
+
+<p>该库对发送事件做了封装，如果当前 MaoXian 还没有 ready，则会把事件缓存下来，等到 MaoXian 变为 ready 时，再发送。所以发送事件就不需要考虑 MaoXian 是否已经初始化完成了，如下例：</p>
+
+<pre><code class="language-javascript">MxAPI.sendEvent('mx-wc.clip-elem', {
+  qType: 'css',
+  q: 'article'
+});
+</code></pre>
+
+<details>
+  <summary><strong>工具库源码</strong>（点我查看）</summary>
+  <div>
+    <pre><code language="javascript">
+(function(root, factory) {
+
+  root.MxAPI = factory();
+
+})(window, function() {
+
+  const EV_PREFIX = 'mx-wc.';
+  const MX_PROPERTY = '___mxwc_is_ready___';
+  const eventsToSend = [];
+  const state = {ready: false};
+
+  function listenEvent(evName, listener) {
+    document.addEventListener(
+      addNamespace(evName),
+      wrapListener(listener)
+    );
+  }
+
+  function sendEvent(evName, msg) {
+    if (state.ready) {
+      // Stringify the message
+      const detail = JSON.stringify(msg || {});
+      const ev = new CustomEvent(
+        addNamespace(evName),
+        {detail: detail}
+      );
+      document.dispatchEvent(ev);
+    } else {
+      eventsToSend.push({evName, msg})
+    }
+  }
+
+
+  function wrapListener(listener) {
+    return function(e) {
+      // handle event message (JSON string)
+      const msg = JSON.parse(e.detail || '{}');
+      listener(msg);
+    }
+  }
+
+
+  function addNamespace(evName) {
+    return evName.startsWith(EV_PREFIX) ? evName : EV_PREFIX + evName;
+  }
+
+  function init() {
+    state.ready = window[MX_PROPERTY] || false;
+    if (!state.ready) {
+      const readyEventListener = function() {
+        state.ready = true;
+        document.removeEventListener('mx-wc.ready', readyEventListener);
+        while(eventsToSend.length &gt; 0) {
+          const {evName, msg} = eventsToSend.shift();
+          sendEvent(evName, msg);
+        }
+      }
+      document.addEventListener('mx-wc.ready', readyEventListener);
+    }
+  }
+
+  init();
+
+  return {listenEvent, sendEvent}
+
+});
+
+</code></pre>
+  </div>
+</details>
+
+<h2 id="publish-events">MaoXian 发出的事件</h2>
+
+<h3 id="ready">事件：mx-wc.ready</h3>
+
+<p>当 MaoXian 初始化完成时， 触发该事件。为了避免因代码运行顺序不同，而导致事件丢失，<strong>该事件会发出多次，我们在监听该事件时，需要避免多次执行</strong>。该事件须和 <code>window.___mxwc_is_ready___</code> 一同使用，请看前一章节的示例代码。</p>
+
+<hr />
+
+<h3 id="selecting">事件： mx-wc.selecting</h3>
+
+<p>当进入「自由选择」模式时，就会触发该事件，如：</p>
+
+<ul>
+  <li>当用户点击「裁剪」</li>
+  <li>通过快捷键 <kbd>C</kbd> 进入裁剪时</li>
+  <li>从「选中模式」按 <kbd>ESC</kbd> 退回来</li>
+  <li>从填写表单，按 <kbd>ESC</kbd>，也会退回来</li>
+</ul>
+
+<hr />
+
+<h3 id="selected">事件： mx-wc.selected</h3>
+
+<p>当进入「选中模式」时，触发该事件，也就是你点击某个选区后，就会触发。注意的是该事件不代表用户选择的裁剪区域，也可能是用户想删除的区域，所以不建议监听此事件。</p>
+
+<hr />
+
+<h3 id="confirmed">事件： mx-wc.confirmed</h3>
+
+<p>从「选中模式」按下 <kbd>Enter</kbd> 后，会触发该事件，该事件带有消息。</p>
+
+<p>消息结构如下：</p>
+
+<pre><code class="language-json">{
+  "elem": {
+    "selector": ".mx-wc-confirmed-elem"
+  }
+}
+</code></pre>
+
+<p>消息表示，当前确认的裁区元素，其中的 <code>selector</code> 为 CSS 选择器。</p>
+
+<hr />
+
+<h3 id="clipping">事件： mx-wc.clipping</h3>
+
+<p>点击表单的保存按钮后，开始裁剪的时候会触发该事件。</p>
+
+<hr />
+
+<h3 id="clipped">事件： mx-wc.clipped</h3>
+
+<p>在裁剪结束时候，会发出该事件，该事件带有消息。</p>
+
+<p>消息结构如下：</p>
+
+<pre><code class="language-json">{
+  "clipping": {
+    "info": {
+      "version" : "2.0",
+      "clipID": "612905100",
+      "format": "html",
+      "title": "a-awesome-title",
+      "link": "https://example.org/post/awesome.html",
+      "category": "box/security",
+      "tags": ["tagA", tagB"],
+      "created_at": "1989-06-04 03:25:00"
+    },
+    "tasks": [
+      {
+        "taskType": "mainFileTask",
+        "type": "text",
+        "filename": "mx-wc/box/security/a-awesome-title/index.html",
+        "mimeType": "text/html",
+        "text": "&lt;html&gt;...&lt;/html&gt;",
+        "clipId": "612905100",
+        "createdMs": "612905100999",
+      }
+    ]
+  }
+}
+</code></pre>
+
+<p>其中，<code>info</code> 为本次裁剪的一些基本信息，<code>tasks</code> 为本次裁剪生成的待存储的任务。</p>
+
+<p>其中 <code>task</code> 的各属性描述如下：</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>属性名</th>
+      <th>说明</th>
+      <th>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>taskType</td>
+      <td>任务类型</td>
+      <td>目前有 <code>mainFileTask</code>, <code>imageFileTask</code>, <code>styleFileTask</code>, <code>fontFileTask</code>, <code>frameFileTask</code>, <code>infoFileTask</code> 以及 <code>titleFileTask</code></td>
+    </tr>
+    <tr>
+      <td>type</td>
+      <td>该资源的内容类型</td>
+      <td>可选值为 <code>url</code> 或者 <code>text</code></td>
+    </tr>
+    <tr>
+      <td>filename</td>
+      <td>存储时使用的文件名</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>mimeType</td>
+      <td>资源的 mimeType</td>
+      <td>type 为 <code>text</code> 才有该属性</td>
+    </tr>
+    <tr>
+      <td>text</td>
+      <td>该资源的文本内容</td>
+      <td>type 为 <code>text</code> 才有该属性</td>
+    </tr>
+    <tr>
+      <td>url</td>
+      <td>该资源的 url</td>
+      <td>type 为 <code>url</code> 才有该属性</td>
+    </tr>
+    <tr>
+      <td>headers</td>
+      <td>HTTP 头部</td>
+      <td>type 为 <code>url</code> 才有该属性</td>
+    </tr>
+    <tr>
+      <td>timeout</td>
+      <td>HTTP 请求的超时时长</td>
+      <td>type 为 <code>url</code> 才有该属性</td>
+    </tr>
+    <tr>
+      <td>clipId</td>
+      <td>本次裁剪的 ID</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>createdMs</td>
+      <td>本次裁剪创建的时间</td>
+      <td>字符串，单位是毫秒</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>如果你要存储这些 task，那么对于 type 为 <code>text</code> 的 task，则直接存储即可，而对于 type 为 <code>url</code> 的 task，你需要通过它的 url 先把对应的资源下载下来，再进行存储。</p>
+
+<hr />
+
+<h3 id="completed">事件： mx-wc.completed</h3>
+
+<p>整个裁剪流程完成时，触发该事件，该事件带有消息。</p>
+
+<p>消息结构如下：</p>
+
+<pre><code class="language-json">{
+  "clipID": "612905100",
+  "filename": "/home/user/Downloads/clippings/box/security/253143434/index.html",
+  "url": "file:///home/user/Downloads/mx-wc/box/security/a-awesome-title/index.html",
+  "originalUrl": "https://a.org/posts/awesome.html",
+  "completedAt": '2000-01-01 00:00:00'
+}
+</code></pre>
+
+<ul>
+  <li>clipId - 本次裁剪ID</li>
+  <li>filename - 主文件的存储路径。</li>
+  <li>url - 保存后主文件的网址，一般为为<code>http(s)://</code> 或 <code>file://</code> 打头的网址。</li>
+  <li>originalUrl - 源网页的地址。</li>
+  <li>completedAt - 完成时间</li>
+</ul>
+
+<hr />
+
+<h3 id="idle">事件： mx-wc.idle</h3>
+
+<p>注意：在 <code>mx-wc.ready</code> 过后，并不会触发 <code>mx-wc.idle</code> 事件。该事件只在其他活跃状态下，进行退出或取消后，才会触发，如下：</p>
+
+<ul>
+  <li>用户进入自由选择模式，后进行退出</li>
+  <li>用户进入选中模式后，进行退出</li>
+  <li>用户确认选区后，点击表单的取消按钮</li>
+  <li>裁剪完成后，触发</li>
+</ul>
+
+<p>一般通过监听该事件，做一些撤销或收尾的工作。</p>
+
+<h2 id="listen-events">MaoXian 监听的事件</h2>
+
+<h3 id="set-form-inputs">事件： mx-wc.set-form-inputs</h3>
+
+<p>该事件用于预设置表单的输入值，MaoXian 会在显示表单的时候，自动帮你输入这些预设的值。一般我们都会在监听到 <code>mx-wc.actived</code> 或 <code>mx-wc.selecting</code> 事件后，发出该事件。</p>
+
+<p>消息结构如下：</p>
+
+<pre><code class="language-json">{
+  "formInputs": {
+    "category": "box/it",
+    "tagstr": "security,privacy,freedom"
+  }
+}
+</code></pre>
+
+<p><code>formInputs</code> 为表单的输入项，四项都为选填，名字和解释如下：</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>名字</th>
+      <th>说明</th>
+      <th>默认值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>format</td>
+      <td>存储格式，只能为 <code>html</code> 或 <code>md</code></td>
+      <td>取决于你的设置（见扩展设置页面）</td>
+    </tr>
+    <tr>
+      <td>title</td>
+      <td>对应表单的标题</td>
+      <td>当前网页的标题</td>
+    </tr>
+    <tr>
+      <td>category</td>
+      <td>对应表单的分类（多级分类用 <code>/</code> 隔开）</td>
+      <td>取决于你的设置（见扩展设置页面）</td>
+    </tr>
+    <tr>
+      <td>tagstr</td>
+      <td>对应表单的标签（多个标签用 <code>,</code> 或 <code>空格</code> 隔开)</td>
+      <td>无</td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3 id="set-form-options">事件： mx-wc.set-form-options</h3>
+
+<p>该事件用于预先设置表单输入项的可选值，这些可选词会被用于自动补全。一般我们都会在监听到 <code>mx-wc.actived</code> 或 <code>mx-wc.selecting</code> 事件后，发出该事件。</p>
+
+<p>消息结构如下：</p>
+
+<pre><code class="language-json">{
+  "formOptions": {
+    "categories": ["news", "hobby", "tools/desktop", "tools/mobile"],
+    "tags": ["security", "privacy", "freedom"]
+  }
+}
+</code></pre>
+
+<p><code>formOptions</code> 为表单输入项的可选值，下方列出的都为选填，名字和解释如下：</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>名字</th>
+      <th>类型</th>
+      <th>说明</th>
+      <th>默认值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>titles</td>
+      <td>Array</td>
+      <td>对应表单的标题</td>
+      <td>当前网页的可能是标题的文字</td>
+    </tr>
+    <tr>
+      <td>categories</td>
+      <td>Array</td>
+      <td>对应表单的分类（多级分类用 <code>/</code> 隔开）</td>
+      <td>扩展存储的分类集合</td>
+    </tr>
+    <tr>
+      <td>tags</td>
+      <td>Array</td>
+      <td>对应表单的标签</td>
+      <td>扩展存储的标签集合</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>注： 一般都不需要提供 <code>titles</code>，MaoXian 默认会从当前网页上查找可能是标题的文字，并作为可选项，这能满足绝大部分需求，如果某些网页太特殊，则考虑用『助手』功能去处理。</p>
+
+<h3 id="select-elem">事件： mx-wc.select-elem</h3>
+
+<p>该事件用于选择某个元素，相当于你点击了某个元素。 一般我们会在监听到 <code>mx-wc.selecting</code> 事件后，发送出该事件。</p>
+
+<p>消息结构如下：</p>
+
+<pre><code class="language-json">{
+  "qType": "css",
+  "q": "#article"
+}
+</code></pre>
+
+<ul>
+  <li>qType 为选择器的类型，可选值为 <code>css</code> 和 <code>xpath</code></li>
+  <li>q 为选择器的值。</li>
+</ul>
+
+<hr />
+
+<h3 id="confirm-elem">事件： mx-wc.confirm-elem</h3>
+
+<p>该事件用于选择某个元素，并且做了确认（直接到达输入表单信息那一步）。一般我们会在监听到 <code>mx-wc.selecting</code> 事件后，发送出该事件。</p>
+
+<p>消息结构如下：</p>
+
+<pre><code class="language-json">{
+  "qType": "css",
+  "q": "#article"
+  "formInputs": {
+    "category": "box/it",
+    "tagstr": "security,privacy,freedom"
+  }
+}
+</code></pre>
+
+<ul>
+  <li>qType 为选择器的类型，可选值为 <code>css</code> 和 <code>xpath</code></li>
+  <li>q 为选择器的值。</li>
+  <li>formInputs 为可选， 详情请看 <code>mx-wc.set-form-inputs</code> 事件的<a href="#set-form-inputs">说明</a>。</li>
+</ul>
+
+<p><strong>注</strong>：该事件消息中的 <code>formInputs</code> 会比 <code>mx-wc.set-form-inputs</code> 具有更高的优先级。</p>
+
+<hr />
+
+<h3 id="clip-elem">事件： mx-wc.clip-elem</h3>
+
+<p>该事件用于选中某个元素，并立即对其进行裁剪。</p>
+
+<p>消息结构如下：</p>
+
+<pre><code class="language-json">{
+  "qType": "css",
+  "q": "#article"
+  "formInputs": {
+    "category": "box/it",
+    "tagstr": "security,privacy,freedom"
+  }
+}
+</code></pre>
+
+<ul>
+  <li>qType 为选择器的类型，可选值为 <code>css</code> 和 <code>xpath</code></li>
+  <li>q 为选择器的值。</li>
+  <li>formInputs 为可选，详情请看 <code>mx-wc.set-form-inputs</code> 事件的<a href="#set-form-inputs">说明</a>。</li>
+</ul>
+
+<p><strong>注</strong>：该事件消息中的 <code>formInputs</code> 会比 <code>mx-wc.set-form-inputs</code> 具有更高的优先级。</p>
+
+<hr />
+
+<h3 id="overwrite-config">事件： mx-wc.overwrite-config</h3>
+
+<p>该事件用于重写某些配置项，并且重写的结果只在本次裁剪有效。一般在监听到 <code>mx-wc.actived</code> 后，可发出该事件。</p>
+
+<p>消息结构如下：</p>
+
+<pre><code class="language-json">{
+  "config": {
+    "rootFolder": "clippings",
+    "defaultCategory": "misc"
+    ...
+  }
+}
+</code></pre>
+
+<p>当前允许重写的配置项如下，所有可配置项均为选填。注： 其中的默认值指的是 MaoXian 扩展提供的默认值，该值只作为参考，实际上使用的是你自己配置页面上的值。</p>
+
+<h4 id="config-storage">存储相关</h4>
+
+<p>可在扩展的 <code>扩展 &gt; 设置页面 &gt; 存储设置</code> 一节找到可使用的变量及其说明。</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>名字</th>
+      <th>说明</th>
+      <th>类型</th>
+      <th>默认值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>clippingHandler</td>
+      <td>处理程序</td>
+      <td>String</td>
+      <td>Browser</td>
+    </tr>
+    <tr>
+      <td>saveFormat</td>
+      <td>保存格式</td>
+      <td>String</td>
+      <td>html</td>
+    </tr>
+    <tr>
+      <td>rootFolder</td>
+      <td>根目录</td>
+      <td>String</td>
+      <td>mx-wc</td>
+    </tr>
+    <tr>
+      <td>defaultCategory</td>
+      <td>默认分类</td>
+      <td>String</td>
+      <td>default</td>
+    </tr>
+    <tr>
+      <td>clippingFolderName</td>
+      <td>裁剪目录</td>
+      <td>String</td>
+      <td>$YYYY-$MM-$DD-$TIME-INTSEC</td>
+    </tr>
+    <tr>
+      <td>mainFileFolder</td>
+      <td>主文件的存储目录</td>
+      <td>String</td>
+      <td>$CLIPPING-PATH</td>
+    </tr>
+    <tr>
+      <td>mainFileName</td>
+      <td>主文件的文件名</td>
+      <td>String</td>
+      <td>index.$FORMAT</td>
+    </tr>
+    <tr>
+      <td>saveInfoFile</td>
+      <td>是否保存元信息文件</td>
+      <td>Boolean</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>infoFileFolder</td>
+      <td>元信息文件的存储目录</td>
+      <td>String</td>
+      <td>$CLIPPING-PATH</td>
+    </tr>
+    <tr>
+      <td>infoFileName</td>
+      <td>元信息文件的文件名</td>
+      <td>String</td>
+      <td>index.json</td>
+    </tr>
+    <tr>
+      <td>saveTitleFile</td>
+      <td>是否保存标题文件</td>
+      <td>Boolean</td>
+      <td>true</td>
+    </tr>
+    <tr>
+      <td>titleFileFolder</td>
+      <td>标题文件的存储目录</td>
+      <td>String</td>
+      <td>$CLIPPINT-PATH</td>
+    </tr>
+    <tr>
+      <td>titleFileName</td>
+      <td>标题文件的文件名</td>
+      <td>String</td>
+      <td>a-title_$TITLE</td>
+    </tr>
+    <tr>
+      <td>frameFileFolder</td>
+      <td>内嵌的网页文件的存储目录</td>
+      <td>String</td>
+      <td>$CLIPPING-PATH/frames</td>
+    </tr>
+    <tr>
+      <td>frameFileName</td>
+      <td>内嵌的网页文件的文件名</td>
+      <td>String</td>
+      <td>$TIME-INTSEC-$MD5URL.frame.html</td>
+    </tr>
+    <tr>
+      <td>assetFolder</td>
+      <td>资源文件的存储目录</td>
+      <td>String</td>
+      <td>$CLIPPING-PATH/assets</td>
+    </tr>
+    <tr>
+      <td>assetFileName</td>
+      <td>资源文件的文件名</td>
+      <td>String</td>
+      <td>$TIME-INTSEC-$MD5URL$EXT</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>备注</strong>：</p>
+
+<ul>
+  <li>clippingHandler （处理程序）的可选值为 <code>Browser</code>（浏览器下载功能） 和 <code>NativeApp</code> （本地程序）</li>
+  <li>saveFormat （保存格式）的可选值为 <code>html</code> 或 <code>md</code></li>
+  <li>saveInfoFile（是否保存元信息文件） 设置为 <code>false</code> 后，MaoXian 便不会保存裁剪历史。</li>
+</ul>
+
+<h4 id="config-markdown">Markdown 文档相关</h4>
+
+<p>请参考 <code>扩展 &gt; 设置 &gt; Markdown</code> 的说明文字进行配置。</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>名字</th>
+      <th>说明</th>
+      <th>类型</th>
+      <th>默认值</th>
+      <th>可选值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>markdownTemplate</td>
+      <td>Markdown 模板</td>
+      <td>String</td>
+      <td><code>\n{{content}}\n</code></td>
+      <td> </td>
+    </tr>
+    <tr>
+      <td>markdownOptionHeadingStyle</td>
+      <td>标题格式</td>
+      <td>String</td>
+      <td><code>atx</code></td>
+      <td><code>setext</code> 或 <code>atx</code></td>
+    </tr>
+    <tr>
+      <td>markdownOptionHr</td>
+      <td>水平分割线</td>
+      <td>String</td>
+      <td><code>* * *</code></td>
+      <td><code>* * *</code> 或 <code>- - -</code> 等等</td>
+    </tr>
+    <tr>
+      <td>markdownOptionBulletListMarker</td>
+      <td>子弹列表的行头符</td>
+      <td>String</td>
+      <td><code>*</code></td>
+      <td><code>*</code>，<code>+</code> 或 <code>-</code></td>
+    </tr>
+    <tr>
+      <td>markdownOptionCodeBlockStyle</td>
+      <td>代码块格式</td>
+      <td>String</td>
+      <td><code>fenced</code></td>
+      <td><code>indented</code> 或 <code>fenced</code></td>
+    </tr>
+    <tr>
+      <td>markdownOptionFence</td>
+      <td>代码块分隔符</td>
+      <td>String</td>
+      <td><code>```</code></td>
+      <td><code>```</code> 或 <code>~~~</code></td>
+    </tr>
+    <tr>
+      <td>markdownOptionEmDelimiter</td>
+      <td>强调（斜体）分隔符</td>
+      <td>String</td>
+      <td><code>_</code></td>
+      <td><code>_</code> 或 <code>*</code></td>
+    </tr>
+    <tr>
+      <td>markdownOptionStrongDelimiter</td>
+      <td>加重（粗体）分隔符</td>
+      <td>String</td>
+      <td><code>**</code></td>
+      <td><code>**</code> 或 <code>__</code></td>
+    </tr>
+    <tr>
+      <td>markdownOptionLinkStyle</td>
+      <td>链接格式</td>
+      <td>String</td>
+      <td><code>inlined</code></td>
+      <td><code>inlined</code> 或 <code>referenced</code></td>
+    </tr>
+    <tr>
+      <td>markdownOptionFormulaBlockWrapper</td>
+      <td>块状公式的格式</td>
+      <td>String</td>
+      <td><code>padSameLine</code></td>
+      <td><code>sameLine</code>, <code>padSameLIne</code>, <code>multipleLine</code> 或 <code>mathCodeBlock</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>备注</strong>：</p>
+
+<ul>
+  <li>markdownOptionHr （水平分割线）可填写的值很灵活，具体查看这里 <a href="https://spec.commonmark.org/0.27/#thematic-breaks">Thematic break</a></li>
+</ul>
+
+<h4 id="config-html">HTML 文档相关</h4>
+
+<p>请参考 <code>扩展 &gt; 设置 &gt; HTML</code> 的说明文字进行配置。</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>名字</th>
+      <th>说明</th>
+      <th>类型</th>
+      <th>默认值</th>
+      <th>可选值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>htmlSaveClippingInformation</td>
+      <td>追加裁剪信息到内容尾部</td>
+      <td>Boolean</td>
+      <td><code>false</code></td>
+      <td><code>false</code>、 <code>true</code></td>
+    </tr>
+    <tr>
+      <td>htmlCustomBodyBgCssEnabled</td>
+      <td>允许自定义 body 标签的 CSS 背景颜色</td>
+      <td>Boolean</td>
+      <td><code>false</code></td>
+      <td><code>false</code>、 <code>true</code></td>
+    </tr>
+    <tr>
+      <td>htmlCustomBodyBgCssValue</td>
+      <td>body 标签的 CSS 背景颜色</td>
+      <td>String</td>
+      <td><code>#000000</code></td>
+      <td>查看 background-color (CSS)</td>
+    </tr>
+    <tr>
+      <td>htmlCompressCss</td>
+      <td>压缩样式（CSS）</td>
+      <td>Boolean</td>
+      <td><code>false</code></td>
+      <td><code>false</code>、<code>true</code></td>
+    </tr>
+    <tr>
+      <td>htmlCaptureImage</td>
+      <td>图片</td>
+      <td>String</td>
+      <td><code>saveAll</code></td>
+      <td><code>saveAll</code>、<code>saveCurrent</code></td>
+    </tr>
+    <tr>
+      <td>htmlCaptureAudio</td>
+      <td>声音</td>
+      <td>String</td>
+      <td><code>remove</code></td>
+      <td><code>saveAll</code> 、<code>saveCurrent</code>、 <code>remove</code></td>
+    </tr>
+    <tr>
+      <td>htmlCaptureVideo</td>
+      <td>影片</td>
+      <td>String</td>
+      <td><code>remove</code></td>
+      <td><code>saveAll</code>、 <code>saveCurrent</code>、 <code>remove</code></td>
+    </tr>
+    <tr>
+      <td>htmlCaptureApplet</td>
+      <td>Applets</td>
+      <td>String</td>
+      <td><code>remove</code></td>
+      <td><code>saveAll</code>、 <code>remove</code></td>
+    </tr>
+    <tr>
+      <td>htmlCaptureEmbed</td>
+      <td>Embeds</td>
+      <td>String</td>
+      <td><code>saveImage</code></td>
+      <td><code>saveAll</code>、 <code>saveImage</code>、 <code>remove</code>、 <code>filter</code></td>
+    </tr>
+    <tr>
+      <td>htmlCaptureObject</td>
+      <td>Objects</td>
+      <td>String</td>
+      <td><code>saveImage</code></td>
+      <td><code>saveAll</code>、 <code>saveImage</code>、 <code>remove</code>、 <code>filter</code></td>
+    </tr>
+    <tr>
+      <td>htmlCaptureIcon</td>
+      <td>网站图标</td>
+      <td>String</td>
+      <td><code>remove</code></td>
+      <td><code>saveAll</code>、 <code>saveFavicon</code>、 <code>remove</code></td>
+    </tr>
+    <tr>
+      <td>htmlCaptureCssRules</td>
+      <td>样式规则</td>
+      <td>String</td>
+      <td><code>saveUserd</code></td>
+      <td><code>saveAll</code>、 <code>saveUserd</code></td>
+    </tr>
+    <tr>
+      <td>htmlCaptureWebFont</td>
+      <td>Web 字体</td>
+      <td>String</td>
+      <td><code>remove</code></td>
+      <td><code>saveAll</code>、 <code>remove</code>、 <code>filterList</code></td>
+    </tr>
+    <tr>
+      <td>htmlCaptureCssImage</td>
+      <td>样式图片</td>
+      <td>String</td>
+      <td><code>remove</code></td>
+      <td><code>saveAll</code>、 <code>remove</code></td>
+    </tr>
+    <tr>
+      <td>htmlEmbedFilter</td>
+      <td>Embeds 过滤器</td>
+      <td>String</td>
+      <td><code>&lt;images&gt;</code></td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>htmlObjectFilter</td>
+      <td>Objects 过滤器</td>
+      <td>String</td>
+      <td><code>&lt;images&gt;</code></td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>htmlWebFontFilterList</td>
+      <td>Web 字体过滤器组</td>
+      <td>String</td>
+      <td><code>woff2|woff|otf|ttf</code></td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="config-web-request">Web 请求相关</h4>
+
+<p>请参考 <code>扩展 &gt; 设置 &gt; 高级设置</code> 的说明文字进行配置。</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>名字</th>
+      <th>说明</th>
+      <th>类型</th>
+      <th>默认值</th>
+      <th>可选值</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>requestTimeout</td>
+      <td>超时（秒）</td>
+      <td>Integer</td>
+      <td>300</td>
+      <td>5 ~ 86400</td>
+    </tr>
+    <tr>
+      <td>requestMaxTries</td>
+      <td>最大尝试次数</td>
+      <td>Integer</td>
+      <td>3</td>
+      <td>大于1的整数</td>
+    </tr>
+    <tr>
+      <td>requestReferrerPolicy</td>
+      <td>Referrer 请求头</td>
+      <td>String</td>
+      <td><code>originWhenCrossOrigin</code></td>
+      <td><code>noReferrer</code>、 <code>origin</code>、 <code>originWhenCrossOrigin</code>、 <code>unsafeUrl</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3 id="set-yielding">事件： mx-wc.set-yielding</h3>
+
+<p>该事件用于把某个状态设置为「让出」，目前可让出的状态有：<code>actived</code>，<code>confirmed</code> 和 <code>clipped</code>。</p>
+
+<p>消息结构如下：</p>
+
+<pre><code class="language-json">{
+  name: 'actived'
+}
+</code></pre>
+
+<ul>
+  <li>name 对应的状态名称</li>
+</ul>
+
+<p><strong>警告</strong>，设置过后，通过 <code>document.removeEventListener</code> 是无法撤销的，请使用 <code>mx-wc.unset-yielding</code> 进行相关的撤销操作。</p>
+
+<p>一般在下面的一些使用场景下，会设置对应的状态为让出。</p>
+
+<ul>
+  <li>在需要开发一些操作网页内容的工具时（高亮，注解等……）可设置 <code>actived</code> 事件为让出，以便在选择裁区前就编辑好网页。</li>
+  <li>在需要自定义『保存表单』时候，则可设置 <code>confirmed</code> 状态为让出，再弹出你自己写的表单。</li>
+  <li>在需要编辑『裁剪结果』时，则可设置 <code>clipped</code> 状态为让出，再对裁剪结果进行编辑或保存。</li>
+</ul>
+
+<p>另： 当本扩展已经把控制权让出给对接方时，其只会对特定的事件进行响应，如下：</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>让出点</th>
+      <th>只会响应以下事件</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>actived</td>
+      <td><code>mx-wc.yield-back</code>，<code>mx-wc.resume-actived</code></td>
+    </tr>
+    <tr>
+      <td>confirmed</td>
+      <td><code>mx-wc.yield-back</code></td>
+    </tr>
+    <tr>
+      <td>clipped</td>
+      <td><code>mx-wc.yield-back</code>，<code>mx-wc.set-saving-hint</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<hr />
+
+<h3 id="unset-yielding">事件： mx-wc.unset-yielding</h3>
+
+<p>该事件用于撤销某个状态的「让出」。</p>
+
+<p>消息结构如下：</p>
+
+<pre><code class="language-json">{
+  name: 'actived'
+}
+</code></pre>
+
+<ul>
+  <li>name 对应的状态名称</li>
+</ul>
+
+<h3 id="yield-back">事件： mx-wc.yield-back</h3>
+
+<p>该事件用于让回控制权。即当你把一个状态设置为让出后，当到达这个状态时，本扩展会把控制权让出来，并等待你的回应。你执行完你的操作后，应该发出该事件把控制权让回给本扩展。</p>
+
+<p>消息结构如下：</p>
+
+<pre><code class="language-json">{
+  "nextAction": {"name": "xxx", "msg": {}}
+}
+</code></pre>
+
+<p><code>nextAction</code> 是你让回控制权后，期望本扩展执行的动作。不同的让出点，允许执行的动作不同。如下：</p>
+
+<h4 id="yield-back-from-actived">当让出状态为 actived 时，让回时，允许的动作</h4>
+
+<ul>
+  <li><code>exit</code>： 退出当前状态，该动作不带消息，执行后，扩展会处于 idle 状态。</li>
+  <li><code>selecting</code>： 进入自由框选那一步，该动作不带消息。如下：</li>
+</ul>
+
+<pre><code class="language-json">{
+  "nextAciton": {
+    "name": "selecting"
+  }
+}
+</code></pre>
+
+<h4 id="yield-back-from-confirmed">当让出状态为 confirmed 时，让回时，允许的动作</h4>
+
+<ul>
+  <li><code>exit</code>： 退出当前状态，该动作不带消息，执行后，扩展会处于 idle 状态。</li>
+  <li><code>showForm</code>： 显示表单，该动作不带消息，扩展像往常一样显示表单。</li>
+  <li><code>clipElem</code>： 进行裁剪，该动作带消息，消息和 <code>mx-wc.clip-elem</code> 事件一样，请参考<a href="#clip-elem">这里</a>，如下：</li>
+</ul>
+
+<pre><code class="language-json">{
+  "nextAction": {
+    "name": "clipElem",
+    "msg": {
+      "qType": "css",
+      "q": "#mx-wc-confirmed-elem",
+      "formInputs": {
+        "category": "box/it",
+        "tagstr": "security,privacy,freedom"
+      }
+    }
+  }
+}
+</code></pre>
+
+<h4 id="yield-back-from-clipped">当让出状态为 clipped 时，让回时，允许的动作</h4>
+
+<ul>
+  <li><code>saveClipping</code>： 存储裁剪结果，通常是你对『裁剪结果』进行一些处理后，使用这个动作让本扩展执行存储操作。该动作带有消息，如下， clipping 的结构，请看 <code>mx-wc.clipped</code> 事件的 <a href="#clipped">说明</a></li>
+</ul>
+
+<pre><code class="language-json">{
+  "nextAction": {
+    "name": "saveClipping",
+    "msg": {clipping: clipping}
+  }
+}
+</code></pre>
+
+<ul>
+  <li>
+    <p><code>exitClipping</code>：退出本次裁剪流程，该动作不带消息，执行后，扩展会处于 idle 状态。通常是你获得『裁剪结果』后，自行对其进行保存，你最好在使用这个动作之前，用 <code>mx-wc.set-saving-hint</code> 事件，告知用户『裁剪结果』已在另一个软件保存。并在另一个软件上告知用户保存的进度。</p>
+  </li>
+  <li>
+    <p><code>completeClipping</code>：完成本次裁剪流程。通常是你对「裁剪结果」进行处理与保存，并用 <code>mx-wc.set-saving-hint</code> 进行进度通知。在处理结束后，使用本动作，把「保存结果」发送给 MaoXian。该动作带有消息，如下：</p>
+  </li>
+</ul>
+
+<pre><code class="language-json">{
+  "nextAction": {
+    "name": "completeClipping",
+    "msg": {
+      "result": {
+        "clipID": "612905100",
+        "originalUrl": "https://a.org/posts/awesome.html",
+        "filename": "/home/user/Downloads/clippings/box/security/253143434/index.html",
+        "url": "https://my.server.org/clippings/,
+        "downloadItemId": "",
+        "taskNum": 6,
+        "failedTaskNum": 0,
+        "pendingTaskNum": 0,
+        "completedTaskNum": 6,
+        "failedTasks": []
+      }
+    }
+  }
+}
+</code></pre>
+
+<ul>
+  <li>clipId           - 本次裁剪ID</li>
+  <li>originalUrl      - 源网页的地址。</li>
+  <li>filename         - 主文件的存储路径（如果存储地为本机，可设置其为完整路径，否则可设置其为相对路径）。</li>
+  <li>url              - 保存后主文件的网址，用户点击「查看结果」会打开该网址（通常为<code>http(s)://</code> 或 <code>file://</code>）。</li>
+  <li>downloadItemId   - 主文件的下载条目ID，如果是通过浏览器的下载接口保存的话，会得到该 ID，</li>
+  <li>taskNum          - 任务数</li>
+  <li>failedTaskNum    - 存储失败的任务数</li>
+  <li>pendingTaskNum   - 还未存储的任务数</li>
+  <li>completedTaskNum - 存储成功的任务数</li>
+  <li>failedTasks      - 存储失败的任务。</li>
+</ul>
+
+<p>failedTask 的结构如下：</p>
+
+<pre><code class="language-json">{
+  "filename": "clippings/box/security/253143434/assets/a.jpg",
+  "errMsg": "NetError: open timeout*
+}
+
+</code></pre>
+
+<hr />
+
+<h3 id="resume-actived">事件： mx-wc.resume-actived</h3>
+
+<p>该事件已过时，请使用 <code>mx-wc.yield-back</code> 来让回控制权。</p>
+
+<p>如果你把 <code>actived</code> 状态设置为「让出」，则可以在执行完某些操作后，通过发送该事件，让 MaoXian 继续走下面的流程。发送该事件不需要带消息。</p>
+
+<hr />
+
+<h3 id="set-saving-hint">事件： mx-wc.set-saving-hint</h3>
+
+<p>该事件用于设置<strong>「存储阶段」</strong>的提示信息（如：存储进度信息），一般只有你把 <code>clipped</code> 状态设置为「让出」时，才会用到该事件。</p>
+
+<p>消息结构如下：</p>
+
+<pre><code class="language-json">{
+  hint: 'saving...'
+}
+</code></pre>
+
+<hr />
+
+<h2 id="last-note">写在最后</h2>
+
+<p>该页面描述的 API 现还未很成熟（稳定），未来可能会有一些改动。若你在使用这些 API 的过程中遇到一些问题或是疑问，请<a href="https://github.com/mika-cn/maoxian-web-clipper/issues">反馈给我们</a>，谢谢 ;)</p>
+
+<hr />
+<p><a href="index-zh-CN.html">首页</a></p>
+</div>
+    </div>
+  </body>
+</html>
+

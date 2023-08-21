@@ -1,0 +1,66 @@
+body {
+  font-size: 14px;
+  line-height: 23px;
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  margin: 0px;
+  background-color: #464646;
+}
+
+/* Desktop screen style */
+@media (min-width: 768px) {
+  .main {
+    width: 70%
+  }
+  .sidebar {
+    position: absolute;
+    top: 0px;
+    right: 0px;
+    width: 30%;
+    height: auto;
+    min-height: 100%;
+  }
+}
+
+/* Palm screen style */
+@media (max-width: 767px) {
+  .main {
+    width: 100%;
+  }
+  .sidebar {
+    height: auto;
+  }
+}
+.main{
+  box-sizing: border-box;
+  padding: 30px 20px 100px 50px;
+  box-sizing: border-box;
+  height: auto;
+  min-height: 100%;
+  background-color: WhiteSmoke;
+}
+.sidebar {
+  box-sizing: border-box;
+  background-color: white;
+  padding: 40px 10px 20px 10px;
+}
+.projects {}
+.clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+.project {
+  color: #586069;
+  margin-bottom: 20px;
+}
+.project > .intro {
+  font-size: 14px;
+}
+
+.post img {
+  max-width: 100%;
+}
+
+.noscript {
+  color: green;
+}

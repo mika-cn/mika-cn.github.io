@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title></title>
+  <style>
+    .avatar {
+      width: 90px;
+      height: 90px;
+      background-color: #464646;
+      display: inline-block;
+    }
+
+    .avatar .row {
+      height: 30px;
+    }
+
+    .avatar .A, .avatar .B, .avatar .C {
+      display: inline-block;
+      width: 30px;
+      height: 30px;
+    }
+    .avatar .A { background-color: red; }
+    .avatar .B { background-color: green; }
+    .avatar .C { background-color: blue; }
+  </style>
+  </head>
+  <body>
+  </body>
+  <script>
+    (function(){
+      const edgeLength = 3;
+      const klasses = ['A', 'B'];
+      // 3 个鸽子
+      // 分别涂上 A，B两种颜色
+
+      // 1: A, B
+      // 2: AA, AB, BA, BB
+      // 3.
+      //    AAA, AAB,
+      //    ABA, ABB,
+
+      //    BAA, BAB
+      //    BBA, BBB,
+
+      let n = edgeLength**2;
+
+      let curr = [];
+      while(n > 0) {
+        n--;
+        if (curr.length === 0) {
+          curr.push(...klasses)
+        } else {
+          const arr = [];
+          for(let i=0; i<klasses.length; i++) {
+            for(let j=0; j<curr.length; j++) {
+              const s = [klasses[i], ...curr[j]];
+              if (n > 0) {
+                arr.push(s)
+              } else {
+                if (isSymmetry(s)) {
+                  arr.push(s);
+                }
+              }
+            }
+          }
+          curr = [...arr];
+        }
+      }
+
+      const avatars = []
+      for(let i=0; i<curr.length; i++) {
+        const avatar = curr[i];
+        let s = "<div class='avatar'><div class='row'>";
+        for(let j=0; j<avatar.length; j++) {
+          s += "<div class='" + avatar[j] + "'></div>";
+          if ( (j+1) % edgeLength == 0 && j+1 !== avatar.length) {
+            s += "</div><div class='row'>";
+          }
+        }
+        s += "</div></div>";
+        avatars.push(s);
+      }
+
+      console.log(avatars[0]);
+
+      const elem = document.createElement('div');
+      elem.innerHTML = avatars.join("\n");
+      document.body.appendChild(elem);
+
+      function isSymmetry(avatar) {
+        const length = 3;
+        const s = ['0', ...avatar];
+        return (
+          s[1] == s[7] && s[2] == s[8] && s[3] == s[9] ||
+          s[1] == s[3] && s[4] == s[6] && s[7] == s[9] ||
+          s[2] == s[4] && s[3] == s[7] && s[6] == s[8] ||
+          s[1] == s[9] && s[2] == s[6] && s[4] == s[8]
+        );
+      }
+
+
+    })();
+  </script>
+</html>

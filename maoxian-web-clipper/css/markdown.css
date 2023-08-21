@@ -1,0 +1,167 @@
+body {
+  font-family: "Helvetica Neue", Helvetica, Arial, "PingFang SC", "Hiragino Sans GB", "Heiti SC", "Microsoft YaHei", "WenQuanYi Micro Hei", sans-serif;
+  margin: 0px;
+  padding: 0px;
+  background-color: #464646;
+}
+
+@media (min-width: 768px) {
+  .main {
+    padding: 30px 25px 200px 25px;
+  }
+  .main p,
+  .main ul,
+  .main ol,
+  .main pre,
+  .main table { margin-left: 25px; margin-right: 25px; }
+}
+
+@media (max-width: 767px) {
+  .main {
+    padding: 30px 10px 200px 10px;
+  }
+  .main p,
+  .main ul,
+  .main ol,
+  .main pre,
+  .main table { margin-left: 0px; margin-right: 0px; }
+}
+
+/******** headers ********/
+h1,h2,h3,h4,h5,h6 {color: black; padding: 4px;}
+h1 {margin-bottom: 20px; margin-left: 10%;}
+h2 {
+  margin-top: 40px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #888;
+}
+h3 {margin-top: 20px; }
+
+.red {color: red;}
+
+.main {
+  max-width: 100%;
+  font-size: 16px;
+  line-height: 26px;
+  background-color: WhiteSmoke;
+  color: #111111;
+}
+
+.main img { max-width: 100%; }
+
+
+hr {
+  border: 0px;
+  border-bottom: 1px solid #ccc;
+  margin-bottom: 50px;
+  margin-top: 50px;
+}
+
+blockquote {
+  margin-left: 0px;
+  padding: 5px 15px 5px 15px;
+  border: 1px dashed #666;
+  background-color: #fff;
+}
+
+/*
+
+blockquote {
+  background-color: #fff;
+  border: 1px solid lightgray;
+  padding: 15px 5px 15px 5px;
+}
+
+blockquote:before, blockquote:after {
+  position: absolute;
+  font-size: 600%;
+  color: rgb(245, 245, 245);
+}
+
+blockquote:before {
+  margin-top: 10px;
+  left: 66px;
+  content: '“';
+}
+blockquote:after {
+  right: 66px;
+  content: '”';
+}
+*/
+
+
+code {
+  border-radius: 3px;
+  padding: 2px 3px 2px 3px;
+  /*background-color: rgba(27,31,35,0.15);*/
+  /*background-color: #F4EED7;*/
+  /*color: #FF5555;*/
+  color: #1E47B4;
+}
+
+kbd {
+  display: inline-block;
+  font-size: 13px;
+  min-width: 20px;
+  line-height: 15px;
+  width: auto;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  padding: 1px 2px;
+  text-align: center;
+  vertical-align: middle;
+  background-color: #fafafa;
+  color: #333;
+  box-shadow: 1px 1px 2px gray;
+}
+
+
+table {
+  padding: 5px;
+  border: 0px;
+  border-collapse: collapse;
+  font-size: 14px;
+}
+table > thead {
+  background-color: #777777;
+  color: white;
+}
+
+table th, table td {
+  border: solid 1px #AAAAAA;
+  padding: 5px;
+}
+
+table td {
+  background-color: #FFFFFF;
+}
+
+/********** codeblock **********/
+
+pre > code {
+  display: block;
+  padding: 5px 10px;
+  border-radius: 3px;
+  /*background-color: black;*/
+  /*background-color: #0E2233;*/
+  background-color: #303030;
+  color: #F0F0F0;
+  overflow-x: auto;
+}
+
+pre > code.language-shell {
+  background-color: black;
+  color: #00CC00;
+}
+
+pre > code.language-graph {
+  line-height: 22px;
+}
+
+/* delete me*/
+.highlighter-coderay {
+  border: 1px solid #ccc;
+  padding: 5px 10px;
+  background-color: #D8D8D8;
+  overflow-x: auto;
+}

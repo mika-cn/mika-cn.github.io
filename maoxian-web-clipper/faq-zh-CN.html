@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="FAQ" />
+    <title>常见问题</title>
+    <link rel="icon" type="image/png" href="imgs/logo.png" />
+    <link rel="stylesheet" type="text/css" href="css/markdown.css" />
+    <link rel="stylesheet" type="text/css" href="css/markdown-toc.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="title"><h1>常见问题</h1></div>
+
+      <input type="checkbox" id="pin-toc" class="pin-toc" hidden>
+      <label for="pin-toc" class="pin-toc-switcher" title="pin(unpin) the table of content"></label>
+      <div class="toc">
+        <h2>目录</h2>
+        <ul>
+  <li><a href="#can-clip-and-cant-clip">什么样的网页适合用本扩展来保存，什么不适合？ </a></li>
+  <li><a href="#what-content-will-be-saved">扩展会保存哪些内容？ </a>
+    <ul>
+      <li><a href="#save-as-html">若存储格式为 HTML </a></li>
+      <li><a href="#save-as-markdown">若存储格式为 Markdown </a></li>
+    </ul>
+  </li>
+  <li><a href="#keyboard-shortcuts">如何设置快捷键 </a></li>
+  <li><a href="#why-prompt-saveas-windows">为什么点击裁剪后，弹出好多选择保存路径的窗口 </a></li>
+  <li><a href="#why-placeholder-image">为什么有的网页裁剪下来后，本来是图片的地方变成空白的图片（或者只有一部分内容有图片） </a></li>
+  <li><a href="#images-failed-to-download">打开裁剪结果，发现一些图片下载失败，该怎么办？ </a></li>
+  <li><a href="#why-require-so-many-permissions">为什么需要那么多权限 </a></li>
+  <li><a href="#clip-menu-not-work">点击了裁剪，没有反应 </a></li>
+  <li><a href="#stuck-on-clipping">卡在了「裁剪中…」 </a></li>
+  <li><a href="#stuck-on-saving">卡在了「保存中…」 </a>
+    <ul>
+      <li><a href="#stuck-cus-net-env">情况一： 网络环境不好 </a></li>
+      <li><a href="#stuck-cus-extension-confliction">情况二： 与其他扩展发生冲突了 </a></li>
+    </ul>
+  </li>
+  <li><a href="#change-default-download-path">改变默认的下载路径 </a>
+    <ul>
+      <li><a href="#method-A-configure-nativeApp">方法一：修改『本地程序』配置 </a></li>
+      <li><a href="#method-B-create-symbolic-link">方法二：创建传送门 </a>
+        <ul>
+          <li><a href="#create-transfer-door-on-windows">例一：在 Windows 上创建传送门 </a></li>
+          <li><a href="#create-transfer-door-on-linux-or-macos">例二：在 Linux/Mac 上创建传送门 </a></li>
+          <li><a href="#create-multiple-portals">例三：创建多个传送门（高级） </a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#dont-save-index-file">我不想保存元信息文件 </a></li>
+  <li><a href="#can-not-open-clipping-in-history">无法打开以前裁剪的内容 </a></li>
+  <li><a href="#allow-access-file-urls">允许访问本地网址 </a>
+    <ul>
+      <li><a href="#access-file-url-step1">1. 获取 “扩展标识” </a></li>
+      <li><a href="#access-file-url-step2">2. 更改浏览器设置 </a></li>
+      <li><a href="#access-file-url-step3">3. 更改本扩展中的设置 </a></li>
+    </ul>
+  </li>
+  <li><a href="#script-busy">浏览器弹出提示框提示：脚本无反应，询问是否中止 </a></li>
+  <li><a href="#save-as-single-file">能把网页裁剪成单个文件？比如：裁剪成 mhtml、zip 或者 存成图片 </a></li>
+  <li><a href="#why-not-publich-on-chrome-webstore">为什么扩展不在「谷歌商店」上线 </a></li>
+  <li><a href="#privacy-policy">该软件会泄露我的隐私吗？ </a></li>
+  <li><a href="#feedback">反馈新问题或建议 </a></li>
+</ul>
+
+      </div>
+
+      <div class="content">
+<h2 id="can-clip-and-cant-clip">什么样的网页适合用本扩展来保存，什么不适合？</h2>
+
+<p>通常来说，那些只包含图文的内容适合使用 MaoXian 来保存，如：博客文章、新闻、论坛帖子等等。</p>
+
+<p>而包含大音频，大视频的网页是不适合的。因为这类网页的主内容为这些大音频和大视频，虽然 MaoXian 确实可以保存音频和视频，但其界面设计并不适用于此类网页，如果你尝试去保存这类网页，往往会发现 MaoXian 一直卡在保存中，并最终失败。请寻找其他专用工具。</p>
+
+<p>流媒体类网页也是不适合的，如：直播，电台等。</p>
+
+<p>另外，如果你寻找的是保存一批文章，比如某个博客的所有文章。MaoXian 也是不适合的，你可以寻找其他具有爬取功能的工具（如 wget）。</p>
+
+<h2 id="what-content-will-be-saved">扩展会保存哪些内容？</h2>
+
+<p>MaoXian 的裁剪过程，裁剪的是<strong>当前状态</strong>下的网页。主要的裁剪内容为文本信息和图片，具体的存储内容会因存储格式的不同而不同，并且有些内容需要在设置页面勾选才会保存。如下：</p>
+
+<h3 id="save-as-html">若存储格式为 HTML</h3>
+
+<p><strong>会保存的内容</strong></p>
+
+<ul>
+  <li>选区的文本</li>
+  <li>选区的图片</li>
+  <li>网页的样式</li>
+  <li>内嵌的网页 （iframe）</li>
+  <li>背景图（默认未保存）</li>
+  <li>网页图标（默认未保存）</li>
+  <li>网页字体（默认未保存）</li>
+  <li>声音（默认不保存）</li>
+  <li>视频（默认不保存）</li>
+  <li>画布节点（canvas，尝试保存当前状态为图片）</li>
+  <li>embed 节点 （默认只保存图片）</li>
+  <li>object 节点（默认只保存图片）</li>
+  <li>applet 节点（默认不保存）</li>
+</ul>
+
+<p><strong>不会保存的内容</strong></p>
+
+<ul>
+  <li>网页脚本 （即：javascript）</li>
+  <li>不显示的元素</li>
+</ul>
+
+<h3 id="save-as-markdown">若存储格式为 Markdown</h3>
+
+<p><strong>会保存的内容</strong></p>
+
+<ul>
+  <li>选区的文本</li>
+  <li>选区的图片</li>
+</ul>
+
+<p>不会保存的内容和 HTML 一样，外加上不会保存网页样式。</p>
+
+<h2 id="keyboard-shortcuts">如何设置快捷键</h2>
+
+<p>由于浏览器提供了统一配置快捷键的页面，所以你可以在浏览器的扩展管理页面找到配置入口，如下：</p>
+
+<ul>
+  <li>在火狐浏览器上，<em><code>在地址栏输入 about:addons &gt; 回车 &gt; 点击小齿轮 &gt; 管理快捷键</code></em></li>
+  <li>在谷歌浏览器上，<em><code>在地址栏输入 chrome://extensions/shortcuts &gt; 回车</code></em></li>
+</ul>
+
+<h2 id="why-prompt-saveas-windows">为什么点击裁剪后，弹出好多选择保存路径的窗口</h2>
+
+<p>默认情况下，本扩展会利用浏览器的下载功能，保存裁剪下来的网页。因为网页通常包含一些样式，图片等文件，所以每次裁剪需要保存多个文件。如果你的浏览器设置了“每次下载都询问保存位置”，那么浏览器就会弹出多个窗口询问你“这些文件要保存在哪里”。</p>
+
+<p>关闭谷歌的 ‘每次下载都询问保存位置’ ： 从浏览器地址栏输入 <code>chrome://settings/downloads</code> &gt; <em>下载</em> &gt; 取消选中 <em>『每次下载都询问保存位置』</em></p>
+
+<p>关闭火狐的 ‘每次下载都询问保存位置’ ： 从浏览器地址栏输入 <code>about:preferences</code> &gt; 回车 &gt; <em>下载</em> &gt; <em>取消选中『每次下载都询问保存位置』</em></p>
+
+<h2 id="why-placeholder-image">为什么有的网页裁剪下来后，本来是图片的地方变成空白的图片（或者只有一部分内容有图片）</h2>
+
+<p>有些网页为了节约流量，会对网页上的图片加上「懒加载」机制。这些网页的图片只有用户浏览过（即图片出现在屏幕上过）才会加载，而那些没有浏览过的图片会用一张空白的图片占位。</p>
+
+<p>因为本扩展裁剪的是当前状态的网页， 所以当你没有完全地浏览过网页的内容时，就进行裁剪，就会出现下载到空白的占位图片。对于这类具有「懒加载」机制的网页，你应该先浏览一遍（即以适当的速度从头滚动到尾），让该加载的资源先加载完全，再进行裁剪。</p>
+
+<h2 id="images-failed-to-download">打开裁剪结果，发现一些图片下载失败，该怎么办？</h2>
+
+<p>在网络环境恶劣的时候，会发生这个情况，请根据页面的提示，到【失败的下载任务】页面进行重现下载即可。如果你确保了非网络环境问题而导致的一直下载失败，则请把问题反馈给开发者。</p>
+
+<h2 id="why-require-so-many-permissions">为什么需要那么多权限</h2>
+
+<p>请查看<a href="privacy-policy-zh-CN.html">隐私说明页面</a></p>
+
+<h2 id="clip-menu-not-work">点击了裁剪，没有反应</h2>
+
+<p>请依次检查以下情况:</p>
+
+<ol>
+  <li>如果你刚安装完扩展，那些在安装前就已经打开的网页得刷新后才能裁剪。</li>
+  <li>如果不是第一种情况，也请尝试刷新网页，再试一下（有时候浏览器会抽风，导致某些资源无法正常加载）。</li>
+  <li>目前 MaoXian 只兼容 <code>Chromium</code> 和 <code>Firefox</code>, 其他浏览器不保证能正常工作。有的用户可能会使用基于 <code>Chromium</code> 开发的浏览器（如：vivaldi），该类浏览器很可能可以正常工作，但我们无法作出保证。</li>
+</ol>
+
+<h2 id="stuck-on-clipping">卡在了「裁剪中…」</h2>
+
+<p>一种情况是网络很不好，MaoXian 卡在某个请求了，可能这个请求根本就没有可能成功。比如万恶的墙对某些请求进行干扰，导致数据一直下载不下来。</p>
+
+<p>你可以到 <em>设置页面 &gt; 高级</em> 页面，调整请求的「超时时长」为 15 秒，设置「重试次数」为 1。再刷新网页，重新进行裁剪，如果你等了一分钟以内，整个流程可以走下去，就说明是网络的问题了。那么没别的较好的办法，你只能去行正义之事了（搭梯子科学上网）。</p>
+
+<p>目前还发现裁剪 wikipedia 网页时候，当网页上有很多个用图片表示的公式时，MaoXian 的裁剪过程很慢，也会呈现出卡住了这种状态。这种就只能等了。</p>
+
+<h2 id="stuck-on-saving">卡在了「保存中…」</h2>
+
+<h3 id="stuck-cus-net-env">情况一： 网络环境不好</h3>
+
+<p>MaoXian 在保存图片的时候，如果遇到网络环境太差，一个图片下了好久都没有下载下来，会发生请求超时的情况，MaoXian 会进行重试，而导致整个保存过程变得很长，保存进度长期没有更新，就会感觉到卡住了。</p>
+
+<p>如果你被墙干扰了，那么没别的较好的办法，你只能去行正义之事了（搭梯子使用魔法上网）。如果你的网络环境太差与墙无关，只是速度不太快， 你可以到 <em>设置页面 &gt; 高级</em> 页面，把「请求时长」设置为更大的值，以减少超时重试的情况，然后在裁剪网页的时候，不要着急，起来喝杯茶水。</p>
+
+<h3 id="stuck-cus-extension-confliction">情况二： 与其他扩展发生冲突了</h3>
+
+<p>如果你使用的是浏览器来下载裁剪下来的文件（默认情况），那么浏览器发出的下载请求有可能被其他扩展拦截了。你可以到 <em><code>设置 &gt; 浏览器</code></em> 页面，点击“测试”按钮进行确认。</p>
+
+<p>确认过后，你可以尝试一个一个地停用可能具有下载功能的扩展，再去测试，以找出冲突的扩展。</p>
+
+<p>注：有些浏览器会开发自己的下载管理功能，也会与 MaoXian 产生冲突。</p>
+
+<p>遇到这个情况可向对应扩展的开发者反馈问题，因为一个扩展拦截了另一个扩展的下载请求，这显然是不合理的。</p>
+
+<p>如果你无法解决冲突的问题，则可以使用我们开发的一个本地程序来绕过这个问题。 详情见: <a href="native-app/index-zh-CN.html">本地程序</a></p>
+
+<h2 id="change-default-download-path">改变默认的下载路径</h2>
+
+<h3 id="method-A-configure-nativeApp">方法一：修改『本地程序』配置</h3>
+
+<p>如果你采用<a href="native-app/index-zh-CN.html">「本地程序」</a>的方式保存信息的话，直接修改配置文件，再重启一下浏览器就可以了。</p>
+
+<p><strong>注意</strong>：如果你只为了修改下载路径，则完全没有必要而去安装『本地程序』（可参考下方的方法二）。</p>
+
+<h3 id="method-B-create-symbolic-link">方法二：创建传送门</h3>
+
+<p>如果你采用的是 「浏览器下载功能」来保存信息的话，由于安全问题，浏览器扩展无法修改浏览器的下载路径。但是你可以通过创建软链接（符号链接），来达到你的目地。</p>
+
+<p>软链接（符号链接）可以理解为一个传送门，即你把文件存在这个传送门里面，文件会被传送到（被保存到）另一个你指定的文件夹。</p>
+
+<p>下方的例子中：</p>
+
+<ul>
+  <li>MaoXian 的根目录，指的是 MaoXian 的存储入口（文件夹），可以在 MaoXian 的设置页面进行更改，默认值为 “<code>mx-wc</code>“。</li>
+  <li>浏览器的下载路径，是你每次下载文件，浏览器默认的存储入口，这个可以在你浏览器的设置页面找到对应的路径。</li>
+  <li>目标路径，即你实际上想把文件存储到这个路径（文件夹）下。</li>
+</ul>
+
+<h4 id="create-transfer-door-on-windows">例一：在 Windows 上创建传送门</h4>
+
+<p>假设:</p>
+
+<ul>
+  <li><code>mx-wc</code> 【MaoXian 的根目录】</li>
+  <li><code>C:\Users\jack\Browser\Downloads</code>  【浏览器的下载路径】</li>
+  <li><code>C:\Users\jack\OneDrive\web-clippings</code> 【目标路径】</li>
+</ul>
+
+<p>（1）把你的目标路径准备好，即创建对应的文件夹。</p>
+
+<p>（2）查看浏览器的下载目录，如果已经存在【MaoXian 的根目录】，则把里面的内容处理掉（剪切到目标路径，或直接删除）， 再把这个【MaoXian 的根目录】删除。因为我们后面要在此处创建一个名字一样的传送门。</p>
+
+<p>（3）在浏览器的下载路径下，创建一个传送门来作为 MaoXian 的根目录。<strong>该传送门的名字必须和【MaoXian 的根目录】是一样的</strong>，此例子中，这个传送门的名字是 “<code>mx-wc</code>“。</p>
+
+<p>Windows 上，创建软链接的命令为:</p>
+
+<pre><code class="language-shell">mklink /D C:\Users\jack\Browser\Downloads\mx-wc C:\Users\jack\OneDrive\web-clippings
+</code></pre>
+
+<p>新建一个 bat 文件，如：maoxian_chuan_song_men.bat 文件（文件名随便取） ，再把上方的命令复制进该 bat 文件（根据你的需求修改最后的两个路径），保存后， 再右击该文件，以管理员方式运行，运行后，传送门即创建成功。</p>
+
+<p>你可以在浏览器的下载目录里看到有一个叫做 “<code>mx-wc</code>” 的文件夹，它即是我们刚刚创建的传送门。你可以试着在它里面随便创建一个文件，再到目标路径里面去验证是否已经传送过去。如果是，恭喜你，你已经成功修改了 MaoXian 默认的存储路径，并且学会了创建传送门这个黑客技术 :P</p>
+
+<h4 id="create-transfer-door-on-linux-or-macos">例二：在 Linux/Mac 上创建传送门</h4>
+
+<p>假设:</p>
+
+<ul>
+  <li><code>mx-wc</code> 【MaoXian 的根目录】</li>
+  <li><code>/home/jack/Browser/Downloads</code> 【浏览器的下载路径】</li>
+  <li><code>/home/jack/Dropbox/web-clippings</code> 【目标路径】</li>
+</ul>
+
+<p>（1）把你的目标路径准备好，即创建对应的文件夹。</p>
+
+<p>（2）查看浏览器的下载目录，如果已经存在【MaoXian 的根目录】，则把里面的内容处理掉（剪切到目标路径，或直接删除）， 再把这个【MaoXian 的根目录】删除。因为我们后面要在此处创建一个名字一样的传送门。</p>
+
+<p>（3）在浏览器的下载路径下，创建一个传送门来作为 MaoXian 的根目录。<strong>该传送门的名字必须和【MaoXian 的根目录】是一样的</strong>，此例子中，这个传送门的名字是 “<code>mx-wc</code>“。 运行下方命令即可创建:</p>
+
+<pre><code class="language-shell">ln -s /home/jack/Dropbox/web-clippings /home/jack/Browser/Downloads/mx-wc
+</code></pre>
+
+<h4 id="create-multiple-portals">例三：创建多个传送门（高级）</h4>
+
+<p>利用传送门这个操作系统自带的功能，我们可以解决更复杂的需求。比如利用 MaoXian 在裁剪时可以选择分类这一特点，为不同的分类创建不同的传送门，以实现不同的分类保存在不同的地方。</p>
+
+<p>比如：</p>
+
+<p>下方格式为： 【传送门】===&gt; 【目标路径】</p>
+
+<pre><code class="language-text">/home/jake/Browser/Downloads/mx-wc/read-later ===&gt; /home/jake/xxNote/read-later
+/home/jake/Browser/Downloads/mx-wc/news       ===&gt; /home/jake/news-reader/clippings
+/home/jake/Browser/Downloads/mx-wc/todos      ===&gt; /home/jake/obsidant/todos
+</code></pre>
+
+<p>在这个例子中，”<code>mx-wc</code>” 这个【MaoXian 的根目录】为普通文件夹，而 “<code>mx-wc/read-later</code>“、”<code>mx-wc/news</code>” 和 “<code>mx-wc/todos</code>” 这三个传送门分别对应不同的目标路径。于是在使用 MaoXian 的过程中，就可以通过选择不同的分类，把文件放进去不同的传送门，即保存在不同的目标路径。</p>
+
+<h2 id="dont-save-index-file">我不想保存元信息文件</h2>
+
+<p>元信息文件是 MaoXian 对裁剪下来的文件的一个识别入口，是许多功能的依赖文件（如：裁剪历史，重置历史等..），如非特别需要，还是建议保存此类文件。</p>
+
+<p><strong>警告：当你取消了元信息文件的保存后，表示你期望通过其他软件来查看和管理你裁剪下来的文件。那些依赖元信息文件的功能将无法识别你裁剪下来的文件（如：裁剪历史，重置历史等..）。</strong></p>
+
+<p>修改方式如下：</p>
+
+<p>进入扩展的 <em>设置页面 &gt; 重置与备份</em> ，确保 ”设置页面的配置信息“ 这一项有勾选后，点击 ”备份设置到文件“ 后得到一个 JSON 文件。使用文本编辑器打开它，使用 <code>saveInfoFile</code> 这个关键字查找，把查找到那一行冒号后面的值修改掉（<code>true</code> 为保存，<code>false</code> 为不保存）。修改完成后，再点击 ”从文件中恢复“ ，选择刚才导出的文件，导入成功后，修改即生效。</p>
+
+<h2 id="can-not-open-clipping-in-history">无法打开以前裁剪的内容</h2>
+
+<p>有的朋友可能发现，我刚裁剪下来的文件可以打开，可过几天就打不开了。</p>
+
+<p>这个是因为扩展在无法访问你本地网址的时候，会尝试通过下载历史打开文件，当浏览器的下载历史被清空（可能是你主动清空的，也可能是浏览器重启后清空的）时，扩展找不到办法打开你的文件了。</p>
+
+<p>可以通过<a href="#allow-access-file-urls">允许扩展访问本地网址</a>, 来避免这个问题。</p>
+
+<h2 id="allow-access-file-urls">允许访问本地网址</h2>
+
+<p>浏览器默认不允许扩展访问本地网址，这会导致本扩展无法直接打开裁剪下来的文件，不能让用户直接点击裁剪历史里面的链接就能查看。</p>
+
+<p>我们建议你允许本扩展访问本地网址，这样你在裁剪历史页面就能更方便地查看裁剪下来的内容，使用起来会方便许多。</p>
+
+<p>本节介绍了如何让浏览器允许 MaoXian 访问本地网址(file://打头的网址)</p>
+
+<h3 id="access-file-url-step1">1. 获取 “扩展标识”</h3>
+
+<p>从 MaoXian 的设置页面，在“本地网址” 一节中找到<code>扩展标识</code> 信息。</p>
+
+<p>不同的浏览器拿到的 <code>扩展标识</code>不同，如下例子:</p>
+
+<ul>
+  <li>Firefox =&gt; moz-extension://612ab18c-c29e-4211-bd50-3f208d227db7</li>
+  <li>Chrome =&gt; chrome-extension://612ab18c-c29e-4211-bd50-3f208d227db7</li>
+</ul>
+
+<h3 id="access-file-url-step2">2. 更改浏览器设置</h3>
+
+<p>这一步，不同的浏览器设置方式不一样。</p>
+
+<p><strong>Chrome/Chromium</strong></p>
+
+<p>以上面的扩展标识为例子，只要在地址栏输入<code>chrome://extensions/?id=612ab18c-c29e-4211-bd50-3f208d227db7</code>, 回车。</p>
+
+<p>找到 <code>允许访问本地文件/网址</code> 这一选项, 启用它就可以了。</p>
+
+<p><strong>Firefox</strong></p>
+
+<p>FireFox 默认没有提供一个页面可以设置这个选项，但可以通过修改浏览器的配置项，来达到目地。</p>
+
+<p>具体方法如下：</p>
+
+<p>I: 在地址栏输入 <code>about:config</code> 并回车, 进入配置项页面 (可能会有一个警告页面，直接点击按钮进入就好了）。</p>
+
+<p>II: 配置以下三项</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>条目名称</th>
+      <th>值</th>
+      <th>提醒</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>capability.policy.policynames</td>
+      <td>localfilelinks</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>capability.policy.localfilelinks.sites</td>
+      <td>moz-extension://612ab18c-c29e-4211-bd50-3f208d227db7</td>
+      <td>这个值，你应该使用自己拿到的 <code>扩展标识</code>, 如果你允许多个扩展的话，这里用空格隔开</td>
+    </tr>
+    <tr>
+      <td>capability.policy.localfilelinks.checkloaduri.enabled</td>
+      <td>allAccess</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>这样操作:</p>
+
+<p>复制条目名称，粘帖到搜索栏进行搜索, 如果搜索到，就双击修改它的值就行了。</p>
+
+<p>如果没有搜索到，就鼠标右键 &gt; 新建 &gt; 字符串(String)， 把<code>条目名称</code>和<code>值</code>依次粘帖进去即可。</p>
+
+<h3 id="access-file-url-step3">3. 更改本扩展中的设置</h3>
+
+<p>回到 MaoXian 的设置页面，把 <em>基础设置 &gt; 我设置好了 ‘允许插件访问本地文件路径’ 复选框</em> 打上勾。</p>
+
+<h2 id="script-busy">浏览器弹出提示框提示：脚本无反应，询问是否中止</h2>
+
+<p>目前在一些大的网页（网页上可能有成千上万个元素），会偶尔发生此种情况。若遇到此种情况，请选择「继续等待」就行了（可能需要多确认几次）。</p>
+
+<h2 id="save-as-single-file">能把网页裁剪成单个文件？比如：裁剪成 mhtml、zip 或者 存成图片</h2>
+
+<p>MaoXian 无法把网页裁剪成单个文件，也不打算支持该功能。</p>
+
+<p>MaoXian 支持的两种格式 HTML 和 Markdown，都是简单的文本文件。文本文件格式简单，没有特殊的编码，这使其容易修改，且可搜索性强。这是那些特殊编码的单个文件所无法比拟的，比如图片，你要搜索其内容中的文字，几乎不可能。zip 也是如此，查看不方便，搜索也是极难。对于 mhtml 来说，并非所有浏览器都支持这种格式。再者，文本文件的简单性使你可以很容易地对其进行解析，转换。比如导入到其他软件中，或者把其转换成更复杂的格式，比如把你裁剪下来的所有网页转换成电子书（epub，pdf 等）。种种的灵活性，使其非常适合作为一种独立于软件的存储格式。</p>
+
+<p>当然，你很可能还是偏好于单文件格式，那么可以尝试下这些优秀的浏览器扩展，它们是： webscrapbook ，savepageWe， singleFile。</p>
+
+<h2 id="why-not-publich-on-chrome-webstore">为什么扩展不在「谷歌商店」上线</h2>
+
+<p>请查看<a href="why-not-publish-on-cws-zh-CN.html">这里</a></p>
+
+<h2 id="privacy-policy">该软件会泄露我的隐私吗？</h2>
+
+<p>请查看<a href="privacy-policy-zh-CN.html">隐私说明</a></p>
+
+<h2 id="feedback">反馈新问题或建议</h2>
+
+<p>如果上诉常见问题的解决方案都无法解决你的问题，把你遇到的问题反映到<a href="https://github.com/mika-cn/maoxian-web-clipper/issues">项目issue里</a>，开发人员会进行跟进。</p>
+
+<p>如果你没用过 <code>Github</code>， 并且不想注册帐号的话，可以发邮件给作者，邮箱是： i 「DOT」mika【AT】tutanota「DOT」com （请把 <code>「DOT」</code> 换成英文句号：<code>.</code>，并把 <code>【AT】</code> 换成邮件符号 <code>@</code>）。</p>
+
+<p><strong>反馈 Bug 注意事项</strong></p>
+
+<p>在描述你遇到的问题时候，请尽可能详细地提供信息。我们期望你能提供以下信息，以便开发者追踪问题。</p>
+
+<ul>
+  <li>当前网页的网址（如果你遇到的是裁剪过程中的 bug）。</li>
+  <li>你的环境信息： 系统信息，浏览器信息，MaoXian 版本，「本地程序」版本（如果你有安装的话）</li>
+  <li>你的配置信息（可以在 <em>设置 &gt; 重置与备份</em> 页面导出）</li>
+  <li>以及详细地描述你遇到的问题（详尽地报告你遇到的问题，非常有利于开发者重现和修复该问题）。
+    <ul>
+      <li>比如：
+        <ul>
+          <li>这是一定会发生的?</li>
+          <li>还是偶然发生的？</li>
+          <li>是在某种特定情况下发生？</li>
+          <li>是只在这个网页发生呢？</li>
+          <li>还是在所有网页上都发生？</li>
+          <li>等等…</li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>我反馈完成后，啥时候能有回复</strong></p>
+
+<p>关于这一点，请理解作者是无法做到及时回复的。因为由于墙和其他的原因，作者会处理完一些问题后，上线对这些问题进行批量回复。但是你的反馈会在当天或未来几天被作者看到，并很可能已经在处理跟进。作者期望你能把在 Github issue 上的交流看成是电子邮件般的交流，不要期望它像聊天软件。所以请仔细地描述你的问题，反馈完后，请去做你自己的事情。 作者对所有用心的反馈都会认真对待并回复的，请给她时间。</p>
+
+<hr />
+
+<p><a href="index-zh-CN.html">首页</a></p>
+</div>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>Custom Element</title>
+  </head>
+  <body>
+
+    <h1>Test Custom Element</h1>
+    <noscript><h2>Please enable javascript.</h2></noscript>
+    <hello-world></hello-world>
+    <iframe width="100%" height="auto" frameborder="0" srcdoc='<style>div {font-size: 16px; color: blue}</style><div>hello world</div>'></iframe>
+
+    <div>
+      <span> My color should be black </span>
+    </div>
+
+    <ul>
+      <li>item A</li>
+      <li>item B</li>
+      <li>item C</li>
+    </ul>
+
+    <br />
+    <ul is="blue-ul">
+      <li>item A</li>
+      <li>item B</li>
+      <li>item C</li>
+    </ul>
+
+    <hr>
+
+    <x-slot><h1>Hello x slot</h1></x-slot>
+    <x-slot></x-slot>
+  </body>
+
+  <script>
+    (function(){
+
+      class XSlot extends HTMLElement {
+        constructor() {
+          super();
+          const shadow = this.attachShadow({mode: 'open'});
+          shadow.innerHTML = '<slot><h1>Fallback Content</h1></slot>';
+        }
+      }
+      customElements.define('x-slot', XSlot);
+
+      /* Define custom Element */
+      class HelloWorld extends HTMLElement {
+        constructor() {
+          super();
+
+          const shadow = this.attachShadow({mode: 'open'});
+          const wrapper = document.createElement('div');
+          wrapper.setAttribute('class', 'wrapper');
+          const elem = document.createElement('span');
+          elem.textContent = 'Hello World!';
+
+          wrapper.appendChild(elem);
+
+          /* internal style */
+          const style = document.createElement('style');
+          style.textContent = `
+            .wrapper {
+              position: relative;
+              height: 600px;
+              border: 1px dashed #ccc;
+              padding: 50px;
+            }
+            span {
+              color: green;
+
+            }
+          `;
+
+          /* external style */
+          const link = document.createElement('link');
+          link.setAttribute('href', 'custom-element.css');
+          link.setAttribute('rel', 'stylesheet');
+
+          shadow.appendChild(link);
+          shadow.appendChild(style);
+          shadow.appendChild(wrapper);
+        }
+      }
+      customElements.define('hello-world', HelloWorld);
+
+      class BlueUl extends HTMLUListElement {
+        constructor() {
+          super();
+          this.setAttribute('style', `color: blue;`);
+        }
+      }
+      customElements.define('blue-ul', BlueUl, {extends:  'ul'});
+
+
+    })();
+  </script>
+</html>

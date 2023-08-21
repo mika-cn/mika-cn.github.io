@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>Test Declarative Shadow Dom (DSD)</title>
+  </head>
+  <body>
+    <hr />
+
+    <x-foo>
+      <template shadowroot="open">
+        <a href="https://a.org"><slot></slot></a>
+      </template>
+      <h3>Hello X-foo</h3>
+    </x-foo>
+
+    <x-bar>
+      <template shadowroot="open">
+        <a href="https://a.org"><slot name="a"></slot></a>
+        <a href="https://b.org"><slot name="b"></slot></a>
+      </template>
+      <h3 slot="b">Hello X-bar b</h3>
+      <h3 slot="a">Hello X-bar a</h3>
+    </x-bar>
+
+    <x-bazz>
+      <template shadowroot="open">
+        <h5>bazz</h5>
+        <div class="wrapper"><slot></slot></div>
+      </template>
+      <x-foo>
+        <template shadowroot="open">
+          <a href="https://a.org"><slot></slot></a>
+        </template>
+        <h3>Nested X-foo</h3>
+      </x-foo>
+    </x-bazz>
+
+  </body>
+  <script>
+    (function(){
+      [].forEach.call(document.querySelectorAll('template[shadowroot]'),
+        (t) => {
+        const mode = (t.getAttribute('shadowroot') || 'open');
+        const shadowRoot = t.parentNode.attachShadow({mode});
+        shadowRoot.appendChild(t.content);
+        t.remove();
+      });
+    })();
+  </script>
+</html>

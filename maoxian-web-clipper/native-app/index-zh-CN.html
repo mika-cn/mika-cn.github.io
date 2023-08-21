@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="MaoXian 网摘的『本地程序』" />
+    <title>本地程序</title>
+    <link rel="icon" type="image/png" href="../imgs/logo.png" />
+    <link rel="stylesheet" type="text/css" href="../css/markdown.css" />
+    <link rel="stylesheet" type="text/css" href="../css/markdown-toc.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="title"><h1>本地程序</h1></div>
+
+      <input type="checkbox" id="pin-toc" class="pin-toc" hidden>
+      <label for="pin-toc" class="pin-toc-switcher" title="pin(unpin) the table of content"></label>
+      <div class="toc">
+        <h2>目录</h2>
+        <ul>
+  <li><a href="#intro">简介 </a></li>
+  <li><a href="#board">公告 </a></li>
+  <li><a href="#features">主要功能 </a></li>
+  <li><a href="#install">安装 </a>
+    <ul>
+      <li><a href="#install-ruby">安装依赖 </a></li>
+      <li><a href="#download-package">下载软件包 </a></li>
+      <li><a href="#extract-package">解压软件包 </a></li>
+      <li><a href="#install-native-app">安装软件 </a></li>
+      <li><a href="#configure-download-path">配置下载路径 </a></li>
+      <li><a href="#check-and-enable">查看状态并启用 </a></li>
+    </ul>
+  </li>
+  <li><a href="#uninstall">卸载软件 </a></li>
+  <li><a href="#upgrade">更新软件 </a></li>
+  <li><a href="#apply-config">运用最新的配置 </a></li>
+  <li><a href="#problems">常见问题 </a>
+    <ul>
+      <li><a href="#cannot-connect">浏览器无法连接『本地程序』 </a>
+        <ul>
+          <li><a href="#cannot-connect-other-browsers">基于 Chromium 或 Firefox 开发的浏览器，没有对一些目录做兼容。</a></li>
+          <li><a href="#connot-connect-ruby">浏览器找不到 ruby </a></li>
+        </ul>
+      </li>
+      <li><a href="#disconnected">浏览器与本地程序的连接已断开 </a></li>
+      <li><a href="#configuration-error">配置文件的问题 </a></li>
+      <li><a href="#unknown-error">还是不行？ </a></li>
+    </ul>
+  </li>
+</ul>
+
+      </div>
+
+      <div class="content">
+<h2 id="intro">简介</h2>
+
+<p>这是一个很小的本地程序，我们开发这个程序增强 Maoxian 的能力。</p>
+
+<blockquote>
+  <p>注意： 如果你只是为了修改 MaoXian 的默认下载目录，则完全没有必要安装『本地程序』，请查看<a href="../faq-zh-CN.html#change-default-download-path">这里</a>查看如何修改默认下载位置。</p>
+</blockquote>
+
+<h2 id="board">公告</h2>
+
+<p>ruby 的最新版本（2.7.0）对之前的接口有一些不兼容，这会导致裁剪网页的时候，图片无法下载成功。如果你安装的 ruby 是 <code>2.7.0</code> 以上，则需要安装 <code>0.2.3</code> 以上的「本地程序」才能正常使用。</p>
+
+<h2 id="features">主要功能</h2>
+
+<ul>
+  <li>默认
+    <ul>
+      <li>下载文件 （用于绕过浏览器的下载功能，从而避免与下载管理软件发生冲突）</li>
+      <li>删除裁剪信息 （让我们可以删除裁剪历史的同时，删除其对应的文件）</li>
+      <li>刷新裁剪历史 （当你有两个裁剪源（比如：一台电脑上的两个浏览器或两台电脑上的浏览器）并且想让浏览器上的裁剪历史保持最新的时候，这一项非常有用。）</li>
+    </ul>
+  </li>
+  <li>Vnote
+    <ul>
+      <li>以 Vnote 的存储格式，存储裁剪下来的 Markdown 文件。当你对接上 Vnote 后，就可以在 Vnote 上管理你裁剪下来的文件。详情请看<a href="vnote_v1-zh-CN.html">这里</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="install">安装</h2>
+
+<h3 id="install-ruby">安装依赖</h3>
+
+<p>该软件依赖于 Ruby， 所以我们要先安装 Ruby，请安装 <code>2.4.1</code> 以上版本。</p>
+
+<p><strong>Linux / Mac 用户</strong></p>
+
+<p>很可能系统就自带了 ruby，请用命令 <code>ruby -v</code> 查看。罗嗦一句，如果你是命令行新手，不知道如何运行命令。没关系，每个人都是从新手过来的，不要看到命令行就害怕。请利用搜索引擎学习如何运行命令（比如：搜索 Mac 系统如何运行命令），再走下面的流程。</p>
+
+<p>如果输出的是 ruby 的版本信息，则说明你的系统已经安装了 ruby, 否则请到 <a href="https://www.ruby-lang.org/en/downloads/">ruby 官网</a> 进行安装</p>
+
+<p><strong>Windows 用户</strong></p>
+
+<p>请到 <a href="https://rubyinstaller.org/downloads/">这里</a> 下载安装包，提醒一下，这里直接下载 <code>WITHOUT DEVKIT</code> 下面的版本即可。安装的时候确保勾选上</p>
+
+<ul>
+  <li>把 ruby 添加到环境变量（该项必须勾选，否则「本地程序」无法正常启动）。</li>
+  <li>使用 UTF-8 作为外部编码 （强烈建议你勾选该项，这样你在跨系统同步文件时候，才不会发生乱码问题）。</li>
+</ul>
+
+<p>最好在安装成功后，验证一下。通过 <kbd>Win</kbd>+<kbd>R</kbd> 调出运行窗口 &gt; 输入 <code>cmd</code> 回车 &gt; 输入 <code>ruby -v</code> 回车 。如果输出的是 ruby 的版本信息，则说明 ruby 安装成功，并且已经添加到环境变量。</p>
+
+<h3 id="download-package">下载软件包</h3>
+
+<p>请根据你的系统信息和浏览器类型， 下载对应的软件包</p>
+
+<p>当前版本 <code>0.2.11</code></p>
+
+<ul>
+  <li>Linux
+    <ul>
+      <li><a href="files/0.2.11/maoxian-web-clipper-native-linux-chrome-0.2.11.zip">native-app-chrome.zip</a></li>
+      <li><a href="files/0.2.11/maoxian-web-clipper-native-linux-chromium-0.2.11.zip">native-app-chromium.zip</a></li>
+      <li><a href="files/0.2.11/maoxian-web-clipper-native-linux-firefox-0.2.11.zip">native-app-firefox.zip</a></li>
+    </ul>
+  </li>
+  <li>Mac
+    <ul>
+      <li><a href="files/0.2.11/maoxian-web-clipper-native-macos-chrome-0.2.11.zip">native-app-chrome.zip</a></li>
+      <li><a href="files/0.2.11/maoxian-web-clipper-native-macos-chromium-0.2.11.zip">native-app-chromium.zip</a></li>
+      <li><a href="files/0.2.11/maoxian-web-clipper-native-macos-firefox-0.2.11.zip">native-app-firefox.zip</a></li>
+    </ul>
+  </li>
+  <li>Windows
+    <ul>
+      <li><a href="files/0.2.11/maoxian-web-clipper-native-windows-chrome-0.2.11.zip">native-app-chrome.zip</a></li>
+      <li><a href="files/0.2.11/maoxian-web-clipper-native-windows-chromium-0.2.11.zip">native-app-chromium.zip</a></li>
+      <li><a href="files/0.2.11/maoxian-web-clipper-native-windows-firefox-0.2.11.zip">native-app-firefox.zip</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="extract-package">解压软件包</h3>
+
+<p>Linux 或者 Mac</p>
+
+<pre><code class="language-shell">unzip maoxian-web-clipper-native-linux-chrome.zip -d maoxian-web-clipper-native
+</code></pre>
+
+<p>Windows</p>
+
+<pre><code class="language-shell">额，使用任何你喜欢的解压软件，把它解压到某个文件夹（由于是直接打包的文件，没有打包根文件夹）, :D
+</code></pre>
+
+<h3 id="install-native-app">安装软件</h3>
+
+<p><strong>注</strong>: 如果你的浏览器是基于 Chromium 或 Firefox 开发的浏览器，请使用<a href="install-on-other-browsers-zh-CN.html">这里</a>的安装教程。</p>
+
+<ul>
+  <li>Linux 或 Mac  直接运行 <code>./install.sh</code> 进行安装</li>
+  <li>在 Windows 上，直接双击 <code>install.bat</code> （注意：你点击后，会发现有个命令窗口跳出来，程序会进行安装，安装完成后会显示：”press any key to continue” 则直接按下 Enter 就好了。 ）</li>
+</ul>
+
+<h3 id="configure-download-path">配置下载路径</h3>
+
+<p>在开始使用之前，我们需要先配置，下载路径，也就是裁剪下来的文件存储的目录（等同于浏览器的下载目录）</p>
+
+<p>编辑 <code>config.yaml</code> ， （随便用一个文本编辑器就可编辑）</p>
+
+<p><code>config.yaml</code> 这个文件<strong>必须是 UTF-8 的编码格式</strong>。 如果你是在 Windows 上的话，别用记事本打开，找一个能正确处理换行符的编辑器（比如 <code>notepad++</code>）。并且确保你保存的编码格式为 UTF-8 （有的编辑器在 Windows 上的默认编码格式不是 UTF-8，这点需要注意）。</p>
+
+<p><strong>注意： 配置的下载路径必须真实存在，否则程序会运行启动失败</strong></p>
+
+<p>Linux / Mac 例子</p>
+
+<pre><code class="language-yaml"># config.yaml
+environment: 'production'
+data_dir: '/home/jack/clippings'
+# avariable handler: 'default', 'vnote_v1'
+msg_handler: 'default'
+</code></pre>
+
+<p>windows 例子</p>
+
+<pre><code class="language-yaml"># config.yaml
+environment: 'production'
+data_dir: 'e:\jack\clippings'
+msg_handler: 'default'
+</code></pre>
+
+<p>注意上方的 <code>msg_handler</code> 目前支持兩個值 <code>default</code> 和 <code>vnote_v1</code> 。如果你要對接 Vnote ，那麼請點擊<a href="vnote_v1-zh-CN.html">這裏</a>，查看如何對接。</p>
+
+<h3 id="check-and-enable">查看状态并启用</h3>
+
+<p>请重启你的浏览器后，到 <strong>扩展设置页面 &gt; 本地程序</strong> 小节查看当前状态。</p>
+
+<ol>
+  <li>请先查看『权限』那一小节，你需要授权一个权限，根据页面提示，如果还没有授权，则点击『授予权限』按钮进行授权。</li>
+  <li>授权成功后，查看『当前状态』那一小节，如果能看到 「本地程序」的版本号，则 MaoXian 扩展已经和 「本地程序」对接上了。如果显示的是错误信息，请查看下方 <a href="#problems">常见错误</a> 小节，排查错误。</li>
+  <li>确保对接上后，请勾选下方的 <strong>启用该处理程序</strong> 。</li>
+</ol>
+
+<p>在两者对接上，并且「本地程序」已启用后。就可以使用「本地程序」了，比如到 <strong>扩展设置页面 &gt; 存储设置</strong> 选用「本地程序」来下载裁剪结果。</p>
+
+<p><strong>注：</strong> 如果你需要在浏览器上预览你裁剪下来的文件， 我们强烈建议你 <strong><a href="../faq-zh-CN.html#allow-access-file-urls">允许 MaoXian 访问本地网址</a></strong>，以便可以方便地查看裁剪下来的文件。</p>
+
+<h2 id="uninstall">卸载软件</h2>
+
+<p>Linux 或 Mac  直接运行 <code>./uninstall.sh</code> 脚本，再删除掉整个程序目录。</p>
+
+<p>在 Windows 上，直接双击 <code>uninstall.bat</code>，再删除掉整个程序目录。</p>
+
+<h2 id="upgrade">更新软件</h2>
+
+<ol>
+  <li>先备份 Native App 目录下的 <code>config.yaml</code> (复制到别的地方)</li>
+  <li><a href="#uninstall">卸载 Native App</a></li>
+  <li>在本页面<a href="#download-package">下载最新版本</a>，<a href="#extract-package">再解压软件包</a></li>
+  <li>用你备份的 <code>config.yaml</code> 覆盖解压出来的文件夹的 config.yaml.</li>
+  <li><a href="#install-native-app">安装新的程序</a></li>
+</ol>
+
+<h2 id="apply-config">运用最新的配置</h2>
+
+<p>有些用户更改了 config.yaml 里的配置，却发现扩展并没有马上应用最新的配置信息。这是属于正常现象，因为『本地程序』只在浏览器启动它时，才会去读取配置。你可以到 <code>设置页面 &gt; 本地程序</code> 那里，点击『重新加载』按钮来加载最新的配置。你也可以通过重启浏览器的方法加载最新配置。</p>
+
+<h2 id="problems">常见问题</h2>
+
+<p>一般情况下，当你的 ruby 版本是正确的，并且配置文件 config.yaml 里面的存储路径是真实存在的路径，「本地程序」会和 MaoXian 对接成功。如果你仔细走完了上面的安装流程，还是无法对接上的话。 请检查日志文件：tmp/app.log (在安装目录下)，使用任何文本编辑器打开即可。</p>
+
+<p>在进行下面检查之前，你得确保你至少到过 <strong>扩展设置页面 &gt; 本地程序</strong> 页面查看过状态信息，并且其显示的是某个错误信息。</p>
+
+<p><strong>注：</strong> 当你做出修改之后，请点击扩展上的 『重新加载』按钮，该按钮会重连本地程序。</p>
+
+<h3 id="cannot-connect">浏览器无法连接『本地程序』</h3>
+
+<p>如果你在设置页面可以如下错误信息，则表明浏览器无法连接『本地程序』，这种情况下，是不会有日志生成的。</p>
+
+<blockquote>
+  <p>ErrorMessage: NativeApp: DisconnectErr:Specified native messaging host not found</p>
+</blockquote>
+
+<p>或</p>
+
+<blockquote>
+  <p>ErrorMessage: NativeApp: DisconnectErr:No such native application maoxian_web_clipper_native</p>
+</blockquote>
+
+<p>可能原因为：</p>
+
+<h4 id="chromium--firefox-cannot-connect-other-browsers">基于 Chromium 或 Firefox 开发的浏览器，没有对一些目录做兼容。{#cannot-connect-other-browsers}</h4>
+
+<p>请查看<a href="./install-on-other-browsers-zh-CN.html">基于Chromium 或 Firefox 开发的浏览器如何安装『本地程序』</a></p>
+
+<h4 id="connot-connect-ruby">浏览器找不到 ruby</h4>
+
+<p>在 Firefox 上表现为：</p>
+
+<blockquote>
+  <p>ErrorMessage: Unknown Error</p>
+</blockquote>
+
+<p>1) ruby 安装不正确。</p>
+
+<p>请确保当你运行 <code>ruby -v</code> 的时候，可以得到正确的 ruby 版本。如若不是，则重新安装即可。</p>
+
+<p>2) 虽然 ruby 安装成功，但是浏览器无法找到它。</p>
+
+<p>这种情况一般发生在 Mac 或 Linux 用户身上，如果你采用的是源码安装的方式，你可能会碰到此问题。</p>
+
+<p><strong>如何确认</strong></p>
+
+<p>可以通过从命令行启动浏览器的方式来确认，比如运行 <code>chromium-browser</code> 命令，然后再到 <strong>扩展设置页面 &gt; 本地程序</strong> 页面，再查看命令行的输出，可以看到类似 “/usr/bin/env: ‘ruby’: No such file or directory” 这样的错误信息。</p>
+
+<p><strong>如何解决</strong></p>
+
+<p>把 main.rb (安装目录下) 第一行的 “/usr/bin/env ruby” 改成 ruby 的绝对路径，比如 “/home/jack/ruby-2.5.0/bin/ruby”。 或者是创建一个软链接到 /usr/bin 目录下，比如： <code>ln -s /home/jack/ruby-2.5.0/bin/ruby /usr/bin/ruby</code>。</p>
+
+<h3 id="disconnected">浏览器与本地程序的连接已断开</h3>
+
+<p>置页面的错误信息：</p>
+
+<blockquote>
+  <p>NativeApp: DisconnectErr:Error when communicating with the native messaging host.</p>
+</blockquote>
+
+<p>这个错误指的是由于未知的错误，浏览器断开了和「本地程序」的连接。这个说明浏览器已经可以找到「本地程序」，并且可以连接上，此时请查看日志文件 <code>tmp/app.log</code> 找到导致连接断开的错误信息，再参照下一小节找到解决方法。</p>
+
+<h3 id="configuration-error">配置文件的问题</h3>
+
+<p>如果在日志文件中，发现错误：”(./config.yaml): invalid trailing UTF-8 octet at line xxx column xxx”，则表示你的配置文件的编码格式不是 UTF-8 ，则重新把配置文件 config.yaml 另存为 UTF-8 编码格式，即可修复。</p>
+
+<p>如果在日志文件中，发现错误： “Config Invalid, data_dir not exist: xxxxx” ，则表示你配置文件 config.yaml 里面的 data_dir 配置的路径，在你的系统中是不存在的。则重新配置即可。</p>
+
+<h3 id="unknown-error">还是不行？</h3>
+
+<p>可能发生 Bug 了。你可以用 <code>ruby -v</code> 检查下 ruby 版本， 若版本比 <code>2.4.1</code> 低，则重新安装更高的版本，重启浏览器，再试一下，还是不行的话，请到 <a href="https://github.com/mika-cn/maoxian-web-clipper/issues">项目 issue 页</a>，给开发者提个issue, 并在 issue 里粘贴上 app.log 里面的内容。</p>
+
+<hr />
+<p><a href="../index-zh-CN.html">首页</a></p>
+</div>
+    </div>
+  </body>
+</html>
+

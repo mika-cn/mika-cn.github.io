@@ -1,0 +1,76 @@
+.toc {
+  display: block;
+}
+
+.pin-toc-switcher {
+  z-index: 2;
+  display: block;
+  width: 25px;
+  height: 25px;
+  background-color: #aaa;
+  color: #f0f0f0;
+  position: fixed;
+  right: 26px;
+  top: 50px;
+  text-align: center;
+  cursor: pointer;
+}
+.pin-toc-switcher:before {
+  content: '=';
+}
+
+/* layout relative style */
+
+@media (min-width: 768px) {
+  .pin-toc:checked ~ .toc {
+    position: fixed;
+    z-index: 1;
+    top: 50px;
+    bottom: 50px;
+    right: 8px;
+    min-width: 300px;
+    width: auto;
+    max-width: 29%;
+    font-size: 14px;
+    background-color: #eee;
+    overflow-x: auto;
+    overflow-y: auto;
+    box-shadow: 0px 2px 3px rgba(0,0,0,.1);
+    border: 1px dashed #ccc;
+  }
+  .pin-toc:checked ~ .toc a {
+    color: #444;
+    text-decoration: none;
+  }
+  .pin-toc:checked ~ .toc a:hover {
+    text-decoration: underline;
+  }
+  .pin-toc:checked ~ .toc a:visited {
+    color: #444;
+  }
+
+  .pin-toc:checked ~ .toc h2 {
+    margin: 15px;
+    border: 0px;
+    color: #333;
+  }
+
+  .pin-toc:checked ~ .toc ul,
+  .pin-toc:checked ~ .toc ol {
+    margin-left: 0px;
+    margin-right: 0px;
+  }
+  .pin-toc:checked ~ .content {
+    width: 65%;
+  }
+
+  .pin-toc:checked ~ .pin-toc-switcher:before {
+    content: '^';
+  }
+}
+
+@media (max-width: 767px) {
+  .pin-toc-switcher {
+    display: none;
+  }
+}

@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>使用CSS来完成简单的状态切换。</title>
+    <style>
+      .A-content {display: none;}
+      #A:checked ~ .A-content {display: block;}
+    </style>
+
+  </head>
+  <body>
+    <h2>使用CSS来完成简单的状态切换。</h2>
+    <div>
+      <input type='checkbox' id='A' hidden />
+      <label for='A'>click me</label>
+      <div class="A-content"> A Content </div>
+    </div>
+  </body>
+</html>

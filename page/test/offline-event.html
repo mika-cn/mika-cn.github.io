@@ -1,0 +1,34 @@
+
+<html>
+  <head>
+
+    <script>
+      function updateOnlineStatus(msg) {
+        var status = document.getElementById("status");
+        var condition = navigator.onLine ? "ONLINE" : "OFFLINE";
+        status.setAttribute("class", condition);
+        var state = document.getElementById("state");
+        state.innerHTML = condition;
+        var log = document.getElementById("log");
+        log.appendChild(document.createTextNode("Event: " + msg + "; status=" + condition + "\n"));
+      }
+
+      function loaded() {
+        updateOnlineStatus("load");
+        window.addEventListener("offline", function () { updateOnlineStatus("offline") }, false);
+        window.addEventListener("online", function () { updateOnlineStatus("online") }, false);
+      }
+    </script>
+
+    <style>
+      #status { height:200px; text-align:center; }
+      #status.online { background:green; }
+      #status.offline { background:red; }
+      #log { background:yellow; border:2px solid black; white-space:pre; max-height:200px; overflow:auto; }
+    </style>
+
+  <body onload="loaded()">
+    <div id="status"><p id="state"/></div>
+    <div id="log"/>
+  </body>
+</html>

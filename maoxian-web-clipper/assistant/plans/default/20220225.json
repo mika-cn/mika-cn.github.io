@@ -1,0 +1,90 @@
+[
+  {
+    "name": "wikipedia.org",
+    "pattern": "https://*.wikipedia.org/wiki/*",
+    "excludePattern": "https://*.m.wikipedia.org/*/",
+    "version": 20220225,
+    "pick": "div.mw-parser-output",
+    "hide": [
+      "div#toc",
+      "table.infobox",
+      "span.mw-editsection",
+      "table.navbox",
+      "div.thumb",
+      "div.dablink",
+      "table.metadata"
+    ],
+    "tags": [
+      "knowledge",
+      "wiki"
+    ]
+  },
+  {
+    "name": "Wikipedia Mobile View",
+    "pattern": "https://*.m.wikipedia.org/*/",
+    "version": 20220206,
+    "pick": "#content",
+    "hide": [
+      ".page-actions-menu",
+      "#toc",
+      ".mw-editsection",
+      "h2 > div.mw-ui-icon",
+      "table.box-Unreferenced",
+      "table.box-More_citations_needed"
+    ],
+    "chAttr": [
+      {
+        "type": "split2list.add",
+        "pick": "h2.section-heading",
+        "attr": "style",
+        "value": "width: 100%",
+        "sep": ";"
+      }
+    ],
+    "tags": [
+      "knowledge",
+      "wiki"
+    ],
+    "contributors": [
+      "Altair Wei (author)"
+    ]
+  },
+  {
+    "name": "Github",
+    "pattern": "https://github.com/",
+    "version": 20220206,
+    "pick": [
+      ".js-discussion",
+      ".markdown-body"
+    ],
+    "hide": [
+      ".avatar",
+      ".avatar-parent-child",
+      ".inline-comment-form-actions",
+      ".flex-items-center.d-sm-flex.d-none",
+      ".d-inline-block"
+    ],
+    "tags": [
+      "IT",
+      "geek",
+      "git"
+    ],
+    "contributors": [
+      "yzqzss (author)"
+    ]
+  },
+  {
+    "name": "ArchWiki",
+    "pattern": "https://wiki.archlinux.org/title/*",
+    "version": 20220206,
+    "pick": "#bodyContent",
+    "tags": [
+      "IT",
+      "wiki",
+      "doc"
+    ],
+    "contributors": [
+      "Mika"
+    ]
+  }
+]

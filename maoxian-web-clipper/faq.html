@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="FAQ" />
+    <title>Frently Ask Question</title>
+    <link rel="icon" type="image/png" href="imgs/logo.png" />
+    <link rel="stylesheet" type="text/css" href="css/markdown.css" />
+    <link rel="stylesheet" type="text/css" href="css/markdown-toc.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="title"><h1>Frently Ask Question</h1></div>
+
+      <input type="checkbox" id="pin-toc" class="pin-toc" hidden>
+      <label for="pin-toc" class="pin-toc-switcher" title="pin(unpin) the table of content"></label>
+      <div class="toc">
+        <h2>Contents</h2>
+        <ul>
+  <li><a href="#can-clip-and-cant-clip">What kinds of web pages that can be clipped with MaoXian and what can’t be clipped? </a></li>
+  <li><a href="#what-content-will-be-saved">What kinds of content will be saved </a>
+    <ul>
+      <li><a href="#save-as-html">If the save format is HTML </a></li>
+      <li><a href="#save-as-markdown">If the save format is Markdown </a></li>
+    </ul>
+  </li>
+  <li><a href="#keyboard-shortcuts">Keyboard shortcuts </a></li>
+  <li><a href="#why-prompt-saveas-windows">Why the browser prompt so many download windows </a></li>
+  <li><a href="#why-placeholder-image">Why the pictures of clipped web pages become white blank areas. </a></li>
+  <li><a href="#images-failed-to-download">Some images are failed to download  </a></li>
+  <li><a href="#why-require-so-many-permissions">Why it requires so many permissions? </a></li>
+  <li><a href="#clip-menu-not-work">Not response after click clip </a></li>
+  <li><a href="#stuck-on-clpping">Stuck on “Clipping…” </a></li>
+  <li><a href="#stuck-on-saving">Stuck on “Saving…” </a>
+    <ul>
+      <li><a href="#stuck-cus-net-env">reason A: network problems </a></li>
+      <li><a href="#stuck-cus-extension-confliction">reason B: conflict with other browser extensions </a></li>
+    </ul>
+  </li>
+  <li><a href="#crash-on-clipping">Stop on clipping-hint every clipping </a></li>
+  <li><a href="#change-default-download-path">Change default download path. </a>
+    <ul>
+      <li><a href="#method-A-configurate-native-app">Method A: configurate NativeApp </a></li>
+      <li><a href="#method-B-create-symbolic-link">Method B: create symbolic link </a>
+        <ul>
+          <li><a href="#create-transfer-door-on-windows">example A: create transfer door on Windows </a></li>
+          <li><a href="#create-transfer-door-on-linux-or-macos">Example B:  create transfer door on Linux/MacOs </a></li>
+        </ul>
+      </li>
+    </ul>
+  </li>
+  <li><a href="#dont-save-index-file">I don’t want to save information files </a></li>
+  <li><a href="#can-not-open-clipping-in-history">Can’t open clipping on history page </a></li>
+  <li><a href="#allow-access-file-urls">Allow access file URLs </a>
+    <ul>
+      <li><a href="#access-file-url-step1">1. Getting “extension identifier” </a></li>
+      <li><a href="#access-file-url-step2">2. configure browser settings </a></li>
+      <li><a href="#access-file-url-step3">3. configure extension settings </a></li>
+    </ul>
+  </li>
+  <li><a href="#script-busy">Browser prompt: script of MaoXian is busy, do you want to abort it </a></li>
+  <li><a href="#save-as-single-file">Can MaoXian clip a web page as single file? like: mhtml, zip or a picture </a></li>
+  <li><a href="#privacy-policy">Does this software harm my privacy? </a></li>
+  <li><a href="#feedback">Report new issue </a></li>
+</ul>
+
+      </div>
+
+      <div class="content">
+<h2 id="can-clip-and-cant-clip">What kinds of web pages that can be clipped with MaoXian and what can’t be clipped?</h2>
+
+<p>Generally, web pages that contains only text and pictures can be clipped with MaoXian, like: blog posts, news, and forum posts etc.</p>
+
+<p>If web pages contain big media content (big audios, big videos), you better not clip them with MaoXian. Although MaoXian can save audios and videos if they are relatively small size. For these big media content, you better find professional tools like: youtubedl, youget. MaoXian also can’t clip web pages that contains live stream or radio.</p>
+
+<p>By the way, If you want to clip a batch of article automatically or entire static website, MaoXian is not the right tool. you need to find professional tools like: wget.</p>
+
+<h2 id="what-content-will-be-saved">What kinds of content will be saved</h2>
+
+<p>MaoXian clip <strong>the current state</strong> of web page, Mostly text and pictures. There are other staffs like web fonts, stylesheets, icons, audio etc. All these files will be saved depends on what format you’re saving and the configuration that you configured.</p>
+
+<h3 id="save-as-html">If the save format is HTML</h3>
+
+<p><strong>the belowing types of content can be saved</strong></p>
+
+<ul>
+  <li>the text of selected area</li>
+  <li>the pictures of selected area</li>
+  <li>stylesheets</li>
+  <li>embed frames</li>
+  <li>background images (won’t be saved by default)</li>
+  <li>web page icons (won’t be saved by default)</li>
+  <li>web fonts (won’t be saved by default)</li>
+  <li>audios (won’t be saved by default)</li>
+  <li>videos (won’t be saved by default)</li>
+  <li>canvas (only save the current state)</li>
+  <li>embed nodes (save pictures only by default)</li>
+  <li>object nodes (save pictures only by default)</li>
+  <li>applet nodes (won’t be saved by default)</li>
+</ul>
+
+<p><strong>the belowing types of content won’t be saved</strong></p>
+
+<ul>
+  <li>scripts (javascripts)</li>
+  <li>hidden content</li>
+</ul>
+
+<h3 id="save-as-markdown">If the save format is Markdown</h3>
+
+<p><strong>the belowing types of content can be saved</strong></p>
+
+<ul>
+  <li>the text of selected area</li>
+  <li>the pictures of selected area</li>
+</ul>
+
+<p><strong>the belowing types of content won’t be saved</strong></p>
+
+<p>Same as HTML plus won’t save stylesheets.</p>
+
+<h2 id="keyboard-shortcuts">Keyboard shortcuts</h2>
+
+<p>You could configure keyboard shortcuts on browser’s extension/add-ons manage page:</p>
+
+<ul>
+  <li>on Firefox, <em><code>go to URL (about:addons) &gt; click on the cog icon &gt; Manage Extension Shortcuts</code></em></li>
+  <li>on Chromium, <em><code>go to URL (chrome://extensions/shortcuts)</code></em></li>
+</ul>
+
+<h2 id="why-prompt-saveas-windows">Why the browser prompt so many download windows</h2>
+
+<p>By default, MaoXian use the download function that provide by the browser to save the clipped files. Generally there are multiple files that needs to be saved when you clip a web page. So if you enable “Ask where to save each file before downloading” then you will get multiple prompt windows.</p>
+
+<p>Turn off Chrome’s Save As dialog so that you won’t be asked where to save file for every download. This can be done by clearing the checkbox before<br /><em><code>chrome://settings/downloads</code></em> &gt; <em>Downloads</em> &gt; <em>Ask where to save each file before downloading</em></p>
+
+<p>Turn off Firefox’s Save As dialog so that you won’t be asked where to save fille for every download. This can be done by clearing the radio-button before<br /><em><code>about:preferences</code></em> &gt; <em>Downloads</em> &gt; <em>Always ask you where to save files</em></p>
+
+<h2 id="why-placeholder-image">Why the pictures of clipped web pages become white blank areas.</h2>
+
+<p>To reduce the cost of bandwidth, some websites use a technology called “lazy load images” which will display a placeholder white image and delay the loading of the real image untill the image scroll into viewport.</p>
+
+<p>Because what MaoXian clip is the current state of the web page. So if you didn’t browser the web page from top to bottom before clip it, you will clip these placeholder white images rather than the real images.</p>
+
+<p>To correctly clip these web pages, browsing them from top to bottom, waitting until all images are loaded, then start your clipping.</p>
+
+<h2 id="images-failed-to-download">Some images are failed to download</h2>
+
+<p>This is normally occured when the network is really really bad. Please go to the “failed tasks” page to retry download these images. If you still can’t download these images after trying several times, please report the problem to the developer.</p>
+
+<h2 id="why-require-so-many-permissions">Why it requires so many permissions?</h2>
+
+<p>Please see <a href="privacy-policy.html">privacy policy</a></p>
+
+<h2 id="clip-menu-not-work">Not response after click clip</h2>
+
+<p>Please check situation below:</p>
+
+<ol>
+  <li>Are you clip a page before your installation? Try refresh your page if you are.</li>
+  <li>Try refresh the web page anyway (sometimes browsers have problem to load some resources)</li>
+  <li>Currently, It only support firefox and chrome/chromium, If you install it to other browser, we don’t guarantee it will work.</li>
+</ol>
+
+<h2 id="stuck-on-clpping">Stuck on “Clipping…”</h2>
+
+<p>MaoXian will stuck on “clipping…” if the network environment is really bad.</p>
+
+<p>You can goto <em>Settings &gt; Advanced</em> and increase the timeout of web requests or fuck the GFW if you are Chinese users.</p>
+
+<h2 id="stuck-on-saving">Stuck on “Saving…”</h2>
+
+<h3 id="stuck-cus-net-env">reason A: network problems</h3>
+
+<p>You can goto <em>Settings &gt; Advanced</em> and increase the timeout of web requests or fuck the GFW if you are Chinese users.</p>
+
+<h3 id="stuck-cus-extension-confliction">reason B: conflict with other browser extensions</h3>
+
+<p>If you are using browser to download clipped files, this could happen. You can goto the <code>Settings &gt; Browser</code> page, and click the “Test” button to test it.</p>
+
+<h2 id="crash-on-clipping">Stop on clipping-hint every clipping</h2>
+
+<p>It’s probably because you had installed some extension(e.g. chrone) to manage your downloads. Download manage extension will intercept your download request, MaoXian use download API to save your clipping information. MaoXian can’t finish its clipping because of that interception.</p>
+
+<p>You can identify this by disabled other extensions and try again, if it works then it’s a confliction. Try enable other extensions one by one to find out the conflicted one.</p>
+
+<p>We have also found some user install MaoXian on other browser(like: vivaldi) which is base on chromium project, that means MaoXian may work fine on these browser. but these browser(e.g. vivaldi) have developed their own download manage function which will intercept download request too.</p>
+
+<p>To solve this confliction, we had developed a native application which can receive download request that was sent by MaoXian.</p>
+
+<p>See: <a href="native-app/index.html">Native App</a></p>
+
+<h2 id="change-default-download-path">Change default download path.</h2>
+
+<h3 id="method-A-configurate-native-app">Method A: configurate NativeApp</h3>
+
+<p>If you choose <a href="native-app/index.html"><strong>Native App</strong></a> as your clipping handler. You can edit the <code>config.yaml</code> to configure download path, don’t forget to restart your browser to apply new configuration.</p>
+
+<p><strong>Note that</strong>: If you just want to change the default download path and don’t need any functions that provided by the MaoXian Native App, then you totally don’t need to install Native App (use Method B).</p>
+
+<h3 id="method-B-create-symbolic-link">Method B: create symbolic link</h3>
+
+<p>If you choose <strong>browser</strong> as your clipping handler(default handler). Browser extensions can’t modify your download path, due to secure reason.</p>
+
+<p>But you can create a symbolic link to achieve this. A symbolic is like a transfer door, you put files inside this transfer door and they get transfered to another location (directory) that you specified.</p>
+
+<p>In belowing examples:</p>
+
+<ul>
+  <li>the root folder of MaoXian is the storage entry of MaoXian. You can configure this value in settings page, the default value is “<code>mx-wc</code>”.</li>
+  <li>the download path of browser is the default download directory of your browser, you can configure this path in browser’s preferences.</li>
+  <li>the destination path is where you want MaoXian to save clipped files.</li>
+</ul>
+
+<h4 id="create-transfer-door-on-windows">example A: create transfer door on Windows</h4>
+
+<p>Assume:</p>
+
+<ul>
+  <li><code>mx-wc</code> 【the root folder of MaoXian】</li>
+  <li><code>C:\Users\jack\Browser\Downloads</code> 【the download path of your browser】</li>
+  <li><code>C:\Users\jack\OneDrive\web-clippings</code> 【the destination path】</li>
+</ul>
+
+<p>step 1: Get your destination path prepared, create the directory if you hasn’t.</p>
+
+<p>step 2: Check the download path of your browser, If there contains a directory that has the same name as the root folder of MaoXian, move it to somewhere else or delete it. Because we will create our transfer door here with the same name.</p>
+
+<p>step 3: Create a transfer door that <strong>with the same name as the root folder of MaoXian</strong> inside the download path of your browser，in this example, the name is “<code>mx-wc</code>”</p>
+
+<p>On Windows, the command to create symbolic link is:</p>
+
+<pre><code class="language-shell">mklink /D C:\Users\jack\Browser\Downloads\mx-wc C:\Users\jack\OneDrive\web-clippings
+</code></pre>
+
+<p>Crate a batch file, like: create_transfer_door_of_maoxian.bat (name whatever you want), copy the above command to the batch file (edit the last two path according to your case)，after you save it, right click this file and run it as Administrator. After the execution, the transfer door is created.</p>
+
+<p>Now, you can see a new directory called “<code>mx-wc</code>” inside your download path of browser. try create a text file and go to the destination folder to see if it’s transfered. If it is, you have learned how to create transfer door on Windows and at the same time you have changed the default download path of MaoXian.</p>
+
+<h4 id="create-transfer-door-on-linux-or-macos">Example B:  create transfer door on Linux/MacOs</h4>
+
+<p>Assume:</p>
+
+<ul>
+  <li><code>mx-wc</code> 【the root folder of MaoXian】</li>
+  <li><code>/home/jack/Browser/Downloads</code> 【the download path of your browser】</li>
+  <li><code>/home/jack/Dropbox/web-clippings</code> 【the destination path】</li>
+</ul>
+
+<p>step 1: Get your destination path prepared, create the directory if you hasn’t.</p>
+
+<p>step 2: Check the download path of your browser, If there contains a directory that has the same name as the root folder of MaoXian, move it to somewhere else or delete it. Because we will create our transfer door here with the same name.</p>
+
+<p>step 3: Create a transfer door that <strong>with the same name as the root folder of MaoXian</strong> inside the download path of your browser，in this example, the name is “<code>mx-wc</code>”</p>
+
+<p>running belowing Command to create:</p>
+
+<pre><code class="language-shell">ln -s /home/jack/Dropbox/web-clippings /home/jack/Browser/Downloads/mx-wc
+</code></pre>
+
+<h2 id="dont-save-index-file">I don’t want to save information files</h2>
+
+<p>Information files (or meta files) are very important for MaoXian. MaoXian use it to identify each clipping result. Functions like Clipping History and Resetting History dependent on information files. So we hightly recommend you save these files.</p>
+
+<p><strong>WARNING: If you do not save these information files, MaoXian will not recognize them anymore, it usually means that you want to use another software to browser and manager the clipped files.</strong></p>
+
+<p>Here’s how to configure it:</p>
+
+<p>Go to <em>settings &gt; Reset / Backup</em>, ensure the “Setting page’s configuration” item is checked, after click “Backup to file” button you will get a JSON file. Use a text editor to open it and search <code>saveInfoFile</code>. change the value from <code>true</code> to <code>false</code>.</p>
+
+<p>Click “Restore from file” button, select the file you just editted. After the restoration, the change will be applied.</p>
+
+<h2 id="can-not-open-clipping-in-history">Can’t open clipping on history page</h2>
+
+<p>Some user had found that the clipping on history page can open after clipping, But couldn’t open it another day.</p>
+
+<p>This is because MaoXian will try to open clipping file through download history if it can’t access file URLs. If you clear that history, then it can’t open it.</p>
+
+<p><a href="#allow-access-file-urls">allow it to access file URLs</a>, can avoid this situation.</p>
+
+<h2 id="allow-access-file-urls">Allow access file URLs</h2>
+
+<p>Web browser don’t allow extension to access file URLs(file://). MaoXian can’t open clipping file(opening file URL) directly because of it.</p>
+
+<p>We suggest you to allow MaoXian to access file URLs. So you can open clipping file more convenient.</p>
+
+<p>Section below describes how to allow MaoXian to access file URLs(file://).</p>
+
+<h3 id="access-file-url-step1">1. Getting “extension identifier”</h3>
+
+<p>You can get it from MaoXian’s setting page <code>setting &gt; General</code>.</p>
+
+<p>It looks like this:</p>
+
+<ul>
+  <li>Firefox =&gt; moz-extension://612ab18c-c29e-4211-bd50-3f208d227db7</li>
+  <li>Chrome =&gt; chrome-extension://612ab18c-c29e-4211-bd50-3f208d227db7</li>
+</ul>
+
+<h3 id="access-file-url-step2">2. configure browser settings</h3>
+
+<p>This step is different between each browser.</p>
+
+<p><strong>Chrome/Chromium</strong></p>
+
+<p>Take <code>extension identifier</code> above as an example, input <code>chrome://extensions/?id=612ab18c-c29e-4211-bd50-3f208d227db7</code> to browser’s address bar, Enter.</p>
+
+<p>Enable <code>Allow access to file URLs</code> option.</p>
+
+<p><strong>Firefox</strong></p>
+
+<p>Firefox hasn’t provide a page to setting this option by default, but we can change firefox’s preference settings.</p>
+
+<p>I: input <code>about:config</code> to address bar and enter, you will get a configuration page.</p>
+
+<p>II: configure these item below</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>Item Name</th>
+      <th>Item Value</th>
+      <th>Note</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>capability.policy.policynames</td>
+      <td>localfilelinks</td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td>capability.policy.localfilelinks.sites</td>
+      <td>moz-extension://612ab18c-c29e-4211-bd50-3f208d227db7</td>
+      <td>change this to <code>extension identifier</code> you got</td>
+    </tr>
+    <tr>
+      <td>capability.policy.localfilelinks.checkloaduri.enabled</td>
+      <td>allAccess</td>
+      <td>-</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>Copy item name, paste to search.</p>
+
+<p>If you can find it. Change it’s value by double click.</p>
+
+<p>If you can’t find it. Do: right click &gt; new &gt; String &gt; paste item name &gt; paste item value</p>
+
+<h3 id="access-file-url-step3">3. configure extension settings</h3>
+
+<p>Back to MaoXian’s setting page，check “I enabled ‘allow file scheme access’”.</p>
+
+<h2 id="script-busy">Browser prompt: script of MaoXian is busy, do you want to abort it</h2>
+
+<p>On some large web pages (which may contains thousands of element), may cause this to happen. please choose wait (you may need to confirm it multiple times)</p>
+
+<h2 id="save-as-single-file">Can MaoXian clip a web page as single file? like: mhtml, zip or a picture</h2>
+
+<p>MaoXian can’t do this, and won’t do this in the future.</p>
+
+<p>MaoXian supports HTML and Markdown format both are simple text file. Text files are a simple format without special encoding which make it very eazy to edit and search. Image you want to edit or search a picture, a zip file or a mhtml file, you need special software to do that.</p>
+
+<p>If you still want to save a webpage as single file, you may try these browser extensions: webscrapbook, savepagewe or singleFile.</p>
+
+<h2 id="privacy-policy">Does this software harm my privacy?</h2>
+
+<p>Please check out the <a href="privacy-policy.html">privacy policy</a> page.</p>
+
+<h2 id="feedback">Report new issue</h2>
+
+<p>If answers above can’t resolve your problem. Feedback your problem to <a href="https://github.com/mika-cn/maoxian-web-clipper/issues">Project Issue Page</a>.</p>
+
+<p>or send an email to:  i 【DOT】 mika 【AT】 tutanota 【DOT】com.</p>
+
+<hr />
+<p><a href="index.html">Home</a></p>
+</div>
+    </div>
+  </body>
+</html>
+

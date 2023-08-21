@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Native application page of Maoxian Web Clipper" />
+    <title>Native application</title>
+    <link rel="icon" type="image/png" href="../imgs/logo.png" />
+    <link rel="stylesheet" type="text/css" href="../css/markdown.css" />
+    <link rel="stylesheet" type="text/css" href="../css/markdown-toc.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="title"><h1>Native application</h1></div>
+
+      <input type="checkbox" id="pin-toc" class="pin-toc" hidden>
+      <label for="pin-toc" class="pin-toc-switcher" title="pin(unpin) the table of content"></label>
+      <div class="toc">
+        <h2>Content</h2>
+        <ul>
+  <li><a href="#intro">Intro </a></li>
+  <li><a href="#board">Important News </a></li>
+  <li><a href="#features">Features </a></li>
+  <li><a href="#install">Installation </a>
+    <ul>
+      <li><a href="#install-ruby">Install ruby </a></li>
+      <li><a href="#download-package">Download </a></li>
+      <li><a href="#extract-package">Extract zip file </a></li>
+      <li><a href="#install-native-app">install the software </a></li>
+      <li><a href="#configure-download-path">configure download path </a></li>
+      <li><a href="#check-and-enable">configure MaoXian Web Clipper </a></li>
+    </ul>
+  </li>
+  <li><a href="#uninstall">uninstall </a></li>
+  <li><a href="#upgrade">upgrade </a></li>
+</ul>
+
+      </div>
+
+      <div class="content">
+<h2 id="intro">Intro</h2>
+
+<p>This is a little application. We develope it to enhance MaoXian’s abilities.</p>
+
+<h2 id="board">Important News</h2>
+
+<p>On the latest version of ruby which is 2.7.0, there’s some interfaces are not compatible with old code. It’ll cause this Native APP not able to download images. So if you have installed ruby 2.7.0 and your Native App’s version is less than 0.2.3, you should upgrade it.</p>
+
+<h2 id="features">Features</h2>
+
+<ul>
+  <li>Download file (to avoid conflic with download manage extention)</li>
+  <li>Delete clipping file (when you delete a clipping record in clipping history page, it delete files that relative to that record)</li>
+  <li>Refresh history (This is useful when you have two clipping sources(e.g. two browsers on same computer or different computers) and want to keep clipping history latest)</li>
+</ul>
+
+<h2 id="install">Installation</h2>
+
+<h3 id="install-ruby">Install ruby</h3>
+
+<p>ruby is required, install it first. Make sure version <code>&gt;= 2.4.1</code>.</p>
+
+<p><a href="https://www.ruby-lang.org/en/downloads/">Install Ruby</a></p>
+
+<h3 id="download-package">Download</h3>
+
+<p>Download software according to your OS and browser type.</p>
+
+<p>Current Version <code>0.2.11</code></p>
+
+<ul>
+  <li>Linux
+    <ul>
+      <li><a href="files/0.2.11/maoxian-web-clipper-native-linux-chrome-0.2.11.zip">native-app-chrome.zip</a></li>
+      <li><a href="files/0.2.11/maoxian-web-clipper-native-linux-chromium-0.2.11.zip">native-app-chromium.zip</a></li>
+      <li><a href="files/0.2.11/maoxian-web-clipper-native-linux-firefox-0.2.11.zip">native-app-firefox.zip</a></li>
+    </ul>
+  </li>
+  <li>Mac
+    <ul>
+      <li><a href="files/0.2.11/maoxian-web-clipper-native-macos-chrome-0.2.11.zip">native-app-chrome.zip</a></li>
+      <li><a href="files/0.2.11/maoxian-web-clipper-native-macos-chromium-0.2.11.zip">native-app-chromium.zip</a></li>
+      <li><a href="files/0.2.11/maoxian-web-clipper-native-macos-firefox-0.2.11.zip">native-app-firefox.zip</a></li>
+    </ul>
+  </li>
+  <li>windows
+    <ul>
+      <li><a href="files/0.2.11/maoxian-web-clipper-native-windows-chrome-0.2.11.zip">native-app-chrome.zip</a></li>
+      <li><a href="files/0.2.11/maoxian-web-clipper-native-windows-chromium-0.2.11.zip">native-app-chromium.zip</a></li>
+      <li><a href="files/0.2.11/maoxian-web-clipper-native-windows-firefox-0.2.11.zip">native-app-firefox.zip</a></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="extract-package">Extract zip file</h3>
+
+<p>in linux or mac</p>
+
+<pre><code class="language-shell">unzip maoxian-web-clipper-native-linux-chrome.zip -d maoxian-web-clipper-native
+</code></pre>
+
+<p>in windows</p>
+
+<pre><code class="language-shell">Use any extract software your like, extract it to a fold :D
+</code></pre>
+
+<h3 id="install-native-app">install the software</h3>
+
+<ul>
+  <li><strong>Mac or Linux</strong>: <code>./install.sh</code></li>
+  <li><strong>Windows</strong>:  double click <code>install.bat</code></li>
+</ul>
+
+<h3 id="configure-download-path">configure download path</h3>
+
+<p>You must configure your download path first,</p>
+
+<p>You will find a file named config.yaml, use any text editor to edit it.
+Notice: if you OS is windows, don’t edit it use notePad, use something like notepad++ which can handle line break correctly.</p>
+
+<p><strong>Notice: download path must exist</strong></p>
+
+<p>e.g in linux</p>
+
+<pre><code class="language-yaml"># config.yaml
+environment: 'production'
+data_dir: '/home/jack/clippings'
+</code></pre>
+
+<p>e.g in windows</p>
+
+<pre><code class="language-yaml"># config.yaml
+environment: 'production'
+data_dir: 'e:\jack\clippings'
+</code></pre>
+
+<h3 id="check-and-enable">configure MaoXian Web Clipper</h3>
+
+<ul>
+  <li>
+    <p>Allow extension to access File URLs. (See: extension setting page &gt; File URL)</p>
+  </li>
+  <li>
+    <p>choose <code>Download through native App</code> as clipping handler. (See: extension setting page &gt; Clipping Handler)</p>
+  </li>
+  <li>
+    <p>reboot your browser</p>
+  </li>
+</ul>
+
+<p>Finish. :D</p>
+
+<h2 id="uninstall">uninstall</h2>
+
+<ul>
+  <li><strong>Mac or Linux</strong>: run <code>./uninstall.sh</code> and delete Native App directory.</li>
+  <li><strong>Windows</strong>: double click <code>uninstall.bat</code> and delete Native App directory.</li>
+</ul>
+
+<h2 id="upgrade">upgrade</h2>
+<ol>
+  <li>Backup <code>config.yaml</code></li>
+  <li><a href="#uninstall">Uninstall Native App</a></li>
+  <li><a href="#download-package">Download latest version</a> in current page and <a href="#extract-package">extract</a> it.</li>
+  <li>Replace <code>config.yaml</code> in extracted directory using the file we had backuped in first step.</li>
+  <li><a href="#install-native-app">Install this Native App</a></li>
+</ol>
+
+<hr />
+<p><a href="../index.html">Home</a></p>
+
+</div>
+    </div>
+  </body>
+</html>
+

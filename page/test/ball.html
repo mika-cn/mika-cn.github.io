@@ -1,0 +1,66 @@
+<html>
+  <head>
+    <style type="text/css">
+      body{
+        background-color: #000000;
+      }
+      div{
+        position: absolute;
+        border-radius: 10000px;
+        background-color:#ffffff;
+        overflow: hidden;
+      }
+    </style>
+  </head>
+<body>
+  <div id="ball"><img src="./imgs/flower/6.jpg" width="60px;" height="60px;"/></div>
+</body>
+<script type="text/javascript">
+  var G = -1;
+  var WIDTH = "20PX";
+  var ball = {};
+  ball.x = function(x){
+    this.X = x;
+    this.obj.style.left = ""+x+"px";
+  };
+  ball.y = function(y){
+    this.Y = y;
+    this.obj.style.top  = ""+y+"px";
+  };
+  ball.z = function(z){
+    this.X = z;
+    this.obj.style.width = ""+z+"px";
+    this.obj.style.height = this.obj.style.width;
+  };
+  var t = 0;
+  var h = 0;
+  var v0 = 0;
+  var direction = -1;
+  ball.fall = function(){
+    t+=0.02;
+    ball.y(ball.Y + (direction*v0 + G*t)*t*0.5 );
+    if(ball.Y <= 0 || ball.Y >=h){
+      if(ball.Y<=0){ ball.y(0); h *= 0.5; console.log("a"); }
+      if(ball.Y>=h){ ball.y(h); console.log("b")}
+      if(h<1){ return; }
+      v0 = Math.abs(direction*v0 + G*t)
+      direction *= -1;
+      t = 0;
+    }
+    setTimeout("ball.fall()", 5);
+  }
+
+
+
+  var $ = function(id){ return document.getElementById(id);}
+
+
+
+  ball.obj = $('ball');
+  ball.x(200)
+  ball.y(800)
+  ball.z(60)
+  h = ball.Y;
+  ball.fall();
+</script>
+</html>

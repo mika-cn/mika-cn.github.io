@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Install MaoXian Web Clipper by extension file" />
+    <title>Using extension file to install MaoXian Web Clipper</title>
+    <link rel="icon" type="image/png" href="imgs/logo.png" />
+    <link rel="stylesheet" type="text/css" href="css/markdown.css" />
+    <style>
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="title"><h1>Using extension file to install MaoXian Web Clipper</h1></div>
+      <div class="content">
+<p><a href="install-by-extension-file-zh-CN.html">简体</a></p>
+
+<h2 id="version-info">Version info</h2>
+
+<ul>
+  <li><strong>Current version:</strong> 0.4.39</li>
+</ul>
+
+<h2 id="download-software-package">Download software package</h2>
+
+<p>The belowing files that ends with <code>checksum.txt</code> are used to verify that the downloaded package are completed and not modified.</p>
+
+<h3 id="target-browser-is-chromium-based-browser">Target browser is Chromium based browser</h3>
+
+<h4 id="crx-package">CRX package</h4>
+
+<p>After you’ve installed this package, the browser can update MaoXian automatically. Note that this package is not suit for <code>Windows + Chrome</code> or <code>MacOS + Chrome</code>. If you are one of these environment, see the blowing “Installation” section.</p>
+
+<p><strong>Note</strong>: If the browser that you currently use is a Chromium based browser, such as Chrome, Chromium, Edge etc. Using belowing links, and after you complete the download, rename it by removing the <code>.zip</code> part. The reason of doing this is that these browsers will try to install the CRX file and if the CRX file isn’t came from Chrome Web Store it’ll get deleted. So we use this file extension trick to walk around.</p>
+
+<ul>
+  <li>
+    <a href="extension/0.4.39/maoxian-web-clipper-chromium-0.4.39.crx" download="maoxian-web-clipper-chromium-0.4.39.crx.zip">maoxian-web-clipper-chromium-0.4.39.crx.zip</a>
+  </li>
+  <li>
+    <a href="extension/0.4.39/maoxian-web-clipper-chromium-0.4.39.crx.checksum.txt" download="maoxian-web-clipper-chromium-0.4.39.crx.zip.checksum.txt">maoxian-web-clipper-chromium-0.4.39.crx.zip.checksum.txt</a>
+  </li>
+</ul>
+
+<p><strong>Note</strong>: If the browser that you currently use is not a Chromium based browser, using belowing links:</p>
+
+<ul>
+  <li><a href="extension/0.4.39/maoxian-web-clipper-chromium-0.4.39.crx">maoxian-web-clipper-chromium-0.4.39.crx</a></li>
+  <li><a href="extension/0.4.39/maoxian-web-clipper-chromium-0.4.39.crx.checksum.txt">maoxian-web-clipper-chromium-0.4.39.crx.checksum.txt</a></li>
+</ul>
+
+<h4 id="zip-package">ZIP package</h4>
+
+<p>After you’ve install this package, the browser can’t update MaoXian automatically.</p>
+
+<ul>
+  <li><a href="extension/0.4.39/maoxian-web-clipper-chromium-0.4.39.zip">maoxian-web-clipper-chromium-0.4.39.zip</a></li>
+  <li><a href="extension/0.4.39/maoxian-web-clipper-chromium-0.4.39.zip.checksum.txt">maoxian-web-clipper-chromium-0.4.39.zip.checksum.txt</a></li>
+</ul>
+
+<h3 id="target-browser-is-firefox">Target browser is Firefox</h3>
+
+<p>If you choose to install zip package, Firefox won’t update MaoXian automatically. It’s better to install MaoXian on Firefox through <a href="https://addons.mozilla.org/en-US/firefox/addon/maoxian-web-clipper/">AMO</a></p>
+
+<ul>
+  <li><a href="extension/0.4.39/maoxian-web-clipper-firefox-0.4.39.zip">maoxian-web-clipper-firefox-0.4.39.zip</a></li>
+  <li><a href="extension/0.4.39/maoxian-web-clipper-firefox-0.4.39.zip.checksum.txt">maoxian-web-clipper-firefox-0.4.39.zip.checksum.txt</a></li>
+</ul>
+
+<h2 id="verifing-the-checksum">Verifing the checksum</h2>
+
+<p>Terminal uses can use belowing commands to calculate the checksum and compare the result with the checksum.txt file. If the checksum matchs, it proves the package is completed and not modified.</p>
+
+<pre><code class="language-shell"># use md5 algorithm to calculate the checksum
+$ md5sum maoxian-web-clipper-x.x.x.zip
+
+# use sha256 algorithm to calculate the checksum
+$ sha256sum maoxian-web-clipper-x.x.x.zip
+
+# use sha512 algorithm to calculate the checksum
+$ sha512sum maoxian-web-clipper-x.x.x.zip
+
+</code></pre>
+
+<h2 id="installing">Installing</h2>
+
+<h3 id="install-maoxian-on-chromium">Install MaoXian on Chromium</h3>
+
+<p>If your environment is <code>Windows + Chrome</code> or <code>MacOS + Chrome</code>, Chrome will disable and won’t allow enabling any browser extension that was not installed from Chrome Web Store. This “for your security” policy will take away your ability of installing any browser extension that is distributed through other methods. Chrome don’t respect both users and developers, they just want to gain control. hence we highly recomend you leave Chrome for other better browsers (such as: Chromium , ungoogled-chromium or other Chromium-based browsers).</p>
+
+<p><strong>Install by drag and drop the crx package</strong></p>
+
+<p>This is the most recommended installing method. The packages that are installed using this method, can update automatically in the future.</p>
+
+<ol>
+  <li>download the crx package</li>
+  <li>open the extension manage page on Chromium (by enter the <code>about:extensions</code> URL)</li>
+  <li>turn Developer mode on</li>
+  <li>drag the downloaded crx package to the extension manage page and drop to install.</li>
+</ol>
+
+<p>Note that if the 4th step can’t trigger the installation, restart your browser with keeping Developer mode on. and try again.</p>
+
+<p><strong>Install by load unpacked zip package</strong></p>
+
+<ol>
+  <li>download the zip package.</li>
+  <li>unzip the package. Note that the package were packed without the root directory. So to avoid messing current directory, move the zip package to a new empty directory and unzip it. If you can’t unzip it successfully, try another unzip software.</li>
+  <li>open the extension manage page on Chromium (by enter the <code>about:extensions</code> URL)</li>
+  <li>turn Developer mode on</li>
+  <li>click the Load unpacked button and choose the directory that you just unziped.</li>
+</ol>
+
+<p><strong>warning:</strong> The packages that are installed using this method will not update automatically.</p>
+
+<h3 id="install-maoxian-on-firefox-using-zip-package">Install MaoXian on Firefox (using zip package)</h3>
+
+<p>The most convenient method to install MaoXian on Firefox is through AMO, Here’s the <a href="https://addons.mozilla.org/zh-CN/firefox/addon/maoxian-web-clipper/">link</a>.</p>
+
+<p>Currently, Only the ESR version and Beta version of Firefox can use this installing method.</p>
+
+<ol>
+  <li>turn zip installing on. enter the <code>about:config</code> URL, search <code>xpinstall.signatures.required</code> and change it’s value to <code>false</code>.</li>
+  <li>enter the <code>about:addons</code> URL, click the Extensions menu on the left, click the dropdown button which with a cog icon, click the Install Add-on From File menu item and select the downloaded zip package.</li>
+</ol>
+
+<p><strong>warning:</strong> The packages that are installed using this method will not update automatically.</p>
+
+<h3 id="seeking-help">Seeking help</h3>
+
+<p><a href="https://github.com/mika-cn/maoxian-web-clipper/issues">Get help</a></p>
+
+<hr />
+
+<p><a href="index.html">Home</a></p>
+</div>
+    </div>
+  </body>
+</html>
+

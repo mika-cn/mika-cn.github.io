@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="" />
+    <title>基于Chromium 或 Firefox 开发的浏览器如何安装『本地程序』</title>
+    <link rel="icon" type="image/png" href="../imgs/logo.png" />
+    <link rel="stylesheet" type="text/css" href="../css/markdown.css" />
+    <link rel="stylesheet" type="text/css" href="../css/markdown-toc.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="title"><h1>基于Chromium 或 Firefox 开发的浏览器如何安装『本地程序』</h1></div>
+
+      <input type="checkbox" id="pin-toc" class="pin-toc" hidden>
+      <label for="pin-toc" class="pin-toc-switcher" title="pin(unpin) the table of content"></label>
+      <div class="toc">
+        <h2>目录</h2>
+        <ul>
+  <li><a href="#background">背景 </a></li>
+  <li><a href="#install-intro">本地程序的安装本质 </a></li>
+  <li><a href="#chromium-based">基于 Chromium 开发的浏览器 </a></li>
+  <li><a href="#firefox-based">基于 Firefox 开发的浏览器 </a></li>
+</ul>
+
+      </div>
+
+      <div class="content">
+<h2 id="background">背景</h2>
+
+<p>这些以 Chromium 或 Firefox 为核心的浏览器，为了避免用户电脑上同时安装了核心浏览器和自己时所造成的冲突。它的一些文件的存储位置和核心浏览器是不一样的。而他们又允许用户安装那些可运行在核心浏览器上的扩展，如果这个时候没有兼容好，有些浏览器扩展就无法正常工作，特别是带有『本地程序』的扩展。</p>
+
+<p>MaoXian 的本地程序就是如此，以 Chromium 这个核心浏览器为例子，「本地程序」只认识 Chromium 的目录，所以只会把自己安装到 Chromium 目录下。那这些基于 Chromium 的浏览器如果没有做好兼容，就找不到「本地程序」了。</p>
+
+<p><strong>注意：</strong> 本页面介绍的安装方法，只适用于那些没有做好兼容的浏览器。而那些做好兼容的浏览器（如 Edge）请按照<a href="index-zh-CN.html">正常流程</a>进行安装。</p>
+
+<h2 id="install-intro">本地程序的安装本质</h2>
+
+<p>本地程序在 Linux 或 MacOS 上的安装，其实只是复制一个 NativeMessageHost 文件（maoxian_web_clipper_native.json) 到一个特定的位置（即目录路径）。</p>
+
+<p>本地程序在 Windows 上的安装，是在一个注册表路径上写入 NativeMessageHost 文件的路径。</p>
+
+<p>下表是 Chromium 上的 NativeMessageHost 文件在不同系统上的安装路径：</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>系统</th>
+      <th>安装路径</th>
+      <th>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MacOS</td>
+      <td>$HOME/Library/Application Support/Chromium/NativeMessagingHosts</td>
+      <td>文件夹路径</td>
+    </tr>
+    <tr>
+      <td>Linux</td>
+      <td>$HOME/.config/chromium/NativeMessagingHosts</td>
+      <td>文件夹路径</td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>HKEY_CURRENT_USER\SOFTWARE\Google\Chrome\NativeMessagingHosts</td>
+      <td>注册表路径</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>下表是 Firefox 上的 NativeMessageHost 文件在不同系统上的安装路径：</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>系统</th>
+      <th>安装路径</th>
+      <th>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>MacOS</td>
+      <td>$HOME/Library/Application Support/Mozilla/NativeMessagingHosts</td>
+      <td>文件夹路径</td>
+    </tr>
+    <tr>
+      <td>Linux</td>
+      <td>$HOME/.mozilla/native-messaging-hosts</td>
+      <td>文件夹路径</td>
+    </tr>
+    <tr>
+      <td>Windows</td>
+      <td>HKEY_CURRENT_USER\SOFTWARE\Mozilla\NativeMessagingHosts</td>
+      <td>注册表路径</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>你可以参照这些安装路径，去寻找你的目标浏览器的安装路径。或者询问你的浏览器开发者，让他们告诉你： NativeMessageHost 文件的安装路径。</p>
+
+<h2 id="chromium-based">基于 Chromium 开发的浏览器</h2>
+
+<p>请先按照<a href="index-zh-CN.html">本地程序首页</a> 上的介绍，下载并解压本地程序。</p>
+
+<p>然后通过修改本地程序脚本的安装路径，适配你要安装的浏览器。</p>
+
+<p><strong>Linux 或 MacOS 用户</strong>，需要编辑 <code>variables.sh</code> 这个脚本文件。</p>
+
+<p>编辑 <code>variables.sh</code>，以 Linux 为例，原内容如下：</p>
+
+<pre><code class="language-shell">#!/usr/bin/env bash
+
+BROWSER_NAME="Chromium"
+TARGET_DIR_SYSTEM="/etc/chromium/native-messaging-hosts"
+TARGET_DIR_USER="$HOME/.config/chromium/NativeMessagingHosts"
+</code></pre>
+
+<p>其中：</p>
+
+<ul>
+  <li><code>BROWSER_NAME</code> 为浏览器名字，只用于提示用，不必太在意它的格式（大小写等）</li>
+  <li><code>TARGET_DIR_SYSTEM</code> 为系统范围的 NativeMessageHost 文件的安装路径。（这个一般不需要修改，因为大部分人的系统平常都只会用到非 root 用户）</li>
+  <li><code>TARGET_DIR_USER</code> 为当前用户范围 NativeMessageHost 文件的安装路径。（主要改这个）</li>
+</ul>
+
+<p>以 Linux 上的 Thorium 浏览器为例子。其 NativeMessageHosts 目录路径为： <code>~/.config/thorium/NativeMessagingHosts</code>。对其进行修改：</p>
+
+<pre><code class="language-shell">#!/usr/bin/env bash
+
+BROWSER_NAME="Thorium"
+TARGET_DIR_SYSTEM="/etc/thorium/native-messaging-hosts"
+TARGET_DIR_USER="$HOME/.config/thorium/NativeMessagingHosts"
+</code></pre>
+
+<p>再运行 <code>./install.sh</code> 既可以安装成功。</p>
+
+<p><strong>Windows 用户</strong> 需要编辑 <code>install.bat</code> 和 <code>uninstall.bat</code> 两个批处理文件。</p>
+
+<p>假设你的目标浏览器的目标路径为： <code>HKEY_CURRENT_USER\SOFTWARE\Thorium\NativeMessagingHosts</code></p>
+
+<p>原 <code>install.bat</code> 的内容：</p>
+
+<pre><code class="language-text">REG ADD "HKEY_CURRENT_USER\SOFTWARE\Google\Chrome\NativeMessagingHosts\maoxian_web_clipper_native" /ve /t REG_SZ /d "%~dp0manifest.json" /f
+ECHO 'Installed, Press any key to exit. . .'
+PAUSE
+</code></pre>
+
+<p>修改为</p>
+
+<pre><code class="language-text">REG ADD "HKEY_CURRENT_USER\SOFTWARE\Thorium\NativeMessagingHosts\maoxian_web_clipper_native" /ve /t REG_SZ /d "%~dp0manifest.json" /f
+ECHO 'Installed, Press any key to exit. . .'
+PAUSE
+</code></pre>
+<p>按照同样的方式修改 <code>uninstall.bat</code> 。然后右击 <code>install.bat</code> 以管理员权限运行，即可安装成功。</p>
+
+<h2 id="firefox-based">基于 Firefox 开发的浏览器</h2>
+
+<p>请参照<a href="#chromium-based">上一小节</a>，对 Firefox 的安装路径进行修改。</p>
+
+<p>以 LibreWolf 浏览器为例子。修改完后如下：</p>
+
+<p><strong>MacOS</strong></p>
+
+<p>variables.sh</p>
+
+<pre><code class="language-shell">#!/usr/bin/env bash
+
+BROWSER_NAME="Librewolf"
+TARGET_DIR_SYSTEM="/Library/Application Support/Librewolf/NativeMessagingHosts"
+TARGET_DIR_USER="$HOME/Library/Application Support/Librewolf/NativeMessagingHosts"
+</code></pre>
+
+<p><strong>Linux</strong></p>
+
+<p>variables.sh</p>
+
+<pre><code class="language-shell">#!/usr/bin/env bash
+
+BROWSER_NAME="Librewolf"
+TARGET_DIR_SYSTEM="/usr/lib64/librewolf/native-messaging-hosts"
+TARGET_DIR_USER="$HOME/.librewolf/native-messaging-hosts"
+</code></pre>
+
+<p><strong>Windows</strong></p>
+
+<p>install.bat</p>
+
+<pre><code class="language-text">REG ADD "HKEY_CURRENT_USER\SOFTWARE\Librewolf\NativeMessagingHosts\maoxian_web_clipper_native" /ve /t REG_SZ /d "%~dp0manifest.json" /f
+ECHO 'Installed, Press any key to exit. . .'
+PAUSE
+</code></pre>
+
+<p>uninstall.bat</p>
+
+<pre><code class="language-text">REG DELETE "HKEY_LOCAL_MACHINE\SOFTWARE\Librewolf\NativeMessagingHosts\maoxian_web_clipper_native" /f
+REG DELETE "HKEY_CURRENT_USER\SOFTWARE\Librewolf\NativeMessagingHosts\maoxian_web_clipper_native" /f
+ECHO 'Uninstalled, Press any key to exit. . .'
+PAUSE
+</code></pre>
+
+<hr />
+<p><a href="../index-zh-CN.html">首页</a></p>
+
+<p><a href="index-zh-CN.html">本地程序</a></p>
+</div>
+    </div>
+  </body>
+</html>
+

@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="">
+    <title>Test Shadow Dom</title>
+  </head>
+  <body>
+
+
+    <x-main>
+      <div class="article-content">
+        <span> article title </span>
+      </div>
+    </x-main>
+    <!-- Declarative Shadow DOM
+      <x-main>
+        <template shadowroot="open">
+          <div class="main">
+            <x-article>
+              <template shadowroot="open">
+                <article><slot></slot></article>
+              </template>
+              <slot></slot>
+            </x-article>
+          </div>
+        </template>
+        <div class="article-content">
+          <h3> article title </h3>
+        </div>
+      </x-main>
+    -->
+    <hr />
+
+    <template id="x-main">
+      <div class="main">
+        <x-article><h1><slot></slot></h1><span>Time</span></x-article>
+      </div>
+    </template>
+
+    <template id="x-article">
+      <article><slot></slot></article>
+    </template>
+
+  </body>
+  <script>
+    (function(){
+
+      class XMain extends HTMLElement{
+        constructor() {
+          super();
+          const template = document.querySelector('#x-main');
+          const shadowRoot = this.attachShadow({mode: 'open'});
+          shadowRoot.appendChild(template.content)
+        }
+      }
+      customElements.define('x-main', XMain);
+
+      class XArticle extends HTMLElement{
+        constructor() {
+          super();
+          const template = document.querySelector('#x-article');
+          const shadowRoot = this.attachShadow({mode: 'open'});
+          shadowRoot.appendChild(template.content)
+        }
+      }
+      customElements.define('x-article', XArticle);
+    })();
+  </script>
+</html>

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>untitled</title>
+<style>
+body {
+  width: 100%;
+}
+
+#example-element {
+    background-color: #1766aa;
+    margin: 20px;
+    border: 5px solid #333;
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    animation: 2s slidein,hello;
+}
+
+@-webkit-keyframes slidein {
+    from {
+        margin-left: -20%;
+    }
+    to {
+        margin-left: 100%;
+    }
+}
+
+@keyframes slidein {
+    from {
+        margin-left: -20%;
+    }
+    to {
+        margin-left: 100%;
+    }
+}
+</style>
+  </head>
+  <body>
+<div id="output" class="output hidden">
+    <section id="default-example" class="flex-column">
+        <div id="example-element"></div>
+    </section>
+</div>
+
+  <script>
+    (() => {
+      console.log("===========================");
+      const s = document.styleSheets[0];
+      const r = s.cssRules[1];
+      console.log(r.style.getPropertyValue('animation-name'));
+      console.log("===========================");
+    })();
+  </script>
+
+  </body>
+</html>

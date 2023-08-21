@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Offline index page of Maoxian Web Clipper" />
+    <title>Offline index page</title>
+    <link rel="icon" type="image/png" href="../imgs/logo.png" />
+    <link rel="stylesheet" type="text/css" href="../css/markdown.css" />
+    <link rel="stylesheet" type="text/css" href="../css/markdown-toc.css" />
+  </head>
+  <body>
+    <div class="main">
+      <div class="title"><h1>Offline index page</h1></div>
+
+      <input type="checkbox" id="pin-toc" class="pin-toc" hidden>
+      <label for="pin-toc" class="pin-toc-switcher" title="pin(unpin) the table of content"></label>
+      <div class="toc">
+        <h2>Content</h2>
+        <ul>
+  <li><a href="#intro">Intro </a></li>
+  <li><a href="#usage">Usage </a>
+    <ul>
+      <li><a href="#step1">STEP 1: Move directory </a></li>
+      <li><a href="#step2">STEP 2: Open it with browser </a></li>
+      <li><a href="#step3">STEP 3: Configure MaoXian extension </a></li>
+    </ul>
+  </li>
+</ul>
+
+      </div>
+
+      <div class="content">
+<h2 id="intro">Intro</h2>
+
+<p>This is a static page, which supports list and search clipping history like the MaoXian’s history page does. use this page, you can browse your clippings offline, which means you can browser your clippings in a new device without install MaoXian.</p>
+
+<p>By the way, you can change this page as much as you like. Only HTML, CSS and javascript in it.</p>
+
+<p>version: 0.0.5</p>
+
+<h2 id="usage">Usage</h2>
+
+<p><a href="files/history-0.0.5.zip">Download it</a> &amp;&amp; extract it.</p>
+
+<p><strong>Note</strong>: MaoXian extension has supported changing name of root folder since version 0.1.34. This static page also has a new configure file (config.js) since version 0.0.4. If you’ve changed name of root folder in extention setting page, then you should change the “rootFolder” item in configure file.</p>
+
+<h3 id="step1">STEP 1: Move directory</h3>
+
+<p>Move extracted directory(named: history) to <code>$downloads/mx-wc</code>, after moving, it’s path looks like <strong>$downloads/mx-wc/history</strong></p>
+
+<p>Directory name “history” is the default name, you can rename it, or even move it’s file to <code>$download/mx-wc</code>. See below for more details.</p>
+
+<p>Let’s assume your <code>$download</code> folder is <strong>/home/jack/Downloads</strong> , then <code>$download/mx-wc</code> folder is <strong>/home/jack/Downloads/mx-wc</strong>.</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>offline page path</th>
+      <th>Support?</th>
+      <th>description</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>/home/jack/Downloads/mx-wc/offline-index/index.html</td>
+      <td>Yes</td>
+      <td>We only rename it from <code>history</code> to <code>offline-index</code></td>
+    </tr>
+    <tr>
+      <td>/home/jack/Downloads/mx-wc/offline-index.html</td>
+      <td>Yes</td>
+      <td>We move all file in <code>history</code> to <code>$download/mx-wc</code> and rename <code>index.html</code> to <code>offline-index.html</code></td>
+    </tr>
+    <tr>
+      <td>/home/jack/Downloads/mx-wc/offline-pages/history/index.html</td>
+      <td>Yes</td>
+      <td>We place this page in a deeper directory</td>
+    </tr>
+    <tr>
+      <td>/home/jack/history/index.html</td>
+      <td>No</td>
+      <td>This page can not placed outside <code>$download/mx-wc</code> directory</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="step2">STEP 2: Open it with browser</h3>
+
+<p>Use your favourite browser open that <code>index.html</code>($download/mx-wc/history/index.html), This is the <strong>offline index page</strong> we talked before.</p>
+
+<h3 id="step3">STEP 3: Configure MaoXian extension</h3>
+
+<p>After step 2, you’ll see a page just like MaoXian’s history page and there are two sample clipping records which is store in <code>clippings.js</code>. <code>clippings.js</code> is the file which <code>index.html</code> will load clipping records from. At this step, You should configure your <code>MaoXian Web Clipper</code> to generate it automatically. Go to MaoXian extension’s <code>setting page</code> &gt; <code>offline index page</code>.</p>
+
+<p>Do this:</p>
+
+<ul>
+  <li>
+    <p>configure <strong>clipping javascript path</strong> (where clippings.js is), it’s value is <code>$MX-WC/history/clippings.js</code>, If you didn’t changed that extracted directory name (history), then you don’t need to change this item.</p>
+  </li>
+  <li>check the <strong>Autogenerate javascript file</strong> checkbox.</li>
+  <li>click the <strong>Generate Now</strong> button, refresh the <code>index.html</code> page which you open previously. If you can’t see that two sample clipping records, then congratulation! you succeed.</li>
+</ul>
+
+<hr />
+<p><a href="../index.html">Home</a></p>
+</div>
+    </div>
+  </body>
+</html>
+
