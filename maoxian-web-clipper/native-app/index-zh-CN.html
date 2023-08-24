@@ -36,12 +36,14 @@
   <li><a href="#apply-config">运用最新的配置 </a></li>
   <li><a href="#problems">常见问题 </a>
     <ul>
+      <li><a href="#cannot-find-it">浏览器无法找到本地程序 </a></li>
       <li><a href="#cannot-connect">浏览器无法连接『本地程序』 </a>
         <ul>
           <li><a href="#cannot-connect-other-browsers">基于 Chromium 或 Firefox 开发的浏览器，没有对一些目录做兼容。</a></li>
           <li><a href="#connot-connect-ruby">浏览器找不到 ruby </a></li>
         </ul>
       </li>
+      <li><a href="#permission-denied">本地程序的位置，浏览器没有权限访问 </a></li>
       <li><a href="#disconnected">浏览器与本地程序的连接已断开 </a></li>
       <li><a href="#configuration-error">配置文件的问题 </a></li>
       <li><a href="#unknown-error">还是不行？ </a></li>
@@ -108,28 +110,28 @@
 
 <p>请根据你的系统信息和浏览器类型， 下载对应的软件包</p>
 
-<p>当前版本 <code>0.2.11</code></p>
+<p>当前版本 <code>0.2.12</code></p>
 
 <ul>
   <li>Linux
     <ul>
-      <li><a href="files/0.2.11/maoxian-web-clipper-native-linux-chrome-0.2.11.zip">native-app-chrome.zip</a></li>
-      <li><a href="files/0.2.11/maoxian-web-clipper-native-linux-chromium-0.2.11.zip">native-app-chromium.zip</a></li>
-      <li><a href="files/0.2.11/maoxian-web-clipper-native-linux-firefox-0.2.11.zip">native-app-firefox.zip</a></li>
+      <li><a href="files/0.2.12/maoxian-web-clipper-native-linux-chrome-0.2.12.zip">native-app-chrome.zip</a></li>
+      <li><a href="files/0.2.12/maoxian-web-clipper-native-linux-chromium-0.2.12.zip">native-app-chromium.zip</a></li>
+      <li><a href="files/0.2.12/maoxian-web-clipper-native-linux-firefox-0.2.12.zip">native-app-firefox.zip</a></li>
     </ul>
   </li>
   <li>Mac
     <ul>
-      <li><a href="files/0.2.11/maoxian-web-clipper-native-macos-chrome-0.2.11.zip">native-app-chrome.zip</a></li>
-      <li><a href="files/0.2.11/maoxian-web-clipper-native-macos-chromium-0.2.11.zip">native-app-chromium.zip</a></li>
-      <li><a href="files/0.2.11/maoxian-web-clipper-native-macos-firefox-0.2.11.zip">native-app-firefox.zip</a></li>
+      <li><a href="files/0.2.12/maoxian-web-clipper-native-macos-chrome-0.2.12.zip">native-app-chrome.zip</a></li>
+      <li><a href="files/0.2.12/maoxian-web-clipper-native-macos-chromium-0.2.12.zip">native-app-chromium.zip</a></li>
+      <li><a href="files/0.2.12/maoxian-web-clipper-native-macos-firefox-0.2.12.zip">native-app-firefox.zip</a></li>
     </ul>
   </li>
   <li>Windows
     <ul>
-      <li><a href="files/0.2.11/maoxian-web-clipper-native-windows-chrome-0.2.11.zip">native-app-chrome.zip</a></li>
-      <li><a href="files/0.2.11/maoxian-web-clipper-native-windows-chromium-0.2.11.zip">native-app-chromium.zip</a></li>
-      <li><a href="files/0.2.11/maoxian-web-clipper-native-windows-firefox-0.2.11.zip">native-app-firefox.zip</a></li>
+      <li><a href="files/0.2.12/maoxian-web-clipper-native-windows-chrome-0.2.12.zip">native-app-chrome.zip</a></li>
+      <li><a href="files/0.2.12/maoxian-web-clipper-native-windows-chromium-0.2.12.zip">native-app-chromium.zip</a></li>
+      <li><a href="files/0.2.12/maoxian-web-clipper-native-windows-firefox-0.2.12.zip">native-app-firefox.zip</a></li>
     </ul>
   </li>
 </ul>
@@ -146,14 +148,20 @@
 <pre><code class="language-shell">额，使用任何你喜欢的解压软件，把它解压到某个文件夹（由于是直接打包的文件，没有打包根文件夹）, :D
 </code></pre>
 
+<p>解压成功后，<strong>把本地程序移动到用户目录下，这样可避免权限相关的问题</strong>。</p>
+
 <h3 id="install-native-app">安装软件</h3>
 
 <p><strong>注</strong>: 如果你的浏览器是基于 Chromium 或 Firefox 开发的浏览器，请使用<a href="install-on-other-browsers-zh-CN.html">这里</a>的安装教程。</p>
+
+<p>进入你的『本地程序』文件夹里，然后：</p>
 
 <ul>
   <li>Linux 或 Mac  直接运行 <code>./install.sh</code> 进行安装</li>
   <li>在 Windows 上，直接双击 <code>install.bat</code> （注意：你点击后，会发现有个命令窗口跳出来，程序会进行安装，安装完成后会显示：”press any key to continue” 则直接按下 Enter 就好了。 ）</li>
 </ul>
+
+<p><strong>注意：安装过后，就不要移动，删除或重命名『本地程序』文件夹了。</strong></p>
 
 <h3 id="configure-download-path">配置下载路径</h3>
 
@@ -226,6 +234,18 @@ msg_handler: 'default'
 
 <p><strong>注：</strong> 当你做出修改之后，请点击扩展上的 『重新加载』按钮，该按钮会重连本地程序。</p>
 
+<h3 id="cannot-find-it">浏览器无法找到本地程序</h3>
+
+<p>在 Firefox 上错误信息如下：</p>
+
+<blockquote>
+  <p>ErrorMessage: NativeApp: DisconnectErr:An unexpected error occurred</p>
+</blockquote>
+
+<p>这个出现的原因为，你在执行完安装步骤之后，移动、删除或重命名本地程序文件夹。导致已经安装成功的文件路径失效，浏览器就找不到本地程序了。</p>
+
+<p>若是如此，则重新进行安装步骤即可，重新安装将会覆盖掉已经失效的文件路径。</p>
+
 <h3 id="cannot-connect">浏览器无法连接『本地程序』</h3>
 
 <p>如果你在设置页面可以如下错误信息，则表明浏览器无法连接『本地程序』，这种情况下，是不会有日志生成的。</p>
@@ -269,6 +289,16 @@ msg_handler: 'default'
 <p><strong>如何解决</strong></p>
 
 <p>把 main.rb (安装目录下) 第一行的 “/usr/bin/env ruby” 改成 ruby 的绝对路径，比如 “/home/jack/ruby-2.5.0/bin/ruby”。 或者是创建一个软链接到 /usr/bin 目录下，比如： <code>ln -s /home/jack/ruby-2.5.0/bin/ruby /usr/bin/ruby</code>。</p>
+
+<h3 id="permission-denied">本地程序的位置，浏览器没有权限访问</h3>
+
+<p>在 Firefox 上表现为：</p>
+
+<blockquote>
+  <p>ErrorMessage: LogErr, Permission denied @ rb_sysopen - /xxx/xxx/xxx/tmp/app.log</p>
+</blockquote>
+
+<p>遇到这种，请把你的本地程序放到，当前用户的目录下，再重新执行安装步骤。</p>
 
 <h3 id="disconnected">浏览器与本地程序的连接已断开</h3>
 
