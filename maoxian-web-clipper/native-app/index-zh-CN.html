@@ -34,19 +34,18 @@
   <li><a href="#uninstall">卸载软件 </a></li>
   <li><a href="#upgrade">更新软件 </a></li>
   <li><a href="#apply-config">运用最新的配置 </a></li>
-  <li><a href="#problems">常见问题 </a>
+  <li><a href="#faq">常见问题 </a>
     <ul>
-      <li><a href="#cannot-find-it">浏览器无法找到本地程序 </a></li>
-      <li><a href="#cannot-connect">浏览器无法连接『本地程序』 </a>
+      <li>情况A：可以找到日志文件</li>
+      <li>情况B：找不到日志文件
         <ul>
-          <li><a href="#cannot-connect-other-browsers">基于 Chromium 或 Firefox 开发的浏览器，没有对一些目录做兼容。</a></li>
-          <li><a href="#connot-connect-ruby">浏览器找不到 ruby </a></li>
+          <li>Firefox （火狐）浏览器</li>
+          <li>Chromium/Chrome （谷歌）浏览器</li>
+          <li><a href="#couldnot-find-ruby">确定和解决浏览器找不到 ruby </a></li>
+          <li><a href="#permission-denied">确定是否「本地程序」路径有权限问题 </a></li>
         </ul>
       </li>
-      <li><a href="#permission-denied">本地程序的位置，浏览器没有权限访问 </a></li>
-      <li><a href="#disconnected">浏览器与本地程序的连接已断开 </a></li>
-      <li><a href="#configuration-error">配置文件的问题 </a></li>
-      <li><a href="#unknown-error">还是不行？ </a></li>
+      <li><a href="#seeking-help">寻求帮助？ </a></li>
     </ul>
   </li>
 </ul>
@@ -59,7 +58,7 @@
 <p>这是一个很小的本地程序，我们开发这个程序增强 Maoxian 的能力。</p>
 
 <blockquote>
-  <p>注意： 如果你只是为了修改 MaoXian 的默认下载目录，则完全没有必要安装『本地程序』，请查看<a href="../faq-zh-CN.html#change-default-download-path">这里</a>查看如何修改默认下载位置。</p>
+  <p><strong>注意</strong>： 如果你只是为了修改 MaoXian 的默认下载目录，则完全没有必要安装『本地程序』，请查看<a href="../faq-zh-CN.html#change-default-download-path">这里</a>查看如何修改默认下载位置。</p>
 </blockquote>
 
 <h2 id="board">公告</h2>
@@ -138,17 +137,30 @@
 
 <h3 id="extract-package">解压软件包</h3>
 
-<p>Linux 或者 Mac</p>
+<p>这一步骤里的解压位置，即『本地程序』的安装位置，需保证浏览器有权限访问该位置。</p>
 
-<pre><code class="language-shell">unzip maoxian-web-clipper-native-linux-chrome.zip -d maoxian-web-clipper-native
+<ul>
+  <li>Linux 用户，<strong>请解压到用户目录下，以避免权限相关的问题</strong>。以下命令解压到 <code>~/.local/apps</code> 目录下，你可自行调整其位置。</li>
+</ul>
+
+<pre><code class="language-shell">mkdir -p ~/.local/apps
+unzip ~/Downloads/maoxian-web-clipper-native-linux-chromium.zip -d ~/.local/apps/maoxian-web-clipper-native
+
 </code></pre>
 
-<p>Windows</p>
+<ul>
+  <li>Mac 用户，<strong>请解压到 <code>/Applications</code> 目录，以避免权限相关问题</strong>。</li>
+</ul>
 
-<pre><code class="language-shell">额，使用任何你喜欢的解压软件，把它解压到某个文件夹（由于是直接打包的文件，没有打包根文件夹）, :D
+<pre><code class="language-shell">unzip ~/Downloads/maoxian-web-clipper-native-linux-chromium.zip -d /Applications/maoxian-web-clipper-native
 </code></pre>
 
-<p>解压成功后，<strong>把本地程序移动到用户目录下，这样可避免权限相关的问题</strong>。</p>
+<ul>
+  <li>Windows 用户</li>
+</ul>
+
+<pre><code class="language-shell">额，使用任何你喜欢的解压软件，把它解压到用户目录下的某个文件夹（由于是直接打包的文件，没有打包根文件夹）, :D
+</code></pre>
 
 <h3 id="install-native-app">安装软件</h3>
 
@@ -157,21 +169,21 @@
 <p>进入你的『本地程序』文件夹里，然后：</p>
 
 <ul>
-  <li>Linux 或 Mac  直接运行 <code>./install.sh</code> 进行安装</li>
-  <li>在 Windows 上，直接双击 <code>install.bat</code> （注意：你点击后，会发现有个命令窗口跳出来，程序会进行安装，安装完成后会显示：”press any key to continue” 则直接按下 Enter 就好了。 ）</li>
+  <li>在 Linux 或 Mac 上，直接运行 <code>./install.sh</code> 进行安装</li>
+  <li>在 Windows 上，直接双击 <code>install.bat</code> （注意：你点击后，会发现有个命令窗口跳出来，程序会进行安装，安装完成后会显示：”press any key to continue” 则直接按下 Enter 键就好了。 ）</li>
 </ul>
 
-<p><strong>注意：安装过后，就不要移动，删除或重命名『本地程序』文件夹了。</strong></p>
+<p>这一步骤做的事情是：把『本地程序』的当前位置告知给浏览器。当 MaoXian 扩展需要和『本地程序』交互时，浏览器就可以找到『本地程序』的位置。所以<strong>安装过后，就不要移动，删除或重命名『本地程序』文件夹了。</strong> 如果你非要移动，或重命名『本地程序』文件夹，你需要再运行一遍安装脚本，告诉浏览器新的『本地程序』位置。</p>
 
 <h3 id="configure-download-path">配置下载路径</h3>
 
 <p>在开始使用之前，我们需要先配置，下载路径，也就是裁剪下来的文件存储的目录（等同于浏览器的下载目录）</p>
 
-<p>编辑 <code>config.yaml</code> ， （随便用一个文本编辑器就可编辑）</p>
+<p>编辑 <code>config.yaml</code> 的 <code>data_dir</code> 的值， （随便用一个文本编辑器就可编辑）</p>
 
 <p><code>config.yaml</code> 这个文件<strong>必须是 UTF-8 的编码格式</strong>。 如果你是在 Windows 上的话，别用记事本打开，找一个能正确处理换行符的编辑器（比如 <code>notepad++</code>）。并且确保你保存的编码格式为 UTF-8 （有的编辑器在 Windows 上的默认编码格式不是 UTF-8，这点需要注意）。</p>
 
-<p><strong>注意： 配置的下载路径必须真实存在，否则程序会运行启动失败</strong></p>
+<p><strong>注意： 配置的下载路径必须真实存在，『本地程序』启动时会检查该路径，不存在，则启动失败</strong></p>
 
 <p>Linux / Mac 例子</p>
 
@@ -198,7 +210,7 @@ msg_handler: 'default'
 
 <ol>
   <li>请先查看『权限』那一小节，你需要授权一个权限，根据页面提示，如果还没有授权，则点击『授予权限』按钮进行授权。</li>
-  <li>授权成功后，查看『当前状态』那一小节，如果能看到 「本地程序」的版本号，则 MaoXian 扩展已经和 「本地程序」对接上了。如果显示的是错误信息，请查看下方 <a href="#problems">常见错误</a> 小节，排查错误。</li>
+  <li>授权成功后，查看『当前状态』那一小节，如果能看到 「本地程序」的版本号，则 MaoXian 扩展已经和 「本地程序」对接上了。如果显示的是错误信息，请查看下方 <a href="#faq">常见错误</a> 小节，排查错误。</li>
   <li>确保对接上后，请勾选下方的 <strong>启用该处理程序</strong> 。</li>
 </ol>
 
@@ -226,57 +238,148 @@ msg_handler: 'default'
 
 <p>有些用户更改了 config.yaml 里的配置，却发现扩展并没有马上应用最新的配置信息。这是属于正常现象，因为『本地程序』只在浏览器启动它时，才会去读取配置。你可以到 <code>设置页面 &gt; 本地程序</code> 那里，点击『重新加载』按钮来加载最新的配置。你也可以通过重启浏览器的方法加载最新配置。</p>
 
-<h2 id="problems">常见问题</h2>
+<h2 id="faq">常见问题</h2>
 
-<p>一般情况下，当你的 ruby 版本是正确的，并且配置文件 config.yaml 里面的存储路径是真实存在的路径，「本地程序」会和 MaoXian 对接成功。如果你仔细走完了上面的安装流程，还是无法对接上的话。 请检查日志文件：tmp/app.log (在安装目录下)，使用任何文本编辑器打开即可。</p>
+<p>一般情况下，当你的 ruby 版本是正确的（大于2.4.1），并且已经将其添加到环境变量里。并且配置文件 config.yaml 里面的存储路径是真实存在的路径，「本地程序」会和 MaoXian 对接成功。如果你仔细走完了上面的安装流程，还是无法对接上的话。 请检查日志文件：tmp/app.log (在安装目录下) 是否存在，若存在则可以使用任何文本编辑器打开它进行进一步排查。</p>
 
-<p>在进行下面检查之前，你得确保你至少到过 <strong>扩展设置页面 &gt; 本地程序</strong> 页面查看过状态信息，并且其显示的是某个错误信息。</p>
+<p>在进行下面检查之前，你得确保你至少运行过安装脚本，并且到 <strong>扩展设置页面 &gt; 本地程序</strong> 页面查看过状态信息，并且其显示的是某个错误信息。</p>
 
-<p><strong>注：</strong> 当你做出修改之后，请点击扩展上的 『重新加载』按钮，该按钮会重连本地程序。</p>
+<h3 id="a">情况A：可以找到日志文件</h3>
 
-<h3 id="cannot-find-it">浏览器无法找到本地程序</h3>
+<p>找到日志文件意味着：「本地程序」已经由浏览器启动，并产生日志。</p>
 
-<p>在 Firefox 上错误信息如下：</p>
+<p>如果在日志文件中，发现错误：”<em>(./config.yaml): invalid trailing UTF-8 octet at line xxx column xxx</em>“，则表示你的配置文件的编码格式不是 UTF-8 ，则重新把配置文件 config.yaml 另存为 UTF-8 编码格式，即可修复。修复完后，在 <strong>扩展设置 &gt; 本地程序</strong> 页面上，点击『重新加载』按钮。</p>
 
-<blockquote>
-  <p>ErrorMessage: NativeApp: DisconnectErr:An unexpected error occurred</p>
-</blockquote>
+<p>如果在日志文件中，发现错误： “<em>Config Invalid, data_dir not exist: xxxxx</em>” ，则表示你配置文件 config.yaml 里面的 data_dir 配置的路径，在你的系统中是不存在的。则你需要新建对应的文件夹或者配置一个存在的路径。修复完后，在 <strong>扩展设置 &gt; 本地程序</strong> 页面上，点击『重新加载』按钮。</p>
 
-<p>这个出现的原因为，你在执行完安装步骤之后，移动、删除或重命名本地程序文件夹。导致已经安装成功的文件路径失效，浏览器就找不到本地程序了。</p>
+<p>若遇到其他错误信息，请<a href="#seeking-help">寻求帮助</a></p>
 
-<p>若是如此，则重新进行安装步骤即可，重新安装将会覆盖掉已经失效的文件路径。</p>
+<h3 id="b">情况B：找不到日志文件</h3>
 
-<h3 id="cannot-connect">浏览器无法连接『本地程序』</h3>
+<p>请根据 <strong>扩展设置 &gt; 本地程序</strong> 页面上的错误信息，对应下文进行排查。</p>
 
-<p>如果你在设置页面可以如下错误信息，则表明浏览器无法连接『本地程序』，这种情况下，是不会有日志生成的。</p>
+<h4 id="firefox-">Firefox （火狐）浏览器</h4>
 
-<blockquote>
-  <p>ErrorMessage: NativeApp: DisconnectErr:Specified native messaging host not found</p>
-</blockquote>
-
-<p>或</p>
+<p>错误信息：</p>
 
 <blockquote>
   <p>ErrorMessage: NativeApp: DisconnectErr:No such native application maoxian_web_clipper_native</p>
 </blockquote>
 
-<p>可能原因为：</p>
+<p>可能原因：</p>
 
-<h4 id="chromium--firefox-cannot-connect-other-browsers">基于 Chromium 或 Firefox 开发的浏览器，没有对一些目录做兼容。{#cannot-connect-other-browsers}</h4>
+<ul>
+  <li>你还没有安装「本地程序」（即没有运行安装脚本），【请先安装】</li>
+  <li>你的浏览器是基于 Firefox 开发的浏览器，并且它没有对一些目录做兼容，你需要按照这个教程来：<a href="./install-on-other-browsers-zh-CN.html">基于Chromium 或 Firefox 开发的浏览器如何安装『本地程序』</a>。</li>
+</ul>
 
-<p>请查看<a href="./install-on-other-browsers-zh-CN.html">基于Chromium 或 Firefox 开发的浏览器如何安装『本地程序』</a></p>
+<hr />
 
-<h4 id="connot-connect-ruby">浏览器找不到 ruby</h4>
+<p>错误信息：</p>
 
-<p>在 Firefox 上表现为：</p>
+<blockquote>
+  <p>ErrorMessage: NativeApp: DisconnectErr:An unexpected error occurred</p>
+</blockquote>
+
+<p>可能原因：</p>
+
+<ul>
+  <li>你安装过后，「本地程序」文件夹的位置或名字发生了变化。 【请再运行一次安装脚本】</li>
+</ul>
+
+<hr />
+
+<p>错误信息：</p>
 
 <blockquote>
   <p>ErrorMessage: Unknown Error</p>
 </blockquote>
 
+<p>可能原因：</p>
+
+<ul>
+  <li>浏览器找不到 ruby 【请确保 ruby 已安装，并已经添加到环境变量，详见：<a href="#couldnot-find-ruby">确定和解决浏览器找不到 ruby</a>】</li>
+  <li>浏览器无权访问「本地程序」【请检查「本地程序」的路径权限，详见：<a href="#permission-denied">确定是否「本地程序」路径有权限问题</a>】</li>
+</ul>
+
+<hr />
+
+<p>错误信息：</p>
+
+<blockquote>
+  <p>ErrorMessage: LogErr, Permission denied @ rb_sysopen - /xxx/xxx/xxx/tmp/app.log</p>
+</blockquote>
+
+<p>原因：</p>
+
+<ul>
+  <li>ruby 无权限创建 logger 文件【请检查「本地程序」的路径权限】</li>
+</ul>
+
+<h4 id="chromiumchrome-">Chromium/Chrome （谷歌）浏览器</h4>
+
+<p>错误信息：</p>
+
+<blockquote>
+  <p>ErrorMessage: this.API.connectNative is not a function</p>
+</blockquote>
+
+<p>原因：</p>
+
+<ul>
+  <li>有时候 Chromium/Chrome 在你授权给 「本地程序」通信的权限后，该权限无法立即生效。【请重启浏览器，以使其生效】</li>
+</ul>
+
+<hr />
+
+<p>错误信息：</p>
+
+<blockquote>
+  <p>ErrorMessage: NativeApp: DisconnectErr:Specified native messaging host not found.</p>
+</blockquote>
+
+<p>可能原因：</p>
+
+<ul>
+  <li>你还没有安装「本地程序」（即没有运行安装脚本），【请先安装】</li>
+  <li>你安装过后，「本地程序」文件夹的位置或名字发生了变化。 【请再运行一次安装脚本】</li>
+  <li>你的浏览器是基于 Chromium 开发的浏览器，并且其没有对一些目录做兼容，你需要按照这个教程来：<a href="./install-on-other-browsers-zh-CN.html">基于Chromium 或 Firefox 开发的浏览器如何安装『本地程序』</a>。</li>
+</ul>
+
+<hr />
+
+<p>错误信息：</p>
+
+<blockquote>
+  <p>ErrorMessage: NativeApp: DisconnectErr:Native host has exited.</p>
+</blockquote>
+
+<p>可能原因：</p>
+
+<ul>
+  <li>浏览器找不到 ruby 【请确保 ruby 已安装，并已经添加到环境变量，详见：<a href="#couldnot-find-ruby">确定和解决浏览器找不到 ruby</a>】</li>
+  <li>浏览器无权访问「本地程序」【请检查「本地程序」的路径权限，详见：<a href="#permission-denied">确定是否「本地程序」路径有权限问题</a>】</li>
+</ul>
+
+<hr />
+
+<p>错误信息：</p>
+
+<blockquote>
+  <p>ErrorMessage: LogErr, Permission denied @ rb_sysopen - /xxx/xxx/xxx/tmp/app.log</p>
+</blockquote>
+
+<p>原因：</p>
+
+<ul>
+  <li>ruby 无权限创建 logger 文件【请检查「本地程序」的路径权限】</li>
+</ul>
+
+<h4 id="couldnot-find-ruby">确定和解决浏览器找不到 ruby</h4>
+
 <p>1) ruby 安装不正确。</p>
 
-<p>请确保当你运行 <code>ruby -v</code> 的时候，可以得到正确的 ruby 版本。如若不是，则重新安装即可。</p>
+<p>请确保当你运行 <code>ruby -v</code> 的时候，可以得到正确的 ruby 版本。如若不是，则重新安装即可。请确保 ruby 已经添加到环境变量里。</p>
 
 <p>2) 虽然 ruby 安装成功，但是浏览器无法找到它。</p>
 
@@ -284,41 +387,38 @@ msg_handler: 'default'
 
 <p><strong>如何确认</strong></p>
 
-<p>可以通过从命令行启动浏览器的方式来确认，比如运行 <code>chromium-browser</code> 命令，然后再到 <strong>扩展设置页面 &gt; 本地程序</strong> 页面，再查看命令行的输出，可以看到类似 “/usr/bin/env: ‘ruby’: No such file or directory” 这样的错误信息。</p>
+<p>可以通过从命令行启动浏览器的方式来确认，比如运行 <code>/usr/bin/chromium-browser</code> 命令，然后再到 <strong>扩展设置页面 &gt; 本地程序</strong> 页面，再查看命令行的输出，可以看到类似 “/usr/bin/env: ‘ruby’: No such file or directory” 这样的错误信息。</p>
 
 <p><strong>如何解决</strong></p>
 
 <p>把 main.rb (安装目录下) 第一行的 “/usr/bin/env ruby” 改成 ruby 的绝对路径，比如 “/home/jack/ruby-2.5.0/bin/ruby”。 或者是创建一个软链接到 /usr/bin 目录下，比如： <code>ln -s /home/jack/ruby-2.5.0/bin/ruby /usr/bin/ruby</code>。</p>
 
-<h3 id="permission-denied">本地程序的位置，浏览器没有权限访问</h3>
+<h4 id="permission-denied">确定是否「本地程序」路径有权限问题</h4>
 
-<p>在 Firefox 上表现为：</p>
+<p>0）先关闭浏览器。</p>
 
-<blockquote>
-  <p>ErrorMessage: LogErr, Permission denied @ rb_sysopen - /xxx/xxx/xxx/tmp/app.log</p>
-</blockquote>
+<p>1）找到浏览器的位置，比如在 Linux 上通过 <code>whereis chromium</code>。</p>
 
-<p>遇到这种，请把你的本地程序放到，当前用户的目录下，再重新执行安装步骤。</p>
+<p>2） 使用命令行的方式启动浏览器，如：运行命令 <code>/usr/bin/chromium</code> ，启动浏览器，再到 MaoXian 设置页面查看「本地程序」的状态，观察到错误后，查看命令行有没有相关错误信息。</p>
 
-<h3 id="disconnected">浏览器与本地程序的连接已断开</h3>
+<p>如果有权限问题，一般可以观察到： <code>Operation not permitted</code> 或者 <code>Permission denied</code> 语句，如下面的 Chromium 的命令行输出：</p>
 
-<p>置页面的错误信息：</p>
+<pre><code class="language-shell">shell-init: error retrieving current directory: getcwd: cannot access parent directories: Operation not permitted
+ruby: Operation not permitted -- /Users/test/Downloads/maoxian-web-clipper-native/main.rb (LoadError)
+</code></pre>
 
-<blockquote>
-  <p>NativeApp: DisconnectErr:Error when communicating with the native messaging host.</p>
-</blockquote>
+<p>一般为整个路径的某个目录权限不允许，则把本地程序复制到别的地方（参考<a href="#extract-package">解压软件包</a>那一小节），即可修复。</p>
 
-<p>这个错误指的是由于未知的错误，浏览器断开了和「本地程序」的连接。这个说明浏览器已经可以找到「本地程序」，并且可以连接上，此时请查看日志文件 <code>tmp/app.log</code> 找到导致连接断开的错误信息，再参照下一小节找到解决方法。</p>
+<h3 id="seeking-help">寻求帮助？</h3>
 
-<h3 id="configuration-error">配置文件的问题</h3>
-
-<p>如果在日志文件中，发现错误：”(./config.yaml): invalid trailing UTF-8 octet at line xxx column xxx”，则表示你的配置文件的编码格式不是 UTF-8 ，则重新把配置文件 config.yaml 另存为 UTF-8 编码格式，即可修复。</p>
-
-<p>如果在日志文件中，发现错误： “Config Invalid, data_dir not exist: xxxxx” ，则表示你配置文件 config.yaml 里面的 data_dir 配置的路径，在你的系统中是不存在的。则重新配置即可。</p>
-
-<h3 id="unknown-error">还是不行？</h3>
-
-<p>可能发生 Bug 了。你可以用 <code>ruby -v</code> 检查下 ruby 版本， 若版本比 <code>2.4.1</code> 低，则重新安装更高的版本，重启浏览器，再试一下，还是不行的话，请到 <a href="https://github.com/mika-cn/maoxian-web-clipper/issues">项目 issue 页</a>，给开发者提个issue, 并在 issue 里粘贴上 app.log 里面的内容。</p>
+<ul>
+  <li>请到 <a href="https://github.com/mika-cn/maoxian-web-clipper/issues">项目 issue 页</a> ，先进行搜索，看有无相关问题。</li>
+  <li>如果搜索完还无法解决，请在 <a href="https://github.com/mika-cn/maoxian-web-clipper/issues">项目 issue 页</a> ，给开发者提个issue，或者发邮件到（i [DOT] mika [AT] tutanota [DOT] com 请将 [DOT] 替换为英文句号：”.”，将[AT] 替换为邮件符号：”@”，并删除所有空格），若你无法访问项目 issue 页面（无法搜索相关问题），也可通过发送邮件寻求帮助。</li>
+  <li>为了更有效地沟通，请提供以下信息：</li>
+  <li>环境信息：系统名字，浏览器名字，ruby 版本，「本地程序」版本。</li>
+  <li><em>设置 &gt; 本地程序</em> 页面上的错误信息。</li>
+  <li>能否查看到日志文件。若有，记得把日志内容带上。</li>
+</ul>
 
 <hr />
 <p><a href="../index-zh-CN.html">首页</a></p>
