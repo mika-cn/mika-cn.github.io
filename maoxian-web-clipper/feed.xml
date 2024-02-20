@@ -6,7 +6,14 @@
   </author>
   <id>https://mika-cn.github.io/maoxian-web-clipper/feed.xml</id>
   <title>MaoXian Web Clipper</title>
-  <updated>2023-12-24T15:56:40+08:00</updated>
+  <updated>2024-02-20T13:02:24+08:00</updated>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0443</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0443"/>
+    <title>MaoXian Web Clipper 0.4.43 is released</title>
+    <updated>2024-02-20T13:02:01+08:00</updated>
+    <dc:date>2024-02-20T13:02:01+08:00</dc:date>
+  </entry>
   <entry>
     <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0442</id>
     <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0442"/>
@@ -70,12 +77,5 @@
     <updated>2023-07-26T21:00:00+08:00</updated>
     <dc:date>2023-07-26T21:00:00+08:00</dc:date>
   </entry>
-  <entry>
-    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0433</id>
-    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0433"/>
-    <title>MaoXian Web Clipper 0.4.33 is released</title>
-    <updated>2023-07-23T17:00:00+08:00</updated>
-    <dc:date>2023-07-23T17:00:00+08:00</dc:date>
-  </entry>
-  <dc:date>2023-12-24T15:56:40+08:00</dc:date>
+  <dc:date>2024-02-20T13:02:24+08:00</dc:date>
 </feed>
