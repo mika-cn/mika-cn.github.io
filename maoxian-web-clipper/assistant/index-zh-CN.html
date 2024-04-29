@@ -730,12 +730,6 @@ https://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
   </thead>
   <tbody>
     <tr>
-      <td>format</td>
-      <td>字符串</td>
-      <td>存储格式，只能为 <code>html</code> 或 <code>md</code></td>
-      <td>取决于你的设置（见扩展设置页面）</td>
-    </tr>
-    <tr>
       <td>title</td>
       <td>选择器</td>
       <td>用于选中包含标题的元素</td>
@@ -759,7 +753,6 @@ https://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
 <p><strong>主要应用场景：</strong></p>
 
 <ul>
-  <li>通过设置 format 来实现：不同网站的网页使用不同的存储格式。</li>
   <li>通过设置 title 来解决网页标题和内容标题不一致的问题（MaoXian 默认会使用网页的标题作为表单的标题输入值）。</li>
   <li>通过设置 category 来为不同的网站的网页设置不同的默认分类。</li>
   <li>通过设置 tagstr 来为不同的网站的网页，打上不同的默认标签。</li>
@@ -772,7 +765,6 @@ https://mika-cn.github.io/maoxian-web-clipper/assistant/plans/zh/index.json
 <pre><code class="language-json">{
   ...
   "form": {
-    "format": "md",
     "title": "main h1",
     "category": "news/read-later",
     "tagstr": "international,freedom-news"
