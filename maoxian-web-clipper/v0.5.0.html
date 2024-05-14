@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="本次不兼容更新的详情" />
+    <title>关于 v0.5.0 的不兼容更新</title>
+    <link rel="icon" type="image/png" href="imgs/logo.png" />
+    <link rel="stylesheet" type="text/css" href="css/markdown.css" />
+    <style>
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="title"><h1>关于 v0.5.0 的不兼容更新</h1></div>
+      <div class="content">
+<h2 id="section">毛线助手的不兼容更新</h2>
+
+<p>新版的毛线助手为了支持『与存储格式』相关的动作。即只有存储格式匹配时，相关动作才会执行。我们把各个动作归入 <code>actions</code> 属性中。</p>
+
+<p>『公开的 Plan』已经全部修改为新格式，若你使用到了『毛线助手』请把 MaoXian 升级到新版本，并在『毛线助手』设置页，更新『公开的 Plan』。如果你编写了『自定义 Plan』也需要改写成新的格式。</p>
+
+<h3 id="section-1">值没有变化的动作</h3>
+
+<p>旧版本：</p>
+
+<pre><code class="language-json">{
+  "name": "old-version-plan",
+  "version": 19890604,
+  "pattern": "https://a.org/posts/*",
+  "hide": [".ad", ".read-more"],
+  "hideSibling": ".main",
+  "show": ".comment-details",
+}
+</code></pre>
+
+<p>新版本：</p>
+
+<pre><code class="language-json">{
+  "name": "old-version-plan",
+  "version": 20240513,
+  "pattern": "https://a.org/posts/*",
+  "actions": [
+    {"hide": [".ad", ".read-more"]},
+    {"hideSibling": ".main"},
+    {"show": ".comment-details"}
+  ]
+}
+</code></pre>
+
+<p><code>pick</code>，<code>form</code>，<code>config</code> 的值也和旧版本的一致。</p>
+
+<h3 id="hideexcept-">hideExcept 动作</h3>
+
+<p>新版中 <code>hideExcept</code> 动作，原先是支持同时提供多个值，在新版中只能提供一个值。若需要多个值，则填写多次。如下：</p>
+
+<p>旧版本：</p>
+
+<pre><code class="language-json">{
+  ...
+  "hideExcept" [
+    {"inside": ".post", "except": [".post-header", ".post-content"]},
+    {"inside": ".comments", "except": [".comment-status", "comment-body"]}
+  ]
+}
+</code></pre>
+
+<p>新版本：</p>
+
+<pre><code class="language-json">{
+  ...
+  "actions" [
+    {"hideExcept": {"inside": ".post", "except": [".post-header", ".post-content"]}},
+    {"hideExcept": {"inside": ".comments", "except": [".comment-status", "comment-body"]}}
+  ]
+}
+</code></pre>
+
+<h3 id="chattr-">chAttr 动作</h3>
+
+<p>新版本中 <code>chAttr</code> 动作，原先是支持同时提供多个值，在新版中只能提供一个值。若需要多个值，则填写多次。如下：</p>
+
+<p>旧版本：</p>
+
+<pre><code class="language-json">{
+  ...
+  "chAttr": [
+    {"pick": "img", "type": "assign.from.self-attr", "attr": "src", "tAttr": "data-src"},
+    {"pick": "video", "type": "assign.from.value", "attr": "preload", "value": "none"},
+  ]
+}
+</code></pre>
+
+<p>新版本：</p>
+
+<pre><code class="language-json">{
+  ...
+  "actions" [
+    {"chAttr": {"pick": "img", "type": "assign.from.self-attr", "attr": "src", "tAttr": "data-src"}},
+    {"chAttr": {"pick": "video", "type": "assign.from.value", "attr": "preload", "value": "none"}},
+  ]
+}
+</code></pre>
+
+<h3 id="section-2">文档</h3>
+
+<p>毛线助手的文档，已做对应的修改，请查看<a href="assistant/index-zh-CN.html">这里</a></p>
+
+<h2 id="section-3">编程接口的不兼容更新</h2>
+
+<p>此次更新，我们把 <code>selecting</code> 和 <code>selected</code> 状态归为一个状态： <code>selecting</code>。如下：</p>
+
+<p>旧版本：</p>
+
+<pre><code class="language-graph">---&gt; ready
+       |
+   +-----&gt; actived* --&gt;  selecting --&gt; selected  --&gt; confirmed* --&gt; clipping --&gt; clipped* --&gt; saving --&gt; completed
+   |          |              |            |              |                                                  |
+ idle &lt;----------------------+---------------------------+--------------------------------------------------+
+</code></pre>
+
+<p>新版本：</p>
+
+<pre><code class="language-graph">---&gt; ready
+       |
+   +-----&gt; actived* --&gt;  selecting  --&gt; confirmed* --&gt; clipping --&gt; clipped* --&gt; saving --&gt; completed
+   |          |              |               |                                                  |
+ idle &lt;----------------------+---------------+--------------------------------------------------+
+</code></pre>
+
+<p>另：</p>
+
+<ul>
+  <li>在新版中： <code>mx-wc.selecting</code> 和 <code>mx-wc.idle</code> 事件是带消息的。</li>
+  <li>在新版中： <code>mx-wc.confirmed</code> 事件的消息，也有变更，多了一个 <code>config</code> 属性。</li>
+</ul>
+
+<p>接口文档也已经更新，请查看<a href="api-zh-CN.html">这里</a></p>
+
+<hr />
+
+<p><a href="index-zh-CN.html">首页</a></p>
+</div>
+    </div>
+  </body>
+</html>
+
