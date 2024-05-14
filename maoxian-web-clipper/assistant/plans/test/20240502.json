@@ -1,0 +1,123 @@
+[
+  {
+    "name": "mx.pc/hide-except",
+    "pattern": "http://*.pc/maoxian-web-clipper/**/test-hide-except.html",
+    "version": 20240502,
+    "actions": [
+      {
+        "hideExcept": {
+          "inside": "pre",
+          "except": [
+            "code"
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "mx.pc/hg-img",
+    "pattern": "http://*.pc/maoxian-web-clipper/**/test-hq-img.html",
+    "version": 20240502,
+    "actions": [
+      {
+        "chAttr": {
+          "type": "split2list.add",
+          "pick": "div.t0",
+          "attr": "class",
+          "value": "actived"
+        }
+      },
+      {
+        "chAttr": {
+          "type": "assign.from.self-attr",
+          "pick": "div.t1 img",
+          "attr": "src",
+          "tAttr": "hq-src"
+        }
+      },
+      {
+        "chAttr": {
+          "pick": "div.t2 img",
+          "action": {
+            "type": "replace.last-match",
+            "attr": "src",
+            "subStr": "thumb",
+            "newStr": "hq"
+          }
+        }
+      },
+      {
+        "chAttr": {
+          "pick": "div.t3 img",
+          "action": [
+            {
+              "type": "assign.from.parent-attr",
+              "attr": "src",
+              "tAttr": "href"
+            }
+          ]
+        }
+      }
+    ]
+  },
+  {
+    "name": "mx.pc/iframe",
+    "pattern": "http://*.pc/maoxian-web-clipper/**/iframe*",
+    "version": 20240502,
+    "actions": [
+      {
+        "chAttr": {
+          "type": "assign.from.self-attr",
+          "pick": "img",
+          "attr": "src",
+          "tAttr": "hq-src"
+        }
+      }
+    ]
+  },
+  {
+    "name": "mx.pc/mx-index",
+    "pattern": "http://*.pc/maoxian-web-clipper/index*.html",
+    "version": 20240502,
+    "actions": [
+      {
+        "hide": "ul"
+      },
+      {
+        "pick": ".main"
+      }
+    ]
+  },
+  {
+    "name": "mx.pc/blog-post",
+    "pattern": "http://*.pc/blog/**/*/*/*/*/*.html",
+    "version": 20240502,
+    "actions": [
+      {
+        "hide": [
+          "header"
+        ]
+      },
+      {
+        "pick": [
+          ".page-content"
+        ]
+      }
+    ]
+  },
+  {
+    "name": "mx.pc/test-tab",
+    "pattern": "http://*.pc/maoxian-web-clipper/**/test-tab.html",
+    "version": 20240502,
+    "actions": [
+      {
+        "chAttr": {
+          "type": "split2list.add",
+          "pick": ".tab-content",
+          "attr": "class",
+          "value": "actived"
+        }
+      }
+    ]
+  }
+]
