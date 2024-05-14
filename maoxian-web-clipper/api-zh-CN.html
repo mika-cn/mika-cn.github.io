@@ -32,11 +32,12 @@
   <li><a href="#publish-events">MaoXian 发出的事件 </a>
     <ul>
       <li><a href="#ready">事件：mx-wc.ready </a></li>
+      <li><a href="#actived">事件： mx-wc.actived </a></li>
       <li><a href="#selecting">事件： mx-wc.selecting </a></li>
-      <li><a href="#selected">事件： mx-wc.selected </a></li>
       <li><a href="#confirmed">事件： mx-wc.confirmed </a></li>
       <li><a href="#clipping">事件： mx-wc.clipping </a></li>
       <li><a href="#clipped">事件： mx-wc.clipped </a></li>
+      <li><a href="#saving">事件： mx-wc.saving </a></li>
       <li><a href="#completed">事件： mx-wc.completed </a></li>
       <li><a href="#idle">事件： mx-wc.idle </a></li>
     </ul>
@@ -138,9 +139,9 @@
 
 <pre><code class="language-graph">---&gt; ready
        |
-   +-----&gt; actived* --&gt;  selecting --&gt; selected --&gt; confirmed* --&gt; clipping --&gt; clipped* --&gt; saving --&gt; completed
-   |          |              |             |            |                                                  |
- idle &lt;----------------------+-------------+------------+--------------------------------------------------+
+   +-----&gt; actived* --&gt;  selecting  --&gt; confirmed* --&gt; clipping --&gt; clipped* --&gt; saving --&gt; completed
+   |          |              |               |                                                  |
+ idle &lt;----------------------+---------------+--------------------------------------------------+
 </code></pre>
 
 <p>上方的图，箭头为状态的转变方向，带星号（<code>*</code>）的状态，为“可让出“状态。当一个状态被设置为“让出“时，MaoXian 会在这些状态事件发生后，停下来，等待对方的回应。</p>
@@ -171,21 +172,15 @@
     </tr>
     <tr>
       <td>mx-wc.selecting</td>
-      <td>否</td>
-      <td>进入自由选择模式</td>
-      <td>扩展激活后，便会进入自由选择模式，触发该事件</td>
-    </tr>
-    <tr>
-      <td>mx-wc.selected</td>
-      <td>否</td>
-      <td>选中某个选区</td>
-      <td>点击选中某个区域后，发出该事件</td>
+      <td>是</td>
+      <td>在选择裁剪区域时</td>
+      <td>选择裁剪区域时，触发该事件</td>
     </tr>
     <tr>
       <td>mx-wc.confirmed</td>
-      <td>否</td>
+      <td>是</td>
       <td>确认某个选区</td>
-      <td>在选中区域后，按 Enter 键，发出该事件</td>
+      <td>在选中某个区域后，按 Enter 键，发出该事件</td>
     </tr>
     <tr>
       <td>mx-wc.clipping</td>
@@ -388,39 +383,63 @@
 
 <hr />
 
-<h3 id="selecting">事件： mx-wc.selecting</h3>
+<h3 id="actived">事件： mx-wc.actived</h3>
 
-<p>当进入「自由选择」模式时，就会触发该事件，如：</p>
+<p>通过点击下拉菜单的裁剪选项，或通过快捷键触发裁剪后，就会立刻触发该事件。该事件为整个裁剪流程的第一个事件。
+该事件为『可让出』事件。</p>
+
+<p>可配合其他事件实现：</p>
 
 <ul>
-  <li>当用户点击「裁剪」</li>
-  <li>通过快捷键 <kbd>C</kbd> 进入裁剪时</li>
-  <li>从「选中模式」按 <kbd>ESC</kbd> 退回来</li>
-  <li>从填写表单，按 <kbd>ESC</kbd>，也会退回来</li>
+  <li><a href="#overwrite-config">重写某些配置项</a></li>
+  <li><a href="#set-form-inputs">设置表单的输入值</a></li>
+  <li><a href="#set-form-options">预先设置表单输入项的可选值</a></li>
 </ul>
 
-<hr />
+<h3 id="selecting">事件： mx-wc.selecting</h3>
 
-<h3 id="selected">事件： mx-wc.selected</h3>
+<p>在选择裁剪区时，就会触发该事件，如：</p>
 
-<p>当进入「选中模式」时，触发该事件，也就是你点击某个选区后，就会触发。注意的是该事件不代表用户选择的裁剪区域，也可能是用户想删除的区域，所以不建议监听此事件。</p>
+<ul>
+  <li>当开始裁剪时（点击『裁剪』菜单或通过快捷键触发），UI 加载完成后。</li>
+</ul>
+
+<p>注： 自 MaoXian V0.5.0 版本起，从我们删除了『选中』（selected）状态，即原来的 selected 和 selecting 并成一个状态，产生的效果是： 在一次裁剪中，这个事件只会触发一次。</p>
+
+<p>该事件带有消息， 消息结构如下：</p>
+
+<pre><code class="language-json">{
+  "config": {
+    "saveFormat": "html"
+  }
+}
+</code></pre>
+<ul>
+  <li>config.saveFormat ，本次裁剪的存储格式</li>
+</ul>
 
 <hr />
 
 <h3 id="confirmed">事件： mx-wc.confirmed</h3>
 
-<p>从「选中模式」按下 <kbd>Enter</kbd> 后，会触发该事件，该事件带有消息。</p>
+<p>从「选中模式」按下 <kbd>Enter</kbd> 后，会触发该事件。</p>
 
-<p>消息结构如下：</p>
+<p>该事件带有消息， 消息结构如下：</p>
 
 <pre><code class="language-json">{
+  "config": {
+    "saveFormat": "html"
+  },
   "elem": {
     "selector": ".mx-wc-confirmed-elem"
   }
 }
 </code></pre>
 
-<p>消息表示，当前确认的裁区元素，其中的 <code>selector</code> 为 CSS 选择器。</p>
+<ul>
+  <li>config.saveFormat ，本次裁剪的存储格式</li>
+  <li>elem ，当前确认的裁区元素，其中的 <code>selector</code> 为 CSS 选择器。</li>
+</ul>
 
 <hr />
 
@@ -432,7 +451,7 @@
 
 <h3 id="clipped">事件： mx-wc.clipped</h3>
 
-<p>在裁剪结束时候，会发出该事件，该事件带有消息。</p>
+<p>在裁剪操作完成的时候，会发出该事件，该事件带有消息。</p>
 
 <p>消息结构如下：</p>
 
@@ -479,7 +498,7 @@
     <tr>
       <td>taskType</td>
       <td>任务类型</td>
-      <td>目前有 <code>mainFileTask</code>, <code>imageFileTask</code>, <code>styleFileTask</code>, <code>fontFileTask</code>, <code>frameFileTask</code>, <code>infoFileTask</code> 以及 <code>titleFileTask</code></td>
+      <td>目前有 <code>mainFileTask</code>, <code>imageFileTask</code>, <code>styleFileTask</code>, <code>fontFileTask</code>, <code>frameFileTask</code>, <code>infoFileTask</code> ，<code>audioFileTask</code>，<code>videoFileTask</code>，<code>textTrackFileTask</code>，<code>miscFileTask</code> 以及 <code>titleFileTask</code></td>
     </tr>
     <tr>
       <td>type</td>
@@ -531,6 +550,10 @@
 
 <p>如果你要存储这些 task，那么对于 type 为 <code>text</code> 的 task，则直接存储即可，而对于 type 为 <code>url</code> 的 task，你需要通过它的 url 先把对应的资源下载下来，再进行存储。</p>
 
+<h3 id="saving">事件： mx-wc.saving</h3>
+
+<p>对裁剪结果进行保存时，发出该事件。</p>
+
 <hr />
 
 <h3 id="completed">事件： mx-wc.completed</h3>
@@ -571,11 +594,23 @@
 
 <p>一般通过监听该事件，做一些撤销或收尾的工作。</p>
 
+<p>该事件带有消息， 消息结构如下：</p>
+
+<pre><code class="language-json">{
+  "config": {
+    "saveFormat": "html"
+  }
+}
+</code></pre>
+<ul>
+  <li>config.saveFormat ，本次裁剪的存储格式</li>
+</ul>
+
 <h2 id="listen-events">MaoXian 监听的事件</h2>
 
 <h3 id="set-form-inputs">事件： mx-wc.set-form-inputs</h3>
 
-<p>该事件用于预设置表单的输入值，MaoXian 会在显示表单的时候，自动帮你输入这些预设的值。一般我们都会在监听到 <code>mx-wc.actived</code> 或 <code>mx-wc.selecting</code> 事件后，发出该事件。</p>
+<p>该事件用于预设置表单的输入值，MaoXian 会在显示表单的时候，自动帮你输入这些预设的值。在监听到 <code>mx-wc.actived</code> 事件后，发出该事件。</p>
 
 <p>消息结构如下：</p>
 
@@ -620,7 +655,7 @@
 
 <h3 id="set-form-options">事件： mx-wc.set-form-options</h3>
 
-<p>该事件用于预先设置表单输入项的可选值，这些可选词会被用于自动补全。一般我们都会在监听到 <code>mx-wc.actived</code> 或 <code>mx-wc.selecting</code> 事件后，发出该事件。</p>
+<p>该事件用于预先设置表单输入项的可选值，这些可选词会被用于自动补全。在监听到 <code>mx-wc.actived</code> 事件后，发出该事件。</p>
 
 <p>消息结构如下：</p>
 
@@ -669,7 +704,7 @@
 
 <h3 id="select-elem">事件： mx-wc.select-elem</h3>
 
-<p>该事件用于选择某个元素，相当于你点击了某个元素。 一般我们会在监听到 <code>mx-wc.selecting</code> 事件后，发送出该事件。</p>
+<p>该事件用于选择某个元素，相当于你点击了某个元素。 在监听到 <code>mx-wc.selecting</code> 事件后，发送出该事件。</p>
 
 <p>消息结构如下：</p>
 
@@ -688,7 +723,7 @@
 
 <h3 id="confirm-elem">事件： mx-wc.confirm-elem</h3>
 
-<p>该事件用于选择某个元素，并且做了确认（直接到达输入表单信息那一步）。一般我们会在监听到 <code>mx-wc.selecting</code> 事件后，发送出该事件。</p>
+<p>该事件用于选择某个元素，并且做了确认（直接到达输入表单信息那一步）。在监听到 <code>mx-wc.selecting</code> 事件后，发送出该事件。</p>
 
 <p>消息结构如下：</p>
 
@@ -714,7 +749,7 @@
 
 <h3 id="clip-elem">事件： mx-wc.clip-elem</h3>
 
-<p>该事件用于选中某个元素，并立即对其进行裁剪。</p>
+<p>该事件用于选中某个元素，并立即对其进行裁剪。在监听到 <code>mx-wc.selecting</code> 事件后，发送出该事件。</p>
 
 <p>消息结构如下：</p>
 
