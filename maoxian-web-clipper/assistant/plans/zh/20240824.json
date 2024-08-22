@@ -416,7 +416,7 @@
   {
     "name": "wixin-gh",
     "pattern": "https://mp.weixin.qq.com/s/*",
-    "version": 20240508,
+    "version": 20240824,
     "actions": [
       {
         "hide": [
