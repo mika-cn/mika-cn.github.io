@@ -31,6 +31,11 @@
       <li><a href="#action-hideSibling">hideSibling 动作的使用 </a></li>
       <li><a href="#action-hideExcept">hideExcept 动作的使用 </a></li>
       <li><a href="#action-chAttr">chAttr 动作的使用 </a></li>
+      <li><a href="#action-exec">exec 动作的使用 </a>
+        <ul>
+          <li><a href="#user-script">用户脚本 </a></li>
+        </ul>
+      </li>
       <li><a href="#action-formula">formula 动作的使用 </a></li>
       <li><a href="#action-pick">pick 或 select 动作的使用 </a></li>
       <li><a href="#action-confirm">confirm 动作的使用 </a></li>
@@ -452,6 +457,11 @@
       <td>chAttr</td>
       <td>对象</td>
       <td>用于修改节点的属性值，提供了多种修改属性的方式，详情请看下文</td>
+    </tr>
+    <tr>
+      <td>exec</td>
+      <td>对象</td>
+      <td>用于执行用户脚本（即用户自己编写或下载到的脚本）</td>
     </tr>
   </tbody>
 </table>
@@ -940,6 +950,100 @@
 </code></pre>
 
 <p>上面的例子会把 “type” 属性的值设置为 “image/svg”。</p>
+
+<h3 id="action-exec">exec 动作的使用</h3>
+
+<p>该动作用于执行用户脚本，用户可自己编写一些脚本，通常用于对网页做一些复杂的修改，然后使用该动作，指定要执行的脚本。</p>
+
+<p>例子：</p>
+
+<pre><code class="language-json">{
+  ...
+  "actioins": [{
+    "exec": {
+      "script": "loadLazyImg",
+      "args": ["article"],
+      "when": "selecting",
+      "once": true
+    }
+  }]
+}
+</code></pre>
+
+<p>上例中</p>
+
+<ul>
+  <li>script 必填， 用于指定要执行的脚本的名字。</li>
+  <li>args  选填， 用于执行脚本时，传入的参数。</li>
+  <li>when  选填，用于指定触发时机，对应于 MaoXian 事件，可选值为：”actived”, “selecting”, “idle”，默认为 “selecting”。</li>
+  <li>once  选填，用于指定是否触发单次。默认为 false，当为 true 时，即使同一个事件发生多次，也只会执行一次。</li>
+</ul>
+
+<p>三个触发时机：</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>事件</th>
+      <th>触发顺序</th>
+      <th>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>actived</td>
+      <td>正序</td>
+      <td>当扩展进入裁剪流程时，该事件就会触发</td>
+    </tr>
+    <tr>
+      <td>selecting</td>
+      <td>正序</td>
+      <td>当裁剪流程进入到筐选要裁剪的区域时，该事件就会触发</td>
+    </tr>
+    <tr>
+      <td>idle</td>
+      <td>逆序</td>
+      <td>当裁剪完成或取消时，该事件触发，通常可在此时做一些收尾的动作（比如：撤销对网页的更改）。</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>触发顺序是指，当同一事件上，已经定义了多个动作时（如：A, B, C）。这些动作的触发顺序。</p>
+
+<ul>
+  <li>正序是指和定义的顺序相同，先定义的动作先触发（如：A, B, C）</li>
+  <li>逆序是指和定义的顺序相反，先定义的动作后触发（如：C, B, A）</li>
+</ul>
+
+<h4 id="user-script">用户脚本</h4>
+
+<p>毛线用户脚本的格式很简单，就是在普通脚本最前面，定义了一些元信息。其中 <code>@name</code>、 <code>@version</code>、 <code>@author</code> 和 <code>@description</code> 是必填的元信息，如下例子：</p>
+
+<pre><code class="language-javascript">//===ScriptMetas==&gt;
+// @name     loadLazyImg
+// @version  1.0.0
+// @author   Me
+// @description Load these lazy images without the need to scroll the whole page
+//&lt;==ScriptMetas===
+
+
+function loadLazyImg(containerSelector) {
+  const container = document.querySelector(containerSelector);
+  if (container) {
+    // load lazy images inside container
+  }
+}
+
+function main() {
+  // 用户在『毛线助手』传入的参数，可通过 args 变量获得。
+  // 假设调用的 Plan ，是上方 exec 的那个例子，此处 args 的值为： ["article"]。
+  loadLazyImg(...args);
+}
+
+main();
+</code></pre>
+
+<p>你可以通过 <strong>设置 &gt; 用户脚本</strong> 页面，把你编写的用户脚本，同步到 MaoXian 扩展里，同步完后，就可以在『MaoXian 助手』里使用。</p>
 
 <h3 id="action-formula">formula 动作的使用</h3>
 
