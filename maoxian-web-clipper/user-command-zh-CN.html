@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="使用用户命令，自定义裁剪参数" />
+    <title>用户命令</title>
+    <link rel="icon" type="image/png" href="imgs/logo.png" />
+    <link rel="stylesheet" type="text/css" href="css/markdown.css" />
+    <style>
+    </style>
+  </head>
+  <body>
+    <div class="main">
+      <div class="title"><h1>用户命令</h1></div>
+      <div class="content">
+<h2 id="section">用户命令</h2>
+
+<p>用户命令即自定义命令，你可以定义一个命令要执行什么动作，以及执行这个动作时的参数是怎么样的。</p>
+
+<p>一旦定义好了之后，你就可以把这些命令，绑定到某个快捷键上，从而可以实现：按下不同的快捷键，执行不同的自定义命令。</p>
+
+<h2 id="how-to-define">如何定义用户命令</h2>
+
+<p>你可以在扩展的 <em>设置 &gt; 用户命令</em> 页面，找到可设置的输入框，此输入框的值是 JSON 格式的，是一个对象，每个自定义命令都是这个对象的属性。即其格式如下：</p>
+
+<pre><code class="language-json">{
+  "$commandNameA": {"exec": "$actionName", "args": [$arg1, $arg2...]}
+}
+</code></pre>
+
+<p>其中：</p>
+
+<ul>
+  <li>exec 必填，类型为字符串， 用于指定要执行的动作</li>
+  <li>args 选填，类型为元组（数组），用于配置，执行的动作的参数</li>
+</ul>
+
+<p>举个例子：</p>
+
+<pre><code class="language-json">{
+  "clipPageAsHTML": {
+    "exec": "startClip",
+    "args": [
+      {"config": {"saveFormat": "html"}}
+    ]
+  },
+  "clipPageAsMarkdown": {
+    "exec": "startClip",
+    "args": [
+      {"config": {"saveFormat": "md"}}
+    ]
+  },
+}
+</code></pre>
+
+<p>上方这个例子：</p>
+
+<ul>
+  <li>定义了两个用户命令，一个取名为 <code>clipPageAsHTML</code> ， 一个取名为 <code>clipPageAsMarkdown</code>。</li>
+  <li>他们定义的动作都是 <code>startClip</code> （开始裁剪）</li>
+  <li><code>clipPageAsHTML</code> 这个用户命令，配置了动作的参数： 存储格式为 <code>html</code></li>
+  <li><code>clipPageAsMarkdown</code> 这个用户命令，配置了动作的参数：存储格式为 <code>md</code></li>
+</ul>
+
+<h2 id="actions">可配置的动作</h2>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>动作</th>
+      <th>参数</th>
+      <th>简介</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>doNothing</td>
+      <td>无</td>
+      <td>无动作，即啥也不做</td>
+    </tr>
+    <tr>
+      <td>startClip</td>
+      <td>[{config, badge}]</td>
+      <td>开始裁剪当前网页，即进入裁剪流程</td>
+    </tr>
+    <tr>
+      <td>openLastClippingResult</td>
+      <td>无</td>
+      <td>查看上次裁剪的结果</td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 id="action-start-clip">startClip 动作</h3>
+
+<p>最常用的动作，有一个参数，这个参数目前包含的属性有 <code>config</code>，<code>badge</code> 和 <code>extra</code>， 所有属性都是可选的，只有在需要时才提供。</p>
+
+<h4 id="start-clip-attr-config">config 属性</h4>
+
+<p><code>config</code> 属性，用于指定本次裁剪的一些配置项，最常见的是存储格式（即： <code>saveFormat</code>），所有可配置项，和毛线助手功能的 config 动作是一样的，详情请查看<a href="assistant/how-to-write-a-plan-zh-CN.html#action-config">这里</a></p>
+
+<p>目前有好几个地方都可以对裁剪的 config 做修改，比如： 设置页面，毛线助手，API 以及用户命令。其中，用户命令的优先级是最高的。</p>
+
+<p>具体优先级如下：</p>
+
+<p><code>用户命令</code> &gt; <code>毛线助手</code> 和 <code>API</code> &gt; <code>设置页面</code></p>
+
+<p>例子：</p>
+
+<pre><code class="language-json">{
+  "clipAsMarkdown": {
+    "exec": "startClip",
+    "args": [
+      {
+        "config": {"saveFormat: "md"}
+      }
+    ]
+  }
+}
+</code></pre>
+
+<h4 id="start-clip-attr-badge">badge 属性</h4>
+
+<p><code>badge</code> 属性用于在扩展的图标（小剪刀）上方显示文字，可配置文字的颜色，和背景的颜色。</p>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>参数名字</th>
+      <th>是否必填</th>
+      <th>例子</th>
+      <th>默认值</th>
+      <th>简介</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>text</td>
+      <td>是</td>
+      <td>“M”</td>
+      <td>无</td>
+      <td>显示的文字，最多只显示三个字符</td>
+    </tr>
+    <tr>
+      <td>textColor</td>
+      <td>否</td>
+      <td>“white” 或者 “#ffffff”</td>
+      <td>“white”</td>
+      <td>文字的颜色，可填写颜色名或颜色的十六进制</td>
+    </tr>
+    <tr>
+      <td>backgroundColor</td>
+      <td>否</td>
+      <td>“green” 或 “#00ff00”</td>
+      <td>“green”</td>
+      <td>背景的颜色，可填写颜色名或颜色的十六进制</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>当指定了 <code>badge</code> 属性之后，裁剪过程中会显示文字，直到裁剪流程结束，才不显示。一般用 <code>badge</code> 来提示自己，当前执行的是哪些参数。</p>
+
+<p>例子：</p>
+
+<pre><code class="language-json">{
+  "clipWithBadge": {
+    "exec": "startClip",
+    "args": [
+      {
+        "badge": {"text": "hi", "textColor": "white", "backgroundColor": "#ffffff"}
+      }
+    ]
+  }
+}
+</code></pre>
+
+<h3 id="start-clip-attr-extra">extra 属性</h3>
+
+<p><code>extra</code> 属性用于传递一些非核心组件的参数，如：助手功能相关参数，你也可以用它传数据给第三方组件。</p>
+
+<h4 id="start-clip-attr-extra-assistant">助手相关 extra.assistant</h4>
+
+<p>助手目前可指定 <code>tagStatus</code> 参数，用于决定那些助手动作的执行与否，关于 <code>tagStatus</code> 请看 <a href="assistant/how-to-write-a-plan-zh-CN.html#action-tag">这里</a></p>
+
+<p>例子：</p>
+
+<pre><code class="language-json">{
+  "clipWithBadge": {
+    "exec": "startClip",
+    "args": [{
+      "extra": {
+        "assistant": {"tagStatus": "tagA, tagB, !tagC"}
+      }
+    }]
+  }
+}
+</code></pre>
+
+<hr />
+<p><a href="index-zh-CN.html">首页</a></p>
+</div>
+    </div>
+  </body>
+</html>
+

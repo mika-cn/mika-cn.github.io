@@ -166,7 +166,7 @@
     </tr>
     <tr>
       <td>mx-wc.actived</td>
-      <td>否</td>
+      <td>是</td>
       <td>活跃（激活）状态</td>
       <td>点击裁剪按钮后，在加载「用户界面（UI）」之前触发</td>
     </tr>
@@ -396,6 +396,20 @@
   <li><a href="#set-form-options">预先设置表单输入项的可选值</a></li>
 </ul>
 
+<p>该事件带有消息， 消息结构如下：</p>
+
+<pre><code class="language-json">{
+  "config": {
+    "saveFormat": "html"
+  },
+  "extra": {...}
+}
+</code></pre>
+<ul>
+  <li>config.saveFormat ，裁剪的存储格式，该值可能来自用户命令，或者设置页面。<strong>注意：该值不一定是本次裁剪所使用的存储格式</strong>，因为其他组件（比如毛线助手功能），可能会在本事件发生时，重写掉该值。</li>
+  <li>extra 该参数专门用于存储非核心组件的参数，目前毛线助手用到它 （extra.assistant），你也可以使用该参数，去传数据，具体查看<a href="user-command-zh-CN.html#start-clip-attr-extra">用户命令</a></li>
+</ul>
+
 <h3 id="selecting">事件： mx-wc.selecting</h3>
 
 <p>在选择裁剪区时，就会触发该事件，如：</p>
@@ -411,11 +425,13 @@
 <pre><code class="language-json">{
   "config": {
     "saveFormat": "html"
-  }
+  },
+  "extra": {...}
 }
 </code></pre>
 <ul>
   <li>config.saveFormat ，本次裁剪的存储格式</li>
+  <li>extra 该参数专门用于存储非核心组件的参数，目前毛线助手用到它 （extra.assistant），你也可以使用该参数，去传数据，具体查看<a href="user-command-zh-CN.html#start-clip-attr-extra">用户命令</a></li>
 </ul>
 
 <hr />
@@ -430,6 +446,7 @@
   "config": {
     "saveFormat": "html"
   },
+  "extra": {...}
   "elem": {
     "selector": ".mx-wc-confirmed-elem"
   }
@@ -438,6 +455,7 @@
 
 <ul>
   <li>config.saveFormat ，本次裁剪的存储格式</li>
+  <li>extra 该参数专门用于存储非核心组件的参数，目前毛线助手用到它 （extra.assistant），你也可以使用该参数，去传数据，具体查看<a href="user-command-zh-CN.html#start-clip-attr-extra">用户命令</a></li>
   <li>elem ，当前确认的裁区元素，其中的 <code>selector</code> 为 CSS 选择器。</li>
 </ul>
 
@@ -599,11 +617,13 @@
 <pre><code class="language-json">{
   "config": {
     "saveFormat": "html"
-  }
+  },
+  "extra": {...}
 }
 </code></pre>
 <ul>
   <li>config.saveFormat ，本次裁剪的存储格式</li>
+  <li>extra 该参数专门用于存储非核心组件的参数，目前毛线助手用到它 （extra.assistant），你也可以使用该参数，去传数据，具体查看<a href="user-command-zh-CN.html#start-clip-attr-extra">用户命令</a></li>
 </ul>
 
 <h2 id="listen-events">MaoXian 监听的事件</h2>
