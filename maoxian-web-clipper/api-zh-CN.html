@@ -1199,13 +1199,31 @@
     </tr>
     <tr>
       <td>requestReferrerPolicy</td>
-      <td>Referrer 请求头</td>
+      <td>Referrer 请求头策略</td>
       <td>String</td>
-      <td><code>originWhenCrossOrigin</code></td>
-      <td><code>noReferrer</code>、 <code>origin</code>、 <code>originWhenCrossOrigin</code>、 <code>unsafeUrl</code></td>
+      <td><code>strict-origin-when-cross-origin</code></td>
+      <td><code>no-referrer</code>、 <code>no-referrer-when-downgrade</code>, <code>origin</code>、 <code>origin-when-cross-origin</code>、 <code>same-origin</code>, <code>strict-origin</code>, <code>strict-origin-when-cross-origin</code>, <code>unsafeUrl</code></td>
+    </tr>
+    <tr>
+      <td>requestCache</td>
+      <td>控制如何利用浏览器缓存</td>
+      <td>String</td>
+      <td><code>default</code></td>
+      <td><code>default</code>, <code>no-store</code>, <code>reload</code>, <code>no-cache</code>, <code>force-cache</code></td>
+    </tr>
+    <tr>
+      <td>requestCredentials</td>
+      <td>授权信息（cookie）</td>
+      <td>String</td>
+      <td><code>same-origin</code></td>
+      <td><code>same-origin</code>, <code>omit</code></td>
     </tr>
   </tbody>
 </table>
+
+<p><strong>备注</strong>：</p>
+
+<p>关于 requestReferrerPolicy, requestCache, requestCredentials 的具体作用效果，请查看 <a href="https://developer.mozilla.org/en-US/docs/Web/API/RequestInit">该文档</a></p>
 
 <hr />
 

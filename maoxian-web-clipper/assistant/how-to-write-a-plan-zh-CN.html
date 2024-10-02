@@ -26,9 +26,17 @@
   <li><a href="#arg-actions">actions 参数的使用 </a>
     <ul>
       <li><a href="#action-structure">action 的结构 </a></li>
+      <li><a href="#action-tag">关于 tag（标签） 的说明 </a>
+        <ul>
+          <li><a href="#tag-status">tagStatus 参数 </a></li>
+          <li><a href="#builtin-tag-status">扩展内置的 tagStatus 的值 </a></li>
+          <li><a href="#default-tag-status">设置默认的 tagStatus 参数 </a></li>
+          <li><a href="#chosen-tag-status">用户明选的 tagStatus 参数 </a></li>
+          <li><a href="#tag-status-cases">各种情况下 tagStatus 的值 </a></li>
+        </ul>
+      </li>
       <li><a href="#action-change-state">用于修改网页状态的动作 </a></li>
       <li><a href="#action-maoxian-related">MaoXian 相关的动作 </a></li>
-      <li><a href="#action-tag">关于 tag（标签） 的说明 </a></li>
       <li><a href="#selector">选择器 </a></li>
       <li><a href="#action-show">show 动作的使用 </a></li>
       <li><a href="#action-hide">hide 动作的使用 </a></li>
@@ -403,6 +411,85 @@
 
 <p>上面这个 Plan，定义了三个 action，可以看出 action 的结构为 <code>{$actionName: $actionValue, [tag]}</code>。</p>
 
+<h3 id="action-tag">关于 tag（标签） 的说明</h3>
+
+<ul>
+  <li>每个标签有两种状态，激活或不激活，默认为不激活。</li>
+  <li>每个动作可以添加零个或多个标签</li>
+  <li>如果一个动作没有添加标签，那么它总是会执行</li>
+  <li>如果一个动作添加了标签，那么只有当所有标签都激活，这个动作才会执行</li>
+</ul>
+
+<p>可以把每个标签看成开关，通过组合这些开关，来控制每个动作是否需要执行。</p>
+
+<h4 id="tag-status">tagStatus 参数</h4>
+
+<p>tagStatus 参数，用于表示标签的激活状态，其值是一个字符串。</p>
+
+<p>tagStatus 用标签的名字表示其是激活，若要表示不激活，可以在标签名字前加上<strong>英文感叹号</strong> ”<code>!</code>“，多个状态之间用<strong>英文逗号</strong> ”<code>,</code>“ 隔开。</p>
+
+<p>例如： <code>rm-comments, !rm-nav-links</code> 这个 tagStatus 表示 <code>rm-comments</code> 标签的状态是激活的，<code>rm-nav-links</code> 标签的状态是不激活。</p>
+
+<h4 id="builtin-tag-status">扩展内置的 tagStatus 的值</h4>
+
+<ul>
+  <li>当存储格式为 <code>html</code> 时，其值是： <code>!disabled, html-only</code>。</li>
+  <li>当存储格式为 <code>md</code>   时，其值是： <code>!disabled, md-only</code>。</li>
+</ul>
+
+<p>即，默认情况下：</p>
+
+<ul>
+  <li>打上 <code>disabled</code> 标签的动作，都不执行</li>
+  <li>打上 <code>html-only</code> 标签的动作，只在存储格式为 <code>html</code>时， 才会执行</li>
+  <li>打上 <code>md-only</code> 标签的动作，只在存储格式为 <code>md</code>时， 才会执行</li>
+</ul>
+
+<h4 id="default-tag-status">设置默认的 tagStatus 参数</h4>
+
+<p>你可以在 <em>设置 &gt; 助手</em> 页面设置默认的 tagStatus，设置后，默认的裁剪动作，都会使用它。</p>
+
+<h4 id="chosen-tag-status">用户明选的 tagStatus 参数</h4>
+
+<p>目前可通过 <a href="../user-command-zh-CN.html">用户命令</a> 在开始裁剪时候，传入 tagStatus 参数。利用它提供与默认裁剪动作不同的方案。</p>
+
+<h4 id="tag-status-cases">各种情况下 tagStatus 的值</h4>
+
+<table border=1>
+  <thead>
+    <tr>
+      <th>内置的值</th>
+      <th>设置的默认值（优先级低）</th>
+      <th>用户明选的值（优先级高）</th>
+      <th>最终使用的值</th>
+      <th>备注</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>!disabled, html-only</code></td>
+      <td><code>tagA, !tagB</code></td>
+      <td>无</td>
+      <td><code>!disabled, html-only, tagA, !tagB</code></td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td><code>!disabled, html-only</code></td>
+      <td>无</td>
+      <td><code>tagX, !tagY</code></td>
+      <td><code>!disabled, html-only, tagX, !tagY</code></td>
+      <td>-</td>
+    </tr>
+    <tr>
+      <td><code>!disabled, md-only</code></td>
+      <td><code>tagA, !tagB</code></td>
+      <td><code>tagX, !tagY</code></td>
+      <td><code>!disabled, md-only, tagX, !tagY</code></td>
+      <td>这里默认值直接被忽略</td>
+    </tr>
+  </tbody>
+</table>
+
 <h3 id="action-change-state">用于修改网页状态的动作</h3>
 
 <table border=1>
@@ -490,40 +577,6 @@
     </tr>
   </tbody>
 </table>
-
-<h3 id="action-tag">关于 tag（标签） 的说明</h3>
-
-<ul>
-  <li>每个标签有两种状态，激活或不激活，默认为不激活。</li>
-  <li>每个动作可以添加零个或多个标签</li>
-  <li>如果一个动作没有添加标签，那么它总是会执行</li>
-  <li>如果一个动作添加了标签，那么只有当所有标签都激活，这个动作才会执行</li>
-</ul>
-
-<p>可以把每个标签看成开关，通过组合这些开关，来控制每个动作是否需要执行。</p>
-
-<p><strong>裁剪时，提供的 tagStatus 的参数</strong></p>
-
-<p>每次裁剪都可以提供一个 tagStatus 参数，用于表示标签的激活状态，其值是一个字符串。</p>
-
-<p>tagStatus 用标签的名字表示其是激活，若要表示不激活，可以在标签名字前加上<strong>英文感叹号</strong> ”<code>!</code>“，多个状态之间用<strong>英文逗号</strong> ”<code>,</code>“ 隔开。</p>
-
-<p>例如： <code>rm-comments, !rm-nav-links</code> 这个 tagStatus 表示 <code>rm-comments</code> 标签的状态是激活的，<code>rm-nav-links</code> 标签的状态是不激活。</p>
-
-<p>扩展默认的 tagStatus 的值如下：</p>
-
-<ul>
-  <li>当存储格式为 <code>html</code> 时，默认值是： <code>!disabled, html-only</code>。</li>
-  <li>当存储格式为 <code>md</code> 时，默认值是： <code>!disabled, md-only</code>。</li>
-</ul>
-
-<p>即，默认情况下：</p>
-
-<ul>
-  <li>打上 <code>disabled</code> 标签的动作，都不执行</li>
-  <li>打上 <code>html-only</code> 标签的动作，只在存储格式为 <code>html</code>时， 才会执行</li>
-  <li>打上 <code>md-only</code> 标签的动作，只在存储格式为 <code>md</code>时， 才会执行</li>
-</ul>
 
 <h3 id="selector">选择器</h3>
 
@@ -991,7 +1044,7 @@
   <li>script 必填， 用于指定要执行的脚本的名字。</li>
   <li>args  选填， 用于执行脚本时，传入的参数。</li>
   <li>when  选填，用于指定触发时机，对应于 MaoXian 事件，可选值为：”actived”, “selecting”, “idle”，默认为 “selecting”。</li>
-  <li>once  选填，用于指定是否触发单次。默认为 false，当为 true 时，即使同一个事件发生多次，也只会执行一次。</li>
+  <li>once  选填，用于指定是否触发单次。默认为 false，当为 true 时，即使同一个事件在同一个网页上发生多次，也只会执行一次。</li>
 </ul>
 
 <p>三个触发时机：</p>
@@ -1600,13 +1653,31 @@ main();
     </tr>
     <tr>
       <td>requestReferrerPolicy</td>
-      <td>Referrer 请求头</td>
+      <td>Referrer 请求头策略</td>
       <td>String</td>
-      <td><code>originWhenCrossOrigin</code></td>
-      <td><code>noReferrer</code>、 <code>origin</code>、 <code>originWhenCrossOrigin</code>、 <code>unsafeUrl</code></td>
+      <td><code>strict-origin-when-cross-origin</code></td>
+      <td><code>no-referrer</code>、 <code>no-referrer-when-downgrade</code>, <code>origin</code>、 <code>origin-when-cross-origin</code>、 <code>same-origin</code>, <code>strict-origin</code>, <code>strict-origin-when-cross-origin</code>, <code>unsafeUrl</code></td>
+    </tr>
+    <tr>
+      <td>requestCache</td>
+      <td>控制如何利用浏览器缓存</td>
+      <td>String</td>
+      <td><code>default</code></td>
+      <td><code>default</code>, <code>no-store</code>, <code>reload</code>, <code>no-cache</code>, <code>force-cache</code></td>
+    </tr>
+    <tr>
+      <td>requestCredentials</td>
+      <td>授权信息（cookie）</td>
+      <td>String</td>
+      <td><code>same-origin</code></td>
+      <td><code>same-origin</code>, <code>omit</code></td>
     </tr>
   </tbody>
 </table>
+
+<p><strong>备注</strong>：</p>
+
+<p>关于 requestReferrerPolicy, requestCache, requestCredentials 的具体作用效果，请查看 <a href="https://developer.mozilla.org/en-US/docs/Web/API/RequestInit">该文档</a></p>
 
 <h2 id="arg-tags">tags 参数的使用</h2>
 
