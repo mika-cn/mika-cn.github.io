@@ -6,10 +6,24 @@
   </author>
   <id>https://mika-cn.github.io/maoxian-web-clipper/feed.xml</id>
   <title>MaoXian Web Clipper</title>
-  <updated>2019-02-14T19:57:44+08:00</updated>
+  <updated>2024-11-14T10:36:40+08:00</updated>
   <entry>
-    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v070</id>
-    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v070"/>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0771</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0771"/>
+    <title>MaoXian Web Clipper 0.7.71 is released, fixed tag with 'undefined'</title>
+    <updated>2024-11-14T11:03:45+08:00</updated>
+    <dc:date>2024-11-14T11:03:45+08:00</dc:date>
+  </entry>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0701</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0701"/>
+    <title>MaoXian Web Clipper 0.7.0.1 is released, fixed tag with 'undefined'</title>
+    <updated>2024-11-14T11:03:45+08:00</updated>
+    <dc:date>2024-11-14T11:03:45+08:00</dc:date>
+  </entry>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0770</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0770"/>
     <title>MaoXian Web Clipper 0.7.70 is released, We've upgraded to Manifest V3</title>
     <updated>2024-10-31T12:01:21+08:00</updated>
     <dc:date>2024-10-31T12:01:21+08:00</dc:date>
@@ -42,5 +56,5 @@
     <updated>2024-05-14T13:32:09+08:00</updated>
     <dc:date>2024-05-14T13:32:09+08:00</dc:date>
   </entry>
-  <dc:date>2019-02-14T19:57:44+08:00</dc:date>
+  <dc:date>2024-11-14T10:36:40+08:00</dc:date>
 </feed>
