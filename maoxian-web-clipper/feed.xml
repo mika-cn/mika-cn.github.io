@@ -6,7 +6,14 @@
   </author>
   <id>https://mika-cn.github.io/maoxian-web-clipper/feed.xml</id>
   <title>MaoXian Web Clipper</title>
-  <updated>2024-11-14T10:36:40+08:00</updated>
+  <updated>2024-12-23T11:44:04+08:00</updated>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0772</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0772"/>
+    <title>MaoXian Web Clipper 0.7.72 is released, we are automatically upgrade Manifest V2 to Manifest V3</title>
+    <updated>2024-12-24T11:35:26+08:00</updated>
+    <dc:date>2024-12-24T11:35:26+08:00</dc:date>
+  </entry>
   <entry>
     <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0771</id>
     <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0771"/>
@@ -56,5 +63,5 @@
     <updated>2024-05-14T13:32:09+08:00</updated>
     <dc:date>2024-05-14T13:32:09+08:00</dc:date>
   </entry>
-  <dc:date>2024-11-14T10:36:40+08:00</dc:date>
+  <dc:date>2024-12-23T11:44:04+08:00</dc:date>
 </feed>
