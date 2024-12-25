@@ -1,6 +1,6 @@
 <?xml version='1.0' encoding='UTF-8'?>
 <gupdate xmlns='http://www.google.com/update2/response' protocol='2.0'>
   <app appid='nfpcihehgmimfhiphjmgfkmppdgkkjnc'>
-    <updatecheck codebase='https://mika-cn.github.io/maoxian-web-clipper/extension/0.7.72/maoxian-web-clipper-chromium-0.7.72.crx' version='0.7.72' />
+    <updatecheck codebase='https://mika-cn.github.io/maoxian-web-clipper/extension/0.7.73/maoxian-web-clipper-chromium-0.7.73.crx' version='0.7.73' />
   </app>
 </gupdate>
