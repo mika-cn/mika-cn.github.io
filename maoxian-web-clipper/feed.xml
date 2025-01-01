@@ -6,7 +6,21 @@
   </author>
   <id>https://mika-cn.github.io/maoxian-web-clipper/feed.xml</id>
   <title>MaoXian Web Clipper</title>
-  <updated>2024-12-25T11:01:45+08:00</updated>
+  <updated>2025-01-01T10:17:23+08:00</updated>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0774</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0774"/>
+    <title>MaoXian Web Clipper 0.7.74 is released, Fix wiznoteplus</title>
+    <updated>2024-01-01T11:01:27+08:00</updated>
+    <dc:date>2024-01-01T11:01:27+08:00</dc:date>
+  </entry>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0702</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0702"/>
+    <title>MaoXian Web Clipper 0.7.0.2 is released, new assisatnt attribute 'data-mx-ignore-md'</title>
+    <updated>2025-01-01T11:00:59+08:00</updated>
+    <dc:date>2025-01-01T11:00:59+08:00</dc:date>
+  </entry>
   <entry>
     <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0773</id>
     <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0773"/>
@@ -49,26 +63,5 @@
     <updated>2024-10-01T11:00:01+08:00</updated>
     <dc:date>2024-10-01T11:00:01+08:00</dc:date>
   </entry>
-  <entry>
-    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v060</id>
-    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v060"/>
-    <title>MaoXian Web Clipper 0.6.0 is released, We can now execute custom scripts in MaoXian Assistant</title>
-    <updated>2024-08-24T13:07:01+08:00</updated>
-    <dc:date>2024-08-24T13:07:01+08:00</dc:date>
-  </entry>
-  <entry>
-    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v050</id>
-    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v050"/>
-    <title>MaoXian Web Clipper 0.5.1 is released</title>
-    <updated>2024-08-05T12:00:02+08:00</updated>
-    <dc:date>2024-08-05T12:00:02+08:00</dc:date>
-  </entry>
-  <entry>
-    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v050</id>
-    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v050"/>
-    <title>MaoXian Web Clipper 0.5.0 is released</title>
-    <updated>2024-05-14T13:32:09+08:00</updated>
-    <dc:date>2024-05-14T13:32:09+08:00</dc:date>
-  </entry>
-  <dc:date>2024-12-25T11:01:45+08:00</dc:date>
+  <dc:date>2025-01-01T10:17:23+08:00</dc:date>
 </feed>
