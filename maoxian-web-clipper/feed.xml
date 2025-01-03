@@ -6,7 +6,14 @@
   </author>
   <id>https://mika-cn.github.io/maoxian-web-clipper/feed.xml</id>
   <title>MaoXian Web Clipper</title>
-  <updated>2025-01-01T10:17:23+08:00</updated>
+  <updated>2025-01-03T14:04:07+08:00</updated>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0703</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0703"/>
+    <title>MaoXian Web Clipper 0.7.0.3 is released, fix NativeApp status</title>
+    <updated>2025-01-03T13:02:39+08:00</updated>
+    <dc:date>2025-01-03T13:02:39+08:00</dc:date>
+  </entry>
   <entry>
     <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0774</id>
     <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0774"/>
@@ -63,5 +70,5 @@
     <updated>2024-10-01T11:00:01+08:00</updated>
     <dc:date>2024-10-01T11:00:01+08:00</dc:date>
   </entry>
-  <dc:date>2025-01-01T10:17:23+08:00</dc:date>
+  <dc:date>2025-01-03T14:04:07+08:00</dc:date>
 </feed>
