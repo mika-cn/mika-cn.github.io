@@ -6,7 +6,21 @@
   </author>
   <id>https://mika-cn.github.io/maoxian-web-clipper/feed.xml</id>
   <title>MaoXian Web Clipper</title>
-  <updated>2025-01-03T14:04:07+08:00</updated>
+  <updated>2025-01-06T10:38:07+08:00</updated>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0775</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0775"/>
+    <title>MaoXian Web Clipper 0.7.75 is released, fix clipping of nested inline SVG</title>
+    <updated>2025-01-06T11:01:05+08:00</updated>
+    <dc:date>2025-01-06T11:01:05+08:00</dc:date>
+  </entry>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0704</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0704"/>
+    <title>MaoXian Web Clipper 0.7.0.4 is released, fix clipping of nested inline SVG</title>
+    <updated>2025-01-06T11:00:09+08:00</updated>
+    <dc:date>2025-01-06T11:00:09+08:00</dc:date>
+  </entry>
   <entry>
     <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0703</id>
     <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0703"/>
@@ -63,12 +77,5 @@
     <updated>2024-10-31T12:01:21+08:00</updated>
     <dc:date>2024-10-31T12:01:21+08:00</dc:date>
   </entry>
-  <entry>
-    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v070</id>
-    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v070"/>
-    <title>MaoXian Web Clipper 0.7.0 is released, We can now define user(custom) commands and bind them to shortcut slots</title>
-    <updated>2024-10-01T11:00:01+08:00</updated>
-    <dc:date>2024-10-01T11:00:01+08:00</dc:date>
-  </entry>
-  <dc:date>2025-01-03T14:04:07+08:00</dc:date>
+  <dc:date>2025-01-06T10:38:07+08:00</dc:date>
 </feed>
