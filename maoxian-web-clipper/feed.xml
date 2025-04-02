@@ -6,7 +6,21 @@
   </author>
   <id>https://mika-cn.github.io/maoxian-web-clipper/feed.xml</id>
   <title>MaoXian Web Clipper</title>
-  <updated>2025-01-06T10:38:07+08:00</updated>
+  <updated>2025-04-02T09:39:46+08:00</updated>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0776</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0776"/>
+    <title>MaoXian Web Clipper 0.7.76 is released, fix zero width space in filename</title>
+    <updated>2025-04-02T12:07:15+08:00</updated>
+    <dc:date>2025-04-02T12:07:15+08:00</dc:date>
+  </entry>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0705</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0705"/>
+    <title>MaoXian Web Clipper 0.7.0.5 is released, fix zero width space in filename</title>
+    <updated>2025-04-02T12:07:15+08:00</updated>
+    <dc:date>2025-04-02T12:07:15+08:00</dc:date>
+  </entry>
   <entry>
     <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0775</id>
     <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0775"/>
@@ -63,19 +77,5 @@
     <updated>2024-11-14T11:03:45+08:00</updated>
     <dc:date>2024-11-14T11:03:45+08:00</dc:date>
   </entry>
-  <entry>
-    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0701</id>
-    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0701"/>
-    <title>MaoXian Web Clipper 0.7.0.1 is released, fixed tag with 'undefined'</title>
-    <updated>2024-11-14T11:03:45+08:00</updated>
-    <dc:date>2024-11-14T11:03:45+08:00</dc:date>
-  </entry>
-  <entry>
-    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0770</id>
-    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0770"/>
-    <title>MaoXian Web Clipper 0.7.70 is released, We've upgraded to Manifest V3</title>
-    <updated>2024-10-31T12:01:21+08:00</updated>
-    <dc:date>2024-10-31T12:01:21+08:00</dc:date>
-  </entry>
-  <dc:date>2025-01-06T10:38:07+08:00</dc:date>
+  <dc:date>2025-04-02T09:39:46+08:00</dc:date>
 </feed>
