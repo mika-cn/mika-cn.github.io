@@ -6,7 +6,14 @@
   </author>
   <id>https://mika-cn.github.io/maoxian-web-clipper/feed.xml</id>
   <title>MaoXian Web Clipper</title>
-  <updated>2025-06-18T11:20:56+08:00</updated>
+  <updated>2025-06-21T17:39:42+08:00</updated>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0780</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0780"/>
+    <title>MaoXian Web Clipper 0.7.80 is released, should apply remembered selections</title>
+    <updated>2025-06-25T20:00:18+08:00</updated>
+    <dc:date>2025-06-25T20:00:18+08:00</dc:date>
+  </entry>
   <entry>
     <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0779</id>
     <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0779"/>
@@ -70,12 +77,5 @@
     <updated>2025-01-06T11:00:09+08:00</updated>
     <dc:date>2025-01-06T11:00:09+08:00</dc:date>
   </entry>
-  <entry>
-    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0703</id>
-    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0703"/>
-    <title>MaoXian Web Clipper 0.7.0.3 is released, fix NativeApp status</title>
-    <updated>2025-01-03T13:02:39+08:00</updated>
-    <dc:date>2025-01-03T13:02:39+08:00</dc:date>
-  </entry>
-  <dc:date>2025-06-18T11:20:56+08:00</dc:date>
+  <dc:date>2025-06-21T17:39:42+08:00</dc:date>
 </feed>
