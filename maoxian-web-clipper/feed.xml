@@ -6,7 +6,21 @@
   </author>
   <id>https://mika-cn.github.io/maoxian-web-clipper/feed.xml</id>
   <title>MaoXian Web Clipper</title>
-  <updated>2025-06-21T17:39:42+08:00</updated>
+  <updated>2025-10-12T07:46:00+08:00</updated>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0781</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0781"/>
+    <title>MaoXian Web Clipper 0.7.81 is released, fix deduplication of filename and enhance code block detection</title>
+    <updated>2025-10-25T08:20:37+08:00</updated>
+    <dc:date>2025-10-25T08:20:37+08:00</dc:date>
+  </entry>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0708</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0708"/>
+    <title>MaoXian Web Clipper 0.7.0.8 is released, enhance code block detection</title>
+    <updated>2025-10-25T08:21:03+08:00</updated>
+    <dc:date>2025-10-25T08:21:03+08:00</dc:date>
+  </entry>
   <entry>
     <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0780</id>
     <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0780"/>
@@ -63,19 +77,5 @@
     <updated>2025-04-02T12:07:15+08:00</updated>
     <dc:date>2025-04-02T12:07:15+08:00</dc:date>
   </entry>
-  <entry>
-    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0775</id>
-    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0775"/>
-    <title>MaoXian Web Clipper 0.7.75 is released, fix clipping of nested inline SVG</title>
-    <updated>2025-01-06T11:01:05+08:00</updated>
-    <dc:date>2025-01-06T11:01:05+08:00</dc:date>
-  </entry>
-  <entry>
-    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0704</id>
-    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0704"/>
-    <title>MaoXian Web Clipper 0.7.0.4 is released, fix clipping of nested inline SVG</title>
-    <updated>2025-01-06T11:00:09+08:00</updated>
-    <dc:date>2025-01-06T11:00:09+08:00</dc:date>
-  </entry>
-  <dc:date>2025-06-21T17:39:42+08:00</dc:date>
+  <dc:date>2025-10-12T07:46:00+08:00</dc:date>
 </feed>
