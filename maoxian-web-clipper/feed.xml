@@ -6,7 +6,21 @@
   </author>
   <id>https://mika-cn.github.io/maoxian-web-clipper/feed.xml</id>
   <title>MaoXian Web Clipper</title>
-  <updated>2025-10-12T07:46:00+08:00</updated>
+  <updated>2026-01-22T08:23:19+08:00</updated>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0782</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0782"/>
+    <title>MaoXian Web Clipper 0.7.82 is released, fix save same video multiple times when the web page contains multiple videos</title>
+    <updated>2026-01-22T09:20:07+08:00</updated>
+    <dc:date>2026-01-22T09:20:07+08:00</dc:date>
+  </entry>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0709</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0709"/>
+    <title>MaoXian Web Clipper 0.7.0.9 is released, fix save same video multiple times when the web page contains multiple videos</title>
+    <updated>2026-01-22T09:20:08+08:00</updated>
+    <dc:date>2026-01-22T09:20:08+08:00</dc:date>
+  </entry>
   <entry>
     <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0781</id>
     <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0781"/>
@@ -63,19 +77,5 @@
     <updated>2025-05-14T20:02:07+08:00</updated>
     <dc:date>2025-05-14T20:02:07+08:00</dc:date>
   </entry>
-  <entry>
-    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0776</id>
-    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0776"/>
-    <title>MaoXian Web Clipper 0.7.76 is released, fix zero width space in filename</title>
-    <updated>2025-04-02T12:07:15+08:00</updated>
-    <dc:date>2025-04-02T12:07:15+08:00</dc:date>
-  </entry>
-  <entry>
-    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0705</id>
-    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0705"/>
-    <title>MaoXian Web Clipper 0.7.0.5 is released, fix zero width space in filename</title>
-    <updated>2025-04-02T12:07:15+08:00</updated>
-    <dc:date>2025-04-02T12:07:15+08:00</dc:date>
-  </entry>
-  <dc:date>2025-10-12T07:46:00+08:00</dc:date>
+  <dc:date>2026-01-22T08:23:19+08:00</dc:date>
 </feed>
