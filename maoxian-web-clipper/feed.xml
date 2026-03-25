@@ -6,7 +6,21 @@
   </author>
   <id>https://mika-cn.github.io/maoxian-web-clipper/feed.xml</id>
   <title>MaoXian Web Clipper</title>
-  <updated>2026-01-22T08:23:19+08:00</updated>
+  <updated>2026-03-25T21:08:27+08:00</updated>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0783</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0783"/>
+    <title>MaoXian Web Clipper 0.7.83 is released, fix error notification</title>
+    <updated>2026-03-26T22:00:05+08:00</updated>
+    <dc:date>2026-03-26T22:00:05+08:00</dc:date>
+  </entry>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v07010</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v07010"/>
+    <title>MaoXian Web Clipper 0.7.0.10 is released, fix error notification</title>
+    <updated>2026-03-26T22:00:05+08:00</updated>
+    <dc:date>2026-03-26T22:00:05+08:00</dc:date>
+  </entry>
   <entry>
     <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0782</id>
     <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0782"/>
@@ -63,19 +77,5 @@
     <updated>2025-05-20T20:01:09+08:00</updated>
     <dc:date>2025-05-20T20:01:09+08:00</dc:date>
   </entry>
-  <entry>
-    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0706</id>
-    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0706"/>
-    <title>MaoXian Web Clipper 0.7.0.6 is released, should not eating up too much memory</title>
-    <updated>2025-05-20T20:02:09+08:00</updated>
-    <dc:date>2025-05-20T20:02:09+08:00</dc:date>
-  </entry>
-  <entry>
-    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0777</id>
-    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0777"/>
-    <title>MaoXian Web Clipper 0.7.77 is released, fix zero width space in filename</title>
-    <updated>2025-05-14T20:02:07+08:00</updated>
-    <dc:date>2025-05-14T20:02:07+08:00</dc:date>
-  </entry>
-  <dc:date>2026-01-22T08:23:19+08:00</dc:date>
+  <dc:date>2026-03-25T21:08:27+08:00</dc:date>
 </feed>
