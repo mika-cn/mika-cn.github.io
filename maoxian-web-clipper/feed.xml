@@ -6,7 +6,14 @@
   </author>
   <id>https://mika-cn.github.io/maoxian-web-clipper/feed.xml</id>
   <title>MaoXian Web Clipper</title>
-  <updated>2026-04-07T09:36:36+08:00</updated>
+  <updated>2026-08-08T08:27:32+08:00</updated>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0785</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0785"/>
+    <title>MaoXian Web Clipper 0.8.0 is released, We adding the user scripts feature back</title>
+    <updated>2026-08-08T12:27:53+08:00</updated>
+    <dc:date>2026-08-08T12:27:53+08:00</dc:date>
+  </entry>
   <entry>
     <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0785</id>
     <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0785"/>
@@ -70,12 +77,5 @@
     <updated>2025-10-25T08:21:03+08:00</updated>
     <dc:date>2025-10-25T08:21:03+08:00</dc:date>
   </entry>
-  <entry>
-    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0780</id>
-    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0780"/>
-    <title>MaoXian Web Clipper 0.7.80 is released, should apply remembered selections</title>
-    <updated>2025-06-25T20:00:18+08:00</updated>
-    <dc:date>2025-06-25T20:00:18+08:00</dc:date>
-  </entry>
-  <dc:date>2026-04-07T09:36:36+08:00</dc:date>
+  <dc:date>2026-08-08T08:27:32+08:00</dc:date>
 </feed>
