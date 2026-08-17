@@ -89,6 +89,11 @@
       <td>无</td>
       <td>查看上次裁剪的结果</td>
     </tr>
+    <tr>
+      <td>openExtensionPage</td>
+      <td>页面名字</td>
+      <td>打开扩展页面</td>
+    </tr>
   </tbody>
 </table>
 
@@ -195,6 +200,20 @@
         "assistant": {"tagStatus": "tagA, tagB, !tagC"}
       }
     }]
+  }
+}
+</code></pre>
+
+<h3 id="openextensionpage">openExtensionPage</h3>
+
+<p>打开扩展页面，可选参数为：”setting”, “home”</p>
+
+<p>例子：</p>
+
+<pre><code class="language-json">{
+  "openSettingPage", {
+    "exec": "openExtensionPage",
+    "args": ["setting"]
   }
 }
 </code></pre>
