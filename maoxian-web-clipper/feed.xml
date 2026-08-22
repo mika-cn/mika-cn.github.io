@@ -6,7 +6,14 @@
   </author>
   <id>https://mika-cn.github.io/maoxian-web-clipper/feed.xml</id>
   <title>MaoXian Web Clipper</title>
-  <updated>2026-08-17T09:56:31+08:00</updated>
+  <updated>2026-08-23T07:45:50+08:00</updated>
+  <entry>
+    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0786</id>
+    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0786"/>
+    <title>MaoXian Web Clipper 0.8.2 is released, Fix error messages</title>
+    <updated>2026-08-22T11:10:17+08:00</updated>
+    <dc:date>2026-08-22T11:10:17+08:00</dc:date>
+  </entry>
   <entry>
     <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0785</id>
     <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0785"/>
@@ -49,33 +56,5 @@
     <updated>2026-03-26T22:00:05+08:00</updated>
     <dc:date>2026-03-26T22:00:05+08:00</dc:date>
   </entry>
-  <entry>
-    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v07010</id>
-    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v07010"/>
-    <title>MaoXian Web Clipper 0.7.0.10 is released, fix error notification</title>
-    <updated>2026-03-26T22:00:05+08:00</updated>
-    <dc:date>2026-03-26T22:00:05+08:00</dc:date>
-  </entry>
-  <entry>
-    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0782</id>
-    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0782"/>
-    <title>MaoXian Web Clipper 0.7.82 is released, fix save same video multiple times when the web page contains multiple videos</title>
-    <updated>2026-01-22T09:20:07+08:00</updated>
-    <dc:date>2026-01-22T09:20:07+08:00</dc:date>
-  </entry>
-  <entry>
-    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0709</id>
-    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0709"/>
-    <title>MaoXian Web Clipper 0.7.0.9 is released, fix save same video multiple times when the web page contains multiple videos</title>
-    <updated>2026-01-22T09:20:08+08:00</updated>
-    <dc:date>2026-01-22T09:20:08+08:00</dc:date>
-  </entry>
-  <entry>
-    <id>https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0781</id>
-    <link href="https://mika-cn.github.io/maoxian-web-clipper/change-log.html?#v0781"/>
-    <title>MaoXian Web Clipper 0.7.81 is released, fix deduplication of filename and enhance code block detection</title>
-    <updated>2025-10-25T08:20:37+08:00</updated>
-    <dc:date>2025-10-25T08:20:37+08:00</dc:date>
-  </entry>
-  <dc:date>2026-08-17T09:56:31+08:00</dc:date>
+  <dc:date>2026-08-23T07:45:50+08:00</dc:date>
 </feed>
